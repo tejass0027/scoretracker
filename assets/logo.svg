@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <!-- Stumps -->
+  <rect x="52" y="30" width="4" height="50" rx="1.5" fill="#f8fafc"/>
+  <rect x="42" y="34" width="4" height="46" rx="1.5" fill="#f8fafc"/>
+  <rect x="62" y="34" width="4" height="46" rx="1.5" fill="#f8fafc"/>
+  
+  <!-- Bails -->
+  <rect x="40" y="27" width="12" height="3" rx="1" fill="#10b981"/>
+  <rect x="54" y="27" width="12" height="3" rx="1" fill="#10b981"/>
+  
+  <!-- Crossed Cricket Bat -->
+  <path d="M28 85 L32 89 L86 35 C88 33, 91 33, 93 35 C95 37, 95 40, 93 42 L39 96 L35 92 Z" fill="#94a3b8"/>
+  <path d="M28 85 L22 79 L18 83 C16 85, 16 88, 18 90 L30 102 C32 104, 35 104, 37 102 L39 96 Z" fill="#64748b"/>
+  
+  <!-- Cricket Ball -->
+  <circle cx="85" cy="85" r="16" fill="#10b981"/>
+  <!-- Ball seams -->
+  <path d="M85 69 A16 16 0 0 1 101 85 M69 85 A16 16 0 0 1 85 101" fill="none" stroke="#f8fafc" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M85 69 A16 16 0 0 0 69 85 M101 85 A16 16 0 0 0 85 101" fill="none" stroke="#f8fafc" stroke-width="1.5" stroke-dasharray="3,2"/>
+  
+  <!-- Heartbeat pulse overlay line -->
+  <path d="M10 65 L32 65 L40 45 L48 85 L54 60 L60 70 L72 65 L95 65" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

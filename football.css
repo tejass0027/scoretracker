@@ -1,0 +1,347 @@
+/* ==========================================================================
+   FOOTBALL SCORE TRACKER & TOURNAMENT MODE - DESIGN SYSTEM & COMPONENT STYLES
+   ========================================================================== */
+
+:root {
+  --fb-emerald: #10b981;
+  --fb-emerald-glow: rgba(16, 185, 129, 0.15);
+  --fb-glass-bg: rgba(11, 15, 25, 0.7);
+  --fb-border: rgba(255, 255, 255, 0.08);
+  --fb-gold: #fbbf24;
+  --fb-red: #f87171;
+  --fb-card-bg: rgba(255, 255, 255, 0.02);
+}
+
+/* Base Wrapper styling overrides */
+#football-page {
+  animation: fadeInFootball 0.4s ease-out;
+}
+
+@keyframes fadeInFootball {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium Format Card hover effects */
+.format-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.format-card.featured:hover {
+  background: rgba(52, 211, 153, 0.08) !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+  box-shadow: 0 10px 25px rgba(52, 211, 153, 0.15);
+}
+
+/* Input Fields styling focus states */
+#football-page input[type="text"]:focus,
+#football-page input[type="number"]:focus,
+#football-page select:focus {
+  outline: none;
+  border-color: #34d399 !important;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.15);
+  background: rgba(0,0,0,0.4) !important;
+}
+
+/* Match Dashboard Period badge animated pulse */
+#fb-period-badge {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px 2px rgba(52, 211, 153, 0.3);
+  }
+}
+
+/* Match Timer panel - big glowing live-aware display */
+.fb-timer-panel {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.10), transparent 65%), rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fb-timer-panel::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.fb-timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+}
+
+.fb-timer-live-dot {
+  display: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.9);
+  flex-shrink: 0;
+}
+
+.fb-timer-panel.is-running .fb-timer-live-dot {
+  display: inline-block;
+  animation: liveBlink 1.2s infinite;
+}
+
+/* Time display typography glow */
+#fb-timer-string {
+  font-size: clamp(3.2rem, 9vw, 5.5rem);
+  font-weight: 900;
+  font-family: monospace;
+  color: var(--ink);
+  letter-spacing: 3px;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(52, 211, 153, 0.3), 0 0 42px rgba(52, 211, 153, 0.12);
+  font-variant-numeric: tabular-nums;
+  transition: text-shadow 0.3s ease;
+}
+
+.fb-timer-panel.is-running #fb-timer-string {
+  animation: fbTimerLivePulse 2s infinite ease-in-out;
+}
+
+@keyframes fbTimerLivePulse {
+  0%, 100% {
+    text-shadow: 0 0 18px rgba(52, 211, 153, 0.3), 0 0 42px rgba(52, 211, 153, 0.12);
+  }
+  50% {
+    text-shadow: 0 0 26px rgba(52, 211, 153, 0.55), 0 0 58px rgba(52, 211, 153, 0.25);
+  }
+}
+
+
+/* Timeline Logs */
+.fb-timeline-card {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  animation: slideInLog 0.3s ease-out;
+}
+
+@keyframes slideInLog {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fb-timeline-card .event-type {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Fixtures cards style */
+.fb-fixture-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.fb-fixture-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.fb-fixture-card .teams-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fb-fixture-card .team-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.fb-fixture-card .fixture-score {
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.fb-fixture-card .status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 10px;
+}
+
+.fb-fixture-card .status-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.fb-fixture-card .status-badge.scheduled {
+  color: var(--text-muted);
+}
+
+.fb-fixture-card .status-badge.live {
+  color: #34d399;
+  animation: liveBlink 1.5s infinite;
+}
+
+.fb-fixture-card .status-badge.completed {
+  color: var(--gold);
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.fb-fixture-card .fixture-btn {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.fb-fixture-card .fixture-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Points Table Pos Highlighting */
+#fb-points-table-body tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s;
+}
+
+#fb-points-table-body tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+#fb-points-table-body td {
+  padding: 12px 10px;
+}
+
+#fb-points-table-body tr:nth-child(1) td:first-child {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+#fb-points-table-body tr:nth-child(2) td:first-child {
+  color: #c0c0c0;
+  font-weight: 800;
+}
+
+#fb-points-table-body tr:nth-child(3) td:first-child {
+  color: #cd7f32;
+  font-weight: 800;
+}
+
+/* Stats leaderboards listing */
+.fb-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px;
+}
+
+.fb-stat-row .rank-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fb-stat-row .rank-num {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.fb-stat-row .player-details {
+  font-weight: 700;
+}
+
+.fb-stat-row .player-team {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.fb-stat-val {
+  font-weight: 800;
+  color: #34d399;
+}
+
+/* Scrollbar customization for dashboards */
+#fb-timeline-list::-webkit-scrollbar,
+#fb-info-teams-container::-webkit-scrollbar,
+#fb-fixtures-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#fb-timeline-list::-webkit-scrollbar-thumb,
+#fb-info-teams-container::-webkit-scrollbar-thumb,
+#fb-fixtures-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+
+/* Modals inputs size alignment */
+.modal-overlay select {
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
