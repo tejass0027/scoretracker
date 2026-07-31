@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 496" role="img" aria-labelledby="title desc">
+  <title id="title">Cricket stadium</title>
+  <desc id="desc">A stylized cricket ground with a pitch, scoreboard, and floodlights.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d7f0ff"/>
+      <stop offset="1" stop-color="#f8fbf2"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1a9a57"/>
+      <stop offset="1" stop-color="#0f693d"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="496" fill="url(#sky)"/>
+  <path d="M0 166 C120 112 242 113 360 158 C478 113 600 112 720 166 L720 260 L0 260 Z" fill="#f2f6f1"/>
+  <path d="M58 182 L154 136 L250 182 Z" fill="#dfe9e1"/>
+  <path d="M470 182 L566 136 L662 182 Z" fill="#dfe9e1"/>
+  <g fill="#25342c">
+    <rect x="100" y="82" width="8" height="104" rx="4"/>
+    <rect x="612" y="82" width="8" height="104" rx="4"/>
+    <circle cx="104" cy="72" r="22" fill="#fff3c4"/>
+    <circle cx="616" cy="72" r="22" fill="#fff3c4"/>
+  </g>
+  <ellipse cx="360" cy="334" rx="334" ry="148" fill="url(#grass)"/>
+  <ellipse cx="360" cy="334" rx="260" ry="106" fill="none" stroke="#d7f6d8" stroke-width="6" opacity=".8"/>
+  <ellipse cx="360" cy="334" rx="110" ry="46" fill="#c8a56b"/>
+  <rect x="326" y="286" width="68" height="96" rx="28" fill="#d9b87a"/>
+  <g stroke="#fff8d8" stroke-width="5" stroke-linecap="round">
+    <path d="M340 298 L380 298"/>
+    <path d="M340 370 L380 370"/>
+    <path d="M350 302 L350 366"/>
+    <path d="M370 302 L370 366"/>
+  </g>
+  <g transform="translate(262 78)">
+    <rect x="0" y="0" width="196" height="86" rx="8" fill="#17201b"/>
+    <rect x="16" y="16" width="164" height="32" rx="4" fill="#f6b73c"/>
+    <text x="98" y="39" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#17201b">LIVE SCORE</text>
+    <circle cx="64" cy="66" r="7" fill="#d54848"/>
+    <circle cx="98" cy="66" r="7" fill="#ffffff"/>
+    <circle cx="132" cy="66" r="7" fill="#4fb7f3"/>
+  </g>
+  <g fill="#ffffff" opacity=".95">
+    <circle cx="190" cy="335" r="10"/>
+    <circle cx="532" cy="326" r="10"/>
+    <circle cx="250" cy="400" r="10"/>
+    <circle cx="456" cy="398" r="10"/>
+    <circle cx="360" cy="248" r="9"/>
+  </g>
+  <path d="M598 376 C618 350 644 350 660 372 C641 366 620 368 598 376 Z" fill="#f6b73c"/>
+</svg>

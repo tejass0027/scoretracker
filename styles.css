@@ -1,0 +1,2120 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --ink: #f8fafc;
+  --muted: #94a3b8;
+  --panel: rgba(15, 23, 42, 0.55);
+  --panel-solid: #0f172a;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-light: rgba(255, 255, 255, 0.15);
+  --field: #10b981;
+  --field-glow: rgba(16, 185, 129, 0.25);
+  --field-dark: #059669;
+  --gold: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+  --blue: #3b82f6;
+  --blue-glow: rgba(59, 130, 246, 0.35);
+  --red: #ef4444;
+  --red-glow: rgba(239, 68, 68, 0.35);
+  --bg: #070a13;
+  --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070a13;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+    #070a13;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.sports-page,
+.format-page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.sports-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.sports-grid,
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.format-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sport-card {
+  display: grid;
+  min-width: 0;
+  min-height: 172px;
+  align-content: space-between;
+  justify-items: start;
+  gap: 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--ink);
+  padding: 18px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sport-card:hover,
+.sport-card:focus-visible {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3), var(--shadow);
+  transform: translateY(-4px);
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sport-card.ready {
+  background: 
+    radial-gradient(circle at 85% 12%, rgba(245, 158, 11, 0.15), transparent 45%),
+    rgba(17, 24, 39, 0.65);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15), var(--shadow);
+}
+
+.sport-card.ready:hover {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 12px 35px -8px rgba(245, 158, 11, 0.25), var(--shadow);
+}
+
+.sport-card strong {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.sport-card small {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.format-card {
+  display: grid;
+  min-height: 190px;
+  align-content: space-between;
+  justify-items: start;
+  gap: 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--ink);
+  padding: 22px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.format-card:hover,
+.format-card:focus-visible {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3), var(--shadow);
+  transform: translateY(-4px);
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.format-card.featured {
+  background: 
+    radial-gradient(circle at 88% 18%, rgba(245, 158, 11, 0.15), transparent 45%),
+    rgba(17, 24, 39, 0.65);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15), var(--shadow);
+}
+
+.format-card.featured:hover {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 12px 35px -8px rgba(245, 158, 11, 0.25), var(--shadow);
+}
+
+.format-card span {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.format-card.featured span {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.format-card strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.format-card small {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.custom-setup {
+  margin-top: 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.custom-setup h2 {
+  margin-bottom: 16px;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.start-custom {
+  min-height: 48px;
+  margin-top: 16px;
+  border-radius: 8px;
+  background: var(--field);
+  color: #070a13;
+  padding: 0 18px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+.start-custom:hover {
+  background: #34d399;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+}
+
+.sport-logo {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.sport-logo::before,
+.sport-logo::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.cricket-logo {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.cricket-logo::before {
+  width: 8px;
+  height: 46px;
+  right: 12px;
+  bottom: 3px;
+  border-radius: 999px;
+  background: var(--gold);
+  transform: rotate(38deg);
+}
+
+.football-logo {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--glass-border);
+}
+
+.football-logo::before {
+  inset: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.basketball-logo {
+  background: rgba(217, 107, 43, 0.15);
+  color: #f97316;
+  border-color: rgba(217, 107, 43, 0.3);
+}
+
+.basketball-logo::before {
+  inset: 0;
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  border-right: 3px solid rgba(255, 255, 255, 0.2);
+  transform: rotate(22deg);
+}
+
+.tennis-logo {
+  background: rgba(184, 216, 63, 0.15);
+  color: #a3e635;
+  border-color: rgba(184, 216, 63, 0.3);
+}
+
+.tennis-logo::before {
+  inset: 6px;
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  border-right: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: rotate(24deg);
+}
+
+.badminton-logo,
+.volleyball-logo,
+.tabletennis-logo,
+.golf-logo {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.hockey-logo,
+.kabaddi-logo,
+.cycling-logo,
+.swimming-logo {
+  background: rgba(16, 120, 184, 0.15);
+  color: #38bdf8;
+  border-color: rgba(16, 120, 184, 0.3);
+}
+
+.baseball-logo,
+.rugby-logo,
+.boxing-logo,
+.mma-logo {
+  background: rgba(213, 72, 72, 0.15);
+  color: #f87171;
+  border-color: rgba(213, 72, 72, 0.3);
+}
+
+.f1-logo,
+.athletics-logo,
+.chess-logo,
+.esports-logo {
+  background: rgba(95, 69, 200, 0.15);
+  color: #a78bfa;
+  border-color: rgba(95, 69, 200, 0.3);
+}
+
+.hockey-logo::before,
+.golf-logo::before {
+  width: 36px;
+  height: 4px;
+  left: 12px;
+  bottom: 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.4);
+  transform: rotate(-28deg);
+}
+
+.swimming-logo::before {
+  width: 48px;
+  height: 14px;
+  left: 5px;
+  bottom: 10px;
+  border-top: 4px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+}
+
+.app-shell,
+.cricket-app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.score-panel,
+.side-panel,
+.cricket-arena,
+.cricket-side {
+  min-width: 0;
+}
+
+.score-panel,
+.cricket-arena {
+  background: var(--panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.cricket-arena {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  padding: 0;
+}
+
+.topbar,
+.cricket-topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.cricket-topbar {
+  align-items: center;
+  margin: 0;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cricket-topbar .eyebrow {
+  color: var(--blue);
+}
+
+.cricket-topbar h1 {
+  color: var(--ink);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--field);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 4.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+h2 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.sport-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.sport-tab {
+  min-height: 38px;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  padding: 0 16px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.sport-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}
+
+.sport-tab.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #070a13;
+}
+
+.cricket-topbar .sport-tab.active {
+  background: var(--field);
+  border-color: var(--field);
+  color: #070a13;
+  box-shadow: 0 4px 12px var(--field-glow);
+}
+
+.cricket-topbar .sport-tab.active:hover {
+  background: #34d399;
+  border-color: #34d399;
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 24px 18px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 16px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  padding: 10px 12px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--field);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.scoreboard,
+.match-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 14px;
+  align-items: stretch;
+  margin: 0 24px 18px;
+  color: var(--ink);
+}
+
+.team-ribbon {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.team-ribbon div {
+  display: grid;
+  gap: 6px;
+  min-height: 84px;
+  align-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  padding: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-ribbon div:first-child {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(255, 255, 255, 0.01));
+}
+
+.team-ribbon span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.team-ribbon div:first-child span::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--field);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--field);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.team-ribbon strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.score-hero {
+  display: grid;
+  align-content: space-between;
+  min-height: 320px;
+  border-radius: 14px;
+  background: 
+    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.2), transparent 40%),
+    linear-gradient(135deg, #0f1c2d, #0b0f19);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--ink);
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.score-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto -40px -90px -40px;
+  height: 180px;
+  border: 2px solid rgba(16, 185, 129, 0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.score-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.score-meta span {
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+}
+
+#innings-label {
+  border-color: rgba(59, 130, 246, 0.2);
+  background: rgba(59, 130, 246, 0.08);
+  color: #93c5fd;
+}
+
+#overs-label {
+  border-color: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.08);
+  color: #6ee7b7;
+}
+
+.score-hero p.match-note {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.score-hero strong {
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.score-hero span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.stat-strip div {
+  display: grid;
+  align-content: center;
+  min-height: 100px;
+  padding: 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--field);
+  transition: all 0.2s ease;
+}
+
+.stat-strip div:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.stat-strip div:nth-child(2) {
+  border-left-color: var(--blue);
+}
+
+.stat-strip div:nth-child(3) {
+  border-left-color: var(--gold);
+}
+
+.stat-strip span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-strip strong {
+  margin-top: 6px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+}
+
+.scorer-console {
+  margin: 0 24px 24px;
+  border-radius: 14px;
+  background: rgba(10, 15, 26, 0.4);
+  border: 1px solid var(--glass-border);
+  padding: 20px;
+}
+
+.console-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.console-title h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.console-title span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.run-buttons,
+.event-buttons {
+  display: grid;
+  gap: 10px;
+}
+
+.run-buttons {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.event-buttons {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.run-buttons button,
+.event-buttons button {
+  min-height: 56px;
+  border-radius: 10px;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.run-buttons button {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  font-size: 1.3rem;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.run-buttons button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.run-buttons button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.run-buttons button[data-run="4"] {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.run-buttons button[data-run="4"]:hover {
+  background: var(--blue);
+  color: #070a13;
+  box-shadow: 0 6px 20px var(--blue-glow);
+}
+
+.run-buttons button[data-run="6"] {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.run-buttons button[data-run="6"]:hover {
+  background: var(--field);
+  color: #070a13;
+  box-shadow: 0 6px 20px var(--field-glow);
+}
+
+.event-buttons button {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.event-buttons button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.event-buttons button[data-wicket="true"] {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.event-buttons button[data-wicket="true"]:hover {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 6px 20px var(--red-glow);
+}
+
+#undo-btn, #reset-btn, #innings-btn, #declare-btn, #follow-on-btn, #draw-btn {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+}
+
+#undo-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--ink);
+}
+
+#reset-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+#innings-btn:not(:disabled) {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+#innings-btn:not(:disabled):hover {
+  background: var(--field);
+  color: #070a13;
+}
+
+.event-buttons button:disabled,
+.sport-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.side-panel,
+.cricket-side {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.cricket-side {
+  grid-template-rows: auto auto 1fr;
+}
+
+.stadium-art,
+.mini-card {
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.stadium-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.45;
+  object-fit: cover;
+  background: #111827;
+}
+
+.mini-card {
+  padding: 18px;
+}
+
+.cricket-side .mini-card {
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+dl div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+dd {
+  margin: 0;
+  max-width: 58%;
+  text-align: right;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.recent-balls,
+.summary-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.recent-balls {
+  grid-template-columns: repeat(6, 1fr);
+  list-style: none;
+}
+
+.recent-balls-container .ball-node {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.recent-balls-container .ball-node:hover {
+  transform: scale(1.1);
+}
+
+.recent-balls-container .ball-wicket {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.45);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 0 12px var(--red-glow);
+}
+
+.recent-balls-container .ball-boundary.ball-run-4 {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 0 12px var(--blue-glow);
+}
+
+.recent-balls-container .ball-boundary.ball-run-6 {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 0 12px var(--gold-glow);
+}
+
+.recent-balls-container .ball-extra {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.recent-balls-container .ball-dot-or-run {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+}
+
+.recent-balls-container .ball-empty {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  border-style: dashed;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.summary-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.summary-row span {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  width: min(420px, calc(100% - 32px));
+  transform: translate(-50%, 24px);
+  border-radius: 10px;
+  background: var(--panel-solid);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  padding: 14px 18px;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-weight: 700;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 980px) {
+  .sports-grid,
+  .format-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-shell,
+  .cricket-app {
+    grid-template-columns: 1fr;
+  }
+
+  .match-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .sports-page,
+  .format-page {
+    width: min(100% - 20px, 1180px);
+    padding: 18px 0;
+  }
+
+  .sports-header {
+    align-items: start;
+    display: grid;
+  }
+
+  .sports-grid,
+  .format-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .sport-card {
+    min-height: 148px;
+    padding: 14px;
+  }
+
+  .sport-logo {
+    width: 50px;
+    height: 50px;
+    font-size: 0.82rem;
+  }
+
+  .format-card {
+    min-height: 158px;
+    padding: 16px;
+  }
+
+  .format-card span {
+    width: 52px;
+    height: 52px;
+  }
+
+  .custom-setup {
+    padding: 16px;
+  }
+
+  .app-shell,
+  .cricket-app {
+    width: min(100% - 20px, 1180px);
+    padding: 10px 0 18px;
+  }
+
+  .score-panel,
+  .cricket-arena {
+    padding: 16px;
+  }
+
+  .cricket-arena {
+    padding: 0;
+    background: var(--panel);
+  }
+
+  .topbar,
+  .cricket-topbar,
+  .scoreboard,
+  .match-stage {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .sport-tabs {
+    justify-content: start;
+  }
+
+  .team-ribbon,
+  .match-grid,
+  .run-buttons,
+  .event-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .match-stage,
+  .match-grid,
+  .scorer-console {
+    margin-inline: 14px;
+  }
+
+  .stat-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .stat-strip div {
+    min-height: 84px;
+    padding: 12px;
+  }
+
+  .score-hero {
+    min-height: 250px;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 430px) {
+  h1 {
+    font-size: 2.35rem;
+  }
+
+  .sports-grid,
+  .format-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sport-card {
+    min-height: 118px;
+    grid-template-columns: auto 1fr;
+    align-content: center;
+    align-items: center;
+  }
+
+  .sport-card small {
+    grid-column: 2;
+  }
+
+  .event-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .match-grid,
+  .team-ribbon,
+  .stat-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .cricket-topbar {
+    align-items: start;
+    display: grid;
+  }
+
+  .run-buttons button,
+  .event-buttons button {
+    min-height: 50px;
+  }
+}
+
+/* Sticky Header Styles */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(9, 13, 22, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.logo-text .highlight {
+  color: var(--field);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}
+
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--red);
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+/* Offsets for page layouts to account for sticky header */
+.sports-page,
+.format-page,
+.cricket-app {
+  padding-top: 96px !important;
+}
+
+/* Skeleton Loading Screen Styles */
+.skeleton-loader {
+  position: fixed;
+  inset: 0;
+  background: #070a13;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 24px min(32px, 5%);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.skeleton-loader.fade-out {
+  opacity: 0;
+}
+
+.skeleton-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 32px;
+}
+
+.skeleton-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeleton-title {
+  width: 120px;
+  height: 20px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  flex-grow: 1;
+}
+
+.skeleton-card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeleton-card-hero {
+  min-height: 480px;
+}
+
+.skeleton-card-side {
+  height: 350px;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+/* Wicket Shake and Red Flash Effect */
+.wicket-flash-shake {
+  animation: flash-shake-anim 0.6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes flash-shake-anim {
+  0%, 100% { transform: translate3d(0, 0, 0); box-shadow: var(--shadow); }
+  10%, 90% { transform: translate3d(-4px, 0, 0); box-shadow: 0 0 25px rgba(239, 68, 68, 0.4), var(--shadow); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); box-shadow: 0 0 40px rgba(239, 68, 68, 0.6), var(--shadow); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* Confetti particles falling styling */
+.confetti-particle {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 10000;
+  animation: confetti-fall 2.2s linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(var(--ty)) translateX(var(--tx)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* Additional UX updates */
+
+@media (max-width: 980px) {
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+  .skeleton-card-side {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .sports-page,
+  .format-page,
+  .cricket-app {
+    padding-top: 84px !important;
+  }
+}
+
+/* Theme Toggle Switch Styles */
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+.theme-switch-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.theme-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  padding: 0;
+}
+
+.theme-switch-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+/* Checked/Active state: Dark Mode by default */
+.theme-switch[aria-checked="true"] {
+  background: var(--field);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.theme-switch[aria-checked="true"] .theme-switch-handle {
+  transform: translateX(20px);
+  background: #ffffff;
+}
+
+/* Checked/Active state Hover: Dark Mode */
+.theme-switch[aria-checked="true"]:hover {
+  background: var(--field-dark);
+}
+
+/* Light Theme Variables */
+.light-theme {
+  --ink: #0f172a;
+  --muted: #475569;
+  --panel: rgba(255, 255, 255, 0.65);
+  --panel-solid: #ffffff;
+  --line: rgba(15, 23, 42, 0.06);
+  --line-light: rgba(15, 23, 42, 0.1);
+  --field: #059669;
+  --field-glow: rgba(5, 150, 105, 0.15);
+  --field-dark: #047857;
+  --gold: #d97706;
+  --gold-glow: rgba(217, 119, 6, 0.2);
+  --blue: #2563eb;
+  --blue-glow: rgba(37, 99, 235, 0.2);
+  --red: #dc2626;
+  --red-glow: rgba(220, 38, 38, 0.2);
+  --bg: #d5e5df;
+  --shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-hover: rgba(15, 23, 42, 0.03);
+}
+
+/* Light Theme Specific Element Styles */
+.light-theme body {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(5, 150, 105, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.light-theme .app-header {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.light-theme .theme-switch {
+  background: rgba(15, 23, 42, 0.12);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.light-theme .theme-switch:hover {
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.light-theme .theme-switch[aria-checked="false"] .theme-switch-handle {
+  transform: translateX(0);
+  background: #0f172a;
+}
+
+.light-theme .nav-btn {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.light-theme .nav-btn:hover {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+/* SVG Logo Adjustments */
+.light-theme .logo-wrapper rect[fill="#f8fafc"] {
+  fill: #0f172a;
+}
+.light-theme .logo-wrapper path[fill="#f8fafc"] {
+  fill: #0f172a;
+}
+.light-theme .logo-wrapper path[stroke="#f8fafc"] {
+  stroke: #0f172a;
+}
+
+/* Page Card Backings */
+.light-theme .sport-card.ready {
+  background: 
+    radial-gradient(circle at 85% 12%, rgba(217, 119, 6, 0.08), transparent 45%),
+    rgba(255, 255, 255, 0.85);
+  border-color: rgba(217, 119, 6, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(217, 119, 6, 0.08), var(--shadow);
+}
+
+.light-theme .format-card.featured {
+  background: 
+    radial-gradient(circle at 88% 18%, rgba(217, 119, 6, 0.08), transparent 45%),
+    rgba(255, 255, 255, 0.85);
+  border-color: rgba(217, 119, 6, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(217, 119, 6, 0.08), var(--shadow);
+}
+
+/* Match Arena */
+.light-theme .cricket-arena {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.light-theme .team-ribbon div {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.light-theme .team-ribbon div:first-child {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.05), rgba(255, 255, 255, 0.01));
+}
+
+.light-theme .score-hero {
+  background: 
+    radial-gradient(circle at 85% 15%, rgba(217, 119, 6, 0.15), transparent 40%),
+    linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  border-color: rgba(15, 23, 42, 0.06);
+  color: #0f172a;
+  box-shadow: inset 0 20px 40px rgba(255, 255, 255, 0.4);
+}
+
+.light-theme .score-hero strong {
+  color: #0f172a;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.light-theme .score-hero p.match-note {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: rgba(15, 23, 42, 0.05);
+  color: #475569;
+}
+
+.light-theme #innings-label {
+  border-color: rgba(37, 99, 235, 0.15);
+  background: rgba(37, 99, 235, 0.05);
+  color: #1d4ed8;
+}
+
+.light-theme #overs-label {
+  border-color: rgba(5, 150, 105, 0.15);
+  background: rgba(5, 150, 105, 0.05);
+  color: #047857;
+}
+
+.light-theme .stat-strip div {
+  background: rgba(15, 23, 42, 0.01);
+}
+
+.light-theme .stat-strip div:hover {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+/* Scorer Buttons */
+.light-theme .scorer-console {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.light-theme .console-title h2 {
+  color: #0f172a;
+}
+
+.light-theme .run-buttons button {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #0f172a;
+}
+
+.run-buttons button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.light-theme .run-buttons button:hover {
+  background: #f1f5f9;
+}
+
+.light-theme .run-buttons button[data-run="4"] {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.light-theme .run-buttons button[data-run="4"]:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.light-theme .run-buttons button[data-run="6"] {
+  background: rgba(5, 150, 105, 0.08);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.light-theme .run-buttons button[data-run="6"]:hover {
+  background: #059669;
+  color: #ffffff;
+}
+
+.light-theme .event-buttons button {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.06);
+  color: #475569;
+}
+
+.light-theme .event-buttons button:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.light-theme .event-buttons button[data-wicket="true"] {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+.light-theme .event-buttons button[data-wicket="true"]:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.light-theme #undo-btn, 
+.light-theme #reset-btn, 
+.light-theme #innings-btn, 
+.light-theme #declare-btn, 
+.light-theme #follow-on-btn, 
+.light-theme #draw-btn {
+  background: #f8fafc;
+  color: var(--muted);
+}
+
+.light-theme #undo-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.light-theme #reset-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+.light-theme #innings-btn:not(:disabled) {
+  background: rgba(5, 150, 105, 0.08);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.light-theme #innings-btn:not(:disabled):hover {
+  background: #059669;
+  color: #ffffff;
+}
+
+/* Sidebar elements */
+.light-theme .cricket-side .mini-card {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.light-theme dl div {
+  border-bottom-color: rgba(15, 23, 42, 0.05);
+}
+
+.light-theme .recent-balls-container .ball-node {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #0f172a;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.light-theme .recent-balls-container .ball-dot-or-run {
+  color: var(--muted);
+}
+
+.light-theme .recent-balls-container .ball-wicket {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.light-theme .recent-balls-container .ball-boundary.ball-run-4 {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.light-theme .recent-balls-container .ball-boundary.ball-run-6 {
+  background: rgba(217, 119, 6, 0.12);
+  color: #d97706;
+  border-color: rgba(217, 119, 6, 0.3);
+}
+
+.light-theme .recent-balls-container .ball-extra {
+  background: rgba(5, 150, 105, 0.08);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.light-theme .recent-balls-container .ball-empty {
+  background: rgba(15, 23, 42, 0.01);
+}
+
+.light-theme .summary-row {
+  background: #ffffff;
+}
+
+.light-theme .summary-row:hover {
+  background: #f1f5f9;
+}
+
+/* Skeleton Loading Light mode */
+.light-theme .skeleton-loader {
+  background: #f8fafc;
+}
+.light-theme .skeleton-circle,
+.light-theme .skeleton-title {
+  background: rgba(15, 23, 42, 0.04);
+}
+.light-theme .skeleton-card {
+  background: rgba(15, 23, 42, 0.02);
+  border-color: rgba(15, 23, 42, 0.04);
+}
+.light-theme .skeleton-header {
+  border-bottom-color: rgba(15, 23, 42, 0.04);
+}
+
+/* Toast Light Mode */
+.light-theme .toast {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Vertical group layout for match setup form items */
+.setup-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Validation errors in Red */
+.validation-error {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin-top: 6px;
+  animation: fadeIn 0.15s ease-out;
+}
+.validation-error.hidden {
+  display: none;
+}
+
+/* Recent Balls Over Row Summary styles */
+.recent-balls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.over-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light-theme .over-row {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.over-row-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 52px;
+}
+
+.over-row-balls {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.over-row-empty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* IPL Tournament Styles */
+.points-table th, 
+.points-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light-theme .points-table th, 
+.light-theme .points-table td {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.points-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.light-theme .points-table tbody tr:hover {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.fixture-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.light-theme .fixture-card {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.fixture-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.light-theme .fixture-card:hover {
+  border-color: rgba(15, 23, 42, 0.15);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.fixture-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.fixture-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.fixture-status.scheduled {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.fixture-status.live {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  animation: pulse 1.5s infinite;
+}
+
+.fixture-status.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.fixture-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fixture-team-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.fixture-team-name {
+  font-size: 0.95rem;
+}
+
+.fixture-team-score {
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.fixture-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fixture-btn:not(.expanded):hover {
+  background: var(--gold);
+  color: #000;
+  border-color: var(--gold);
+}
+
+.light-theme .fixture-btn {
+  border-color: rgba(15, 23, 42, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.light-theme .fixture-btn:not(.expanded):hover {
+  background: var(--gold);
+  color: #000;
+  border-color: var(--gold);
+}
+
+.light-theme #btn-new-tournament-choice {
+  background: rgba(15, 23, 42, 0.05) !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+.light-theme #btn-new-tournament-choice:hover {
+  background: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Custom Round Checkbox styling for squad modal */
+.squad-checkbox-round {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.squad-checkbox-round:checked {
+  background-color: var(--gold);
+  border-color: var(--gold);
+}
+
+.light-theme .squad-checkbox-round {
+  border-color: rgba(15, 23, 42, 0.3);
+}
