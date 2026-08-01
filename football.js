@@ -2,7 +2,7 @@
    FOOTBALL SCORE TRACKER & TOURNAMENT LEAGUE MODULE - CORE ENGINE
    ========================================================================== */
 
-console.log("Football Module loaded - version 205");
+console.log("Football Module loaded - version 206");
 
 (function () {
   // 1. STORAGE KEYS & DEFAULT STATES
@@ -22,6 +22,7 @@ console.log("Football Module loaded - version 205");
     quarterBreaks: false,
     maxSubs: 5,
     knockoutMode: false,
+    extraTimeMode: false,
     etDuration: 15,
     playersCount: 11,
     rosterA: [],
@@ -97,6 +98,7 @@ console.log("Football Module loaded - version 205");
     playersInput: document.querySelector("#fb-players-input"),
     halftimeDurationInput: document.querySelector("#fb-halftime-duration-input"),
     knockoutInput: document.querySelector("#fb-knockout-input"),
+    etInput: document.querySelector("#fb-et-input"),
     quarterBreaksInput: document.querySelector("#fb-quarter-breaks-input"),
     etDurationInput: document.querySelector("#fb-et-duration-input"),
     etSetupContainer: document.querySelector("#fb-et-setup-container"),
@@ -410,8 +412,14 @@ console.log("Football Module loaded - version 205");
           } else if (fb.period === "2nd-half" || fb.period === "4th-quarter") {
             fb.matchTimer.stoppageTime2ndHalf = fb.matchTimer.stoppageTime;
             fb.matchTimer.running = false;
-            if (fb.knockoutMode && fb.scoreA === fb.scoreB) {
-              fb.period = "full-time-pending";
+            if (fb.scoreA === fb.scoreB) {
+              if (fb.extraTimeMode) {
+                fb.period = "full-time-pending";
+              } else if (fb.knockoutMode) {
+                fb.period = "et-full-time-pending";
+              } else {
+                fb.period = "completed";
+              }
             } else {
               fb.period = "completed";
             }
@@ -559,11 +567,12 @@ console.log("Football Module loaded - version 205");
       const playersCount = Math.max(5, Math.min(11, Number(playersVal)));
       const halftimeDur = Math.max(1, Math.min(45, Number(halftimeVal)));
       const qb = els.quarterBreaksInput.checked;
+      const etEnabled = els.etInput ? els.etInput.checked : false;
       const ko = els.knockoutInput.checked;
 
       // EXTRA TIME DURATION VALIDATION
       let etDuration = 15; // default
-      if (ko) {
+      if (etEnabled) {
         const etDurationVal = els.etDurationInput.value.trim();
         if (!etDurationVal) {
           triggerFbToast("Please fill in the Extra Time duration field!");
@@ -597,6 +606,7 @@ console.log("Football Module loaded - version 205");
       fb.quarterBreaks = qb;
       fb.maxSubs = maxSubs;
       fb.knockoutMode = ko;
+      fb.extraTimeMode = etEnabled;
       fb.etDuration = etDuration;
       fb.playersCount = playersCount;
       fb.rosterA = rosterA;
@@ -628,10 +638,10 @@ console.log("Football Module loaded - version 205");
     });
   }
 
-  // Toggle Extra Time duration input based on Knockout Match selection
-  if (els.knockoutInput && els.etSetupContainer) {
-    els.knockoutInput.addEventListener("change", () => {
-      if (els.knockoutInput.checked) {
+  // Toggle Extra Time duration input based on Extra Time selection
+  if (els.etInput && els.etSetupContainer) {
+    els.etInput.addEventListener("change", () => {
+      if (els.etInput.checked) {
         els.etSetupContainer.style.display = "block";
       } else {
         els.etSetupContainer.style.display = "none";
@@ -771,7 +781,7 @@ console.log("Football Module loaded - version 205");
       } else if (fb.period === "3rd-quarter-break") {
         transLabel = "Start 4th Quarter";
       } else if (fb.period === "2nd-half" || fb.period === "4th-quarter") {
-        transLabel = fb.knockoutMode && fb.scoreA === fb.scoreB ? "End Match (ET)" : "End Match";
+        transLabel = fb.scoreA === fb.scoreB ? (fb.extraTimeMode ? "End Match (ET)" : (fb.knockoutMode ? "End Match (Shootout)" : "End Match")) : "End Match";
       } else if (fb.period === "full-time-pending") {
         transLabel = "Start Extra Time";
       } else if (fb.period === "et-1st-half") {
@@ -1156,8 +1166,14 @@ console.log("Football Module loaded - version 205");
         fb.matchTimer.running = false;
         playFbWhistleSound(true); // End of period double whistle
         stopFbTimer();
-        if (fb.knockoutMode && fb.scoreA === fb.scoreB) {
-          fb.period = "full-time-pending";
+        if (fb.scoreA === fb.scoreB) {
+          if (fb.extraTimeMode) {
+            fb.period = "full-time-pending";
+          } else if (fb.knockoutMode) {
+            fb.period = "et-full-time-pending";
+          } else {
+            fb.period = "completed";
+          }
         } else {
           fb.period = "completed";
         }
