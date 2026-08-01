@@ -2,7 +2,7 @@
    FOOTBALL SCORE TRACKER & TOURNAMENT LEAGUE MODULE - CORE ENGINE
    ========================================================================== */
 
-console.log("Football Module loaded - version 202");
+console.log("Football Module loaded - version 203");
 
 (function () {
   // 1. STORAGE KEYS & DEFAULT STATES
@@ -22,6 +22,7 @@ console.log("Football Module loaded - version 202");
     quarterBreaks: false,
     maxSubs: 5,
     knockoutMode: false,
+    etDuration: 15,
     playersCount: 11,
     rosterA: [],
     rosterB: [],
@@ -97,6 +98,8 @@ console.log("Football Module loaded - version 202");
     halftimeDurationInput: document.querySelector("#fb-halftime-duration-input"),
     knockoutInput: document.querySelector("#fb-knockout-input"),
     quarterBreaksInput: document.querySelector("#fb-quarter-breaks-input"),
+    etDurationInput: document.querySelector("#fb-et-duration-input"),
+    etSetupContainer: document.querySelector("#fb-et-setup-container"),
     startBtn: document.querySelector("#fb-start-btn"),
     backBtns: document.querySelectorAll(".fb-back-btn"),
 
@@ -376,8 +379,8 @@ console.log("Football Module loaded - version 202");
         else if (fb.period === "2nd-quarter") targetSecs = fb.fullDuration * 30;
         else if (fb.period === "3rd-quarter") targetSecs = fb.fullDuration * 45;
         else if (fb.period === "2nd-half" || fb.period === "4th-quarter") targetSecs = fb.fullDuration * 60;
-        else if (fb.period === "et-1st-half") targetSecs = 15 * 60;
-        else if (fb.period === "et-2nd-half") targetSecs = 30 * 60;
+        else if (fb.period === "et-1st-half") targetSecs = (fb.etDuration || 15) * 60;
+        else if (fb.period === "et-2nd-half") targetSecs = ((fb.etDuration || 15) * 2) * 60;
 
         const currentPeriodSecs = isExtraTime ? fb.matchTimer.etSeconds : fb.matchTimer.seconds;
 
@@ -558,6 +561,21 @@ console.log("Football Module loaded - version 202");
       const qb = els.quarterBreaksInput.checked;
       const ko = els.knockoutInput.checked;
 
+      // EXTRA TIME DURATION VALIDATION
+      let etDuration = 15; // default
+      if (ko) {
+        const etDurationVal = els.etDurationInput.value.trim();
+        if (!etDurationVal) {
+          triggerFbToast("Please fill in the Extra Time duration field!");
+          return;
+        }
+        if (Number(etDurationVal) < 1 || Number(etDurationVal) > 45) {
+          triggerFbToast("Extra Time duration must be between 1 and 45 minutes.");
+          return;
+        }
+        etDuration = Math.max(1, Math.min(45, Number(etDurationVal)));
+      }
+
       // Construct Initial Roster Arrays
       const rosterA = [];
       const rosterB = [];
@@ -579,6 +597,7 @@ console.log("Football Module loaded - version 202");
       fb.quarterBreaks = qb;
       fb.maxSubs = maxSubs;
       fb.knockoutMode = ko;
+      fb.etDuration = etDuration;
       fb.playersCount = playersCount;
       fb.rosterA = rosterA;
       fb.rosterB = rosterB;
@@ -606,6 +625,17 @@ console.log("Football Module loaded - version 202");
     els.modeAdvanced.addEventListener("click", () => {
       els.modeAdvanced.classList.add("active");
       els.modeSimple.classList.remove("active");
+    });
+  }
+
+  // Toggle Extra Time duration input based on Knockout Match selection
+  if (els.knockoutInput && els.etSetupContainer) {
+    els.knockoutInput.addEventListener("change", () => {
+      if (els.knockoutInput.checked) {
+        els.etSetupContainer.style.display = "block";
+      } else {
+        els.etSetupContainer.style.display = "none";
+      }
     });
   }
 
