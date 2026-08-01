@@ -2,7 +2,7 @@
 window.addEventListener("error", (e) => {
   alert(`Global Error: ${e.message} at ${e.filename}:${e.lineno}`);
 });
-console.log("CricPulse App loaded - version 203");
+console.log("CricPulse App loaded - version 204");
 
 const STORAGE_KEY = "cricket-score-tracker-v1";
 
