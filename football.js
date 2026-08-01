@@ -533,6 +533,12 @@ console.log("Football Module loaded - version 197");
         return;
       }
 
+      // STRICT UNIQUE TEAM NAME VALIDATION
+      if (tA.toLowerCase() === tB.toLowerCase()) {
+        triggerFbToast("Team names must be unique!");
+        return;
+      }
+
       // STRICT RANGE VALIDATION
       if (Number(durationVal) < 2 || Number(durationVal) > 90) {
         triggerFbToast("Match duration must be between 2 and 90 minutes.");
@@ -1245,6 +1251,33 @@ console.log("Football Module loaded - version 197");
           return;
         }
 
+        // Validate unique player names
+        const allNames = new Set();
+        let duplicatePlayer = null;
+
+        inputsA.forEach((input) => {
+          const val = input.value.trim();
+          const key = val.toLowerCase();
+          if (allNames.has(key)) {
+            duplicatePlayer = val;
+          }
+          allNames.add(key);
+        });
+
+        inputsB.forEach((input) => {
+          const val = input.value.trim();
+          const key = val.toLowerCase();
+          if (allNames.has(key)) {
+            duplicatePlayer = val;
+          }
+          allNames.add(key);
+        });
+
+        if (duplicatePlayer) {
+          triggerFbToast(`All player names must be unique. Duplicate found: "${duplicatePlayer}"`);
+          return;
+        }
+
         const rosterA = [];
         inputsA.forEach((input, index) => {
           rosterA.push({ name: input.value.trim(), number: index + 1, active: index < playersCount });
@@ -1594,6 +1627,23 @@ console.log("Football Module loaded - version 197");
 
       if (missingTeamName) {
         triggerFbToast("Please fill in all team names!");
+        return;
+      }
+
+      // STRICT UNIQUE TEAM NAME VALIDATION
+      const teamNames = new Set();
+      let duplicateTeam = null;
+      teamInputs.forEach(input => {
+        const name = input.value.trim();
+        const key = name.toLowerCase();
+        if (teamNames.has(key)) {
+          duplicateTeam = name;
+        }
+        teamNames.add(key);
+      });
+
+      if (duplicateTeam) {
+        triggerFbToast(`Team names must be unique. Duplicate found: "${duplicateTeam}"`);
         return;
       }
 
