@@ -2,7 +2,7 @@
    FOOTBALL SCORE TRACKER & TOURNAMENT LEAGUE MODULE - CORE ENGINE
    ========================================================================== */
 
-console.log("Football Module loaded - version 207");
+console.log("Football Module loaded - version 208");
 
 (function () {
   // 1. STORAGE KEYS & DEFAULT STATES
@@ -494,6 +494,19 @@ console.log("Football Module loaded - version 207");
       if (els.formatView) els.formatView.classList.remove("hidden");
     } else if (hash === "#football-custom-setup") {
       if (els.setupView) els.setupView.classList.remove("hidden");
+      if (els.teamAInput) els.teamAInput.value = "";
+      if (els.teamBInput) els.teamBInput.value = "";
+      if (els.durationInput) els.durationInput.value = "";
+      if (els.subsInput) els.subsInput.value = "";
+      if (els.playersInput) els.playersInput.value = "";
+      if (els.halftimeDurationInput) els.halftimeDurationInput.value = "";
+      if (els.etDurationInput) els.etDurationInput.value = "";
+      if (els.knockoutInput) els.knockoutInput.checked = false;
+      if (els.etInput) els.etInput.checked = false;
+      if (els.quarterBreaksInput) els.quarterBreaksInput.checked = false;
+      if (els.etSetupContainer) els.etSetupContainer.style.display = "none";
+      if (els.modeSimple) els.modeSimple.classList.add("active");
+      if (els.modeAdvanced) els.modeAdvanced.classList.remove("active");
     } else if (hash === "#football-match") {
       if (els.dashboardView) els.dashboardView.classList.remove("hidden");
       renderFbDashboard();
@@ -1635,7 +1648,7 @@ console.log("Football Module loaded - version 207");
       div.className = "setup-group";
       div.innerHTML = `
         <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Team ${i + 1} Name</label>
-        <input type="text" class="football-tteam-name-input" placeholder="Enter Team ${i + 1} Name" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;" />
+        <input type="text" class="football-tteam-name-input" placeholder="Enter Team ${i + 1} Name" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;" />
       `;
       els.tteamInputs.appendChild(div);
     }
