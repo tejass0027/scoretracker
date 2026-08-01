@@ -2,7 +2,7 @@
    FOOTBALL SCORE TRACKER & TOURNAMENT LEAGUE MODULE - CORE ENGINE
    ========================================================================== */
 
-console.log("Football Module loaded - version 203");
+console.log("Football Module loaded - version 204");
 
 (function () {
   // 1. STORAGE KEYS & DEFAULT STATES
@@ -96,7 +96,8 @@ console.log("Football Module loaded - version 203");
     subsInput: document.querySelector("#fb-subs-input"),
     playersInput: document.querySelector("#fb-players-input"),
     halftimeDurationInput: document.querySelector("#fb-halftime-duration-input"),
-    knockoutInput: document.querySelector("#fb-knockout-input"),
+    etOptionNo: document.querySelector("#fb-et-option-no"),
+    etOptionYes: document.querySelector("#fb-et-option-yes"),
     quarterBreaksInput: document.querySelector("#fb-quarter-breaks-input"),
     etDurationInput: document.querySelector("#fb-et-duration-input"),
     etSetupContainer: document.querySelector("#fb-et-setup-container"),
@@ -559,7 +560,7 @@ console.log("Football Module loaded - version 203");
       const playersCount = Math.max(5, Math.min(11, Number(playersVal)));
       const halftimeDur = Math.max(1, Math.min(45, Number(halftimeVal)));
       const qb = els.quarterBreaksInput.checked;
-      const ko = els.knockoutInput.checked;
+      const ko = els.etOptionYes ? els.etOptionYes.classList.contains("active") : false;
 
       // EXTRA TIME DURATION VALIDATION
       let etDuration = 15; // default
@@ -628,14 +629,17 @@ console.log("Football Module loaded - version 203");
     });
   }
 
-  // Toggle Extra Time duration input based on Knockout Match selection
-  if (els.knockoutInput && els.etSetupContainer) {
-    els.knockoutInput.addEventListener("change", () => {
-      if (els.knockoutInput.checked) {
-        els.etSetupContainer.style.display = "block";
-      } else {
-        els.etSetupContainer.style.display = "none";
-      }
+  // Toggle Extra Time duration input based on Extra Time option button clicks
+  if (els.etOptionNo && els.etOptionYes && els.etSetupContainer) {
+    els.etOptionNo.addEventListener("click", () => {
+      els.etOptionNo.classList.add("active");
+      els.etOptionYes.classList.remove("active");
+      els.etSetupContainer.style.display = "none";
+    });
+    els.etOptionYes.addEventListener("click", () => {
+      els.etOptionYes.classList.add("active");
+      els.etOptionNo.classList.remove("active");
+      els.etSetupContainer.style.display = "block";
     });
   }
 
