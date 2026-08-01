@@ -1985,6 +1985,24 @@ console.log("Football Module loaded - version 197");
       fbt.maxSubs = Math.max(1, Math.min(11, Number(subsVal)));
 
       const teamInputs = document.querySelectorAll(".fb-edit-team-name-input");
+      
+      // STRICT UNIQUE TEAM NAME VALIDATION
+      const teamNames = new Set();
+      let duplicateTeam = null;
+      teamInputs.forEach(input => {
+        const name = input.value.trim() || `Team ${Number(input.dataset.index) + 1}`;
+        const key = name.toLowerCase();
+        if (teamNames.has(key)) {
+          duplicateTeam = name;
+        }
+        teamNames.add(key);
+      });
+
+      if (duplicateTeam) {
+        triggerFbToast(`Team names must be unique. Duplicate found: "${duplicateTeam}"`);
+        return;
+      }
+
       teamInputs.forEach(input => {
         const idx = Number(input.dataset.index);
         const oldName = fbt.teams[idx].name;
