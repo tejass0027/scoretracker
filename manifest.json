@@ -1,6 +1,6 @@
 {
-  "name": "ScoreCentral Live Sports Score Tracker",
-  "short_name": "ScoreCentral",
+  "name": "ScoreTracker Live Sports Score Tracker",
+  "short_name": "ScoreTracker",
   "description": "Progressive live sports score tracker for Cricket and Football with custom formats.",
   "start_url": "./index.html",
   "display": "standalone",
