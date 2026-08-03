@@ -525,8 +525,15 @@ console.log("ScoreTracker Football Module loaded - version 208");
       const storedFb = localStorage.getItem(FB_STORAGE_KEY);
       const storedFbt = localStorage.getItem(FBT_STORAGE_KEY);
 
-      if (storedFb) fb = JSON.parse(storedFb);
-      if (storedFbt) fbt = JSON.parse(storedFbt);
+      if (storedFb) {
+        fb = { ...clone(defaultFbState), ...JSON.parse(storedFb) };
+        if (fb.matchTimer) {
+          fb.matchTimer = { ...clone(defaultFbState.matchTimer), ...fb.matchTimer };
+        }
+      }
+      if (storedFbt) {
+        fbt = { ...clone(defaultFbtState), ...JSON.parse(storedFbt) };
+      }
     } catch (e) {
       console.error("Failed to load football states: ", e);
     }

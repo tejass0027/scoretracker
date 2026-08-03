@@ -4065,6 +4065,13 @@ els.startCustomMatch.addEventListener("click", () => {
     return;
   }
 
+  const tAVal = els.customTeamA ? els.customTeamA.value.trim() : "";
+  const tBVal = els.customTeamB ? els.customTeamB.value.trim() : "";
+  if (tAVal && tBVal && tAVal.toLowerCase() === tBVal.toLowerCase()) {
+    showToast("Team names must be unique. Please use different names for the two teams.");
+    return;
+  }
+
   const valA = els.customPlayersA ? els.customPlayersA.value.trim() : "";
   const valB = els.customPlayersB ? els.customPlayersB.value.trim() : "";
   if (!valA || !valB) {
