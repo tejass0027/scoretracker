@@ -2,7 +2,7 @@
 window.addEventListener("error", (e) => {
   alert(`Global Error: ${e.message} at ${e.filename}:${e.lineno}`);
 });
-console.log("CricPulse App loaded - version 208");
+console.log("ScoreCentral App loaded - version 208");
 
 const STORAGE_KEY = "cricket-score-tracker-v1";
 
@@ -2886,9 +2886,9 @@ function render() {
 
   // Update dynamic tab title based on score
   if (!els.cricketPage.classList.contains("hidden")) {
-    document.title = `${battingTeam()} ${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)} ov) • CricPulse`;
+    document.title = `${battingTeam()} ${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)} ov) • ScoreCentral`;
   } else {
-    document.title = "CricPulse • Live Cricket Score Tracker";
+    document.title = "ScoreCentral • Live Sports Score Tracker";
   }
 
   renderLivePlayerStats(innings);
@@ -4499,7 +4499,7 @@ const themeToggleBtn = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector("#theme-switch-label");
 
 function initTheme() {
-  const storedTheme = localStorage.getItem("cricpulse-theme");
+  const storedTheme = localStorage.getItem("scorecentral-theme");
   const isLight = storedTheme === "light";
   setTheme(isLight);
 }
@@ -4509,12 +4509,12 @@ function setTheme(isLight) {
     document.documentElement.classList.add("light-theme");
     if (themeToggleBtn) themeToggleBtn.setAttribute("aria-checked", "false");
     if (themeLabel) themeLabel.textContent = "Light Mode";
-    localStorage.setItem("cricpulse-theme", "light");
+    localStorage.setItem("scorecentral-theme", "light");
   } else {
     document.documentElement.classList.remove("light-theme");
     if (themeToggleBtn) themeToggleBtn.setAttribute("aria-checked", "true");
     if (themeLabel) themeLabel.textContent = "Dark Mode";
-    localStorage.setItem("cricpulse-theme", "dark");
+    localStorage.setItem("scorecentral-theme", "dark");
   }
 }
 
