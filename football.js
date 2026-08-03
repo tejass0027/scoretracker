@@ -2,7 +2,7 @@
    FOOTBALL SCORE TRACKER & TOURNAMENT LEAGUE MODULE - CORE ENGINE
    ========================================================================== */
 
-console.log("ScoreCentral Football Module loaded - version 208");
+console.log("ScoreTracker Football Module loaded - version 208");
 
 (function () {
   // 1. STORAGE KEYS & DEFAULT STATES
