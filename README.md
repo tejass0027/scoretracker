@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for six distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for seven distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -40,3 +40,10 @@ This application provides real-time scoring trackers and tournament standing com
 * Tracks Penalty Corners (PC) and Penalty Strokes (PS) counters for each team.
 * Includes Sin Bin card suspensions with active countdown timers: Green Card (2m), Yellow Card (5m/10m), and Red Card (ejection).
 * Compiles round-robin league fixtures and points standing tables (with Goal Difference, Goals For, and Goals Against).
+
+### 7. 🏐 Volleyball Scorer
+* Supports Best of 3 Sets or Best of 5 Sets (Standard FIVB).
+* Implements FIVB rally scoring (25 points for sets 1-4, 15 points for deciding set, win-by-2 deuce rule).
+* Features serving team indicators and rotation tracking.
+* Incorporates a 30-second timeout clock with synthesized buzzer alerts and timeout limit trackers (2 per set).
+* Compiles round-robin tournament standings based on FIVB league points (3-0/3-1 = 3pts, 3-2 = 2pts, 2-3 = 1pt), Sets ratios, and Points ratios.

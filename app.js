@@ -14,6 +14,7 @@ const els = {
   tennisPage: document.querySelector("#tennis-page"),
   badmintonPage: document.querySelector("#badminton-page"),
   hockeyPage: document.querySelector("#hockey-page"),
+  volleyballPage: document.querySelector("#volleyball-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -200,6 +201,7 @@ function hideAllPages() {
   if (els.tennisPage) els.tennisPage.classList.add("hidden");
   if (els.badmintonPage) els.badmintonPage.classList.add("hidden");
   if (els.hockeyPage) els.hockeyPage.classList.add("hidden");
+  if (els.volleyballPage) els.volleyballPage.classList.add("hidden");
 }
 
 function showSportsPage(fromHash = false) {
@@ -496,6 +498,10 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#hockey")) {
     if (typeof window.showHockeyPage === "function") {
       window.showHockeyPage(true);
+    }
+  } else if (hash.startsWith("#volleyball")) {
+    if (typeof window.showVolleyballPage === "function") {
+      window.showVolleyballPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -2671,7 +2677,7 @@ function render() {
     setTimeout(() => loader.remove(), 400);
   }
 
-  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey")) {
+  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball")) {
     return;
   }
   els.teamA.value = state.teamA;

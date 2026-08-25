@@ -1,0 +1,118 @@
+/* ==========================================================================
+   VOLLEYBALL SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --vb-primary: #f97316; /* Vibrant Orange */
+  --vb-primary-rgb: 249, 115, 22;
+  --vb-blue: #3b82f6; /* FIVB Royal Blue */
+  --vb-border: rgba(249, 115, 22, 0.25);
+}
+
+/* Timeout Indicators */
+.vb-timeout-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 0 3px;
+  transition: all 0.2s ease;
+}
+
+.vb-timeout-dot.available {
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.vb-timeout-dot.used {
+  background: rgba(239, 68, 68, 0.4);
+  border-color: #ef4444;
+}
+
+/* Server indicator badge */
+.vb-server-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--vb-primary);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Point Score Numbers */
+.vb-point-num {
+  font-size: 4.2rem;
+  font-weight: 900;
+  color: var(--vb-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(249, 115, 22, 0.25);
+  font-family: monospace;
+}
+
+.vb-point-num.team2 {
+  color: var(--vb-blue);
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+}
+
+/* Sets Pill Badge */
+.vb-set-pill {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.vb-set-pill.active {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: var(--vb-primary);
+  color: var(--vb-primary);
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.2);
+}
+
+/* Action category buttons */
+.vb-cat-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.vb-cat-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--vb-primary);
+  transform: translateY(-1px);
+}
+
+/* Log Item */
+.vb-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
