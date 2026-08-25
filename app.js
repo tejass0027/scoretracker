@@ -16,6 +16,7 @@ const els = {
   hockeyPage: document.querySelector("#hockey-page"),
   volleyballPage: document.querySelector("#volleyball-page"),
   baseballPage: document.querySelector("#baseball-page"),
+  rugbyPage: document.querySelector("#rugby-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -204,6 +205,7 @@ function hideAllPages() {
   if (els.hockeyPage) els.hockeyPage.classList.add("hidden");
   if (els.volleyballPage) els.volleyballPage.classList.add("hidden");
   if (els.baseballPage) els.baseballPage.classList.add("hidden");
+  if (els.rugbyPage) els.rugbyPage.classList.add("hidden");
 }
 
 function showSportsPage(fromHash = false) {
@@ -508,6 +510,10 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#baseball")) {
     if (typeof window.showBaseballPage === "function") {
       window.showBaseballPage(true);
+    }
+  } else if (hash.startsWith("#rugby")) {
+    if (typeof window.showRugbyPage === "function") {
+      window.showRugbyPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -2683,7 +2689,7 @@ function render() {
     setTimeout(() => loader.remove(), 400);
   }
 
-  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball")) {
+  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball") || window.location.hash.startsWith("#rugby")) {
     return;
   }
   els.teamA.value = state.teamA;

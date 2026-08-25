@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="hockey.css?v=213" />
     <link rel="stylesheet" href="volleyball.css?v=214" />
     <link rel="stylesheet" href="baseball.css?v=215" />
+    <link rel="stylesheet" href="rugby.css?v=216" />
   </head>
   <body>
     <!-- Sticky Header -->
@@ -130,10 +131,10 @@
           <strong>Baseball</strong>
           <small>Available now</small>
         </button>
-        <button class="sport-card" type="button" data-soon="Rugby">
+        <button class="sport-card ready" type="button" data-open-sport="rugby">
           <span class="sport-logo rugby-logo" aria-hidden="true">RG</span>
           <strong>Rugby</strong>
-          <small>Coming soon</small>
+          <small>Available now</small>
         </button>
         <button class="sport-card" type="button" data-soon="Kabaddi">
           <span class="sport-logo kabaddi-logo" aria-hidden="true">KB</span>
@@ -3169,6 +3170,327 @@
       </section>
     </main>
 
+    <!-- ==========================================
+         RUGBY PAGE WRAPPER
+         ========================================== -->
+    <main id="rugby-page" class="format-page hidden" style="max-width: 860px; margin: 0 auto; padding: 20px; font-family: inherit;">
+      
+      <!-- 1. RUGBY FORMAT SELECTION VIEW -->
+      <section id="rg-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Rugby</p>
+            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--rg-primary);">Select Match Mode</h1>
+          </div>
+          <button id="rg-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 10px;">
+          <!-- Custom Match Card -->
+          <div id="rg-format-custom-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--rg-primary)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🏉</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Custom Match</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Rugby Union (15s) or Rugby Sevens (7s) with Try (+5), Conversion (+2), Penalty (+3), Drop Goal (+3), live halves stopwatch, and Sin Bin cards.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--rg-primary); display: flex; align-items: center; gap: 6px;">Play Custom Match &rarr;</div>
+          </div>
+
+          <!-- Tournament Card -->
+          <div id="rg-format-tournament-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--rg-primary)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🏆</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Tournament / Championship</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Round-robin schedule, World Rugby Bonus Points standing table (Try Bonus &amp; Losing Bonus Points), and match logs.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--rg-primary); display: flex; align-items: center; gap: 6px;">Manage Tournament &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. RUGBY CUSTOM MATCH SETUP VIEW -->
+      <section id="rg-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Rugby Match Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--rg-primary); font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="rg-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Team 1 Name</label>
+            <input id="rg-team1-input" type="text" maxlength="24" placeholder="e.g. New Zealand All Blacks" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Team 2 Name</label>
+            <input id="rg-team2-input" type="text" maxlength="24" placeholder="e.g. South Africa Springboks" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Game Format</label>
+            <select id="rg-format-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="union" selected>Rugby Union (15s - 10m Sin Bin)</option>
+              <option value="sevens">Rugby Sevens (7s - 2m Sin Bin)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Half Duration</label>
+            <select id="rg-duration-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="40" selected>40 Minutes per half (Union Standard)</option>
+              <option value="20">20 Minutes per half (Training / Quick)</option>
+              <option value="10">10 Minutes per half (Sevens Final)</option>
+              <option value="7">7 Minutes per half (Sevens Standard)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="rg-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Start Rugby Match</button>
+      </section>
+
+      <!-- 3. RUGBY DASHBOARD VIEW -->
+      <section id="rg-dashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 12px 20px;">
+          <button id="rg-dashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+          <div>
+            <span id="rg-live-indicator" class="live-indicator hidden" style="display: inline-flex;">
+              <span class="live-dot" style="background: var(--rg-primary);"></span>
+              LIVE RUGBY
+            </span>
+          </div>
+          <button id="rg-reset-match-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+        </div>
+
+        <!-- Big Scoreboard & Match Clock -->
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; align-items: center; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px;">
+          
+          <!-- Team 1 Big Score & Breakdown -->
+          <div style="text-align: center;">
+            <h2 id="rg-team1-name-display" style="margin:0; font-size:1.25rem; font-weight:800; color:#fff;">Team 1</h2>
+            <div id="rg-team1-score-display" class="rg-score-num" style="margin-top: 6px;">0</div>
+            <div class="rg-breakdown-row">
+              <span class="rg-chip rg-chip-t" id="rg-t1-t-chip">0 T</span>
+              <span class="rg-chip rg-chip-c" id="rg-t1-c-chip">0 C</span>
+              <span class="rg-chip rg-chip-p" id="rg-t1-p-chip">0 P</span>
+              <span class="rg-chip rg-chip-dg" id="rg-t1-dg-chip">0 DG</span>
+            </div>
+            <!-- Sin Bin Badges -->
+            <div id="rg-t1-sinbin-list" class="rg-sinbin-container"></div>
+          </div>
+
+          <!-- Middle Clock & Match Half Status -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+            <div id="rg-half-badge" style="font-weight: 900; font-size: 1.1rem; color: var(--rg-primary); text-transform: uppercase; letter-spacing: 1px;">1st Half</div>
+            
+            <div id="rg-match-timer" style="font-size: 2.8rem; font-weight: 900; font-family: monospace; color: #fff; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); padding: 4px 20px; border-radius: 12px;">00:00</div>
+
+            <!-- Clock Controls -->
+            <div style="display: flex; gap: 8px;">
+              <button id="rg-timer-toggle-btn" class="sport-tab active" type="button" style="margin:0; padding: 6px 14px; font-weight: 800; font-size: 0.85rem;">▶ Start</button>
+              <button id="rg-timer-plus-btn" class="sport-tab" type="button" style="margin:0; padding: 6px 10px; font-size: 0.8rem;">+1m</button>
+              <button id="rg-next-half-btn" class="sport-tab" type="button" style="margin:0; padding: 6px 12px; font-size: 0.8rem; background: rgba(16,185,129,0.15); color:#10b981; border-color:rgba(16,185,129,0.3);">Next Half →</button>
+            </div>
+          </div>
+
+          <!-- Team 2 Big Score & Breakdown -->
+          <div style="text-align: center;">
+            <h2 id="rg-team2-name-display" style="margin:0; font-size:1.25rem; font-weight:800; color:#fff;">Team 2</h2>
+            <div id="rg-team2-score-display" class="rg-score-num team2" style="margin-top: 6px;">0</div>
+            <div class="rg-breakdown-row">
+              <span class="rg-chip rg-chip-t" id="rg-t2-t-chip">0 T</span>
+              <span class="rg-chip rg-chip-c" id="rg-t2-c-chip">0 C</span>
+              <span class="rg-chip rg-chip-p" id="rg-t2-p-chip">0 P</span>
+              <span class="rg-chip rg-chip-dg" id="rg-t2-dg-chip">0 DG</span>
+            </div>
+            <!-- Sin Bin Badges -->
+            <div id="rg-t2-sinbin-list" class="rg-sinbin-container"></div>
+          </div>
+        </div>
+
+        <!-- Action Scoring Controls -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <!-- Team 1 Scoring Buttons -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px;">
+            <h3 id="rg-t1-actions-title" style="margin: 0; font-size: 1rem; font-weight: 800; color: var(--rg-primary); text-align: center;">Team 1 Scoring</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="rg-score-btn try-btn" data-team="1" data-type="try" type="button">
+                <span>🏉 TRY</span><span style="font-size:0.75rem; opacity:0.85;">+5 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="1" data-type="conv" type="button" style="background: rgba(56,189,248,0.12); color:#38bdf8; border-color:rgba(56,189,248,0.3);">
+                <span>🎯 CONVERSION</span><span style="font-size:0.75rem; opacity:0.85;">+2 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="1" data-type="pen" type="button" style="background: rgba(245,158,11,0.12); color:#f59e0b; border-color:rgba(245,158,11,0.3);">
+                <span>🥅 PENALTY GOAL</span><span style="font-size:0.75rem; opacity:0.85;">+3 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="1" data-type="dg" type="button" style="background: rgba(168,85,247,0.12); color:#c084fc; border-color:rgba(168,85,247,0.3);">
+                <span>👟 DROP GOAL</span><span style="font-size:0.75rem; opacity:0.85;">+3 Points</span>
+              </button>
+            </div>
+
+            <!-- Cards -->
+            <div style="display: flex; gap: 8px; margin-top: 4px;">
+              <button class="rg-score-btn" data-team="1" data-card="yellow" type="button" style="flex:1; padding:8px; background: rgba(245,158,11,0.1); color:#fbbf24; border-color:rgba(245,158,11,0.3);">
+                <span>🟡 Yellow Card (Sin Bin)</span>
+              </button>
+              <button class="rg-score-btn" data-team="1" data-card="red" type="button" style="flex:1; padding:8px; background: rgba(239,68,68,0.1); color:#f87171; border-color:rgba(239,68,68,0.3);">
+                <span>🔴 Red Card</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Team 2 Scoring Buttons -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px;">
+            <h3 id="rg-t2-actions-title" style="margin: 0; font-size: 1rem; font-weight: 800; color: #f59e0b; text-align: center;">Team 2 Scoring</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="rg-score-btn try-btn" data-team="2" data-type="try" type="button">
+                <span>🏉 TRY</span><span style="font-size:0.75rem; opacity:0.85;">+5 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="2" data-type="conv" type="button" style="background: rgba(56,189,248,0.12); color:#38bdf8; border-color:rgba(56,189,248,0.3);">
+                <span>🎯 CONVERSION</span><span style="font-size:0.75rem; opacity:0.85;">+2 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="2" data-type="pen" type="button" style="background: rgba(245,158,11,0.12); color:#f59e0b; border-color:rgba(245,158,11,0.3);">
+                <span>🥅 PENALTY GOAL</span><span style="font-size:0.75rem; opacity:0.85;">+3 Points</span>
+              </button>
+              <button class="rg-score-btn" data-team="2" data-type="dg" type="button" style="background: rgba(168,85,247,0.12); color:#c084fc; border-color:rgba(168,85,247,0.3);">
+                <span>👟 DROP GOAL</span><span style="font-size:0.75rem; opacity:0.85;">+3 Points</span>
+              </button>
+            </div>
+
+            <!-- Cards -->
+            <div style="display: flex; gap: 8px; margin-top: 4px;">
+              <button class="rg-score-btn" data-team="2" data-card="yellow" type="button" style="flex:1; padding:8px; background: rgba(245,158,11,0.1); color:#fbbf24; border-color:rgba(245,158,11,0.3);">
+                <span>🟡 Yellow Card (Sin Bin)</span>
+              </button>
+              <button class="rg-score-btn" data-team="2" data-card="red" type="button" style="flex:1; padding:8px; background: rgba(239,68,68,0.1); color:#f87171; border-color:rgba(239,68,68,0.3);">
+                <span>🔴 Red Card</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Undo & Match End controls -->
+        <div style="display: flex; gap: 12px; justify-content: space-between; align-items: center;">
+          <button id="rg-undo-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700;">↩️ Undo Last Event</button>
+          <button id="rg-end-match-btn" class="sport-tab" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700; background: rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">End Match (Full Time)</button>
+        </div>
+
+        <button id="rg-submit-result-btn" class="sport-tab hidden" type="button" style="background: var(--rg-primary) !important; color: #070a13 !important; font-weight: 900; padding: 12px; width:100%; border-radius:10px;">Submit Tournament Match Result</button>
+
+        <!-- Match Timeline Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin:0 0 12px; font-size: 1rem; font-weight: 800; color: var(--rg-primary); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Match Timeline Log</h3>
+          <div id="rg-timeline-list" style="display: grid; gap: 8px; max-height: 200px; overflow-y: auto;">
+            <p style="color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin: 0;">No scoring events logged yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. RUGBY TOURNAMENT CONFIGURATION VIEW -->
+      <section id="rg-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Rugby Tournament Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--rg-primary); font-family: inherit;">Tournament Configuration</h1>
+          </div>
+          <button id="rg-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+          <div style="grid-column: 1 / -1;">
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tournament / Championship Name</label>
+            <input id="rg-tname-input" type="text" maxlength="32" placeholder="e.g. Six Nations Rugby Championship" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Number of Teams</label>
+            <select id="rg-tteam-count" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="4" selected>4 Teams</option>
+              <option value="6">6 Teams</option>
+              <option value="8">8 Teams</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Format</label>
+            <select id="rg-tformat-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="union" selected>Rugby Union 15s</option>
+              <option value="sevens">Rugby Sevens 7s</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-top: 10px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: var(--rg-primary); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Team Names</h3>
+          <div id="rg-tteam-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="rg-tcreate-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Create Rugby Tournament</button>
+      </section>
+
+      <!-- 5. RUGBY TOURNAMENT DASHBOARD VIEW -->
+      <section id="rg-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Dashboard</p>
+            <h1 id="rg-tdashboard-name" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--rg-primary);">Rugby Tournament</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="rg-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="rg-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div style="display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+          <button id="rg-tab-table" class="sport-tab active" type="button">📊 Standings Table</button>
+          <button id="rg-tab-fixtures" class="sport-tab" type="button">📅 Fixtures &amp; Results</button>
+          <button id="rg-tab-edit" class="sport-tab" type="button">⚙️ Edit Teams</button>
+        </div>
+
+        <!-- Standings Table Tab Content -->
+        <div id="rg-table-view" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 8px; width: 6%;">#</th>
+                <th style="padding: 10px 8px;">Team</th>
+                <th style="padding: 10px 8px; text-align: center;">P</th>
+                <th style="padding: 10px 8px; text-align: center;">W</th>
+                <th style="padding: 10px 8px; text-align: center;">D</th>
+                <th style="padding: 10px 8px; text-align: center;">L</th>
+                <th style="padding: 10px 8px; text-align: center;">PF</th>
+                <th style="padding: 10px 8px; text-align: center;">PA</th>
+                <th style="padding: 10px 8px; text-align: center;">DIFF</th>
+                <th style="padding: 10px 8px; text-align: center;" title="Try Bonus Points (4+ Tries)">TBP</th>
+                <th style="padding: 10px 8px; text-align: center;" title="Losing Bonus Points (&le; 7 pts)">LBP</th>
+                <th style="padding: 10px 8px; text-align: right; color: var(--rg-primary); font-weight: 800;">PTS</th>
+              </tr>
+            </thead>
+            <tbody id="rg-points-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures Tab Content -->
+        <div id="rg-fixtures-view" class="hidden" style="display: grid; gap: 16px;">
+          <h2 style="margin: 0; font-size: 1.2rem; color: #fff;">Match Schedule</h2>
+          <div id="rg-fixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+
+        <!-- Edit Tab Content -->
+        <div id="rg-edit-view" class="hidden" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 20px;">
+          <h2 style="margin:0; font-size: 1.2rem; color: #fff;">Edit Team Names</h2>
+          <div>
+            <div id="rg-edit-teams-container" style="display: grid; gap: 12px;"></div>
+          </div>
+          <button id="rg-edit-save-btn" class="start-custom" type="button" style="margin-top: 12px; width: 100%;">Save Team Names</button>
+        </div>
+      </section>
+    </main>
+
     <!-- EVENT MODALS & OVERLAYS (BASKETBALL SPECIFIC) -->
     <div id="bb-action-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
         <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 440px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
@@ -3415,5 +3737,6 @@
     <script src="hockey.js?v=213"></script>
     <script src="volleyball.js?v=214"></script>
     <script src="baseball.js?v=215"></script>
+    <script src="rugby.js?v=216"></script>
   </body>
 </html>
