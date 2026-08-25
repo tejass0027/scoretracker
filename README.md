@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for five distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for six distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -32,5 +32,11 @@ This application provides real-time scoring trackers and tournament standing com
 ### 5. 🏸 Badminton Scorer
 * Tracks point-by-point rallies up to 21 points (standard) or 11 points (short).
 * Follows setting rules (deuce setting at 20-20 or 10-10) with a capped maximum limit of 30 or 15 points.
-* Includes a graphical badminton court visualization situated next to the scoreboard.
 * Compiles round-robin fixtures and standings ratios.
+
+### 6. 🏑 Hockey Scorer
+* Tracks goals, 4 Quarters, Halftimes, and Shootout tiebreakers.
+* Live period countdown timer with audio buzzer alerts.
+* Tracks Penalty Corners (PC) and Penalty Strokes (PS) counters for each team.
+* Includes Sin Bin card suspensions with active countdown timers: Green Card (2m), Yellow Card (5m/10m), and Red Card (ejection).
+* Compiles round-robin league fixtures and points standing tables (with Goal Difference, Goals For, and Goals Against).

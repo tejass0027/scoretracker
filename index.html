@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="basketball.css?v=211" />
     <link rel="stylesheet" href="tennis.css?v=211" />
     <link rel="stylesheet" href="badminton.css?v=211" />
+    <link rel="stylesheet" href="hockey.css?v=213" />
   </head>
   <body>
     <!-- Sticky Header -->
@@ -112,10 +113,10 @@
           <strong>Badminton</strong>
           <small>Available now</small>
         </button>
-        <button class="sport-card" type="button" data-soon="Hockey">
+        <button class="sport-card ready" type="button" data-open-sport="hockey">
           <span class="sport-logo hockey-logo" aria-hidden="true">HK</span>
           <strong>Hockey</strong>
-          <small>Coming soon</small>
+          <small>Available now</small>
         </button>
         <button class="sport-card" type="button" data-soon="Volleyball">
           <span class="sport-logo volleyball-logo" aria-hidden="true">VB</span>
@@ -2185,6 +2186,339 @@
       </section>
     </main>
 
+    <!-- ==========================================
+         HOCKEY PAGE WRAPPER
+         ========================================== -->
+    <main id="hockey-page" class="format-page hidden" style="max-width: 860px; margin: 0 auto; padding: 20px; font-family: inherit;">
+      
+      <!-- 1. HOCKEY FORMAT SELECTION VIEW -->
+      <section id="hoc-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Field Hockey</p>
+            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--hoc-primary);">Select Match Mode</h1>
+          </div>
+          <button id="hoc-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 10px;">
+          <!-- Custom Match Card -->
+          <div id="hoc-format-custom-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--hoc-primary)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🏑</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Custom Match</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Friendly match between two teams with 4 Quarters, PC/PS counters, Green/Yellow/Red card suspensions, and timer clocks.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--hoc-primary); display: flex; align-items: center; gap: 6px;">Play Custom Match &rarr;</div>
+          </div>
+
+          <!-- Tournament Card -->
+          <div id="hoc-format-tournament-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--hoc-primary)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🏆</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Tournament / League</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Round-robin league fixtures, full standings table with Goal Difference (GD), Goals For/Against, and points progression.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--hoc-primary); display: flex; align-items: center; gap: 6px;">Manage Tournament &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. HOCKEY CUSTOM MATCH SETUP VIEW -->
+      <section id="hoc-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Hockey Match Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--hoc-primary); font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="hoc-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Team 1 Name</label>
+            <input id="hoc-team1-input" type="text" maxlength="24" placeholder="e.g. India" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Team 2 Name</label>
+            <input id="hoc-team2-input" type="text" maxlength="24" placeholder="e.g. Australia" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Duration Format</label>
+            <select id="hoc-duration-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="15" selected>4 Quarters of 15 Mins (Standard FIH)</option>
+              <option value="10">4 Quarters of 10 Mins (Short Match)</option>
+              <option value="5">4 Quarters of 5 Mins (Sprint Test)</option>
+              <option value="35">2 Halves of 35 Mins (Classic)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tie Breaker Rule</label>
+            <select id="hoc-tiebreaker-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="shootout" selected>Penalty Shootout (8-sec 1v1)</option>
+              <option value="draw">Allow Draw Result</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="hoc-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Start Hockey Match</button>
+      </section>
+
+      <!-- 3. HOCKEY DASHBOARD VIEW -->
+      <section id="hoc-dashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 12px 20px;">
+          <button id="hoc-dashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+          <div>
+            <span id="hoc-live-indicator" class="live-indicator hidden" style="display: inline-flex;">
+              <span class="live-dot" style="background: var(--hoc-primary);"></span>
+              LIVE HOCKEY
+            </span>
+          </div>
+          <button id="hoc-reset-match-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+        </div>
+
+        <!-- Period Navigation Ribbon & Clock -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 20px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <span id="hoc-pill-q1" class="hoc-period-pill active">Q1</span>
+            <span id="hoc-pill-q2" class="hoc-period-pill">Q2</span>
+            <span id="hoc-pill-half" class="hoc-period-pill">Halftime</span>
+            <span id="hoc-pill-q3" class="hoc-period-pill">Q3</span>
+            <span id="hoc-pill-q4" class="hoc-period-pill">Q4</span>
+            <span id="hoc-pill-so" class="hoc-period-pill" style="display:none;">Shootout</span>
+            <span id="hoc-pill-ft" class="hoc-period-pill">Full Time</span>
+          </div>
+
+          <!-- Timer Clock -->
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div id="hoc-timer-display" style="font-family: monospace; font-size: 2.8rem; font-weight: 900; color: #fff; letter-spacing: 2px;">15:00</div>
+            <button id="hoc-timer-toggle-btn" class="sport-tab active" type="button" style="padding: 8px 16px; font-size: 0.9rem; font-weight: 700; background: var(--hoc-primary); color: #070a13;">▶ Start</button>
+            <button id="hoc-timer-reset-btn" class="sport-tab active" type="button" style="padding: 8px 14px; font-size: 0.85rem;">🔄 Reset</button>
+          </div>
+        </div>
+
+        <!-- Scoreboard Goals Banner -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 20px; align-items: center; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px;">
+          <!-- Team 1 Display -->
+          <div style="text-align: center;">
+            <h2 id="hoc-team1-name-display" style="margin:0; font-size:1.35rem; font-weight:800; color:#fff;">Team 1</h2>
+            <div id="hoc-team1-score" class="hoc-score-num" style="margin-top: 8px;">0</div>
+            <div style="display: flex; justify-content: center; gap: 6px; margin-top: 8px;" id="hoc-team1-cards-container"></div>
+          </div>
+
+          <!-- Versus & Match Status -->
+          <div style="text-align: center;">
+            <span style="font-weight:800; font-size:0.9rem; color:var(--text-muted); letter-spacing:2px;">VS</span>
+            <div id="hoc-status-badge" style="font-weight:700; color:var(--hoc-primary); font-size:0.75rem; margin-top:8px; text-transform:uppercase;">1st Quarter</div>
+          </div>
+
+          <!-- Team 2 Display -->
+          <div style="text-align: center;">
+            <h2 id="hoc-team2-name-display" style="margin:0; font-size:1.35rem; font-weight:800; color:#fff;">Team 2</h2>
+            <div id="hoc-team2-score" class="hoc-score-num" style="margin-top: 8px; color: var(--hoc-blue); text-shadow: 0 0 15px rgba(56,189,248,0.25);">0</div>
+            <div style="display: flex; justify-content: center; gap: 6px; margin-top: 8px;" id="hoc-team2-cards-container"></div>
+          </div>
+        </div>
+
+        <!-- Secondary Stats Grid (Penalty Corners, Penalty Strokes) -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+          <div class="hoc-stat-box">
+            <div id="hoc-t1-pc" class="hoc-stat-num">0</div>
+            <div class="hoc-stat-label">T1 Penalty Corners</div>
+          </div>
+          <div class="hoc-stat-box">
+            <div id="hoc-t1-ps" class="hoc-stat-num">0</div>
+            <div class="hoc-stat-label">T1 Penalty Strokes</div>
+          </div>
+          <div class="hoc-stat-box">
+            <div id="hoc-t2-pc" class="hoc-stat-num" style="color: var(--hoc-blue);">0</div>
+            <div class="hoc-stat-label">T2 Penalty Corners</div>
+          </div>
+          <div class="hoc-stat-box">
+            <div id="hoc-t2-ps" class="hoc-stat-num" style="color: var(--hoc-blue);">0</div>
+            <div class="hoc-stat-label">T2 Penalty Strokes</div>
+          </div>
+        </div>
+
+        <!-- Scorer Action Controls -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 16px;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 800; color: var(--hoc-primary); text-align: center;">Log Goals &amp; Events</h3>
+          
+          <!-- Primary Goal Buttons -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <button id="hoc-t1-goal-btn" class="start-custom" type="button" style="background: var(--hoc-primary) !important; color: #070a13 !important; font-weight: 800; padding: 16px;">🏑 Goal Team 1</button>
+            <button id="hoc-t2-goal-btn" class="start-custom" type="button" style="background: #3b82f6 !important; color: #fff !important; font-weight: 800; padding: 16px;">🏑 Goal Team 2</button>
+          </div>
+
+          <!-- Secondary Actions (PC, PS) -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <button id="hoc-t1-pc-btn" class="sport-tab active" type="button" style="margin:0;">🚩 T1 Corner</button>
+            <button id="hoc-t1-ps-btn" class="sport-tab active" type="button" style="margin:0;">🎯 T1 Stroke</button>
+            <button id="hoc-t2-pc-btn" class="sport-tab active" type="button" style="margin:0;">🚩 T2 Corner</button>
+            <button id="hoc-t2-ps-btn" class="sport-tab active" type="button" style="margin:0;">🎯 T2 Stroke</button>
+          </div>
+
+          <!-- Cards Modal Trigger & Period Transition -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+            <button id="hoc-open-cards-btn" class="sport-tab active" type="button" style="margin:0; background: rgba(234, 179, 8, 0.1); color: #eab308; border-color: rgba(234, 179, 8, 0.3);">🟨 Card Suspension</button>
+            <button id="hoc-undo-btn" class="sport-tab active" type="button" style="margin:0;">↩️ Undo Event</button>
+            <button id="hoc-period-transition-btn" class="sport-tab active" type="button" style="margin:0; background: rgba(16,185,129,0.15); color: #10b981; border-color: rgba(16,185,129,0.3);">Next Quarter &rarr;</button>
+          </div>
+
+          <button id="hoc-submit-result-btn" class="sport-tab hidden" type="button" style="background: var(--hoc-primary) !important; color: #070a13 !important; font-weight: 800; padding: 12px; width:100%; border-radius:10px;">Submit Tournament Match Result</button>
+        </div>
+
+        <!-- Active Card Suspensions Panel -->
+        <div id="hoc-suspensions-card" class="hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin:0 0 12px; font-size: 0.95rem; font-weight: 800; color: #eab308; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">⏳ Active Temporary Suspensions (Sin Bin)</h3>
+          <div id="hoc-suspensions-list" style="display: grid; gap: 8px;"></div>
+        </div>
+
+        <!-- Timeline History Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin:0 0 12px; font-size: 1rem; font-weight: 800; color: var(--hoc-primary); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Match Timeline Log</h3>
+          <div id="hoc-timeline-list" style="display: grid; gap: 8px; max-height: 200px; overflow-y: auto;">
+            <p style="color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin: 0;">No events logged yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. HOCKEY TOURNAMENT CONFIGURATION VIEW -->
+      <section id="hoc-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Hockey Tournament Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--hoc-primary); font-family: inherit;">Tournament Configuration</h1>
+          </div>
+          <button id="hoc-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+          <div style="grid-column: 1 / -1;">
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tournament Name</label>
+            <input id="hoc-tname-input" type="text" maxlength="32" placeholder="e.g. Hockey World Cup 2026" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Number of Teams</label>
+            <select id="hoc-tteam-count" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="4" selected>4 Teams</option>
+              <option value="6">6 Teams</option>
+              <option value="8">8 Teams</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Quarter Duration</label>
+            <select id="hoc-tduration-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="15" selected>4 Quarters (15 Mins)</option>
+              <option value="10">4 Quarters (10 Mins)</option>
+              <option value="5">4 Quarters (5 Mins)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-top: 10px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: var(--hoc-primary); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Team Names</h3>
+          <div id="hoc-tteam-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="hoc-tcreate-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Create Hockey Tournament</button>
+      </section>
+
+      <!-- 5. HOCKEY TOURNAMENT DASHBOARD VIEW -->
+      <section id="hoc-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Dashboard</p>
+            <h1 id="hoc-tdashboard-name" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--hoc-primary);">Hockey Tournament</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="hoc-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="hoc-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div style="display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+          <button id="hoc-tab-table" class="sport-tab active" type="button">📊 Standings Table</button>
+          <button id="hoc-tab-fixtures" class="sport-tab" type="button">📅 Fixtures &amp; Results</button>
+          <button id="hoc-tab-edit" class="sport-tab" type="button">⚙️ Edit Teams</button>
+        </div>
+
+        <!-- Standings Table Tab Content -->
+        <div id="hoc-table-view" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 8px; width: 6%;">#</th>
+                <th style="padding: 10px 8px;">Team</th>
+                <th style="padding: 10px 8px; text-align: center;">P</th>
+                <th style="padding: 10px 8px; text-align: center;">W</th>
+                <th style="padding: 10px 8px; text-align: center;">D</th>
+                <th style="padding: 10px 8px; text-align: center;">L</th>
+                <th style="padding: 10px 8px; text-align: center;">GF</th>
+                <th style="padding: 10px 8px; text-align: center;">GA</th>
+                <th style="padding: 10px 8px; text-align: center;">GD</th>
+                <th style="padding: 10px 8px; text-align: right; color: var(--hoc-primary); font-weight: 800;">PTS</th>
+              </tr>
+            </thead>
+            <tbody id="hoc-points-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures Tab Content -->
+        <div id="hoc-fixtures-view" class="hidden" style="display: grid; gap: 16px;">
+          <h2 style="margin: 0; font-size: 1.2rem; color: #fff;">Match Schedule</h2>
+          <div id="hoc-fixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+
+        <!-- Edit Tab Content -->
+        <div id="hoc-edit-view" class="hidden" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 20px;">
+          <h2 style="margin:0; font-size: 1.2rem; color: #fff;">Edit Team Names</h2>
+          <div>
+            <div id="hoc-edit-teams-container" style="display: grid; gap: 12px;"></div>
+          </div>
+          <button id="hoc-edit-save-btn" class="start-custom" type="button" style="margin-top: 12px; width: 100%;">Save Team Names</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- HOCKEY CARDS MODAL -->
+    <div id="hoc-cards-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
+      <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 420px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+        <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+          <h2 style="margin: 0; font-size: 1.15rem; color: var(--hoc-primary); font-weight: 800;">Issue Hockey Card</h2>
+          <button id="hoc-close-cards-modal" type="button" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; outline: none; padding: 0 4px; line-height: 1;">&times;</button>
+        </div>
+        <div style="padding: 20px; display: grid; gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Select Team</label>
+            <select id="hoc-card-team-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;"></select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Card Type &amp; Suspension</label>
+            <div style="display: grid; gap: 8px;">
+              <button class="sport-tab active hoc-issue-card-btn" data-card="green" type="button" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3); text-align: left; padding: 10px 14px;">
+                🟢 <strong>Green Card</strong> &mdash; 2 Min Temporary Suspension
+              </button>
+              <button class="sport-tab active hoc-issue-card-btn" data-card="yellow5" type="button" style="background: rgba(234, 179, 8, 0.15); color: #eab308; border-color: rgba(234, 179, 8, 0.3); text-align: left; padding: 10px 14px;">
+                🟡 <strong>Yellow Card (5m)</strong> &mdash; 5 Min Suspension
+              </button>
+              <button class="sport-tab active hoc-issue-card-btn" data-card="yellow10" type="button" style="background: rgba(234, 179, 8, 0.15); color: #eab308; border-color: rgba(234, 179, 8, 0.3); text-align: left; padding: 10px 14px;">
+                🟡 <strong>Yellow Card (10m)</strong> &mdash; 10 Min Major Suspension
+              </button>
+              <button class="sport-tab active hoc-issue-card-btn" data-card="red" type="button" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); text-align: left; padding: 10px 14px;">
+                🔴 <strong>Red Card</strong> &mdash; Permanent Ejection
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- EVENT MODALS & OVERLAYS (BASKETBALL SPECIFIC) -->
     <div id="bb-action-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
         <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 440px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
@@ -2428,5 +2762,6 @@
     <script src="basketball.js?v=211"></script>
     <script src="tennis.js?v=211"></script>
     <script src="badminton.js?v=211"></script>
+    <script src="hockey.js?v=213"></script>
   </body>
 </html>
