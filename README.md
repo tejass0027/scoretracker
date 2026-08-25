@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for ten distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for eleven distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -69,3 +69,11 @@ This application provides real-time scoring trackers and tournament standing com
 * Visual on-mat active player dots tracking (7 to 0) with automatic All-Out (Lona +2) detection and full-team revival.
 * Interactive 30-Second Raid Clock with buzzer alerts and consecutive empty raid / Do-or-Die raid tracking.
 * Compiles PKL 5-point tournament standings (5 pts win, 3 pts tie, 1 pt for loss by &le; 7 points).
+
+### 11. 🏓 Table Tennis (Ping Pong) Scorer
+* Follows official ITTF scoring: Best of 3, 5, or 7 games (11 points, win-by-2 deuce).
+* Dynamic service rotation: 2-point rotation in standard play and 1-point rotation in deuce (10-10+).
+* Server indicators with remaining serve counter (1/2, 2/2) and deciding game end-change alerts (at 5 points).
+* Real-time Game Point and Match Point visual alerts.
+* 60-second tactical timeout clock with audio buzzer.
+* Compiles ITTF tournament standings based on Match Points (2 pts win, 1 pt loss), Game ratios, and Point ratios.

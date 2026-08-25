@@ -18,6 +18,7 @@ const els = {
   baseballPage: document.querySelector("#baseball-page"),
   rugbyPage: document.querySelector("#rugby-page"),
   kabaddiPage: document.querySelector("#kabaddi-page"),
+  tabletennisPage: document.querySelector("#tabletennis-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -208,6 +209,7 @@ function hideAllPages() {
   if (els.baseballPage) els.baseballPage.classList.add("hidden");
   if (els.rugbyPage) els.rugbyPage.classList.add("hidden");
   if (els.kabaddiPage) els.kabaddiPage.classList.add("hidden");
+  if (els.tabletennisPage) els.tabletennisPage.classList.add("hidden");
 }
 
 function showSportsPage(fromHash = false) {
@@ -520,6 +522,10 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#kabaddi")) {
     if (typeof window.showKabaddiPage === "function") {
       window.showKabaddiPage(true);
+    }
+  } else if (hash.startsWith("#tabletennis")) {
+    if (typeof window.showTableTennisPage === "function") {
+      window.showTableTennisPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -2695,7 +2701,7 @@ function render() {
     setTimeout(() => loader.remove(), 400);
   }
 
-  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball") || window.location.hash.startsWith("#rugby") || window.location.hash.startsWith("#kabaddi")) {
+  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball") || window.location.hash.startsWith("#rugby") || window.location.hash.startsWith("#kabaddi") || window.location.hash.startsWith("#tabletennis")) {
     return;
   }
   els.teamA.value = state.teamA;
