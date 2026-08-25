@@ -18,6 +18,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     t1p1: "", t1p2: "", // Team 1 player names (for doubles)
     t2p1: "", t2p2: "", // Team 2 player names (for doubles)
     gamesLength: 3, // Best of 3 games
+    pointsLimit: 21, // 21 points standard or 11 points short
     
     // Live scores
     scoreP1: 0,
@@ -40,6 +41,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     name: "",
     teamCount: 4,
     gamesLength: 3,
+    pointsLimit: 21,
     teams: [], // { name, played, wins, losses, gamesWon, gamesLost, gamesDiff, ptsWon, ptsLost, ptsDiff, pts }
     fixtures: [], // { round, teamA, teamB, scoreA, scoreB, status, matchState }
     activeFixtureIndex: -1
@@ -81,6 +83,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     t2p1Input: document.querySelector("#bad-t2p1-input"),
     t2p2Input: document.querySelector("#bad-t2p2-input"),
     gamesSelect: document.querySelector("#bad-games-select"),
+    pointsSelect: document.querySelector("#bad-points-select"),
     startBtn: document.querySelector("#bad-start-btn"),
 
     // Scorer Dashboard
@@ -121,6 +124,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     tnameInput: document.querySelector("#bad-tname-input"),
     tteamCount: document.querySelector("#bad-tteam-count"),
     tgamesSelect: document.querySelector("#bad-tgames-select"),
+    tpointsSelect: document.querySelector("#bad-tpoints-select"),
     tteamInputs: document.querySelector("#bad-tteam-inputs"),
     tcreateBtn: document.querySelector("#bad-tcreate-btn"),
 
@@ -313,11 +317,12 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
         }
       }
 
-      initializeBadmintonMatch(p1, p2, isDoubles ? "doubles" : "singles", t1p1, t1p2, t2p1, t2p2);
+      const pointsLimit = els.pointsSelect ? Number(els.pointsSelect.value) : 21;
+      initializeBadmintonMatch(p1, p2, isDoubles ? "doubles" : "singles", t1p1, t1p2, t2p1, t2p2, pointsLimit);
     });
   }
 
-  function initializeBadmintonMatch(p1, p2, type, t1p1, t1p2, t2p1, t2p2) {
+  function initializeBadmintonMatch(p1, p2, type, t1p1, t1p2, t2p1, t2p2, pointsLimit = 21) {
     bad = clone(defaultBadmintonState);
     bad.active = true;
     bad.isTournamentMatch = false;
@@ -326,6 +331,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     bad.matchType = type;
     bad.t1p1 = t1p1; bad.t1p2 = t1p2;
     bad.t2p1 = t2p1; bad.t2p2 = t2p2;
+    bad.pointsLimit = pointsLimit;
 
     saveBadmintonState();
     window.location.hash = "#badminton-match";
@@ -377,21 +383,20 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     // Check Setting / Deuce and Game Winner
     const sA = bad.scoreP1;
     const sB = bad.scoreP2;
+    const limit = bad.pointsLimit || 21;
+    const deuceStart = limit - 1;
+    const cap = limit + 9;
 
-    // Standard game win is to 21 rally points. 
-    // Setting rules: 
-    // - If score reaches 20-20, winner must lead by 2 points.
-    // - Setting is capped at 30 (whoever reaches 30 first wins).
-    if (sA >= 21 || sB >= 21) {
+    if (sA >= limit || sB >= limit) {
       if (Math.abs(sA - sB) >= 2) {
         winGame(sA > sB ? 1 : 2);
-      } else if (sA === 20 && sB === 20) {
+      } else if (sA === deuceStart && sB === deuceStart) {
         bad.isSetting = true;
         logTimelinePoint("⚠️ Game reaches setting (deuce)! Must win by 2 points.");
         triggerBadToast("Setting active! Must win by 2 points.");
-      } else if (sA === 30 || sB === 30) {
-        // Capped at 30 points
-        winGame(sA === 30 ? 1 : 2);
+      } else if (sA === cap || sB === cap) {
+        // Capped points
+        winGame(sA === cap ? 1 : 2);
       }
     }
 
@@ -630,10 +635,12 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
         teamNames.push(tName);
       }
 
+      const pointsLimit = els.tpointsSelect ? Number(els.tpointsSelect.value) : 21;
       badt = clone(defaultBadtState);
       badt.active = true;
       badt.name = name;
       badt.teamCount = teamCount;
+      badt.pointsLimit = pointsLimit;
 
       badt.teams = teamNames.map(t => ({
         name: t,
@@ -844,6 +851,7 @@ console.log("ScoreTracker Badminton Module loaded - version 211");
     bad.p1Name = p1;
     bad.p2Name = p2;
     bad.matchType = "singles";
+    bad.pointsLimit = badt.pointsLimit || 21;
 
     saveBadmintonState();
     window.location.hash = "#badminton-match";
