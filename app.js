@@ -475,6 +475,10 @@ function navigateByHash(hash) {
     showCricketPage(true);
   } else if (hash.startsWith("#football")) {
     showFootballPage(true);
+  } else if (hash.startsWith("#basketball")) {
+    if (typeof window.showBasketballPage === "function") {
+      window.showBasketballPage(true);
+    }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
   } else if (hash === "#tsetup") {
