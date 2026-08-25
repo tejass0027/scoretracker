@@ -1,0 +1,152 @@
+/* ==========================================================================
+   TABLE TENNIS (PING PONG) SCORER STYLESHEET
+   ========================================================================== */
+
+:root {
+  --tt-primary: #06b6d4; /* ITTF Table Tennis Cyan */
+  --tt-primary-rgb: 6, 182, 212;
+  --tt-red: #ef4444;
+  --tt-blue: #3b82f6;
+  --tt-gold: #f59e0b;
+  --tt-dark: #0b0f19;
+  --tt-border: rgba(6, 182, 212, 0.25);
+}
+
+/* Big Score Display */
+.tt-score-num {
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--tt-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+  font-family: monospace;
+}
+
+.tt-score-num.team2 {
+  color: #f59e0b;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+}
+
+/* Service Indicator */
+.tt-server-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--tt-primary);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  width: fit-content;
+  margin: 0 auto 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tt-server-badge.team2 {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Game Score Chips */
+.tt-game-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tt-game-chip.active {
+  border-color: var(--tt-primary);
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--tt-primary);
+}
+
+/* Game Point / Match Point Alert Badge */
+.tt-point-badge {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #f87171;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  animation: pulse 1.2s infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 60s Timeout Clock */
+.tt-timeout-display {
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: monospace;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(6, 182, 212, 0.4);
+  padding: 4px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.tt-timeout-display.warning {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  animation: pulse 0.8s infinite;
+}
+
+/* Point Action Buttons */
+.tt-action-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.tt-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--tt-primary);
+  transform: translateY(-2px);
+}
+
+.tt-action-btn.team1-point {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--tt-primary);
+  border-color: rgba(6, 182, 212, 0.35);
+}
+
+.tt-action-btn.team2-point {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+/* Timeline Log */
+.tt-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
