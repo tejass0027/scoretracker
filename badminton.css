@@ -1,0 +1,123 @@
+/* ==========================================================================
+   BADMINTON SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --bad-primary: #38bdf8; /* Light Blue / Cyan */
+  --bad-primary-rgb: 56, 189, 248;
+  --bad-court-bg: #065f46; /* Dark Green Court */
+  --bad-border: rgba(56, 189, 248, 0.2);
+}
+
+/* Badminton Court visual styling */
+.bad-court {
+  position: relative;
+  background: var(--bad-court-bg);
+  border: 3px solid #fff;
+  border-radius: 8px;
+  width: 100%;
+  aspect-ratio: 2.1;
+  overflow: hidden;
+  margin: 15px 0;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.bad-court-inner {
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  left: 6%;
+  right: 6%;
+  border: 2px solid #fff;
+}
+
+.bad-court-center-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #fff;
+}
+
+.bad-court-short-service {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 33%;
+  right: 33%;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.bad-court-center-divide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #fff;
+}
+
+.bad-court-net {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  z-index: 5;
+}
+
+/* Scoreboard badges */
+.bad-server-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bad-primary);
+  box-shadow: 0 0 8px var(--bad-primary);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.bad-game-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  min-width: 48px;
+  text-align: center;
+}
+
+.bad-game-badge.active {
+  border-color: var(--bad-primary);
+  color: var(--bad-primary);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.bad-point-badge {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: var(--bad-primary);
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.bad-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
