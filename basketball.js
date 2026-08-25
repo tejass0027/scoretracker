@@ -56,7 +56,11 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
   const els = {
     // Page Wrappers
     basketballPage: document.querySelector("#basketball-page"),
+    formatView: document.querySelector("#bb-format-view"),
     setupView: document.querySelector("#bb-setup-view"),
+    formatBackBtn: document.querySelector("#bb-format-back-btn"),
+    formatCustomBtn: document.querySelector("#bb-format-custom-btn"),
+    formatTournamentBtn: document.querySelector("#bb-format-tournament-btn"),
     dashboardView: document.querySelector("#bb-dashboard-view"),
     tsetupView: document.querySelector("#bb-tsetup-view"),
     tdashboardView: document.querySelector("#bb-tdashboard-view"),
@@ -243,6 +247,7 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
   // 5. NAVIGATION & GENERAL ROUTING
   function hideAllBbViews() {
     const views = [
+      els.formatView,
       els.setupView,
       els.dashboardView,
       els.tsetupView,
@@ -272,6 +277,8 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
 
     const hash = window.location.hash;
     if (hash === "#basketball") {
+      if (els.formatView) els.formatView.classList.remove("hidden");
+    } else if (hash === "#basketball-custom") {
       if (els.setupView) els.setupView.classList.remove("hidden");
       // Clear inputs
       if (els.teamAInput) els.teamAInput.value = "";
@@ -413,9 +420,25 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
   }
 
   // 7. SETUP EVENT LISTENERS
+  if (els.formatBackBtn) {
+    els.formatBackBtn.addEventListener("click", () => {
+      window.location.hash = "#sports";
+    });
+  }
+  if (els.formatCustomBtn) {
+    els.formatCustomBtn.addEventListener("click", () => {
+      window.location.hash = "#basketball-custom";
+    });
+  }
+  if (els.formatTournamentBtn) {
+    els.formatTournamentBtn.addEventListener("click", () => {
+      window.location.hash = "#basketball-tsetup";
+    });
+  }
+
   if (els.setupBackBtn) {
     els.setupBackBtn.addEventListener("click", () => {
-      window.location.hash = "#sports";
+      window.location.hash = "#basketball";
     });
   }
 
