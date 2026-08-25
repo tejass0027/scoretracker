@@ -139,3 +139,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* Responsive layout for dashboard grid columns aligning court to right hand column */
+@media (min-width: 768px) {
+  .bad-dashboard-grid {
+    grid-template-columns: 1fr 240px !important;
+  }
+}
