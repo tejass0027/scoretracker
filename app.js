@@ -15,6 +15,7 @@ const els = {
   badmintonPage: document.querySelector("#badminton-page"),
   hockeyPage: document.querySelector("#hockey-page"),
   volleyballPage: document.querySelector("#volleyball-page"),
+  baseballPage: document.querySelector("#baseball-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -202,6 +203,7 @@ function hideAllPages() {
   if (els.badmintonPage) els.badmintonPage.classList.add("hidden");
   if (els.hockeyPage) els.hockeyPage.classList.add("hidden");
   if (els.volleyballPage) els.volleyballPage.classList.add("hidden");
+  if (els.baseballPage) els.baseballPage.classList.add("hidden");
 }
 
 function showSportsPage(fromHash = false) {
@@ -502,6 +504,10 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#volleyball")) {
     if (typeof window.showVolleyballPage === "function") {
       window.showVolleyballPage(true);
+    }
+  } else if (hash.startsWith("#baseball")) {
+    if (typeof window.showBaseballPage === "function") {
+      window.showBaseballPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -2677,7 +2683,7 @@ function render() {
     setTimeout(() => loader.remove(), 400);
   }
 
-  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball")) {
+  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball")) {
     return;
   }
   els.teamA.value = state.teamA;

@@ -1,0 +1,195 @@
+/* ==========================================================================
+   BASEBALL SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --bs-primary: #ef4444; /* Baseball Seam Red */
+  --bs-primary-rgb: 239, 68, 68;
+  --bs-navy: #1e3a8a; /* Deep Navy */
+  --bs-field: #064e3b; /* Emerald Diamond */
+  --bs-border: rgba(239, 68, 68, 0.25);
+}
+
+/* Baseball Diamond Layout */
+.bs-diamond-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.bs-diamond-turf {
+  position: absolute;
+  inset: 15px;
+  background: rgba(6, 78, 59, 0.4);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+
+.bs-base {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.bs-base:hover {
+  transform: rotate(45deg) scale(1.15);
+}
+
+.bs-base.occupied {
+  background: #f59e0b;
+  border-color: #fbbf24;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.8);
+}
+
+/* Base Coordinates */
+.bs-base.second {
+  top: 4px;
+  left: 59px;
+}
+
+.bs-base.third {
+  top: 59px;
+  left: 4px;
+}
+
+.bs-base.first {
+  top: 59px;
+  right: 4px;
+}
+
+.bs-base.home {
+  bottom: 4px;
+  left: 59px;
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #fff;
+  cursor: default;
+}
+
+/* Count Lights (B - S - O) */
+.bs-count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bs-count-label {
+  font-size: 0.8rem;
+  font-weight: 900;
+  width: 14px;
+  color: var(--text-muted);
+}
+
+.bs-count-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.bs-count-dot.ball.active {
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+}
+
+.bs-count-dot.strike.active {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+}
+
+.bs-count-dot.out.active {
+  background: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+}
+
+/* Line Score Table */
+.bs-linescore-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.bs-linescore-table th,
+.bs-linescore-table td {
+  padding: 8px 6px;
+  font-family: monospace;
+}
+
+.bs-linescore-table th {
+  color: var(--text-muted);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bs-linescore-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bs-inning-active-col {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--bs-primary) !important;
+  font-weight: 900 !important;
+}
+
+/* Big Run Score Numbers */
+.bs-run-num {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--bs-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+  font-family: monospace;
+}
+
+.bs-run-num.home {
+  color: #38bdf8;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+}
+
+/* Quick Action Buttons */
+.bs-action-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px 8px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.15s ease;
+}
+
+.bs-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--bs-primary);
+  transform: translateY(-1px);
+}
+
+/* Log Item */
+.bs-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
