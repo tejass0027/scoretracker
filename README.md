@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for eight distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for nine distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -54,3 +54,11 @@ This application provides real-time scoring trackers and tournament standing com
 * Visual interactive Base Diamond showing active base runners (1st, 2nd, 3rd Base) with automatic runner advance physics.
 * Ball, Strike, and Out (B-S-O) pitch counts with automatic walks on 4 balls and strikeouts/half-inning change on 3 outs.
 * Compiles round-robin league standings with Win PCT, Runs Scored, Runs Allowed, and Run Differentials.
+
+### 9. 🏉 Rugby Scorer
+* Supports Rugby Union (15s) and Rugby Sevens (7s).
+* Tracks World Rugby point progression: Try (+5), Conversion (+2), Penalty Goal (+3), and Drop Goal (+3).
+* Displays live scoring breakdown chips (T - C - P - DG).
+* Interactive live match stopwatch with synthesized referee whistles.
+* Sin Bin disciplinary management with live countdown timers: Yellow Card (10m in 15s, 2m in 7s) and Red Card (Send Off).
+* Compiles World Rugby bonus points standings (4 pts win, 2 pts draw, +1 Try Bonus for 4+ tries, +1 Losing Bonus for &le; 7 pts deficit).

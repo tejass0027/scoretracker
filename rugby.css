@@ -1,0 +1,145 @@
+/* ==========================================================================
+   RUGBY SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --rg-primary: #10b981; /* Rugby Pitch Emerald */
+  --rg-primary-rgb: 16, 185, 129;
+  --rg-gold: #f59e0b;
+  --rg-red: #ef4444;
+  --rg-blue: #38bdf8;
+  --rg-border: rgba(16, 185, 129, 0.25);
+}
+
+/* Rugby Big Score Display */
+.rg-score-num {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: var(--rg-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  font-family: monospace;
+}
+
+.rg-score-num.team2 {
+  color: #f59e0b;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+/* Breakdown Stats Chips (T - C - P - DG) */
+.rg-breakdown-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.rg-chip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rg-chip-t {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rg-chip-c {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.rg-chip-p {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.rg-chip-dg {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+/* Rugby Action Scoring Buttons */
+.rg-score-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 10px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s ease;
+}
+
+.rg-score-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--rg-primary);
+  transform: translateY(-1px);
+}
+
+.rg-score-btn.try-btn {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.rg-score-btn.try-btn:hover {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+/* Sin Bin Suspensions Badges */
+.rg-sinbin-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.rg-sinbin-badge {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: pulse 2s infinite;
+}
+
+.rg-sinbin-badge.red {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  animation: none;
+}
+
+/* Timeline Log */
+.rg-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
