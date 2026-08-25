@@ -1,0 +1,136 @@
+/* ==========================================================================
+   HOCKEY SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --hoc-primary: #f59e0b; /* Vibrant Amber / Gold */
+  --hoc-primary-rgb: 245, 158, 11;
+  --hoc-blue: #38bdf8; /* Blue turf accent */
+  --hoc-turf: #0d2847; /* Deep Blue Turf */
+  --hoc-border: rgba(245, 158, 11, 0.2);
+}
+
+/* Period Pills */
+.hoc-period-pill {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.hoc-period-pill.active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--hoc-primary);
+  color: var(--hoc-primary);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+}
+
+/* Card badges */
+.hoc-card-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hoc-card-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hoc-card-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Stat counter pills */
+.hoc-stat-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hoc-stat-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  font-family: monospace;
+  line-height: 1.1;
+}
+
+.hoc-stat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Score display */
+.hoc-score-num {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--hoc-primary);
+  line-height: 1;
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+  font-family: monospace;
+}
+
+/* Active Suspension badge list */
+.hoc-suspension-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+/* Log Item */
+.hoc-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
