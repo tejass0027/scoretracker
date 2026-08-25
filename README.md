@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for seven distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for eight distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -47,3 +47,10 @@ This application provides real-time scoring trackers and tournament standing com
 * Features serving team indicators and rotation tracking.
 * Incorporates a 30-second timeout clock with synthesized buzzer alerts and timeout limit trackers (2 per set).
 * Compiles round-robin tournament standings based on FIVB league points (3-0/3-1 = 3pts, 3-2 = 2pts, 2-3 = 1pt), Sets ratios, and Points ratios.
+
+### 8. ⚾ Baseball Scorer
+* Supports 9, 7, 5, or 3 regulation innings with extra innings support.
+* Inning-by-inning box line score tracking with Runs (R), Hits (H), and Errors (E).
+* Visual interactive Base Diamond showing active base runners (1st, 2nd, 3rd Base) with automatic runner advance physics.
+* Ball, Strike, and Out (B-S-O) pitch counts with automatic walks on 4 balls and strikeouts/half-inning change on 3 outs.
+* Compiles round-robin league standings with Win PCT, Runs Scored, Runs Allowed, and Run Differentials.
