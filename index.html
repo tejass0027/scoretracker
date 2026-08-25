@@ -1183,6 +1183,31 @@
 
     <!-- BASKETBALL APPLICATION PAGE WRAPPER -->
     <main id="basketball-page" class="format-page hidden" style="max-width: 820px; margin: 0 auto; padding: 20px; font-family: inherit;">
+      
+      <!-- 1. BASKETBALL FORMAT SELECTION VIEW -->
+      <section id="bb-format-view" class="hidden">
+        <header class="sports-header">
+          <div>
+            <p class="eyebrow">Basketball setup</p>
+            <h1>Choose Basketball Format</h1>
+          </div>
+          <button id="bb-format-back-btn" class="sport-tab active" type="button">All sports</button>
+        </header>
+
+        <div class="format-grid" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <button class="format-card" type="button" id="bb-format-custom-btn">
+            <span style="background: rgba(245, 158, 11, 0.15); color: var(--gold); border-color: rgba(245, 158, 11, 0.3);">CUS</span>
+            <strong>Custom Match</strong>
+            <small>Create a single custom match, customize rules, and track play metrics in real-time.</small>
+          </button>
+          <button class="format-card featured" type="button" id="bb-format-tournament-btn" style="background: radial-gradient(circle at 88% 18%, rgba(249, 115, 22, 0.15), transparent 45%), rgba(17, 24, 39, 0.65) !important; border-color: rgba(249, 115, 22, 0.35) !important; box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.15), var(--shadow) !important;">
+            <span style="background: rgba(249, 115, 22, 0.15); color: #f97316; border-color: rgba(249, 115, 22, 0.3);">LGE</span>
+            <strong>League / Tournament</strong>
+            <small>Run a complete round-robin tournament with point tables, fixtures, and auto-generated stat leaderboards.</small>
+          </button>
+        </div>
+      </section>
+
       <!-- 5. BASKETBALL SETUP VIEW -->
       <section id="bb-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
