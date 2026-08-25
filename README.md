@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for nine distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for ten distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -62,3 +62,10 @@ This application provides real-time scoring trackers and tournament standing com
 * Interactive live match stopwatch with synthesized referee whistles.
 * Sin Bin disciplinary management with live countdown timers: Yellow Card (10m in 15s, 2m in 7s) and Red Card (Send Off).
 * Compiles World Rugby bonus points standings (4 pts win, 2 pts draw, +1 Try Bonus for 4+ tries, +1 Losing Bonus for &le; 7 pts deficit).
+
+### 10. 🤼 Kabaddi Scorer
+* Implements Pro Kabaddi League (PKL) scoring system.
+* Features Touch Points (+1 to +4), Bonus Points (+1), Tackle Points (+1), and Super Tackles (+2).
+* Visual on-mat active player dots tracking (7 to 0) with automatic All-Out (Lona +2) detection and full-team revival.
+* Interactive 30-Second Raid Clock with buzzer alerts and consecutive empty raid / Do-or-Die raid tracking.
+* Compiles PKL 5-point tournament standings (5 pts win, 3 pts tie, 1 pt for loss by &le; 7 points).

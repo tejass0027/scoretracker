@@ -1,0 +1,164 @@
+/* ==========================================================================
+   KABADDI SCORER SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --kb-primary: #f97316; /* Kabaddi Flame Orange */
+  --kb-primary-rgb: 249, 115, 22;
+  --kb-gold: #f59e0b;
+  --kb-red: #ef4444;
+  --kb-blue: #38bdf8;
+  --kb-mat: #1e1b4b;
+  --kb-border: rgba(249, 115, 22, 0.25);
+}
+
+/* Big Score Display */
+.kb-score-num {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: var(--kb-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  font-family: monospace;
+}
+
+.kb-score-num.team2 {
+  color: #38bdf8;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* On-Mat Player Dots (7 Players) */
+.kb-mat-players {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.kb-player-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+.kb-player-dot.active {
+  background: #f97316;
+  border-color: #fb923c;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
+}
+
+.kb-player-dot.active.team2 {
+  background: #38bdf8;
+  border-color: #7dd3fc;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}
+
+.kb-player-dot.out {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* 30-Second Raid Timer Display */
+.kb-raid-clock {
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-family: monospace;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(249, 115, 22, 0.4);
+  padding: 4px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.kb-raid-clock.warning {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  animation: pulse 0.8s infinite;
+}
+
+/* Do or Die Badge */
+.kb-dod-badge {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #f87171;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  animation: pulse 1.2s infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Raiding Team Indicator */
+.kb-raiding-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(249, 115, 22, 0.2);
+  color: var(--kb-primary);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  width: fit-content;
+  margin: 0 auto 6px;
+}
+
+/* Action Scoring Buttons */
+.kb-action-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 8px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.15s ease;
+}
+
+.kb-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--kb-primary);
+  transform: translateY(-1px);
+}
+
+.kb-action-btn.touch-btn {
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--kb-primary);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.kb-action-btn.tackle-btn {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.kb-action-btn.super-btn {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Timeline Log */
+.kb-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
