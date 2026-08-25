@@ -1591,6 +1591,14 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
     });
   }
 
+  // Bind the Basketball card button from home sports page
+  const bbCardBtn = document.querySelector("[data-open-sport='basketball']");
+  if (bbCardBtn) {
+    bbCardBtn.addEventListener("click", () => {
+      window.location.hash = "#basketball";
+    });
+  }
+
   // 14. INITIALIZE APP ROUTINGS
   loadBbState();
 
