@@ -1989,49 +1989,46 @@
           <button id="bad-reset-match-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
         </div>
 
-        <!-- Scoreboard & Court Grid wrapper -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: stretch;">
-          
-          <!-- Left Column: Point Scoreboard Display -->
-          <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 20px; align-items: center; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px;">
-            <!-- Player A Display -->
-            <div style="text-align: center;">
-              <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                <span id="bad-p1-serving" class="bad-server-dot"></span>
-                <h2 id="bad-p1-name-display" style="margin:0; font-size:1.3rem; font-weight:800; color:#fff;">Player 1</h2>
-              </div>
-              <div id="bad-p1-points" class="bad-point-badge" style="margin-top: 12px;">0</div>
+        <!-- Point Scoreboard Display -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 20px; align-items: center; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px;">
+          <!-- Player A Display -->
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+              <span id="bad-p1-serving" class="bad-server-dot"></span>
+              <h2 id="bad-p1-name-display" style="margin:0; font-size:1.3rem; font-weight:800; color:#fff;">Player 1</h2>
             </div>
-
-            <!-- Versus Label -->
-            <div style="text-align: center;">
-              <span style="font-weight:800; font-size:0.9rem; color:var(--text-muted); letter-spacing:2px;">VS</span>
-              <div id="bad-setting-indicator" style="font-weight:700; color:var(--gold); font-size:0.75rem; margin-top:8px; display:none; text-transform:uppercase;">Setting</div>
-            </div>
-
-            <!-- Player B Display -->
-            <div style="text-align: center;">
-              <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                <h2 id="bad-p2-name-display" style="margin:0; font-size:1.3rem; font-weight:800; color:#fff;">Player 2</h2>
-                <span id="bad-p2-serving" class="bad-server-dot" style="display:none;"></span>
-              </div>
-              <div id="bad-p2-points" class="bad-point-badge" style="margin-top: 12px; color: #60a5fa; text-shadow: 0 0 10px rgba(96,165,250,0.2);">0</div>
-            </div>
+            <div id="bad-p1-points" class="bad-point-badge" style="margin-top: 12px;">0</div>
           </div>
 
-          <!-- Right Column: Badminton Court Visual -->
-          <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div class="bad-court" style="margin: 0; max-width: 100%;">
-              <div class="bad-court-inner">
-                <div class="bad-court-center-line"></div>
-                <div class="bad-court-short-service"></div>
-                <div class="bad-court-center-divide"></div>
-              </div>
-              <div class="bad-court-net"></div>
-            </div>
-            <p style="font-size:0.75rem; color:var(--text-muted); margin: 6px 0 0; text-align:center;">Badminton Court Layout</p>
+          <!-- Versus Label -->
+          <div style="text-align: center;">
+            <span style="font-weight:800; font-size:0.9rem; color:var(--text-muted); letter-spacing:2px;">VS</span>
+            <div id="bad-setting-indicator" style="font-weight:700; color:var(--gold); font-size:0.75rem; margin-top:8px; display:none; text-transform:uppercase;">Setting</div>
           </div>
 
+          <!-- Player B Display -->
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+              <h2 id="bad-p2-name-display" style="margin:0; font-size:1.3rem; font-weight:800; color:#fff;">Player 2</h2>
+              <span id="bad-p2-serving" class="bad-server-dot" style="display:none;"></span>
+            </div>
+            <div id="bad-p2-points" class="bad-point-badge" style="margin-top: 12px; color: #60a5fa; text-shadow: 0 0 10px rgba(96,165,250,0.2);">0</div>
+          </div>
+        </div>
+
+        <!-- Badminton Court Visual (Vertical & Outside) -->
+        <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 220px; margin: 0 auto;">
+          <div class="bad-court" style="margin: 0; max-width: 100%;">
+            <div class="bad-court-inner">
+              <div class="bad-court-center-line"></div>
+              <div class="bad-court-center-line-bottom"></div>
+              <div class="bad-court-short-service"></div>
+              <div class="bad-court-short-service-bottom"></div>
+              <div class="bad-court-center-divide"></div>
+            </div>
+            <div class="bad-court-net"></div>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin: 6px 0 0; text-align:center;">Badminton Court Layout</p>
         </div>
 
         <!-- Games Table -->
