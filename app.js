@@ -4837,5 +4837,9 @@ window.addEventListener("hashchange", () => {
 });
 
 // Initialize Page state on reload/load
-showSportsPage();
+if (window.location.hash && window.location.hash !== "#sports") {
+  navigateByHash(window.location.hash);
+} else {
+  showSportsPage(true);
+}
 render();
