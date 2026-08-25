@@ -17,6 +17,7 @@ const els = {
   volleyballPage: document.querySelector("#volleyball-page"),
   baseballPage: document.querySelector("#baseball-page"),
   rugbyPage: document.querySelector("#rugby-page"),
+  kabaddiPage: document.querySelector("#kabaddi-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -206,6 +207,7 @@ function hideAllPages() {
   if (els.volleyballPage) els.volleyballPage.classList.add("hidden");
   if (els.baseballPage) els.baseballPage.classList.add("hidden");
   if (els.rugbyPage) els.rugbyPage.classList.add("hidden");
+  if (els.kabaddiPage) els.kabaddiPage.classList.add("hidden");
 }
 
 function showSportsPage(fromHash = false) {
@@ -514,6 +516,10 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#rugby")) {
     if (typeof window.showRugbyPage === "function") {
       window.showRugbyPage(true);
+    }
+  } else if (hash.startsWith("#kabaddi")) {
+    if (typeof window.showKabaddiPage === "function") {
+      window.showKabaddiPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -2689,7 +2695,7 @@ function render() {
     setTimeout(() => loader.remove(), 400);
   }
 
-  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball") || window.location.hash.startsWith("#rugby")) {
+  if (window.location.hash.startsWith("#football") || window.location.hash.startsWith("#basketball") || window.location.hash.startsWith("#tennis") || window.location.hash.startsWith("#badminton") || window.location.hash.startsWith("#hockey") || window.location.hash.startsWith("#volleyball") || window.location.hash.startsWith("#baseball") || window.location.hash.startsWith("#rugby") || window.location.hash.startsWith("#kabaddi")) {
     return;
   }
   els.teamA.value = state.teamA;
