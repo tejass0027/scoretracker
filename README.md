@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for thirteen distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for fourteen distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -92,3 +92,11 @@ This application provides real-time scoring trackers and tournament standing com
 * Official 3-Judge Scorecard table with automated decision outcomes: Unanimous Decision (UD), Split Decision (SD), Majority Decision (MD), or Draw.
 * Supports stoppage declarations: KO (Knockout), TKO (Technical Knockout), and RTD (Corner Retirement).
 * Compiles Championship Tournament bout cards, boxer records (W-L-D, KOs), and title points standings.
+
+### 14. 🥋 MMA (Mixed Martial Arts / UFC) Scorer
+* Follows official Unified Rules of MMA across 3 or 5 five-minute rounds.
+* Features live UFC fight metrics tracking: Significant Strikes, Takedowns (TD), Control Time, Knockdowns (KD), Submission Attempts, and foul deductions (-1).
+* Live 5:00 round countdown clock with synthesized Octagon Horn / Buzzer audio and 10-second wood clapper warnings.
+* Official 3-Judge Scorecard table with automated decision outcomes: Unanimous Decision (UD), Split Decision (SD), Majority Decision (MD), or Draw.
+* Comprehensive finish methods: KO/TKO (Head Kick, Flying Knee, Ground & Pound) and Submission (Rear Naked Choke, Guillotine, Armbar, Triangle).
+* Compiles Grand Prix Championship fight cards, fighter records (W-L-D, KOs, SUBs), and division standings.
