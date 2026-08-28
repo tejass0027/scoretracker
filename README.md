@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for eleven distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for twelve distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -77,3 +77,10 @@ This application provides real-time scoring trackers and tournament standing com
 * Real-time Game Point and Match Point visual alerts.
 * 60-second tactical timeout clock with audio buzzer.
 * Compiles ITTF tournament standings based on Match Points (2 pts win, 1 pt loss), Game ratios, and Point ratios.
+
+### 12. ⛳ Golf Scorer
+* Follows official USGA / PGA Tour rules for Stroke Play (To Par / Gross Strokes) and Modified Stableford points.
+* Supports 18-Hole (Front 9 OUT, Back 9 IN, Total) and 9-Hole group rounds (1 to 4 players).
+* Features Par 3, 4, and 5 hole configurations with Eagle (-2), Birdie (-1), Par (E), Bogey (+1), and Double Bogey+ (+2+) quick stroke chips.
+* Interactive full course scorecard with standard circle (Eagle/Birdie) and square (Bogey/Double) highlights.
+* Real-time PGA Tour Leaderboard with official ranking, ties calculation (Pos: 1, T2, T2, 4), To Par (+/-), Thru holes, and Gross Strokes.

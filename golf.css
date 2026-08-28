@@ -1,0 +1,166 @@
+/* ==========================================================================
+   GOLF SCORER & TOURNAMENT SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --gf-primary: #10b981; /* Emerald Fairway Green */
+  --gf-primary-rgb: 16, 185, 129;
+  --gf-gold: #f59e0b;
+  --gf-eagle: #38bdf8;
+  --gf-birdie: #f87171;
+  --gf-bogey: #94a3b8;
+  --gf-double: #ea580c;
+  --gf-dark: #0b0f19;
+  --gf-border: rgba(16, 185, 129, 0.25);
+}
+
+/* Hole Banner Header */
+.gf-hole-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Quick Score Action Chips */
+.gf-stroke-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.15s ease;
+}
+
+.gf-stroke-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.gf-stroke-btn.eagle {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--gf-eagle);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.gf-stroke-btn.birdie {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--gf-birdie);
+  border-color: rgba(248, 113, 113, 0.35);
+}
+
+.gf-stroke-btn.par {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.gf-stroke-btn.bogey {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--gf-bogey);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.gf-stroke-btn.double {
+  background: rgba(234, 88, 12, 0.15);
+  color: var(--gf-double);
+  border-color: rgba(234, 88, 12, 0.35);
+}
+
+/* Scorecard Table Cell Badges */
+.gf-cell-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+/* Eagle: Double Circle */
+.gf-cell-badge.eagle {
+  color: var(--gf-eagle);
+  border: 2px double var(--gf-eagle);
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* Birdie: Single Circle */
+.gf-cell-badge.birdie {
+  color: var(--gf-birdie);
+  border: 1px solid var(--gf-birdie);
+  border-radius: 50%;
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* Par: Plain */
+.gf-cell-badge.par {
+  color: #fff;
+}
+
+/* Bogey: Single Square */
+.gf-cell-badge.bogey {
+  color: var(--gf-bogey);
+  border: 1px solid var(--gf-bogey);
+  border-radius: 2px;
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* Double Bogey+: Double Square */
+.gf-cell-badge.double {
+  color: var(--gf-double);
+  border: 2px double var(--gf-double);
+  border-radius: 2px;
+  background: rgba(234, 88, 12, 0.1);
+}
+
+/* To Par Display Badges */
+.gf-topar-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 900;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.gf-topar-badge.under {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.gf-topar-badge.even {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.gf-topar-badge.over {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* Timeline Log */
+.gf-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
