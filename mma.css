@@ -1,0 +1,165 @@
+/* ==========================================================================
+   MMA (UFC / MIXED MARTIAL ARTS) SCORER & CHAMPIONSHIP SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --mma-red: #ef4444;    /* Red Corner */
+  --mma-red-rgb: 239, 68, 68;
+  --mma-blue: #3b82f6;   /* Blue Corner */
+  --mma-blue-rgb: 59, 130, 246;
+  --mma-gold: #eab308;   /* UFC Championship Gold */
+  --mma-dark: #080c14;
+  --mma-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Corner Cards */
+.mma-corner-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.mma-corner-card.red {
+  border-color: rgba(239, 68, 68, 0.3);
+  box-shadow: inset 0 0 40px rgba(239, 68, 68, 0.05);
+}
+
+.mma-corner-card.blue {
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: inset 0 0 40px rgba(59, 130, 246, 0.05);
+}
+
+/* Big Points Display */
+.mma-score-num {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: monospace;
+}
+
+.mma-score-num.red {
+  color: var(--mma-red);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
+}
+
+.mma-score-num.blue {
+  color: var(--mma-blue);
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
+}
+
+/* Round Timer Clock */
+.mma-round-clock {
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-family: monospace;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 20px;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+}
+
+.mma-round-clock.active {
+  border-color: var(--mma-gold);
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.3);
+}
+
+.mma-round-clock.warning {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  animation: pulse 0.8s infinite;
+}
+
+/* Compustrike Action Buttons */
+.mma-action-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 8px;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.mma-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.mma-action-btn.red-btn {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--mma-red);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.mma-action-btn.blue-btn {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--mma-blue);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.mma-action-btn.gold-btn {
+  background: rgba(234, 179, 8, 0.15);
+  color: var(--mma-gold);
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+/* Decision & Method Badges */
+.mma-decision-badge {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid var(--mma-gold);
+  color: var(--mma-gold);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 3-Judge Scorecard Table */
+.mma-scorecard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.mma-scorecard-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+}
+
+.mma-scorecard-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Timeline Log */
+.mma-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
