@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for twelve distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for thirteen distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -84,3 +84,11 @@ This application provides real-time scoring trackers and tournament standing com
 * Features Par 3, 4, and 5 hole configurations with Eagle (-2), Birdie (-1), Par (E), Bogey (+1), and Double Bogey+ (+2+) quick stroke chips.
 * Interactive full course scorecard with standard circle (Eagle/Birdie) and square (Bogey/Double) highlights.
 * Real-time PGA Tour Leaderboard with official ranking, ties calculation (Pos: 1, T2, T2, 4), To Par (+/-), Thru holes, and Gross Strokes.
+
+### 13. 🥊 Boxing Scorer
+* Follows official 10-Point Must scoring rules (WBC, WBA, IBF, WBO) across 4 to 12 Championship rounds.
+* Features Compubox-style live punch tracking: Jabs, Power Punches, Knockdowns (KD), and referee foul point deductions (-1).
+* Live round countdown clock with synthesized Boxing Bell audio (3 gong rings) and 10-second wood tap clapper warnings.
+* Official 3-Judge Scorecard table with automated decision outcomes: Unanimous Decision (UD), Split Decision (SD), Majority Decision (MD), or Draw.
+* Supports stoppage declarations: KO (Knockout), TKO (Technical Knockout), and RTD (Corner Retirement).
+* Compiles Championship Tournament bout cards, boxer records (W-L-D, KOs), and title points standings.

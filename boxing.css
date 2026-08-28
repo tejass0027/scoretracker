@@ -1,0 +1,184 @@
+/* ==========================================================================
+   BOXING SCORER & CHAMPIONSHIP SYSTEM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --bx-red: #ef4444;    /* Red Corner */
+  --bx-red-rgb: 239, 68, 68;
+  --bx-blue: #3b82f6;   /* Blue Corner */
+  --bx-blue-rgb: 59, 130, 246;
+  --bx-gold: #f59e0b;   /* Championship Belt Gold */
+  --bx-dark: #090d16;
+  --bx-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Corner Cards */
+.bx-corner-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.bx-corner-card.red {
+  border-color: rgba(239, 68, 68, 0.3);
+  box-shadow: inset 0 0 40px rgba(239, 68, 68, 0.05);
+}
+
+.bx-corner-card.blue {
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: inset 0 0 40px rgba(59, 130, 246, 0.05);
+}
+
+/* Big Points Display */
+.bx-score-num {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: monospace;
+}
+
+.bx-score-num.red {
+  color: var(--bx-red);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
+}
+
+.bx-score-num.blue {
+  color: var(--bx-blue);
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
+}
+
+/* Round Timer Clock */
+.bx-round-clock {
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-family: monospace;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 20px;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+}
+
+.bx-round-clock.active {
+  border-color: var(--bx-gold);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.bx-round-clock.warning {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  animation: pulse 0.8s infinite;
+}
+
+.bx-round-clock.rest {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+/* Compubox Punch Action Buttons */
+.bx-punch-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 8px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.bx-punch-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.bx-punch-btn.red-btn {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--bx-red);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.bx-punch-btn.blue-btn {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--bx-blue);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.bx-punch-btn.kd-btn {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--bx-gold);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Knockdown & Decision Badges */
+.bx-kd-badge {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--bx-gold);
+  color: var(--bx-gold);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bx-decision-badge {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--bx-gold);
+  color: var(--bx-gold);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 3-Judge Scorecard Table */
+.bx-scorecard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.bx-scorecard-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+}
+
+.bx-scorecard-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Timeline Log */
+.bx-log-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
