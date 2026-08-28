@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="golf.css?v=219" />
     <link rel="stylesheet" href="boxing.css?v=220" />
     <link rel="stylesheet" href="mma.css?v=221" />
+    <link rel="stylesheet" href="esports.css?v=222" />
   </head>
   <body>
     <!-- Sticky Header -->
@@ -166,10 +167,10 @@
           <strong>MMA</strong>
           <small>Available now</small>
         </button>
-        <button class="sport-card" type="button" data-soon="Esports">
+        <button class="sport-card ready" type="button" data-open-sport="esports">
           <span class="sport-logo esports-logo" aria-hidden="true">ES</span>
           <strong>Esports</strong>
-          <small>Coming soon</small>
+          <small>Available now</small>
         </button>
       </section>
     </main>
@@ -5041,6 +5042,330 @@
       </section>
     </main>
 
+    <!-- ==========================================
+         ESPORTS (COMPETITIVE GAMING) PAGE WRAPPER
+         ========================================== -->
+    <main id="esports-page" class="format-page hidden" style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: inherit;">
+      
+      <!-- 1. ESPORTS FORMAT SELECTION VIEW -->
+      <section id="esports-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Competitive Esports</p>
+            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--es-cyan);">Select Esports Mode</h1>
+          </div>
+          <button id="esports-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 10px;">
+          <!-- Custom Match Card -->
+          <div id="esports-format-custom-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--es-cyan)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(6, 182, 212, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🎮</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Custom Match (Bo1 / Bo3 / Bo5)</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Tactical FPS (Valorant / CS2 MR12/MR15, Halves side swap, 45s Spike plant countdown with beep audio, Ace! fanfare) or MOBA series with Map Veto selection.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--es-cyan); display: flex; align-items: center; gap: 6px;">Score Esports Match &rarr;</div>
+          </div>
+
+          <!-- Tournament Card -->
+          <div id="esports-format-tournament-btn" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; text-align: left;" onmouseover="this.style.borderColor='var(--es-magenta)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none';">
+            <div>
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(236, 72, 153, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">🏆</div>
+              <h2 style="margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: #fff;">Esports Pro League Championship</h2>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Pro League series schedule, map record standings (Matches W-L, Maps W-L, Round Differential +/-, Points), and team management.</p>
+            </div>
+            <div style="margin-top: 24px; font-weight: 700; font-size: 0.9rem; color: var(--es-magenta); display: flex; align-items: center; gap: 6px;">Manage Pro League &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ESPORTS CUSTOM MATCH SETUP VIEW -->
+      <section id="esports-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Esports Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--es-cyan); font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="esports-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--es-cyan); margin-bottom: 6px; font-weight: 700;">💠 Team A Name</label>
+            <input id="esports-team-a-input" type="text" maxlength="24" placeholder="e.g. Sentinels" autocomplete="off" style="width: 100%; height: 40px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--es-magenta); margin-bottom: 6px; font-weight: 700;">🌸 Team B Name</label>
+            <input id="esports-team-b-input" type="text" maxlength="24" placeholder="e.g. Fnatic" autocomplete="off" style="width: 100%; height: 40px; background: rgba(236,72,153,0.08); border: 1px solid rgba(236,72,153,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Game Discipline</label>
+            <select id="esports-discipline-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="fps" selected>Tactical FPS (Valorant / CS2)</option>
+              <option value="moba">MOBA (LoL / Dota 2)</option>
+              <option value="generic">Universal / Generic</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Series Format</label>
+            <select id="esports-series-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="1">Best of 1 (Single Map)</option>
+              <option value="3" selected>Best of 3 (First to 2 Maps)</option>
+              <option value="5">Best of 5 (Grand Finals - First to 3)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Rounds to Win (per Map)</label>
+            <select id="esports-rounds-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="13" selected>MR12 (First to 13 - Valorant/CS2)</option>
+              <option value="16">MR15 (First to 16 - CS:GO)</option>
+              <option value="1">1 Game (MOBA Direct Win)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="esports-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Launch Esports Match</button>
+      </section>
+
+      <!-- 3. ESPORTS DASHBOARD VIEW -->
+      <section id="esports-dashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 12px 20px;">
+          <button id="esports-dashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+          <div>
+            <span id="esports-live-indicator" class="live-indicator hidden" style="display: inline-flex;">
+              <span class="live-dot" style="background: var(--es-cyan);"></span>
+              LIVE PRO ESPORTS MATCH
+            </span>
+          </div>
+          <button id="esports-reset-match-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+        </div>
+
+        <!-- Series Tracker (Maps List) -->
+        <div id="esports-series-tracker" style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;"></div>
+
+        <!-- Big Scoreboard, Side Indicator & Spike Clock -->
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; align-items: center; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px;">
+          
+          <!-- Team A Score & Side -->
+          <div style="text-align: center;">
+            <div id="esports-team-a-side" class="es-side-badge atk">⚔️ ATTACKING</div>
+            <h2 id="esports-team-a-name-display" style="margin: 6px 0 0; font-size: 1.3rem; font-weight: 800; color: #fff;">Sentinels</h2>
+            <div id="esports-team-a-score-display" class="es-score-num team-a" style="margin-top: 6px;">0</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+              Kills: <span id="esports-team-a-kills" style="color: var(--es-cyan); font-weight:800;">0</span> • Map Wins: <span id="esports-team-a-maps" style="color:#fff; font-weight:800;">0</span>
+            </div>
+          </div>
+
+          <!-- Middle Banner, Spike Timer & Halves Info -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="esports-map-banner" style="font-weight: 900; font-size: 1.15rem; color: var(--es-gold); text-transform: uppercase; letter-spacing: 1px;">Map 1: Haven (Bo3)</div>
+            <div id="esports-half-indicator" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">First Half (Round 1 of 24)</div>
+
+            <!-- Series / Match Point Badge -->
+            <div id="esports-point-badge" class="mma-decision-badge hidden" style="border-color:var(--es-gold); color:var(--es-gold);">MATCH POINT</div>
+
+            <!-- 45s Spike / Bomb Plant Timer Widget -->
+            <div id="esports-spike-widget" class="es-spike-widget hidden">
+              <span style="font-size: 1.4rem;">💣</span>
+              <div>
+                <div style="font-size:0.7rem; font-weight:800; color:#fca5a5; text-transform:uppercase;">SPIKE PLANTED</div>
+                <div id="esports-spike-clock" class="es-spike-clock">45.0s</div>
+              </div>
+            </div>
+
+            <!-- Side Switch Button -->
+            <button id="esports-swap-sides-btn" class="sport-tab" type="button" style="margin:0; padding: 6px 12px; font-size: 0.8rem; color:var(--es-gold);">🔄 Swap Sides (ATK ↔ DEF)</button>
+          </div>
+
+          <!-- Team B Score & Side -->
+          <div style="text-align: center;">
+            <div id="esports-team-b-side" class="es-side-badge def">🛡️ DEFENDING</div>
+            <h2 id="esports-team-b-name-display" style="margin: 6px 0 0; font-size: 1.3rem; font-weight: 800; color: #fff;">Fnatic</h2>
+            <div id="esports-team-b-score-display" class="es-score-num team-b" style="margin-top: 6px;">0</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+              Kills: <span id="esports-team-b-kills" style="color: var(--es-magenta); font-weight:800;">0</span> • Map Wins: <span id="esports-team-b-maps" style="color:#fff; font-weight:800;">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tactical Action Buttons (Team A vs Team B) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <!-- Team A Actions -->
+          <div style="background: rgba(6,182,212,0.03); border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; padding: 20px; display: grid; gap: 10px;">
+            <h3 id="esports-team-a-actions-title" style="margin: 0; font-size: 1rem; font-weight: 800; color: var(--es-cyan); text-align: center;">Team A Actions</h3>
+            
+            <button class="es-action-btn cyan-btn" data-es-team="a" data-es-action="win" type="button" style="padding:14px;">
+              <span style="font-size:1.1rem;">🏆 +1 Round Won</span>
+              <span style="font-size:0.75rem; opacity:0.8;">Standard Win / Elimination</span>
+            </button>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <button class="es-action-btn cyan-btn" data-es-team="a" data-es-action="kill" type="button">
+                <span>🎯 +1 Kill</span>
+              </button>
+              <button class="es-action-btn gold-btn" data-es-team="a" data-es-action="ace" type="button">
+                <span>☠️ ACE! (5k Wipe)</span>
+              </button>
+            </div>
+
+            <button class="es-action-btn" data-es-team="a" data-es-action="plant" type="button" style="color:#f87171; border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.08);">
+              <span>💣 Spike Planted (+1 Win if explodes)</span>
+            </button>
+
+            <button class="es-action-btn" data-es-team="a" data-es-action="defuse" type="button" style="color:#38bdf8; border-color:rgba(56,189,248,0.3); background:rgba(56,189,248,0.08);">
+              <span>🛡️ Spike Defused (+1 Win)</span>
+            </button>
+          </div>
+
+          <!-- Team B Actions -->
+          <div style="background: rgba(236,72,153,0.03); border: 1px solid rgba(236,72,153,0.2); border-radius: 16px; padding: 20px; display: grid; gap: 10px;">
+            <h3 id="esports-team-b-actions-title" style="margin: 0; font-size: 1rem; font-weight: 800; color: var(--es-magenta); text-align: center;">Team B Actions</h3>
+            
+            <button class="es-action-btn magenta-btn" data-es-team="b" data-es-action="win" type="button" style="padding:14px;">
+              <span style="font-size:1.1rem;">🏆 +1 Round Won</span>
+              <span style="font-size:0.75rem; opacity:0.8;">Standard Win / Elimination</span>
+            </button>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <button class="es-action-btn magenta-btn" data-es-team="b" data-es-action="kill" type="button">
+                <span>🎯 +1 Kill</span>
+              </button>
+              <button class="es-action-btn gold-btn" data-es-team="b" data-es-action="ace" type="button">
+                <span>☠️ ACE! (5k Wipe)</span>
+              </button>
+            </div>
+
+            <button class="es-action-btn" data-es-team="b" data-es-action="plant" type="button" style="color:#f87171; border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.08);">
+              <span>💣 Spike Planted (+1 Win if explodes)</span>
+            </button>
+
+            <button class="es-action-btn" data-es-team="b" data-es-action="defuse" type="button" style="color:#38bdf8; border-color:rgba(56,189,248,0.3); background:rgba(56,189,248,0.08);">
+              <span>🛡️ Spike Defused (+1 Win)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Series Navigation Bar (Next Map, Undo, Match Finish) -->
+        <div style="display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <button id="esports-undo-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700;">↩️ Undo Last Round</button>
+          <div style="display: flex; gap: 10px;">
+            <button id="esports-timeout-btn" class="sport-tab" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700; color:var(--es-gold);">⏱️ Tactical Timeout</button>
+            <button id="esports-next-map-btn" class="start-custom" type="button" style="margin: 0; padding: 10px 20px; font-weight: 800; font-size:0.9rem;">Finish Map / Next Map &rarr;</button>
+          </div>
+        </div>
+
+        <button id="esports-submit-result-btn" class="sport-tab hidden" type="button" style="background: var(--es-cyan) !important; color: #050811 !important; font-weight: 900; padding: 12px; width:100%; border-radius:10px;">Submit Pro League Series Result</button>
+
+        <!-- Match Timeline Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin:0 0 12px; font-size: 1rem; font-weight: 800; color: var(--es-cyan); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Round-by-Round Timeline Log</h3>
+          <div id="esports-timeline-list" style="display: grid; gap: 8px; max-height: 200px; overflow-y: auto;">
+            <p style="color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin: 0;">No rounds scored yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ESPORTS TOURNAMENT CONFIGURATION VIEW -->
+      <section id="esports-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Esports Pro League Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--es-cyan); font-family: inherit;">Pro League Configuration</h1>
+          </div>
+          <button id="esports-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+          <div style="grid-column: 1 / -1;">
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Pro League Championship Title</label>
+            <input id="esports-tname-input" type="text" maxlength="32" placeholder="e.g. VCT Champions / CS2 Major Pro League" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Number of Teams</label>
+            <select id="esports-tteam-count" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="4" selected>4 Teams</option>
+              <option value="6">6 Teams</option>
+              <option value="8">8 Teams</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Series Format per Match</label>
+            <select id="esports-tseries-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="1">Best of 1 (Single Map)</option>
+              <option value="3" selected>Best of 3 (Bo3)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-top: 10px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: var(--es-cyan); border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Teams</h3>
+          <div id="esports-tteam-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="esports-tcreate-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%;">Create Esports Pro League</button>
+      </section>
+
+      <!-- 5. ESPORTS TOURNAMENT DASHBOARD VIEW -->
+      <section id="esports-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Pro League Dashboard</p>
+            <h1 id="esports-tdashboard-name" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--es-cyan);">Esports Pro League</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="esports-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="esports-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div style="display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+          <button id="esports-tab-table" class="sport-tab active" type="button">📊 League Standings</button>
+          <button id="esports-tab-fixtures" class="sport-tab" type="button">🎮 Pro Fixtures &amp; Matches</button>
+          <button id="esports-tab-edit" class="sport-tab" type="button">⚙️ Edit Teams</button>
+        </div>
+
+        <!-- Standings Table Tab Content -->
+        <div id="esports-table-view" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 8px; width: 6%;">#</th>
+                <th style="padding: 10px 8px;">Team</th>
+                <th style="padding: 10px 8px; text-align: center;">Matches</th>
+                <th style="padding: 10px 8px; text-align: center; color:#10b981;">W</th>
+                <th style="padding: 10px 8px; text-align: center; color:#f87171;">L</th>
+                <th style="padding: 10px 8px; text-align: center; color:var(--es-cyan); font-weight:800;">Maps W-L</th>
+                <th style="padding: 10px 8px; text-align: center; color:var(--es-gold); font-weight:800;">RD (+/-)</th>
+                <th style="padding: 10px 8px; text-align: right; color: var(--es-cyan); font-weight: 900;">PTS</th>
+              </tr>
+            </thead>
+            <tbody id="esports-points-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures Tab Content -->
+        <div id="esports-fixtures-view" class="hidden" style="display: grid; gap: 16px;">
+          <h2 style="margin: 0; font-size: 1.2rem; color: #fff;">Pro League Match Fixtures</h2>
+          <div id="esports-fixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+
+        <!-- Edit Tab Content -->
+        <div id="esports-edit-view" class="hidden" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 20px;">
+          <h2 style="margin:0; font-size: 1.2rem; color: #fff;">Edit Team Names</h2>
+          <div>
+            <div id="esports-edit-teams-container" style="display: grid; gap: 12px;"></div>
+          </div>
+          <button id="esports-edit-save-btn" class="start-custom" type="button" style="margin-top: 12px; width: 100%;">Save Names</button>
+        </div>
+      </section>
+    </main>
+
     <!-- EVENT MODALS & OVERLAYS (BASKETBALL SPECIFIC) -->
     <div id="bb-action-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
         <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 440px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
@@ -5293,5 +5618,6 @@
     <script src="golf.js?v=219"></script>
     <script src="boxing.js?v=220"></script>
     <script src="mma.js?v=221"></script>
+    <script src="esports.js?v=222"></script>
   </body>
 </html>
