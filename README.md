@@ -4,7 +4,7 @@ An offline-ready, self-contained dashboard application designed for tracking liv
 
 ## What It Does
 
-This application provides real-time scoring trackers and tournament standing compilers for fifteen distinct sports:
+This application provides real-time scoring trackers and tournament standing compilers for fourteen distinct sports:
 
 ### 1. 🏏 Cricket Scorer
 * Tracks runs, wickets, overs, balls, and run-rates.
@@ -100,11 +100,3 @@ This application provides real-time scoring trackers and tournament standing com
 * Official 3-Judge Scorecard table with automated decision outcomes: Unanimous Decision (UD), Split Decision (SD), Majority Decision (MD), or Draw.
 * Comprehensive finish methods: KO/TKO (Head Kick, Flying Knee, Ground & Pound) and Submission (Rear Naked Choke, Guillotine, Armbar, Triangle).
 * Compiles Grand Prix Championship fight cards, fighter records (W-L-D, KOs, SUBs), and division standings.
-
-### 15. 🎮 Esports Scorer
-* Supports Tactical FPS (Valorant / CS2 - MR12/MR15) and MOBA formats across Best of 1, 3, or 5 series.
-* Automatic Halves Side Switch (Attackers ⚔️ &harr; Defenders 🛡️) at round 12 or 15.
-* 45-second Spike / Bomb Plant countdown timer with synthesized pulsing beep audio and defusal chimes.
-* Live Kill tracker and team ACE! (5k wipe) celebrations.
-* Overtime (OT) deuce handling with win-by-2 round logic.
-* Compiles Esports Pro League Championship standings (Matches Played, Match W-L, Map W-L, Round Differential +/-, Points).
