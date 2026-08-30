@@ -4882,6 +4882,28 @@ if (els.fixturesList) {
   });
 }
 
+// Universal Cloud Vault bindings for Cricket
+const btnSaveCricketVault = document.querySelector("#btn-save-cricket-vault");
+if (btnSaveCricketVault) {
+  btnSaveCricketVault.addEventListener("click", () => {
+    if (window.AuthVault && typeof window.AuthVault.saveMatch === "function") {
+      const summary = `${state.innings === 1 ? '1st Inn' : '2nd Inn'}: ${state.score}/${state.wickets} (${state.overs}.${state.balls} ov)`;
+      window.AuthVault.saveMatch("cricket", "Cricket", state.battingTeam, state.bowlingTeam, summary, state);
+    }
+  });
+}
+
+const btnSaveCricketTournVault = document.querySelector("#btn-save-cricket-tourn-vault");
+if (btnSaveCricketTournVault) {
+  btnSaveCricketTournVault.addEventListener("click", () => {
+    if (window.AuthVault && typeof window.AuthVault.saveTournament === "function") {
+      const tournName = state.setupTournamentName || "Cricket Tournament";
+      const teamCount = (state.tournamentTeams || []).length || 4;
+      window.AuthVault.saveTournament("cricket", "Cricket", tournName, teamCount, state);
+    }
+  });
+}
+
 syncScoringModeUI();
 
 // Initialize Hash Routing

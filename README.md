@@ -100,3 +100,16 @@ This application provides real-time scoring trackers and tournament standing com
 * Official 3-Judge Scorecard table with automated decision outcomes: Unanimous Decision (UD), Split Decision (SD), Majority Decision (MD), or Draw.
 * Comprehensive finish methods: KO/TKO (Head Kick, Flying Knee, Ground & Pound) and Submission (Rear Naked Choke, Guillotine, Armbar, Triangle).
 * Compiles Grand Prix Championship fight cards, fighter records (W-L-D, KOs, SUBs), and division standings.
+
+---
+
+## ☁️ Google Authentication & Cloud Match/Tournament Vault
+
+* **Google Sign-In (Google Identity Services GIS)**:
+  * One-tap and button login with Google Account.
+  * Real-time profile display (User Avatar, Full Name, Email) with session persistence across browser reloads.
+* **Universal Cloud Vault (`#vault-modal`)**:
+  * **Saved Matches Vault**: Save and manage match states across all 14 sports with 1-click **Resume / Load**.
+  * **Saved Tournaments Vault**: Save and resume full tournament fixtures, points tables, and team statistics.
+  * **Search & Filters**: Filter by sport (All 14 Sports) or search by team/tournament names.
+  * **Backup & Restore**: Export complete vault backups to a JSON file and restore anytime.
