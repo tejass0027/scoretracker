@@ -723,4 +723,26 @@
   transform: translateX(-3px) !important;
 }
 
+/* ==========================================================================
+   SYMMETRICAL 3-COLUMN CRICKET FORMAT GRID
+   ========================================================================== */
+.format-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  align-items: stretch !important;
+}
+
+.format-card {
+  height: 100% !important;
+  min-height: 200px !important;
+}
+
+@media (max-width: 768px) {
+  .format-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+}
+
 
