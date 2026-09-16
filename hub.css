@@ -677,3 +677,50 @@
 .light-theme .sport-card[data-sport-theme="mma"]:hover { border-color: #e11d48 !important; box-shadow: 0 16px 36px -4px rgba(225, 29, 72, 0.2) !important; }
 .light-theme .sport-card[data-sport-theme="mma"] .sport-card-footer { color: #e11d48 !important; }
 
+/* ==========================================================================
+   ALL SPORTS NAVIGATION BUTTONS (DARK & LIGHT MODE STYLED)
+   ========================================================================== */
+.all-sports-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  margin-top: 10px !important;
+  border-radius: 999px !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-decoration: none !important;
+
+  /* Dark Mode default: frosted glass with white text */
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+.all-sports-btn:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: translateX(-3px) !important;
+}
+
+/* Light Mode: Crisp pure white card with dark text - NEVER turn black! */
+.light-theme .all-sports-btn {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .all-sports-btn:hover {
+  background: #f1f5f9 !important;
+  color: #059669 !important;
+  border-color: #94a3b8 !important;
+  transform: translateX(-3px) !important;
+}
+
+
