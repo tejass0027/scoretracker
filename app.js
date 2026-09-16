@@ -4048,10 +4048,11 @@ document.querySelectorAll(".filter-pill[data-sport-filter]").forEach((pill) => {
 
     const category = pill.getAttribute("data-sport-filter");
     document.querySelectorAll(".sports-grid .sport-card").forEach((card) => {
-      if (category === "all" || card.getAttribute("data-category") === category) {
-        card.style.display = "";
+      const cardCat = card.getAttribute("data-category");
+      if (category === "all" || cardCat === category) {
+        card.classList.remove("sport-card-hidden");
       } else {
-        card.style.display = "none";
+        card.classList.add("sport-card-hidden");
       }
     });
   });

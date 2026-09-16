@@ -273,6 +273,10 @@
   cursor: pointer !important;
 }
 
+.sport-card.sport-card-hidden {
+  display: none !important;
+}
+
 .sport-card::after {
   content: "" !important;
   position: absolute !important;
