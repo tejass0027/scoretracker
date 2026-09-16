@@ -1,0 +1,447 @@
+/* ==========================================================================
+   SCORETRACKER MODERN SPORTS HUB - PREMIUM STYLESHEET
+   ========================================================================== */
+
+/* Main Container */
+#sports-page.sports-page {
+  width: min(1280px, calc(100% - 32px)) !important;
+  margin: 0 auto !important;
+  padding: 36px 0 60px !important;
+}
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+.hero-banner {
+  position: relative !important;
+  border-radius: 24px !important;
+  padding: 40px 36px !important;
+  background: 
+    radial-gradient(ellipse at 15% 10%, rgba(16, 185, 129, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 90%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
+  margin-bottom: 32px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 32px !important;
+}
+
+.hero-banner::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, #10b981, #3b82f6, transparent) !important;
+}
+
+.hero-content {
+  flex: 1 1 60% !important;
+}
+
+.hero-badge-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+.hero-pill-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  background: rgba(16, 185, 129, 0.16) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2) !important;
+}
+
+.hero-pill-badge .pulse-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #10b981 !important;
+  box-shadow: 0 0 10px #10b981 !important;
+  animation: pulseDot 2s infinite ease-in-out !important;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.hero-edition-tag {
+  font-size: 0.82rem !important;
+  color: #94a3b8 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 3.8vw, 3rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+  margin: 0 0 14px !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 40%, #34d399 80%, #60a5fa 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: -0.02em !important;
+}
+
+.hero-desc {
+  font-size: 1.05rem !important;
+  color: #94a3b8 !important;
+  max-width: 650px !important;
+  margin: 0 0 24px !important;
+  line-height: 1.6 !important;
+}
+
+.hero-stats-ribbon {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.stat-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #f8fafc !important;
+  transition: all 0.2s ease !important;
+}
+
+.stat-pill:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+.stat-pill-icon {
+  font-size: 1.1rem !important;
+}
+
+/* Hero Right Visual Card */
+.hero-visual-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 24px !important;
+  border-radius: 20px !important;
+  background: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+  min-width: 240px !important;
+  text-align: center !important;
+}
+
+.hero-visual-icon {
+  font-size: 3.5rem !important;
+  margin-bottom: 8px !important;
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5)) !important;
+  animation: floatIcon 3s ease-in-out infinite alternate !important;
+}
+
+@keyframes floatIcon {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.hero-visual-title {
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  margin: 0 0 4px !important;
+}
+
+.hero-visual-subtitle {
+  font-size: 0.8rem !important;
+  color: #10b981 !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   CATEGORY FILTER PILLS
+   ========================================================================== */
+.sport-filter-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 0 26px !important;
+  overflow-x: auto !important;
+  padding: 6px 2px 10px !important;
+}
+
+.filter-pill {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 20px !important;
+  border-radius: 999px !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #94a3b8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  white-space: nowrap !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.filter-pill:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+.filter-pill.active {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25) !important;
+}
+
+.filter-count {
+  font-size: 0.72rem !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #94a3b8 !important;
+}
+
+.filter-pill.active .filter-count {
+  background: rgba(16, 185, 129, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   SPORTS GRID & MODERN CARDS
+   ========================================================================== */
+.sports-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.sport-card {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 220px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #f8fafc !important;
+  padding: 24px !important;
+  text-align: left !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+}
+
+.sport-card::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 20px !important;
+  padding: 1.5px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 70%) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  pointer-events: none !important;
+}
+
+.sport-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.sport-card-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+
+.sport-emoji-box {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.8rem !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.sport-card:hover .sport-emoji-box {
+  transform: scale(1.1) rotate(4deg) !important;
+}
+
+.sport-status-tag {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.sport-card-body {
+  margin-bottom: 16px !important;
+}
+
+.sport-card-title {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 0 8px !important;
+  letter-spacing: -0.01em !important;
+}
+
+.sport-card-desc {
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+
+.sport-card-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-top: 14px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  color: #10b981 !important;
+  transition: all 0.2s ease !important;
+}
+
+.sport-card:hover .sport-card-footer {
+  color: #ffffff !important;
+}
+
+.sport-card-arrow {
+  display: inline-block !important;
+  font-size: 1.1rem !important;
+  transition: transform 0.2s ease !important;
+}
+
+.sport-card:hover .sport-card-arrow {
+  transform: translateX(5px) !important;
+}
+
+/* ==========================================================================
+   SPORT-SPECIFIC COLOR THEMES
+   ========================================================================== */
+.sport-card[data-sport-theme="cricket"] .sport-emoji-box { background: rgba(245, 158, 11, 0.15) !important; border-color: rgba(245, 158, 11, 0.35) !important; }
+.sport-card[data-sport-theme="cricket"]:hover { border-color: rgba(245, 158, 11, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(245, 158, 11, 0.3) !important; }
+.sport-card[data-sport-theme="cricket"] .sport-card-footer { color: #fbbf24 !important; }
+
+.sport-card[data-sport-theme="football"] .sport-emoji-box { background: rgba(16, 185, 129, 0.15) !important; border-color: rgba(16, 185, 129, 0.35) !important; }
+.sport-card[data-sport-theme="football"]:hover { border-color: rgba(16, 185, 129, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(16, 185, 129, 0.3) !important; }
+.sport-card[data-sport-theme="football"] .sport-card-footer { color: #34d399 !important; }
+
+.sport-card[data-sport-theme="basketball"] .sport-emoji-box { background: rgba(249, 115, 22, 0.15) !important; border-color: rgba(249, 115, 22, 0.35) !important; }
+.sport-card[data-sport-theme="basketball"]:hover { border-color: rgba(249, 115, 22, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(249, 115, 22, 0.3) !important; }
+.sport-card[data-sport-theme="basketball"] .sport-card-footer { color: #fb923c !important; }
+
+.sport-card[data-sport-theme="tennis"] .sport-emoji-box { background: rgba(56, 189, 248, 0.15) !important; border-color: rgba(56, 189, 248, 0.35) !important; }
+.sport-card[data-sport-theme="tennis"]:hover { border-color: rgba(56, 189, 248, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(56, 189, 248, 0.3) !important; }
+.sport-card[data-sport-theme="tennis"] .sport-card-footer { color: #38bdf8 !important; }
+
+.sport-card[data-sport-theme="badminton"] .sport-emoji-box { background: rgba(139, 92, 246, 0.15) !important; border-color: rgba(139, 92, 246, 0.35) !important; }
+.sport-card[data-sport-theme="badminton"]:hover { border-color: rgba(139, 92, 246, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(139, 92, 246, 0.3) !important; }
+.sport-card[data-sport-theme="badminton"] .sport-card-footer { color: #a78bfa !important; }
+
+.sport-card[data-sport-theme="hockey"] .sport-emoji-box { background: rgba(20, 184, 166, 0.15) !important; border-color: rgba(20, 184, 166, 0.35) !important; }
+.sport-card[data-sport-theme="hockey"]:hover { border-color: rgba(20, 184, 166, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(20, 184, 166, 0.3) !important; }
+.sport-card[data-sport-theme="hockey"] .sport-card-footer { color: #2dd4bf !important; }
+
+.sport-card[data-sport-theme="volleyball"] .sport-emoji-box { background: rgba(59, 130, 246, 0.15) !important; border-color: rgba(59, 130, 246, 0.35) !important; }
+.sport-card[data-sport-theme="volleyball"]:hover { border-color: rgba(59, 130, 246, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(59, 130, 246, 0.3) !important; }
+.sport-card[data-sport-theme="volleyball"] .sport-card-footer { color: #60a5fa !important; }
+
+.sport-card[data-sport-theme="baseball"] .sport-emoji-box { background: rgba(239, 68, 68, 0.15) !important; border-color: rgba(239, 68, 68, 0.35) !important; }
+.sport-card[data-sport-theme="baseball"]:hover { border-color: rgba(239, 68, 68, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(239, 68, 68, 0.3) !important; }
+.sport-card[data-sport-theme="baseball"] .sport-card-footer { color: #f87171 !important; }
+
+.sport-card[data-sport-theme="rugby"] .sport-emoji-box { background: rgba(244, 63, 94, 0.15) !important; border-color: rgba(244, 63, 94, 0.35) !important; }
+.sport-card[data-sport-theme="rugby"]:hover { border-color: rgba(244, 63, 94, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(244, 63, 94, 0.3) !important; }
+.sport-card[data-sport-theme="rugby"] .sport-card-footer { color: #fb7185 !important; }
+
+.sport-card[data-sport-theme="kabaddi"] .sport-emoji-box { background: rgba(251, 146, 60, 0.15) !important; border-color: rgba(251, 146, 60, 0.35) !important; }
+.sport-card[data-sport-theme="kabaddi"]:hover { border-color: rgba(251, 146, 60, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(251, 146, 60, 0.3) !important; }
+.sport-card[data-sport-theme="kabaddi"] .sport-card-footer { color: #fb923c !important; }
+
+.sport-card[data-sport-theme="tabletennis"] .sport-emoji-box { background: rgba(6, 182, 212, 0.15) !important; border-color: rgba(6, 182, 212, 0.35) !important; }
+.sport-card[data-sport-theme="tabletennis"]:hover { border-color: rgba(6, 182, 212, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(6, 182, 212, 0.3) !important; }
+.sport-card[data-sport-theme="tabletennis"] .sport-card-footer { color: #22d3ee !important; }
+
+.sport-card[data-sport-theme="golf"] .sport-emoji-box { background: rgba(34, 197, 94, 0.15) !important; border-color: rgba(34, 197, 94, 0.35) !important; }
+.sport-card[data-sport-theme="golf"]:hover { border-color: rgba(34, 197, 94, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(34, 197, 94, 0.3) !important; }
+.sport-card[data-sport-theme="golf"] .sport-card-footer { color: #4ade80 !important; }
+
+.sport-card[data-sport-theme="boxing"] .sport-emoji-box { background: rgba(220, 38, 38, 0.15) !important; border-color: rgba(220, 38, 38, 0.35) !important; }
+.sport-card[data-sport-theme="boxing"]:hover { border-color: rgba(220, 38, 38, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(220, 38, 38, 0.3) !important; }
+.sport-card[data-sport-theme="boxing"] .sport-card-footer { color: #f87171 !important; }
+
+.sport-card[data-sport-theme="mma"] .sport-emoji-box { background: rgba(225, 29, 72, 0.15) !important; border-color: rgba(225, 29, 72, 0.35) !important; }
+.sport-card[data-sport-theme="mma"]:hover { border-color: rgba(225, 29, 72, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(225, 29, 72, 0.3) !important; }
+.sport-card[data-sport-theme="mma"] .sport-card-footer { color: #fb7185 !important; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .hero-banner {
+    flex-direction: column !important;
+    text-align: left !important;
+    padding: 28px 24px !important;
+  }
+  .hero-visual-card {
+    width: 100% !important;
+  }
+}
