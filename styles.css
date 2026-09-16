@@ -76,6 +76,10 @@ button {
 }
 
 .sports-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
   margin-bottom: 24px;
 }
 
@@ -790,9 +794,9 @@ h2 {
 }
 
 .sport-tab.active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #070a13;
+  background: var(--field);
+  border-color: var(--field);
+  color: #ffffff;
 }
 
 .cricket-topbar .sport-tab.active {
@@ -1910,6 +1914,24 @@ dd {
 
 .light-theme .nav-btn:hover {
   background: rgba(15, 23, 42, 0.06);
+}
+
+.light-theme .sport-tab {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #334155;
+}
+
+.light-theme .sport-tab:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.light-theme .sport-tab.active {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
 }
 
 /* SVG Logo Adjustments */
