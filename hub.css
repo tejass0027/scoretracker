@@ -1086,4 +1086,581 @@
   color: #475569 !important;
 }
 
+/* ==========================================================================
+   PLATFORM STATS BAR
+   ========================================================================== */
+.welcome-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 800px) {
+  .welcome-stats-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.welcome-stat-box {
+  padding: 20px 16px;
+  border-radius: 18px;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+.welcome-stat-box:hover {
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.welcome-stat-number {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 900;
+  color: #34d399;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.welcome-stat-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   INTERACTIVE DEMO CONSOLE
+   ========================================================================== */
+.welcome-demo-section {
+  margin-bottom: 44px;
+}
+
+.welcome-demo-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+.welcome-section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.welcome-section-desc {
+  font-size: 0.98rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.welcome-demo-card {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: 24px;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16, 185, 129, 0.15), transparent 70%),
+    rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.welcome-demo-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.welcome-demo-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.welcome-demo-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.welcome-demo-matchup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.welcome-demo-team {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.welcome-demo-team-name {
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.welcome-demo-target-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.welcome-demo-scorebox {
+  text-align: right;
+}
+
+.welcome-demo-score {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #34d399;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.welcome-demo-overs {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.welcome-demo-equation {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.welcome-demo-equation strong {
+  color: #fbbf24;
+}
+
+.welcome-demo-controls-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+.welcome-demo-btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.demo-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.demo-ctrl-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.demo-ctrl-btn.four {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+}
+
+.demo-ctrl-btn.four:hover {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.demo-ctrl-btn.six {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+.demo-ctrl-btn.six:hover {
+  background: rgba(245, 158, 11, 0.3);
+  border-color: #fbbf24;
+  color: #ffffff;
+}
+
+.demo-ctrl-btn.wicket {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+.demo-ctrl-btn.wicket:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+.demo-ctrl-btn.reset {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.demo-toast-msg {
+  margin-top: 12px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 8px 14px;
+  border-radius: 8px;
+  animation: fadeInToast 0.25s ease;
+}
+
+@keyframes fadeInToast {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   HOW IT WORKS 3-STEP GRID
+   ========================================================================== */
+.welcome-steps-section {
+  margin-bottom: 48px;
+}
+
+.welcome-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 860px) {
+  .welcome-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.welcome-step-card {
+  position: relative;
+  padding: 30px 24px;
+  border-radius: 22px;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.welcome-step-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.welcome-step-badge {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.12);
+  letter-spacing: -0.03em;
+}
+
+.welcome-step-icon {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.welcome-step-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.welcome-step-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+.welcome-faq-section {
+  margin-bottom: 48px;
+}
+
+.welcome-faq-grid {
+  max-width: 860px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-faq-item {
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.welcome-faq-item[open] {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.welcome-faq-q {
+  padding: 18px 22px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.welcome-faq-q::after {
+  content: "+";
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #34d399;
+  transition: transform 0.2s ease;
+}
+
+.welcome-faq-item[open] .welcome-faq-q::after {
+  transform: rotate(45deg);
+}
+
+.welcome-faq-a {
+  padding: 0 22px 20px;
+  font-size: 0.92rem;
+  color: #94a3b8;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   BOTTOM CALL TO ACTION BANNER
+   ========================================================================== */
+.welcome-bottom-banner {
+  text-align: center;
+  padding: 50px 24px;
+  border-radius: 26px;
+  background: 
+    radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.22), transparent 70%),
+    rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+}
+
+.welcome-bottom-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.welcome-bottom-desc {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 580px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES FOR NEW SECTIONS
+   ========================================================================== */
+.light-theme .welcome-stat-box {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+.light-theme .welcome-stat-number {
+  color: #059669 !important;
+}
+
+.light-theme .welcome-stat-label {
+  color: #64748b !important;
+}
+
+.light-theme .welcome-section-title {
+  color: #0f172a !important;
+}
+
+.light-theme .welcome-section-desc {
+  color: #64748b !important;
+}
+
+.light-theme .welcome-demo-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .welcome-demo-team-name {
+  color: #0f172a !important;
+}
+
+.light-theme .welcome-demo-score {
+  color: #059669 !important;
+}
+
+.light-theme .welcome-demo-overs {
+  color: #64748b !important;
+}
+
+.light-theme .welcome-demo-equation {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+.light-theme .welcome-demo-equation strong {
+  color: #b45309 !important;
+}
+
+.light-theme .demo-ctrl-btn {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.light-theme .demo-ctrl-btn:hover {
+  background: #e2e8f0 !important;
+}
+
+.light-theme .demo-ctrl-btn.four {
+  background: #e0f2fe !important;
+  border-color: #7dd3fc !important;
+  color: #0369a1 !important;
+}
+
+.light-theme .demo-ctrl-btn.six {
+  background: #fef3c7 !important;
+  border-color: #fde047 !important;
+  color: #854d0e !important;
+}
+
+.light-theme .demo-ctrl-btn.wicket {
+  background: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+  color: #b91c1c !important;
+}
+
+.light-theme .welcome-step-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05) !important;
+}
+
+.light-theme .welcome-step-title {
+  color: #0f172a !important;
+}
+
+.light-theme .welcome-step-desc {
+  color: #64748b !important;
+}
+
+.light-theme .welcome-step-badge {
+  color: rgba(15, 23, 42, 0.1) !important;
+}
+
+.light-theme .welcome-faq-item {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.light-theme .welcome-faq-item[open] {
+  border-color: #10b981 !important;
+  background: #ffffff !important;
+}
+
+.light-theme .welcome-faq-q {
+  color: #0f172a !important;
+}
+
+.light-theme .welcome-faq-a {
+  color: #64748b !important;
+}
+
+.light-theme .welcome-bottom-banner {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .welcome-bottom-title {
+  color: #0f172a !important;
+}
+
+.light-theme .welcome-bottom-desc {
+  color: #64748b !important;
+}
+
+
 

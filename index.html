@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=313" />
-    <link rel="stylesheet" href="hub.css?v=313" />
+    <link rel="stylesheet" href="styles.css?v=314" />
+    <link rel="stylesheet" href="hub.css?v=314" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -215,6 +215,131 @@
             <span class="welcome-tag">📤 JSON Export</span>
             <span class="welcome-tag">📱 Offline PWA</span>
           </div>
+        </div>
+      </section>
+
+      <!-- 1. PLATFORM STATS RIBBON -->
+      <section class="welcome-stats-bar" aria-label="Platform Highlights">
+        <div class="welcome-stat-box">
+          <div class="welcome-stat-number">14</div>
+          <div class="welcome-stat-label">Official Sports Consoles</div>
+        </div>
+        <div class="welcome-stat-box">
+          <div class="welcome-stat-number">100%</div>
+          <div class="welcome-stat-label">Offline PWA Ready</div>
+        </div>
+        <div class="welcome-stat-box">
+          <div class="welcome-stat-number">&lt; 1ms</div>
+          <div class="welcome-stat-label">Zero-Lag Score Engine</div>
+        </div>
+        <div class="welcome-stat-box">
+          <div class="welcome-stat-number">Pro</div>
+          <div class="welcome-stat-label">Tournament League System</div>
+        </div>
+      </section>
+
+      <!-- 2. INTERACTIVE LIVE CONSOLE PREVIEW -->
+      <section class="welcome-demo-section" aria-label="Live Console Simulator">
+        <div class="welcome-demo-header">
+          <div class="welcome-badge" style="margin-bottom: 10px;">
+            <span class="pulse-dot"></span>
+            <span>Interactive Simulator</span>
+          </div>
+          <h2 class="welcome-section-title">Experience Live Scoring in Action</h2>
+          <p class="welcome-section-desc">Try tapping the scoring buttons below to see how fast and responsive ScoreTracker is:</p>
+        </div>
+
+        <div class="welcome-demo-card">
+          <div class="welcome-demo-top">
+            <div class="welcome-demo-badge">🏏 T20 MATCH • CHASE IN PROGRESS</div>
+            <div id="demo-indicator" class="welcome-demo-status">⚡ LIVE SIMULATOR</div>
+          </div>
+          <div class="welcome-demo-matchup">
+            <div class="welcome-demo-team">
+              <span class="welcome-demo-team-name">Bengaluru Strikers</span>
+              <span class="welcome-demo-target-badge">Target: 185</span>
+            </div>
+            <div class="welcome-demo-scorebox">
+              <div id="demo-score-display" class="welcome-demo-score">164 / 3</div>
+              <div id="demo-overs-display" class="welcome-demo-overs">Overs: 16.4 / 20</div>
+            </div>
+          </div>
+          <div class="welcome-demo-equation" id="demo-equation-text">
+            Need <strong>21 runs</strong> from <strong>20 balls</strong> &bull; CRR: 9.84 &bull; RRR: 6.30
+          </div>
+          <div class="welcome-demo-controls">
+            <span class="welcome-demo-controls-label">Tap to test live match controls:</span>
+            <div class="welcome-demo-btn-row">
+              <button id="demo-btn-1" class="demo-ctrl-btn" type="button">+1 Single</button>
+              <button id="demo-btn-4" class="demo-ctrl-btn four" type="button">+4 Four! 🏏</button>
+              <button id="demo-btn-6" class="demo-ctrl-btn six" type="button">+6 Six! 🔥</button>
+              <button id="demo-btn-wicket" class="demo-ctrl-btn wicket" type="button">Wicket! 🔴</button>
+              <button id="demo-btn-reset" class="demo-ctrl-btn reset" type="button">Reset</button>
+            </div>
+            <div id="demo-toast" class="demo-toast-msg hidden">Nice shot! Score updated in real-time.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. HOW IT WORKS IN 3 EASY STEPS -->
+      <section class="welcome-steps-section" aria-label="How it works">
+        <h2 class="welcome-section-title" style="text-align: center;">How ScoreTracker Works</h2>
+        <p class="welcome-section-desc" style="text-align: center; margin: 0 auto 32px;">Start scoring your games in three effortless steps:</p>
+
+        <div class="welcome-steps-grid">
+          <div class="welcome-step-card">
+            <div class="welcome-step-badge">01</div>
+            <div class="welcome-step-icon">🎯</div>
+            <h3 class="welcome-step-title">Choose Sport or League</h3>
+            <p class="welcome-step-desc">Pick from 14 official sports—Cricket, Football, Basketball, Tennis, Boxing, etc.—or create an IPL-style round-robin tournament.</p>
+          </div>
+          <div class="welcome-step-card">
+            <div class="welcome-step-badge">02</div>
+            <div class="welcome-step-icon">⚙️</div>
+            <h3 class="welcome-step-title">Configure Rules &amp; Rosters</h3>
+            <p class="welcome-step-desc">Set custom overs, period durations, foul limits, and squad rosters with Simple Mode or Advanced Player Names.</p>
+          </div>
+          <div class="welcome-step-card">
+            <div class="welcome-step-badge">03</div>
+            <div class="welcome-step-icon">🏆</div>
+            <h3 class="welcome-step-title">Score &amp; Sync to Cloud</h3>
+            <p class="welcome-step-desc">Enjoy responsive touch controls, referee audio sound effects, automatic Net Run Rate calculations, and Cloud Vault sync.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. FREQUENTLY ASKED QUESTIONS -->
+      <section class="welcome-faq-section" aria-label="Frequently asked questions">
+        <h2 class="welcome-section-title" style="text-align: center;">Frequently Asked Questions</h2>
+        <div class="welcome-faq-grid">
+          <details class="welcome-faq-item">
+            <summary class="welcome-faq-q">Can I use ScoreTracker without an internet connection?</summary>
+            <div class="welcome-faq-a">Yes! ScoreTracker is built as an offline-first Progressive Web App (PWA). Once loaded, you can track matches anywhere—even at remote grounds without Wi-Fi or mobile network.</div>
+          </details>
+          <details class="welcome-faq-item">
+            <summary class="welcome-faq-q">How does the Tournament / League Engine work?</summary>
+            <div class="welcome-faq-a">Tournament mode allows up to 10 teams in a round-robin schedule. It automatically calculates matches played, won, lost, points, and Net Run Rate (NRR), and crowns champions through grand playoff matches.</div>
+          </details>
+          <details class="welcome-faq-item">
+            <summary class="welcome-faq-q">Can I save and export my match scorecards?</summary>
+            <div class="welcome-faq-a">Absolutely. All games are automatically saved locally and can also be saved to your Google Cloud Vault, or exported as JSON backups to share with coaches, teammates, or tournament organizers.</div>
+          </details>
+          <details class="welcome-faq-item">
+            <summary class="welcome-faq-q">Which sports are supported?</summary>
+            <div class="welcome-faq-a">ScoreTracker currently supports 14 sports: Cricket, Football, Basketball, Tennis, Badminton, Hockey, Volleyball, Baseball, Rugby, Kabaddi, Table Tennis, Golf, Boxing, and MMA.</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 5. BOTTOM CTA BANNER -->
+      <section class="welcome-bottom-banner" aria-label="Launch Call to Action">
+        <div class="welcome-bottom-content">
+          <h2 class="welcome-bottom-title">Ready to Kick Off Your Next Match?</h2>
+          <p class="welcome-bottom-desc">Enter the Sports Hub to choose a sport or launch your league tournament now.</p>
+          <button id="welcome-bottom-enter-btn" class="welcome-btn-primary" type="button">
+            <span>⚡ Enter Sports Hub</span>
+            <span style="font-size: 1.25rem;">&rarr;</span>
+          </button>
         </div>
       </section>
     </main>

@@ -4666,6 +4666,109 @@ document.querySelectorAll(".welcome-quick-pill").forEach((pill) => {
   });
 });
 
+const welcomeBottomEnterBtn = document.querySelector("#welcome-bottom-enter-btn");
+if (welcomeBottomEnterBtn) {
+  welcomeBottomEnterBtn.addEventListener("click", () => {
+    showSportsPage();
+    render();
+  });
+}
+
+// Welcome Page Interactive Demo Simulator
+let demoRuns = 164;
+let demoWickets = 3;
+let demoBalls = 100; // 16.4 overs = 16*6 + 4
+const demoTarget = 185;
+const demoTotalBalls = 120; // 20 overs
+
+function updateDemoUI(msg = null) {
+  const scoreEl = document.querySelector("#demo-score-display");
+  const oversEl = document.querySelector("#demo-overs-display");
+  const eqEl = document.querySelector("#demo-equation-text");
+  const toastEl = document.querySelector("#demo-toast");
+
+  const overs = Math.floor(demoBalls / 6);
+  const ballsInOver = demoBalls % 6;
+  const oversStr = `${overs}.${ballsInOver}`;
+  const remainingBalls = Math.max(0, demoTotalBalls - demoBalls);
+  const remainingRuns = Math.max(0, demoTarget - demoRuns);
+  const crr = demoBalls > 0 ? ((demoRuns / demoBalls) * 6).toFixed(2) : "0.00";
+  const rrr = remainingBalls > 0 ? ((remainingRuns / remainingBalls) * 6).toFixed(2) : "0.00";
+
+  if (scoreEl) scoreEl.textContent = `${demoRuns} / ${demoWickets}`;
+  if (oversEl) oversEl.textContent = `Overs: ${oversStr} / 20`;
+
+  if (eqEl) {
+    if (demoRuns >= demoTarget) {
+      eqEl.innerHTML = `<span style="color:#34d399; font-weight:800;">🎉 Bengaluru Strikers won by ${10 - demoWickets} wickets!</span>`;
+    } else if (demoWickets >= 10 || remainingBalls <= 0) {
+      eqEl.innerHTML = `<span style="color:#f87171; font-weight:800;">Innings complete! Target was ${demoTarget}.</span>`;
+    } else {
+      eqEl.innerHTML = `Need <strong>${remainingRuns} runs</strong> from <strong>${remainingBalls} balls</strong> &bull; CRR: ${crr} &bull; RRR: ${rrr}`;
+    }
+  }
+
+  if (toastEl && msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.remove("hidden");
+    clearTimeout(window._demoToastTimer);
+    window._demoToastTimer = setTimeout(() => {
+      toastEl.classList.add("hidden");
+    }, 2200);
+  }
+}
+
+const demoBtn1 = document.querySelector("#demo-btn-1");
+const demoBtn4 = document.querySelector("#demo-btn-4");
+const demoBtn6 = document.querySelector("#demo-btn-6");
+const demoBtnWicket = document.querySelector("#demo-btn-wicket");
+const demoBtnReset = document.querySelector("#demo-btn-reset");
+
+if (demoBtn1) {
+  demoBtn1.addEventListener("click", () => {
+    if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
+      demoRuns += 1;
+      demoBalls += 1;
+      updateDemoUI("Quick single taken! +1 run");
+    }
+  });
+}
+if (demoBtn4) {
+  demoBtn4.addEventListener("click", () => {
+    if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
+      demoRuns += 4;
+      demoBalls += 1;
+      updateDemoUI("CRACKING SHOT! 🏏 Boundary four (+4)!");
+    }
+  });
+}
+if (demoBtn6) {
+  demoBtn6.addEventListener("click", () => {
+    if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
+      demoRuns += 6;
+      demoBalls += 1;
+      updateDemoUI("HUGE MAXIMUM! 🔥 Six runs into the stands (+6)!");
+    }
+  });
+}
+if (demoBtnWicket) {
+  demoBtnWicket.addEventListener("click", () => {
+    if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
+      demoWickets += 1;
+      demoBalls += 1;
+      updateDemoUI("OUT! 🔴 Clean bowled! Wicket fell!");
+    }
+  });
+}
+if (demoBtnReset) {
+  demoBtnReset.addEventListener("click", () => {
+    demoRuns = 164;
+    demoWickets = 3;
+    demoBalls = 100;
+    updateDemoUI("Simulator reset to starting match situation.");
+  });
+}
+
 if (els.navSportsBtn) {
   els.navSportsBtn.addEventListener("click", () => {
     showSportsPage();
