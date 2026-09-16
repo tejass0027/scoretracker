@@ -470,3 +470,210 @@
     width: 100% !important;
   }
 }
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES FOR MODERN SPORTS HUB
+   ========================================================================== */
+.light-theme #sports-page.sports-page {
+  color: #0f172a !important;
+}
+
+.light-theme .hero-banner {
+  background: 
+    radial-gradient(ellipse at 15% 10%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 90%, rgba(59, 130, 246, 0.1) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .hero-pill-badge {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #059669 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1) !important;
+}
+
+.light-theme .hero-edition-tag {
+  color: #64748b !important;
+}
+
+.light-theme .hero-title {
+  background: linear-gradient(135deg, #0f172a 35%, #059669 80%, #2563eb 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.light-theme .hero-desc {
+  color: #475569 !important;
+}
+
+.light-theme .stat-pill {
+  background: #ffffff !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  color: #1e293b !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+.light-theme .stat-pill:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+  transform: translateY(-2px) !important;
+}
+
+.light-theme .hero-visual-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06) !important;
+}
+
+.light-theme .hero-visual-title {
+  color: #0f172a !important;
+}
+
+.light-theme .hero-visual-subtitle {
+  color: #059669 !important;
+}
+
+/* Filter Pills */
+.light-theme .filter-pill {
+  background: #ffffff !important;
+  color: #475569 !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+.light-theme .filter-pill:hover {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #94a3b8 !important;
+}
+
+.light-theme .filter-pill.active {
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: #047857 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.18) !important;
+}
+
+.light-theme .filter-count {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+}
+
+.light-theme .filter-pill.active .filter-count {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #065f46 !important;
+}
+
+/* Sport Cards */
+.light-theme .sport-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .sport-card::after {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), transparent 70%) !important;
+}
+
+.light-theme .sport-card:hover {
+  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12) !important;
+  border-color: rgba(203, 213, 225, 0.9) !important;
+}
+
+.light-theme .sport-emoji-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+.light-theme .sport-status-tag {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #059669 !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+
+.light-theme .sport-card-title {
+  color: #0f172a !important;
+}
+
+.light-theme .sport-mini-chip {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+.light-theme .sport-card:hover .sport-mini-chip {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme .sport-card-footer {
+  border-top: 1px solid #f1f5f9 !important;
+  color: #059669 !important;
+}
+
+.light-theme .sport-card:hover .sport-card-footer {
+  color: #047857 !important;
+}
+
+/* Light Mode Sport Accents on Hover */
+.light-theme .sport-card[data-sport-theme="cricket"] .sport-emoji-box { background: #fffbeb !important; border-color: #fde68a !important; }
+.light-theme .sport-card[data-sport-theme="cricket"]:hover { border-color: #f59e0b !important; box-shadow: 0 16px 36px -4px rgba(245, 158, 11, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="cricket"] .sport-card-footer { color: #d97706 !important; }
+
+.light-theme .sport-card[data-sport-theme="football"] .sport-emoji-box { background: #ecfdf5 !important; border-color: #a7f3d0 !important; }
+.light-theme .sport-card[data-sport-theme="football"]:hover { border-color: #10b981 !important; box-shadow: 0 16px 36px -4px rgba(16, 185, 129, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="football"] .sport-card-footer { color: #059669 !important; }
+
+.light-theme .sport-card[data-sport-theme="basketball"] .sport-emoji-box { background: #fff7ed !important; border-color: #fed7aa !important; }
+.light-theme .sport-card[data-sport-theme="basketball"]:hover { border-color: #f97316 !important; box-shadow: 0 16px 36px -4px rgba(249, 115, 22, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="basketball"] .sport-card-footer { color: #ea580c !important; }
+
+.light-theme .sport-card[data-sport-theme="tennis"] .sport-emoji-box { background: #f0f9ff !important; border-color: #bae6fd !important; }
+.light-theme .sport-card[data-sport-theme="tennis"]:hover { border-color: #0284c7 !important; box-shadow: 0 16px 36px -4px rgba(2, 132, 199, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="tennis"] .sport-card-footer { color: #0284c7 !important; }
+
+.light-theme .sport-card[data-sport-theme="badminton"] .sport-emoji-box { background: #f5f3ff !important; border-color: #ddd6fe !important; }
+.light-theme .sport-card[data-sport-theme="badminton"]:hover { border-color: #7c3aed !important; box-shadow: 0 16px 36px -4px rgba(124, 58, 237, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="badminton"] .sport-card-footer { color: #7c3aed !important; }
+
+.light-theme .sport-card[data-sport-theme="hockey"] .sport-emoji-box { background: #f0fdfa !important; border-color: #99f6e4 !important; }
+.light-theme .sport-card[data-sport-theme="hockey"]:hover { border-color: #0d9488 !important; box-shadow: 0 16px 36px -4px rgba(13, 148, 136, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="hockey"] .sport-card-footer { color: #0d9488 !important; }
+
+.light-theme .sport-card[data-sport-theme="volleyball"] .sport-emoji-box { background: #eff6ff !important; border-color: #bfdbfe !important; }
+.light-theme .sport-card[data-sport-theme="volleyball"]:hover { border-color: #2563eb !important; box-shadow: 0 16px 36px -4px rgba(37, 99, 235, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="volleyball"] .sport-card-footer { color: #2563eb !important; }
+
+.light-theme .sport-card[data-sport-theme="baseball"] .sport-emoji-box { background: #fef2f2 !important; border-color: #fecaca !important; }
+.light-theme .sport-card[data-sport-theme="baseball"]:hover { border-color: #dc2626 !important; box-shadow: 0 16px 36px -4px rgba(220, 38, 38, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="baseball"] .sport-card-footer { color: #dc2626 !important; }
+
+.light-theme .sport-card[data-sport-theme="rugby"] .sport-emoji-box { background: #fff1f2 !important; border-color: #fecdd3 !important; }
+.light-theme .sport-card[data-sport-theme="rugby"]:hover { border-color: #e11d48 !important; box-shadow: 0 16px 36px -4px rgba(225, 29, 72, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="rugby"] .sport-card-footer { color: #e11d48 !important; }
+
+.light-theme .sport-card[data-sport-theme="kabaddi"] .sport-emoji-box { background: #fff7ed !important; border-color: #fed7aa !important; }
+.light-theme .sport-card[data-sport-theme="kabaddi"]:hover { border-color: #ea580c !important; box-shadow: 0 16px 36px -4px rgba(234, 88, 12, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="kabaddi"] .sport-card-footer { color: #ea580c !important; }
+
+.light-theme .sport-card[data-sport-theme="tabletennis"] .sport-emoji-box { background: #ecfeff !important; border-color: #a5f3fc !important; }
+.light-theme .sport-card[data-sport-theme="tabletennis"]:hover { border-color: #0891b2 !important; box-shadow: 0 16px 36px -4px rgba(8, 145, 178, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="tabletennis"] .sport-card-footer { color: #0891b2 !important; }
+
+.light-theme .sport-card[data-sport-theme="golf"] .sport-emoji-box { background: #f0fdf4 !important; border-color: #bbf7d0 !important; }
+.light-theme .sport-card[data-sport-theme="golf"]:hover { border-color: #16a34a !important; box-shadow: 0 16px 36px -4px rgba(22, 163, 74, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="golf"] .sport-card-footer { color: #16a34a !important; }
+
+.light-theme .sport-card[data-sport-theme="boxing"] .sport-emoji-box { background: #fef2f2 !important; border-color: #fecaca !important; }
+.light-theme .sport-card[data-sport-theme="boxing"]:hover { border-color: #dc2626 !important; box-shadow: 0 16px 36px -4px rgba(220, 38, 38, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="boxing"] .sport-card-footer { color: #dc2626 !important; }
+
+.light-theme .sport-card[data-sport-theme="mma"] .sport-emoji-box { background: #fff1f2 !important; border-color: #fecdd3 !important; }
+.light-theme .sport-card[data-sport-theme="mma"]:hover { border-color: #e11d48 !important; box-shadow: 0 16px 36px -4px rgba(225, 29, 72, 0.2) !important; }
+.light-theme .sport-card[data-sport-theme="mma"] .sport-card-footer { color: #e11d48 !important; }
+
