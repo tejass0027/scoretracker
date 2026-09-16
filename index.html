@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=310" />
-    <link rel="stylesheet" href="hub.css?v=310" />
+    <link rel="stylesheet" href="styles.css?v=311" />
+    <link rel="stylesheet" href="hub.css?v=311" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -481,20 +481,109 @@
       </header>
 
       <section class="format-grid" aria-label="Cricket formats">
-        <button class="format-card" type="button" data-format="Test" data-overs="90">
-          <span>TEST</span>
-          <strong>Test Match</strong>
-          <small>Standard Test-style match setup</small>
+        <!-- 1. T20 Match -->
+        <button class="format-card" type="button" data-format="T20" data-overs="20" data-format-theme="t20">
+          <div class="format-card-top">
+            <div class="format-emoji-box">⚡</div>
+            <span class="format-status-tag">20 Overs</span>
+          </div>
+          <div class="format-card-body">
+            <h3 class="format-card-title">T20 Match</h3>
+            <p class="format-card-desc">High-intensity modern cricket. Fast-paced 20-over contest with powerplay fielding restrictions and big hitting.</p>
+            <div class="format-chip-row">
+              <span class="format-mini-chip">⚡ 20 Overs</span>
+              <span class="format-mini-chip">🔥 Powerplay</span>
+              <span class="format-mini-chip">⏱️ Fast Chase</span>
+            </div>
+          </div>
+          <div class="format-card-footer">
+            <span>Play T20 Match</span>
+            <span class="format-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="format-card" type="button" id="custom-format-btn">
-          <span>CUS</span>
-          <strong>Custom</strong>
-          <small>Choose teams and overs</small>
+
+        <!-- 2. IPL Tournament -->
+        <button class="format-card featured" type="button" id="tournament-format-btn" data-format-theme="ipl">
+          <div class="format-card-top">
+            <div class="format-emoji-box">🏆</div>
+            <span class="format-status-tag">Tournament Mode</span>
+          </div>
+          <div class="format-card-body">
+            <h3 class="format-card-title">IPL Tournament</h3>
+            <p class="format-card-desc">Full 10-team premier league championship. Track live points tables, round-robin fixtures, net run rate & playoffs.</p>
+            <div class="format-chip-row">
+              <span class="format-mini-chip">🏆 10 Teams</span>
+              <span class="format-mini-chip">📊 Points Table</span>
+              <span class="format-mini-chip">👑 Grand Playoffs</span>
+            </div>
+          </div>
+          <div class="format-card-footer">
+            <span>Launch Tournament</span>
+            <span class="format-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="format-card featured" type="button" id="tournament-format-btn">
-          <span>IPL</span>
-          <strong>IPL Tournament</strong>
-          <small>Points Table & Round Robin</small>
+
+        <!-- 3. One Day International (ODI) -->
+        <button class="format-card" type="button" data-format="ODI" data-overs="50" data-format-theme="odi">
+          <div class="format-card-top">
+            <div class="format-emoji-box">🌍</div>
+            <span class="format-status-tag">50 Overs</span>
+          </div>
+          <div class="format-card-body">
+            <h3 class="format-card-title">ODI Match</h3>
+            <p class="format-card-desc">Classic 50-over international battle. Build enduring partnerships, rotate strike in middle overs, and execute late blitzes.</p>
+            <div class="format-chip-row">
+              <span class="format-mini-chip">🌍 50 Overs</span>
+              <span class="format-mini-chip">🏏 World Cup Style</span>
+              <span class="format-mini-chip">🎯 Strategic</span>
+            </div>
+          </div>
+          <div class="format-card-footer">
+            <span>Play ODI Match</span>
+            <span class="format-card-arrow">&rarr;</span>
+          </div>
+        </button>
+
+        <!-- 4. Test Match -->
+        <button class="format-card" type="button" data-format="Test" data-overs="90" data-format-theme="test">
+          <div class="format-card-top">
+            <div class="format-emoji-box">🛡️</div>
+            <span class="format-status-tag">Traditional</span>
+          </div>
+          <div class="format-card-body">
+            <h3 class="format-card-title">Test Match</h3>
+            <p class="format-card-desc">The ultimate test of skill and discipline. Multi-session endurance, red ball swing, and strategic attrition over 90 overs.</p>
+            <div class="format-chip-row">
+              <span class="format-mini-chip">🛡️ 90 Overs</span>
+              <span class="format-mini-chip">🔴 Red Ball</span>
+              <span class="format-mini-chip">⏳ 2 Innings</span>
+            </div>
+          </div>
+          <div class="format-card-footer">
+            <span>Play Test Match</span>
+            <span class="format-card-arrow">&rarr;</span>
+          </div>
+        </button>
+
+        <!-- 5. Custom Match -->
+        <button class="format-card" type="button" id="custom-format-btn" data-format-theme="custom">
+          <div class="format-card-top">
+            <div class="format-emoji-box">⚙️</div>
+            <span class="format-status-tag">Sandbox</span>
+          </div>
+          <div class="format-card-body">
+            <h3 class="format-card-title">Custom Match</h3>
+            <p class="format-card-desc">Full freedom over rules. Pick custom overs (1 to 100), customized team names, custom player rosters, and scoring mode.</p>
+            <div class="format-chip-row">
+              <span class="format-mini-chip">⚙️ Any Overs</span>
+              <span class="format-mini-chip">👥 Custom Rosters</span>
+              <span class="format-mini-chip">✨ Full Control</span>
+            </div>
+          </div>
+          <div class="format-card-footer">
+            <span>Configure Custom</span>
+            <span class="format-card-arrow">&rarr;</span>
+          </div>
         </button>
       </section>
 

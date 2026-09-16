@@ -723,4 +723,276 @@
   transform: translateX(-3px) !important;
 }
 
+/* ==========================================================================
+   CRICKET FORMAT SELECTION GRID & CARDS
+   ========================================================================== */
+.format-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 22px !important;
+  margin-top: 24px !important;
+}
+
+.format-card {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 240px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #f8fafc !important;
+  padding: 24px !important;
+  text-align: left !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  width: 100% !important;
+}
+
+/* Reset default styles.css span circular rule */
+.format-card span {
+  width: auto !important;
+  height: auto !important;
+  display: inline-flex !important;
+  border-radius: 0 !important;
+  background: none !important;
+  border: none !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  place-items: unset !important;
+}
+
+.format-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.format-card:focus-visible {
+  outline: 2px solid #34d399 !important;
+  outline-offset: 3px !important;
+}
+
+.format-card-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+  width: 100% !important;
+}
+
+.format-emoji-box {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.8rem !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.format-card:hover .format-emoji-box {
+  transform: scale(1.1) rotate(4deg) !important;
+}
+
+.format-status-tag {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.format-card-body {
+  margin: 6px 0 16px !important;
+  flex-grow: 1 !important;
+}
+
+.format-card-title {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 0 8px 0 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.format-card-desc {
+  font-size: 0.88rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.5 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+.format-chip-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+}
+
+.format-mini-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #94a3b8 !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  letter-spacing: 0.2px !important;
+  transition: all 0.2s ease !important;
+}
+
+.format-card:hover .format-mini-chip {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.format-card-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-top: 14px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: #10b981 !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+}
+
+.format-card:hover .format-card-footer {
+  color: #ffffff !important;
+}
+
+.format-card-arrow {
+  display: inline-block !important;
+  font-size: 1.15rem !important;
+  transition: transform 0.2s ease !important;
+}
+
+.format-card:hover .format-card-arrow {
+  transform: translateX(5px) !important;
+}
+
+/* Theme Accents (Dark Mode) */
+.format-card[data-format-theme="t20"] .format-emoji-box { background: rgba(245, 158, 11, 0.15) !important; border-color: rgba(245, 158, 11, 0.35) !important; }
+.format-card[data-format-theme="t20"] .format-status-tag { background: rgba(245, 158, 11, 0.15) !important; color: #fbbf24 !important; border-color: rgba(245, 158, 11, 0.3) !important; }
+.format-card[data-format-theme="t20"]:hover { border-color: rgba(245, 158, 11, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(245, 158, 11, 0.3) !important; }
+.format-card[data-format-theme="t20"] .format-card-footer { color: #fbbf24 !important; }
+
+.format-card[data-format-theme="ipl"] {
+  background: radial-gradient(circle at 88% 18%, rgba(234, 179, 8, 0.15), transparent 50%), rgba(15, 23, 42, 0.75) !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+}
+.format-card[data-format-theme="ipl"] .format-emoji-box { background: rgba(234, 179, 8, 0.18) !important; border-color: rgba(234, 179, 8, 0.4) !important; }
+.format-card[data-format-theme="ipl"] .format-status-tag { background: rgba(234, 179, 8, 0.2) !important; color: #facc15 !important; border-color: rgba(234, 179, 8, 0.4) !important; }
+.format-card[data-format-theme="ipl"]:hover { border-color: rgba(234, 179, 8, 0.7) !important; box-shadow: 0 20px 45px -5px rgba(234, 179, 8, 0.35) !important; }
+.format-card[data-format-theme="ipl"] .format-card-footer { color: #facc15 !important; }
+
+.format-card[data-format-theme="odi"] .format-emoji-box { background: rgba(14, 165, 233, 0.15) !important; border-color: rgba(14, 165, 233, 0.35) !important; }
+.format-card[data-format-theme="odi"] .format-status-tag { background: rgba(14, 165, 233, 0.15) !important; color: #38bdf8 !important; border-color: rgba(14, 165, 233, 0.3) !important; }
+.format-card[data-format-theme="odi"]:hover { border-color: rgba(14, 165, 233, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(14, 165, 233, 0.3) !important; }
+.format-card[data-format-theme="odi"] .format-card-footer { color: #38bdf8 !important; }
+
+.format-card[data-format-theme="test"] .format-emoji-box { background: rgba(244, 63, 94, 0.15) !important; border-color: rgba(244, 63, 94, 0.35) !important; }
+.format-card[data-format-theme="test"] .format-status-tag { background: rgba(244, 63, 94, 0.15) !important; color: #fb7185 !important; border-color: rgba(244, 63, 94, 0.3) !important; }
+.format-card[data-format-theme="test"]:hover { border-color: rgba(244, 63, 94, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(244, 63, 94, 0.3) !important; }
+.format-card[data-format-theme="test"] .format-card-footer { color: #fb7185 !important; }
+
+.format-card[data-format-theme="custom"] .format-emoji-box { background: rgba(16, 185, 129, 0.15) !important; border-color: rgba(16, 185, 129, 0.35) !important; }
+.format-card[data-format-theme="custom"] .format-status-tag { background: rgba(16, 185, 129, 0.15) !important; color: #34d399 !important; border-color: rgba(16, 185, 129, 0.3) !important; }
+.format-card[data-format-theme="custom"]:hover { border-color: rgba(16, 185, 129, 0.6) !important; box-shadow: 0 20px 45px -5px rgba(16, 185, 129, 0.3) !important; }
+.format-card[data-format-theme="custom"] .format-card-footer { color: #34d399 !important; }
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES FOR FORMAT CARDS
+   ========================================================================== */
+.light-theme .format-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+.light-theme .format-card:hover {
+  background: #ffffff !important;
+  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12) !important;
+}
+
+.light-theme .format-card-title {
+  color: #0f172a !important;
+}
+
+.light-theme .format-card-desc {
+  color: #64748b !important;
+}
+
+.light-theme .format-mini-chip {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+.light-theme .format-card:hover .format-mini-chip {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme .format-card-footer {
+  border-top: 1px solid #f1f5f9 !important;
+}
+
+/* Light Mode Accents */
+.light-theme .format-card[data-format-theme="t20"] .format-emoji-box { background: #fffbeb !important; border-color: #fde68a !important; }
+.light-theme .format-card[data-format-theme="t20"] .format-status-tag { background: #fef3c7 !important; color: #b45309 !important; border-color: #fcd34d !important; }
+.light-theme .format-card[data-format-theme="t20"]:hover { border-color: #f59e0b !important; box-shadow: 0 16px 36px -4px rgba(245, 158, 11, 0.2) !important; }
+.light-theme .format-card[data-format-theme="t20"] .format-card-footer { color: #d97706 !important; }
+
+.light-theme .format-card[data-format-theme="ipl"] {
+  background: radial-gradient(circle at 88% 18%, #fefce8, #ffffff 60%) !important;
+  border-color: #fef08a !important;
+}
+.light-theme .format-card[data-format-theme="ipl"] .format-emoji-box { background: #fef9c3 !important; border-color: #fef08a !important; }
+.light-theme .format-card[data-format-theme="ipl"] .format-status-tag { background: #fef08a !important; color: #854d0e !important; border-color: #fde047 !important; }
+.light-theme .format-card[data-format-theme="ipl"]:hover { border-color: #eab308 !important; box-shadow: 0 16px 36px -4px rgba(234, 179, 8, 0.22) !important; }
+.light-theme .format-card[data-format-theme="ipl"] .format-card-footer { color: #ca8a04 !important; }
+
+.light-theme .format-card[data-format-theme="odi"] .format-emoji-box { background: #f0f9ff !important; border-color: #bae6fd !important; }
+.light-theme .format-card[data-format-theme="odi"] .format-status-tag { background: #e0f2fe !important; color: #0369a1 !important; border-color: #7dd3fc !important; }
+.light-theme .format-card[data-format-theme="odi"]:hover { border-color: #0284c7 !important; box-shadow: 0 16px 36px -4px rgba(2, 132, 199, 0.2) !important; }
+.light-theme .format-card[data-format-theme="odi"] .format-card-footer { color: #0284c7 !important; }
+
+.light-theme .format-card[data-format-theme="test"] .format-emoji-box { background: #fff1f2 !important; border-color: #fecdd3 !important; }
+.light-theme .format-card[data-format-theme="test"] .format-status-tag { background: #ffe4e6 !important; color: #be123c !important; border-color: #fda4af !important; }
+.light-theme .format-card[data-format-theme="test"]:hover { border-color: #e11d48 !important; box-shadow: 0 16px 36px -4px rgba(225, 29, 72, 0.2) !important; }
+.light-theme .format-card[data-format-theme="test"] .format-card-footer { color: #e11d48 !important; }
+
+.light-theme .format-card[data-format-theme="custom"] .format-emoji-box { background: #ecfdf5 !important; border-color: #a7f3d0 !important; }
+.light-theme .format-card[data-format-theme="custom"] .format-status-tag { background: #d1fae5 !important; color: #047857 !important; border-color: #6ee7b7 !important; }
+.light-theme .format-card[data-format-theme="custom"]:hover { border-color: #10b981 !important; box-shadow: 0 16px 36px -4px rgba(16, 185, 129, 0.2) !important; }
+.light-theme .format-card[data-format-theme="custom"] .format-card-footer { color: #059669 !important; }
+
 
