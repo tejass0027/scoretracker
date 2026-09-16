@@ -137,83 +137,285 @@
       </div>
     </div>
     <main id="sports-page" class="sports-page">
-      <header class="sports-header">
-        <div>
-          <p class="eyebrow">Score tracker</p>
-          <h1>Choose a Sport</h1>
+      <!-- HERO BANNER -->
+      <section class="hero-banner" aria-label="Welcome banner">
+        <div class="hero-badge-row">
+          <div class="hero-pill-badge">
+            <span class="pulse-dot"></span>
+            <span>Live Multi-Sport Engine</span>
+          </div>
+          <span style="font-size: 0.78rem; color: var(--muted); font-weight: 600;">v2.5 Pro Edition</span>
         </div>
-      </header>
+        <h1 class="hero-title">Track Live Matches &amp; Run Tournaments</h1>
+        <p class="hero-desc">Professional scoring consoles, period timers, referee sound effects, and Cloud Vault sync for 14 competitive disciplines.</p>
+        <div class="hero-stats-ribbon">
+          <div class="stat-pill">
+            <span class="stat-pill-icon">⚡</span>
+            <span>14 Sports Active</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill-icon">🏆</span>
+            <span>Round-Robin Tournaments</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill-icon">⏱️</span>
+            <span>Live Timers &amp; Whistles</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill-icon">☁️</span>
+            <span>Cloud Vault Sync</span>
+          </div>
+        </div>
+      </section>
 
+      <!-- CATEGORY FILTER BAR -->
+      <section class="sport-filter-bar" aria-label="Sport categories">
+        <button class="filter-pill active" type="button" data-sport-filter="all">
+          <span>🔥 All Sports</span>
+          <span class="filter-count">14</span>
+        </button>
+        <button class="filter-pill" type="button" data-sport-filter="ball">
+          <span>⚽ Ball &amp; Team</span>
+          <span class="filter-count">7</span>
+        </button>
+        <button class="filter-pill" type="button" data-sport-filter="racket">
+          <span>🎾 Racket &amp; Net</span>
+          <span class="filter-count">3</span>
+        </button>
+        <button class="filter-pill" type="button" data-sport-filter="combat">
+          <span>🥊 Combat &amp; Ring</span>
+          <span class="filter-count">2</span>
+        </button>
+        <button class="filter-pill" type="button" data-sport-filter="field">
+          <span>⛳ Precision &amp; Mat</span>
+          <span class="filter-count">2</span>
+        </button>
+      </section>
+
+      <!-- SPORTS GRID -->
       <section class="sports-grid" aria-label="Available sports">
-        <button class="sport-card ready" type="button" data-open-sport="cricket">
-          <span class="sport-logo cricket-logo" aria-hidden="true">CR</span>
-          <strong>Cricket</strong>
-          <small>Available now</small>
+        <!-- 1. Cricket -->
+        <button class="sport-card" type="button" data-open-sport="cricket" data-category="ball" data-sport-theme="cricket">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏏</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Cricket</h2>
+            <p class="sport-card-desc">Overs, wickets, run rate &amp; IPL tournaments with ball-by-ball log</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="football">
-          <span class="sport-logo football-logo" aria-hidden="true">FB</span>
-          <strong>Football</strong>
-          <small>Available now</small>
+
+        <!-- 2. Football -->
+        <button class="sport-card" type="button" data-open-sport="football" data-category="ball" data-sport-theme="football">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">⚽</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Football</h2>
+            <p class="sport-card-desc">90' match timer, goals, yellow/red cards, substitutions &amp; league tables</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="basketball">
-          <span class="sport-logo basketball-logo" aria-hidden="true">BB</span>
-          <strong>Basketball</strong>
-          <small>Available now</small>
+
+        <!-- 3. Basketball -->
+        <button class="sport-card" type="button" data-open-sport="basketball" data-category="ball" data-sport-theme="basketball">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏀</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Basketball</h2>
+            <p class="sport-card-desc">4 quarters, shot clock buzzer, 1/2/3-pointers, timeouts &amp; player fouls</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="tennis">
-          <span class="sport-logo tennis-logo" aria-hidden="true">TN</span>
-          <strong>Tennis</strong>
-          <small>Available now</small>
+
+        <!-- 4. Tennis -->
+        <button class="sport-card" type="button" data-open-sport="tennis" data-category="racket" data-sport-theme="tennis">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🎾</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Tennis</h2>
+            <p class="sport-card-desc">Bo3 / Bo5 sets, 0-15-30-40 deuce, 7-pt tiebreaker &amp; server indicator</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="badminton">
-          <span class="sport-logo badminton-logo" aria-hidden="true">BD</span>
-          <strong>Badminton</strong>
-          <small>Available now</small>
+
+        <!-- 5. Badminton -->
+        <button class="sport-card" type="button" data-open-sport="badminton" data-category="racket" data-sport-theme="badminton">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏸</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Badminton</h2>
+            <p class="sport-card-desc">21-pt rally scoring, setting rules, 30-pt cap &amp; service court rotation</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="hockey">
-          <span class="sport-logo hockey-logo" aria-hidden="true">HK</span>
-          <strong>Hockey</strong>
-          <small>Available now</small>
+
+        <!-- 6. Hockey -->
+        <button class="sport-card" type="button" data-open-sport="hockey" data-category="ball" data-sport-theme="hockey">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏑</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Field Hockey</h2>
+            <p class="sport-card-desc">4 quarters, penalty corners (PC), penalty strokes &amp; card suspensions</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="volleyball">
-          <span class="sport-logo volleyball-logo" aria-hidden="true">VB</span>
-          <strong>Volleyball</strong>
-          <small>Available now</small>
+
+        <!-- 7. Volleyball -->
+        <button class="sport-card" type="button" data-open-sport="volleyball" data-category="ball" data-sport-theme="volleyball">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏐</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Volleyball</h2>
+            <p class="sport-card-desc">FIVB rally scoring (25 &amp; 15 pts), 30s timeout buzzer &amp; set standings</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="baseball">
-          <span class="sport-logo baseball-logo" aria-hidden="true">BS</span>
-          <strong>Baseball</strong>
-          <small>Available now</small>
+
+        <!-- 8. Baseball -->
+        <button class="sport-card" type="button" data-open-sport="baseball" data-category="ball" data-sport-theme="baseball">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">⚾</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Baseball</h2>
+            <p class="sport-card-desc">Inning box line score, diamond base runners, B-S-O pitch counters &amp; walks</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="rugby">
-          <span class="sport-logo rugby-logo" aria-hidden="true">RG</span>
-          <strong>Rugby</strong>
-          <small>Available now</small>
+
+        <!-- 9. Rugby -->
+        <button class="sport-card" type="button" data-open-sport="rugby" data-category="ball" data-sport-theme="rugby">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏉</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Rugby</h2>
+            <p class="sport-card-desc">Union (15s) &amp; Sevens (7s), Try (+5), Conversion, Sin Bin card timers</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="kabaddi">
-          <span class="sport-logo kabaddi-logo" aria-hidden="true">KB</span>
-          <strong>Kabaddi</strong>
-          <small>Available now</small>
+
+        <!-- 10. Kabaddi -->
+        <button class="sport-card" type="button" data-open-sport="kabaddi" data-category="field" data-sport-theme="kabaddi">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🤼</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Kabaddi</h2>
+            <p class="sport-card-desc">PKL 7-mat player dots, 30s raid clock, Super Tackle &amp; All-Out (+2) revival</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="tabletennis">
-          <span class="sport-logo tabletennis-logo" aria-hidden="true">TT</span>
-          <strong>Table Tennis</strong>
-          <small>Available now</small>
+
+        <!-- 11. Table Tennis -->
+        <button class="sport-card" type="button" data-open-sport="tabletennis" data-category="racket" data-sport-theme="tabletennis">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏓</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Table Tennis</h2>
+            <p class="sport-card-desc">ITTF 11-pt games, 2-serve rotation, deuce 1-serve &amp; timeout countdown</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="golf">
-          <span class="sport-logo golf-logo" aria-hidden="true">GF</span>
-          <strong>Golf</strong>
-          <small>Available now</small>
+
+        <!-- 12. Golf -->
+        <button class="sport-card" type="button" data-open-sport="golf" data-category="field" data-sport-theme="golf">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">⛳</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Golf</h2>
+            <p class="sport-card-desc">18-hole / 9-hole scorecards, PGA Tour Leaderboard with ties &amp; Par scoring</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="boxing">
-          <span class="sport-logo boxing-logo" aria-hidden="true">BX</span>
-          <strong>Boxing</strong>
-          <small>Available now</small>
+
+        <!-- 13. Boxing -->
+        <button class="sport-card" type="button" data-open-sport="boxing" data-category="combat" data-sport-theme="boxing">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🥊</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Boxing</h2>
+            <p class="sport-card-desc">10-Point Must, Compubox punches, 3-minute round bell &amp; 3-judge scorecard</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
-        <button class="sport-card ready" type="button" data-open-sport="mma">
-          <span class="sport-logo mma-logo" aria-hidden="true">MM</span>
-          <strong>MMA</strong>
-          <small>Available now</small>
+
+        <!-- 14. MMA (UFC) -->
+        <button class="sport-card" type="button" data-open-sport="mma" data-category="combat" data-sport-theme="mma">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🥋</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">MMA (UFC)</h2>
+            <p class="sport-card-desc">Unified Rules 10-Pt Must, strikes, takedowns, submissions &amp; Grand Prix</p>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
         </button>
       </section>
     </main>

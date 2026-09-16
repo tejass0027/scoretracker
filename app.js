@@ -4040,9 +4040,29 @@ document.querySelectorAll("[data-soon]").forEach((button) => {
   });
 });
 
-document.querySelector("[data-open-sport='cricket']").addEventListener("click", () => {
-  showFormatPage();
+// Category Filter Pills on Modern Sports Hub
+document.querySelectorAll(".filter-pill[data-sport-filter]").forEach((pill) => {
+  pill.addEventListener("click", () => {
+    document.querySelectorAll(".filter-pill[data-sport-filter]").forEach((p) => p.classList.remove("active"));
+    pill.classList.add("active");
+
+    const category = pill.getAttribute("data-sport-filter");
+    document.querySelectorAll(".sports-grid .sport-card").forEach((card) => {
+      if (category === "all" || card.getAttribute("data-category") === category) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
 });
+
+const cricketBtn = document.querySelector("[data-open-sport='cricket']");
+if (cricketBtn) {
+  cricketBtn.addEventListener("click", () => {
+    showFormatPage();
+  });
+}
 
 let pendingFormat = "Custom";
 
