@@ -4769,6 +4769,76 @@ if (demoBtnReset) {
   });
 }
 
+// Terms & Conditions / Privacy Modal Logic
+const termsModal = document.querySelector("#terms-modal");
+const termsModalCloseIcon = document.querySelector("#terms-modal-close-icon");
+const termsModalCloseBtn = document.querySelector("#terms-modal-close-btn");
+const termsModalTitle = document.querySelector("#terms-modal-title");
+const termsTabBtn = document.querySelector("#terms-tab-btn");
+const privacyTabBtn = document.querySelector("#privacy-tab-btn");
+const disclaimerTabBtn = document.querySelector("#disclaimer-tab-btn");
+const termsContent = document.querySelector("#terms-content");
+const privacyContent = document.querySelector("#privacy-content");
+const disclaimerContent = document.querySelector("#disclaimer-content");
+
+function openTermsModal(tab = "terms") {
+  if (!termsModal) return;
+  termsModal.classList.remove("hidden");
+  switchTermsTab(tab);
+}
+
+function closeTermsModal() {
+  if (!termsModal) return;
+  termsModal.classList.add("hidden");
+}
+
+function switchTermsTab(tab) {
+  if (!termsTabBtn || !privacyTabBtn || !disclaimerTabBtn) return;
+  termsTabBtn.classList.remove("active");
+  privacyTabBtn.classList.remove("active");
+  disclaimerTabBtn.classList.remove("active");
+
+  if (termsContent) termsContent.classList.add("hidden");
+  if (privacyContent) privacyContent.classList.add("hidden");
+  if (disclaimerContent) disclaimerContent.classList.add("hidden");
+
+  if (tab === "terms") {
+    termsTabBtn.classList.add("active");
+    if (termsContent) termsContent.classList.remove("hidden");
+    if (termsModalTitle) termsModalTitle.textContent = "Terms & Conditions";
+  } else if (tab === "privacy") {
+    privacyTabBtn.classList.add("active");
+    if (privacyContent) privacyContent.classList.remove("hidden");
+    if (termsModalTitle) termsModalTitle.textContent = "Privacy Policy";
+  } else if (tab === "disclaimer") {
+    disclaimerTabBtn.classList.add("active");
+    if (disclaimerContent) disclaimerContent.classList.remove("hidden");
+    if (termsModalTitle) termsModalTitle.textContent = "Fair-Use Disclaimer";
+  }
+}
+
+if (termsModalCloseIcon) termsModalCloseIcon.addEventListener("click", closeTermsModal);
+if (termsModalCloseBtn) termsModalCloseBtn.addEventListener("click", closeTermsModal);
+if (termsModal) {
+  termsModal.addEventListener("click", (e) => {
+    if (e.target === termsModal) closeTermsModal();
+  });
+}
+
+if (termsTabBtn) termsTabBtn.addEventListener("click", () => switchTermsTab("terms"));
+if (privacyTabBtn) privacyTabBtn.addEventListener("click", () => switchTermsTab("privacy"));
+if (disclaimerTabBtn) disclaimerTabBtn.addEventListener("click", () => switchTermsTab("disclaimer"));
+
+document.querySelectorAll(".trigger-terms").forEach((btn) => {
+  btn.addEventListener("click", () => openTermsModal("terms"));
+});
+document.querySelectorAll(".trigger-privacy").forEach((btn) => {
+  btn.addEventListener("click", () => openTermsModal("privacy"));
+});
+document.querySelectorAll(".trigger-disclaimer").forEach((btn) => {
+  btn.addEventListener("click", () => openTermsModal("disclaimer"));
+});
+
 if (els.navSportsBtn) {
   els.navSportsBtn.addEventListener("click", () => {
     showSportsPage();

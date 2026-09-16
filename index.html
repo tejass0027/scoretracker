@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=314" />
-    <link rel="stylesheet" href="hub.css?v=314" />
+    <link rel="stylesheet" href="styles.css?v=315" />
+    <link rel="stylesheet" href="hub.css?v=315" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -342,6 +342,30 @@
           </button>
         </div>
       </section>
+
+      <!-- 6. FOOTER -->
+      <footer class="app-footer">
+        <div class="footer-container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <div class="footer-brand-header">
+                <span class="logo-text" style="font-size: 1.25rem;">Score<span class="highlight">Tracker</span></span>
+                <span class="footer-badge">Pro Edition</span>
+              </div>
+              <p class="footer-tagline">Professional real-time scoring consoles, period clocks, referee sound effects, and Cloud Vault sync across 14 competitive disciplines.</p>
+            </div>
+            <div class="footer-links-group">
+              <button class="footer-link-btn trigger-terms" type="button">Terms &amp; Conditions</button>
+              <button class="footer-link-btn trigger-privacy" type="button">Privacy Policy</button>
+              <button class="footer-link-btn trigger-disclaimer" type="button">Disclaimer</button>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 ScoreTracker. All rights reserved.</p>
+            <p class="footer-subtext">Built for sports enthusiasts, schools, and grassroots leagues.</p>
+          </div>
+        </div>
+      </footer>
     </main>
 
     <main id="sports-page" class="sports-page hidden">
@@ -676,6 +700,30 @@
           </div>
         </button>
       </section>
+
+      <!-- SPORTS PAGE FOOTER -->
+      <footer class="app-footer">
+        <div class="footer-container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <div class="footer-brand-header">
+                <span class="logo-text" style="font-size: 1.25rem;">Score<span class="highlight">Tracker</span></span>
+                <span class="footer-badge">Pro Edition</span>
+              </div>
+              <p class="footer-tagline">Professional real-time scoring consoles, period clocks, referee sound effects, and Cloud Vault sync across 14 competitive disciplines.</p>
+            </div>
+            <div class="footer-links-group">
+              <button class="footer-link-btn trigger-terms" type="button">Terms &amp; Conditions</button>
+              <button class="footer-link-btn trigger-privacy" type="button">Privacy Policy</button>
+              <button class="footer-link-btn trigger-disclaimer" type="button">Disclaimer</button>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 ScoreTracker. All rights reserved.</p>
+            <p class="footer-subtext">Built for sports enthusiasts, schools, and grassroots leagues.</p>
+          </div>
+        </div>
+      </footer>
     </main>
 
     <main id="format-page" class="format-page hidden">
@@ -5784,6 +5832,72 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- ==========================================
+         TERMS & CONDITIONS / PRIVACY MODAL
+         ========================================== -->
+    <div id="terms-modal" class="terms-modal-overlay hidden">
+      <div class="terms-modal-card">
+        <div class="terms-modal-header">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(16,185,129,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">📜</div>
+            <div>
+              <h2 id="terms-modal-title" style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #fff;">Terms &amp; Conditions</h2>
+              <p style="margin: 2px 0 0; font-size: 0.78rem; color: var(--muted);">ScoreTracker Legal &amp; Compliance Information</p>
+            </div>
+          </div>
+          <button id="terms-modal-close-icon" class="modal-close-x" type="button">&times;</button>
+        </div>
+
+        <div class="terms-tab-bar">
+          <button id="terms-tab-btn" class="terms-tab-btn active" type="button">Terms &amp; Conditions</button>
+          <button id="privacy-tab-btn" class="terms-tab-btn" type="button">Privacy Policy</button>
+          <button id="disclaimer-tab-btn" class="terms-tab-btn" type="button">Fair-Use Disclaimer</button>
+        </div>
+
+        <div class="terms-modal-body">
+          <!-- 1. Terms Content -->
+          <div id="terms-content" class="terms-tab-content">
+            <h3>1. Acceptance of Terms</h3>
+            <p>By accessing and using ScoreTracker, you agree to comply with and be bound by these Terms and Conditions. If you disagree with any part of these terms, please discontinue use of the application.</p>
+            
+            <h3>2. Digital Scoring &amp; Tournament Engine</h3>
+            <p>ScoreTracker is provided as a free, modern digital scoring assistant for sports enthusiasts, grassroots leagues, schools, and tournament organizers across 14 disciplines.</p>
+            
+            <h3>3. Data Storage &amp; Cloud Vault</h3>
+            <p>Matches and tournament tables are saved locally in your browser cache. Optional Google authentication allows cloud synchronization to your private Cloud Vault. You are responsible for exporting JSON backups of crucial league data.</p>
+            
+            <h3>4. Intellectual Property</h3>
+            <p>&copy; 2026 ScoreTracker. All software code, graphical components, responsive layout systems, and application branding are protected property. All rights reserved.</p>
+          </div>
+
+          <!-- 2. Privacy Content -->
+          <div id="privacy-content" class="terms-tab-content hidden">
+            <h3>1. Privacy-First Commitment</h3>
+            <p>ScoreTracker is designed with an offline-first, privacy-respecting architecture. We do not sell, trade, or distribute your personal match scores, team rosters, or league data.</p>
+            
+            <h3>2. Google Authentication</h3>
+            <p>When you choose to sign in with Google, we receive only your public name and email address solely to authenticate and associate your Cloud Vault match records.</p>
+            
+            <h3>3. Local Browser Storage</h3>
+            <p>All active scoring data, period clocks, and tournament standings reside securely on your device via standard browser LocalStorage.</p>
+          </div>
+
+          <!-- 3. Disclaimer Content -->
+          <div id="disclaimer-content" class="terms-tab-content hidden">
+            <h3>Fair-Use &amp; Independent Software Notice</h3>
+            <p>ScoreTracker is an independent open scoring platform. All league designations (such as IPL, FIFA, NBA, ICC, UFC), team names, logos, and sport trademarks belong strictly to their respective trademark holders.</p>
+            <p>Their mention within ScoreTracker is solely for descriptive identification and recreational scorekeeping under fair-use guidelines.</p>
+          </div>
+        </div>
+
+        <div class="terms-modal-footer">
+          <button id="terms-modal-close-btn" class="welcome-btn-primary" type="button" style="padding: 10px 26px; font-size: 0.9rem;">Close</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ==========================================
          CLOUD MATCH & TOURNAMENT VAULT MODAL
          ========================================== -->
