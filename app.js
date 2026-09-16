@@ -4079,7 +4079,7 @@ document.querySelectorAll("[data-format]").forEach((button) => {
     // Prefill fields
     els.customTeamA.value = state.teamA;
     els.customTeamB.value = state.teamB;
-    els.customOvers.value = button.dataset.overs ? Number(button.dataset.overs) : (format === "Test" ? 90 : 20);
+    els.customOvers.value = format === "Test" ? 90 : 20;
     els.customPlayersA.value = "";
     els.customPlayersB.value = "";
 
