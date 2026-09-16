@@ -7,6 +7,11 @@ console.log("ScoreTracker App loaded - version 208");
 const STORAGE_KEY = "cricket-score-tracker-v1";
 
 const els = {
+  welcomePage: document.querySelector("#welcome-page"),
+  navHomeBtn: document.querySelector("#nav-btn-home"),
+  welcomeEnterBtn: document.querySelector("#welcome-enter-btn"),
+  welcomeTournamentBtn: document.querySelector("#welcome-tournament-btn"),
+  welcomeCricketBtn: document.querySelector("#welcome-cricket-btn"),
   sportsPage: document.querySelector("#sports-page"),
   formatPage: document.querySelector("#format-page"),
   cricketPage: document.querySelector("#cricket-page"),
@@ -197,6 +202,7 @@ const defaultState = {
 let state = loadState();
 
 function hideAllPages() {
+  if (els.welcomePage) els.welcomePage.classList.add("hidden");
   if (els.sportsPage) els.sportsPage.classList.add("hidden");
   if (els.formatPage) els.formatPage.classList.add("hidden");
   if (els.cricketPage) els.cricketPage.classList.add("hidden");
@@ -218,14 +224,28 @@ function hideAllPages() {
   if (els.mmaPage) els.mmaPage.classList.add("hidden");
 }
 
+function showWelcomePage(fromHash = false) {
+  if (!fromHash) window.location.hash = "#welcome";
+  hideAllPages();
+  if (els.welcomePage) els.welcomePage.classList.remove("hidden");
+  
+  if (els.navHomeBtn) els.navHomeBtn.classList.add("hidden");
+  if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
+  if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
+  if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 function showSportsPage(fromHash = false) {
   if (!fromHash) window.location.hash = "#sports";
   hideAllPages();
   if (els.sportsPage) els.sportsPage.classList.remove("hidden");
   
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.add("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function showFormatPage(fromHash = false) {
@@ -233,6 +253,7 @@ function showFormatPage(fromHash = false) {
   hideAllPages();
   if (els.formatPage) els.formatPage.classList.remove("hidden");
   
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
@@ -553,6 +574,10 @@ function navigateByHash(hash) {
     showTournamentChoice(true);
   } else if (hash === "#formats") {
     showFormatPage(true);
+  } else if (hash === "#sports") {
+    showSportsPage(true);
+  } else if (hash === "#welcome" || !hash) {
+    showWelcomePage(true);
   } else {
     showSportsPage(true);
   }
@@ -4579,6 +4604,68 @@ if (els.selectBowler) {
 
 
 // Nav Header Button Event Listeners
+if (els.navHomeBtn) {
+  els.navHomeBtn.addEventListener("click", () => {
+    showWelcomePage();
+    render();
+  });
+}
+const brandLogo = document.querySelector("#header-brand-logo");
+if (brandLogo) {
+  brandLogo.addEventListener("click", () => {
+    showWelcomePage();
+    render();
+  });
+  brandLogo.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      showWelcomePage();
+      render();
+    }
+  });
+}
+if (els.welcomeEnterBtn) {
+  els.welcomeEnterBtn.addEventListener("click", () => {
+    showSportsPage();
+    render();
+  });
+}
+if (els.welcomeTournamentBtn) {
+  els.welcomeTournamentBtn.addEventListener("click", () => {
+    showTournamentChoice();
+    render();
+  });
+}
+if (els.welcomeCricketBtn) {
+  els.welcomeCricketBtn.addEventListener("click", () => {
+    showFormatPage();
+    render();
+  });
+}
+
+// Welcome Quick-Launch Pill Handlers
+document.querySelectorAll(".welcome-quick-pill").forEach((pill) => {
+  pill.addEventListener("click", () => {
+    const target = pill.getAttribute("data-sport-target");
+    if (target === "cricket") {
+      showFormatPage();
+    } else if (target === "football" && typeof window.showFootballPage === "function") {
+      window.showFootballPage();
+    } else if (target === "basketball" && typeof window.showBasketballPage === "function") {
+      window.showBasketballPage();
+    } else if (target === "tennis" && typeof window.showTennisPage === "function") {
+      window.showTennisPage();
+    } else if (target === "badminton" && typeof window.showBadmintonPage === "function") {
+      window.showBadmintonPage();
+    } else if (target === "hockey" && typeof window.showHockeyPage === "function") {
+      window.showHockeyPage();
+    } else {
+      showSportsPage();
+    }
+    render();
+  });
+});
+
 if (els.navSportsBtn) {
   els.navSportsBtn.addEventListener("click", () => {
     showSportsPage();
@@ -4934,9 +5021,9 @@ window.addEventListener("hashchange", () => {
 });
 
 // Initialize Page state on reload/load
-if (window.location.hash && window.location.hash !== "#sports") {
+if (window.location.hash && window.location.hash !== "#welcome") {
   navigateByHash(window.location.hash);
 } else {
-  showSportsPage(true);
+  showWelcomePage(true);
 }
 render();
