@@ -23,7 +23,7 @@
     <meta property="og:type" content="website" />
     
     <link rel="stylesheet" href="styles.css?v=321" />
-    <link rel="stylesheet" href="hub.css?v=321" />
+    <link rel="stylesheet" href="hub.css?v=322" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -805,6 +805,86 @@
           </div>
         </div>
       </footer>
+    </main>
+    <main id="review-page" class="review-page hidden">
+      <div class="review-page-container">
+        <!-- Top navigation with back button -->
+        <div class="review-page-nav">
+          <button id="review-back-btn" class="all-sports-btn review-page-back-btn" type="button">
+            &larr; Back to Sports Hub
+          </button>
+          <div class="review-page-badge">
+            <span class="pulse-dot"></span>
+            <span>⭐ ScoreTracker Feedback</span>
+          </div>
+        </div>
+
+        <!-- Page Header -->
+        <header class="review-page-header">
+          <h1 class="review-page-title">Send Us Your Review</h1>
+          <p class="review-page-subtitle">
+            Share your experience, feature ideas, or sport requests. Your feedback directly shapes ScoreTracker, and all submissions are delivered privately to our team!
+          </p>
+        </header>
+
+        <!-- Standalone Review Card -->
+        <div class="welcome-review-card standalone-review-card">
+          <form id="standalone-review-form" class="welcome-review-form">
+            <div class="review-stars-wrapper">
+              <div class="review-stars-row" role="radiogroup" aria-label="Rating out of 5 stars">
+                <button type="button" class="review-star-btn active" data-rating="1" aria-label="1 Star">★</button>
+                <button type="button" class="review-star-btn active" data-rating="2" aria-label="2 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="3" aria-label="3 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="4" aria-label="4 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="5" aria-label="5 Stars">★</button>
+              </div>
+              <div id="standalone-review-star-feedback" class="review-star-feedback">⭐⭐⭐⭐⭐ 5 Stars - Exceptional!</div>
+            </div>
+
+            <div class="review-form-grid">
+              <div class="review-field-group">
+                <label for="standalone-review-author-name" class="review-label">Your Name</label>
+                <input type="text" id="standalone-review-author-name" class="review-input" placeholder="e.g. Rahul Sharma or Team Coach" autocomplete="name" />
+              </div>
+              <div class="review-field-group">
+                <label for="standalone-review-author-email" class="review-label">Your Email ID <span style="color:#f87171;">*</span></label>
+                <input type="email" id="standalone-review-author-email" class="review-input" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="review-form-grid" style="margin-bottom: 16px;">
+              <div class="review-field-group" style="grid-column: 1 / -1;">
+                <label for="standalone-review-sport-category" class="review-label">Review Category / Sport</label>
+                <select id="standalone-review-sport-category" class="review-select">
+                  <option value="General Experience">⭐ General Platform Experience</option>
+                  <option value="Cricket Tracker">🏏 Cricket Live Console</option>
+                  <option value="Football Tracker">⚽ Football Live Console</option>
+                  <option value="Basketball Tracker">🏀 Basketball Live Console</option>
+                  <option value="Tournament League Engine">🏆 Tournament &amp; League Engine</option>
+                  <option value="Feature Request">💡 Feature Request / Suggestion</option>
+                  <option value="Bug Report">🐞 Bug Report / Issue</option>
+                  <option value="Other Sports">⚡ Other 14 Sports</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="review-field-group" style="margin-bottom: 20px;">
+              <label for="standalone-review-message" class="review-label">Your Review &amp; Comments <span style="color:#f87171;">*</span></label>
+              <textarea id="standalone-review-message" class="review-textarea" placeholder="Tell us what you enjoyed, what rules or sports you'd love to see next, or any improvements..." required></textarea>
+            </div>
+
+            <button type="submit" id="standalone-review-submit-btn" class="review-submit-btn">
+              <span>🚀 Submit Review</span>
+            </button>
+
+            <div id="standalone-review-status-box" class="review-status-box hidden"></div>
+          </form>
+        </div>
+
+        <div class="review-page-privacy-note">
+          🔒 All reviews are securely delivered straight to our team inbox at <strong>algobuilds@gmail.com</strong>.
+        </div>
+      </div>
     </main>
 
     <main id="format-page" class="format-page hidden">
@@ -6068,7 +6148,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=321"></script>
+    <script src="app.js?v=322"></script>
     <script src="sports/football.js?v=211"></script>
     <script src="sports/basketball.js?v=211"></script>
     <script src="sports/tennis.js?v=211"></script>

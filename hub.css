@@ -2542,6 +2542,120 @@
   border-top: 1px solid #f1f5f9 !important;
 }
 
+/* ==========================================================================
+   DEDICATED STANDALONE REVIEW PAGE
+   ========================================================================== */
+.review-page {
+  min-height: 100vh;
+  padding: 32px 20px 80px;
+  animation: fadeInPage 0.35s ease-out;
+}
 
+@keyframes fadeInPage {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+.review-page-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
 
+.review-page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.review-page-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary, #ffffff);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+.review-page-back-btn:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #34d399;
+  transform: translateX(-3px);
+}
+
+.review-page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 999px;
+  color: #fbbf24;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.review-page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.review-page-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #fbbf24 60%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 12px;
+}
+
+.review-page-subtitle {
+  color: var(--text-muted, #94a3b8);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.standalone-review-card {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 191, 36, 0.18);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.review-page-privacy-note {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.86rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Light Theme adaptations for standalone review page */
+.light-theme .review-page-back-btn {
+  background: #ffffff;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+.light-theme .review-page-back-btn:hover {
+  background: #ecfdf5;
+  border-color: #059669;
+  color: #059669;
+}
+
+.light-theme .review-page-title {
+  background: linear-gradient(135deg, #0f172a 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -13,6 +13,8 @@ const els = {
   welcomeTournamentBtn: document.querySelector("#welcome-tournament-btn"),
   welcomeCricketBtn: document.querySelector("#welcome-cricket-btn"),
   sportsPage: document.querySelector("#sports-page"),
+  reviewPage: document.querySelector("#review-page"),
+  reviewBackBtn: document.querySelector("#review-back-btn"),
   formatPage: document.querySelector("#format-page"),
   cricketPage: document.querySelector("#cricket-page"),
   footballPage: document.querySelector("#football-page"),
@@ -204,6 +206,7 @@ let state = loadState();
 function hideAllPages() {
   if (els.welcomePage) els.welcomePage.classList.add("hidden");
   if (els.sportsPage) els.sportsPage.classList.add("hidden");
+  if (els.reviewPage) els.reviewPage.classList.add("hidden");
   if (els.formatPage) els.formatPage.classList.add("hidden");
   if (els.cricketPage) els.cricketPage.classList.add("hidden");
   if (els.customSetup) els.customSetup.classList.add("hidden");
@@ -248,6 +251,24 @@ function showSportsPage(fromHash = false) {
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+function showReviewPage(fromHash = false) {
+  if (!fromHash) window.location.hash = "#review";
+  hideAllPages();
+  if (els.reviewPage) els.reviewPage.classList.remove("hidden");
+  
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
+  if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
+  if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
+  if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  setTimeout(() => {
+    const input = document.querySelector("#standalone-review-author-name") || document.querySelector("#review-author-name");
+    if (input) input.focus();
+  }, 120);
+}
+window.showReviewPage = showReviewPage;
 
 function showFormatPage(fromHash = false) {
   if (!fromHash) window.location.hash = "#formats";
@@ -528,20 +549,7 @@ function navigateByHash(hash) {
   }
 
   if (hash === "#review") {
-    showWelcomePage(true);
-    setTimeout(() => {
-      const revSec = document.querySelector("#welcome-review-section");
-      if (revSec) {
-        revSec.scrollIntoView({ behavior: "smooth", block: "center" });
-        const card = revSec.querySelector(".welcome-review-card");
-        if (card) {
-          card.classList.add("review-highlight-pulse");
-          setTimeout(() => card.classList.remove("review-highlight-pulse"), 2600);
-        }
-        const msgInput = document.querySelector("#review-message");
-        if (msgInput) msgInput.focus();
-      }
-    }, 140);
+    showReviewPage(true);
     return;
   }
 
@@ -4899,15 +4907,8 @@ if (demoBtnReset) {
   });
 }
 
-// Welcome Review Form Handler (Sends directly to algobuilds@gmail.com)
-(function initReviewSection() {
-  let selectedRating = 5;
-  const starBtns = document.querySelectorAll(".review-star-btn");
-  const starFeedback = document.querySelector("#review-star-feedback");
-  const reviewForm = document.querySelector("#welcome-review-form");
-  const reviewSubmitBtn = document.querySelector("#review-submit-btn");
-  const reviewStatusBox = document.querySelector("#review-status-box");
-
+// Review Form Handler (Supports Standalone Review Page and Welcome Section)
+(function initReviewSections() {
   const ratingDescriptions = {
     1: "⭐ 1 Star - Needs Improvement",
     2: "⭐⭐ 2 Stars - Fair",
@@ -4916,51 +4917,60 @@ if (demoBtnReset) {
     5: "⭐⭐⭐⭐⭐ 5 Stars - Exceptional!"
   };
 
-  function updateStars(val) {
-    selectedRating = val;
-    starBtns.forEach((btn) => {
-      const r = parseInt(btn.getAttribute("data-rating"), 10);
-      if (r <= val) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-    if (starFeedback) {
-      starFeedback.textContent = ratingDescriptions[val] || `${val} Stars`;
-    }
-  }
+  function setupForm(formId, config) {
+    const form = document.querySelector(formId);
+    if (!form) return;
 
-  starBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const r = parseInt(btn.getAttribute("data-rating"), 10);
-      updateStars(r);
-    });
-    btn.addEventListener("mouseenter", () => {
-      const r = parseInt(btn.getAttribute("data-rating"), 10);
-      starBtns.forEach((b) => {
-        const br = parseInt(b.getAttribute("data-rating"), 10);
-        if (br <= r) b.classList.add("active");
-        else b.classList.remove("active");
+    let selectedRating = 5;
+    const starBtns = form.querySelectorAll(".review-star-btn");
+    const starFeedback = document.querySelector(config.feedbackId);
+    const starsRow = form.querySelector(".review-stars-row");
+    const submitBtn = document.querySelector(config.submitBtnId);
+    const statusBox = document.querySelector(config.statusBoxId);
+
+    function updateStars(val) {
+      selectedRating = val;
+      starBtns.forEach((btn) => {
+        const r = parseInt(btn.getAttribute("data-rating"), 10);
+        if (r <= val) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+      if (starFeedback) {
+        starFeedback.textContent = ratingDescriptions[val] || `${val} Stars`;
+      }
+    }
+
+    starBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const r = parseInt(btn.getAttribute("data-rating"), 10);
+        updateStars(r);
+      });
+      btn.addEventListener("mouseenter", () => {
+        const r = parseInt(btn.getAttribute("data-rating"), 10);
+        starBtns.forEach((b) => {
+          const br = parseInt(b.getAttribute("data-rating"), 10);
+          if (br <= r) b.classList.add("active");
+          else b.classList.remove("active");
+        });
       });
     });
-  });
 
-  const starsRow = document.querySelector(".review-stars-row");
-  if (starsRow) {
-    starsRow.addEventListener("mouseleave", () => {
-      updateStars(selectedRating);
-    });
-  }
+    if (starsRow) {
+      starsRow.addEventListener("mouseleave", () => {
+        updateStars(selectedRating);
+      });
+    }
 
-  if (reviewForm) {
-    reviewForm.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const nameInput = document.querySelector("#review-author-name");
-      const emailInput = document.querySelector("#review-author-email");
-      const categoryInput = document.querySelector("#review-sport-category");
-      const messageInput = document.querySelector("#review-message");
+      const nameInput = document.querySelector(config.nameInputId);
+      const emailInput = document.querySelector(config.emailInputId);
+      const categoryInput = document.querySelector(config.categoryInputId);
+      const messageInput = document.querySelector(config.messageInputId);
 
       const name = (nameInput && nameInput.value.trim()) || "Anonymous Sports Fan";
       const email = (emailInput && emailInput.value.trim()) || "";
@@ -4968,31 +4978,31 @@ if (demoBtnReset) {
       const message = (messageInput && messageInput.value.trim()) || "";
 
       if (!email || !email.includes("@")) {
-        if (reviewStatusBox) {
-          reviewStatusBox.className = "review-status-box error";
-          reviewStatusBox.textContent = "Please enter a valid email address before submitting.";
-          reviewStatusBox.classList.remove("hidden");
+        if (statusBox) {
+          statusBox.className = "review-status-box error";
+          statusBox.textContent = "Please enter a valid email address before submitting.";
+          statusBox.classList.remove("hidden");
         }
         if (emailInput) emailInput.focus();
         return;
       }
 
       if (!message) {
-        if (reviewStatusBox) {
-          reviewStatusBox.className = "review-status-box error";
-          reviewStatusBox.textContent = "Please enter your review message before submitting.";
-          reviewStatusBox.classList.remove("hidden");
+        if (statusBox) {
+          statusBox.className = "review-status-box error";
+          statusBox.textContent = "Please enter your review message before submitting.";
+          statusBox.classList.remove("hidden");
         }
         if (messageInput) messageInput.focus();
         return;
       }
 
-      if (reviewSubmitBtn) {
-        reviewSubmitBtn.disabled = true;
-        reviewSubmitBtn.innerHTML = "<span>⏳ Sending review to team...</span>";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "<span>⏳ Sending review to team...</span>";
       }
-      if (reviewStatusBox) {
-        reviewStatusBox.classList.add("hidden");
+      if (statusBox) {
+        statusBox.classList.add("hidden");
       }
 
       const payload = {
@@ -5018,15 +5028,15 @@ if (demoBtnReset) {
         });
 
         if (response.ok) {
-          if (reviewStatusBox) {
-            reviewStatusBox.className = "review-status-box success";
-            reviewStatusBox.innerHTML = `
+          if (statusBox) {
+            statusBox.className = "review-status-box success";
+            statusBox.innerHTML = `
               🎉 <strong>Thank you for your review!</strong><br>
               Your ${selectedRating}-star feedback has been sent directly to our team inbox at <strong>algobuilds@gmail.com</strong>.
             `;
-            reviewStatusBox.classList.remove("hidden");
+            statusBox.classList.remove("hidden");
           }
-          reviewForm.reset();
+          form.reset();
           updateStars(5);
         } else {
           throw new Error("Submission response not ok");
@@ -5037,50 +5047,56 @@ if (demoBtnReset) {
         const mailtoBody = encodeURIComponent(`Rating: ${selectedRating} / 5 Stars\nFrom: ${name} (${email})\nCategory: ${category}\n\nReview:\n${message}`);
         const mailtoUrl = `mailto:algobuilds@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 
-        if (reviewStatusBox) {
-          reviewStatusBox.className = "review-status-box success";
-          reviewStatusBox.innerHTML = `
+        if (statusBox) {
+          statusBox.className = "review-status-box success";
+          statusBox.innerHTML = `
             📬 <strong>Network blocked automatic delivery.</strong> You can send it directly with 1 tap:
             <br><br>
             <a href="${mailtoUrl}" style="color: #34d399; font-weight: 800; text-decoration: underline;">
               ✉️ Click here to send your review to algobuilds@gmail.com
             </a>
           `;
-          reviewStatusBox.classList.remove("hidden");
+          statusBox.classList.remove("hidden");
         }
       } finally {
-        if (reviewSubmitBtn) {
-          reviewSubmitBtn.disabled = false;
-          reviewSubmitBtn.innerHTML = "<span>🚀 Submit Review</span>";
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "<span>🚀 Submit Review</span>";
         }
       }
     });
   }
+
+  // Standalone dedicated Review Page form
+  setupForm("#standalone-review-form", {
+    feedbackId: "#standalone-review-star-feedback",
+    nameInputId: "#standalone-review-author-name",
+    emailInputId: "#standalone-review-author-email",
+    categoryInputId: "#standalone-review-sport-category",
+    messageInputId: "#standalone-review-message",
+    submitBtnId: "#standalone-review-submit-btn",
+    statusBoxId: "#standalone-review-status-box"
+  });
+
+  // Welcome section review form
+  setupForm("#welcome-review-form", {
+    feedbackId: "#review-star-feedback",
+    nameInputId: "#review-author-name",
+    emailInputId: "#review-author-email",
+    categoryInputId: "#review-sport-category",
+    messageInputId: "#review-message",
+    submitBtnId: "#review-submit-btn",
+    statusBoxId: "#review-status-box"
+  });
 })();
 
-// Open Review Section from anywhere (Sports Hub, navbar, floating button)
+// Open Standalone Review Page from anywhere (Sports Hub, navbar, floating button)
 function openReviewSection() {
-  if (window.location.hash !== "#review") {
-    window.location.hash = "#review";
-  }
-  showWelcomePage();
-  setTimeout(() => {
-    const revSec = document.querySelector("#welcome-review-section");
-    if (revSec) {
-      revSec.scrollIntoView({ behavior: "smooth", block: "center" });
-      const card = revSec.querySelector(".welcome-review-card");
-      if (card) {
-        card.classList.add("review-highlight-pulse");
-        setTimeout(() => card.classList.remove("review-highlight-pulse"), 2600);
-      }
-      const msgInput = document.querySelector("#review-message");
-      if (msgInput) msgInput.focus();
-    }
-  }, 140);
+  showReviewPage();
 }
 window.openReviewSection = openReviewSection;
 
-// Bind Review triggers in Sports Hub and navigation bar
+// Bind Review triggers in Sports Hub, navigation bar, and back button
 const hubReviewBtn = document.querySelector("#sports-hub-review-btn");
 if (hubReviewBtn) {
   hubReviewBtn.addEventListener("click", () => {
@@ -5097,6 +5113,12 @@ const navReviewBtn = document.querySelector("#nav-btn-review");
 if (navReviewBtn) {
   navReviewBtn.addEventListener("click", () => {
     openReviewSection();
+  });
+}
+const reviewBackBtn = document.querySelector("#review-back-btn");
+if (reviewBackBtn) {
+  reviewBackBtn.addEventListener("click", () => {
+    showSportsPage();
   });
 }
 
