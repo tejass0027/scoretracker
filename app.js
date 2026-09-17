@@ -4945,9 +4945,19 @@ if (demoBtnReset) {
       const messageInput = document.querySelector("#review-message");
 
       const name = (nameInput && nameInput.value.trim()) || "Anonymous Sports Fan";
-      const email = (emailInput && emailInput.value.trim()) || "Not provided";
+      const email = (emailInput && emailInput.value.trim()) || "";
       const category = (categoryInput && categoryInput.value) || "General Experience";
       const message = (messageInput && messageInput.value.trim()) || "";
+
+      if (!email || !email.includes("@")) {
+        if (reviewStatusBox) {
+          reviewStatusBox.className = "review-status-box error";
+          reviewStatusBox.textContent = "Please enter a valid email address before submitting.";
+          reviewStatusBox.classList.remove("hidden");
+        }
+        if (emailInput) emailInput.focus();
+        return;
+      }
 
       if (!message) {
         if (reviewStatusBox) {
@@ -4955,6 +4965,7 @@ if (demoBtnReset) {
           reviewStatusBox.textContent = "Please enter your review message before submitting.";
           reviewStatusBox.classList.remove("hidden");
         }
+        if (messageInput) messageInput.focus();
         return;
       }
 
