@@ -1963,6 +1963,7 @@
   border: 1px solid rgba(16, 185, 129, 0.35);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
+  margin-bottom: 48px;
   animation: bannerGlowPulse 5.5s ease-in-out infinite alternate;
 }
 
