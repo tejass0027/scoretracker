@@ -622,7 +622,7 @@ function navigateByHash(hash) {
   } else if (hash === "#sports") {
     showSportsPage(true);
   } else {
-    showSportsPage(true);
+    showWelcomePage(true);
   }
 }
 
@@ -5547,16 +5547,13 @@ if (btnSaveCricketTournVault) {
 
 syncScoringModeUI();
 
-// Initialize Hash Routing
+// Always show starting welcome page first when visiting the site
+showWelcomePage(true);
+render();
+
+// Initialize Hash Routing for subsequent interactions & back/forward navigation
 window.addEventListener("hashchange", () => {
   navigateByHash(window.location.hash);
   render();
 });
 
-// Initialize Page state on reload/load
-if (window.location.hash && window.location.hash !== "#welcome") {
-  navigateByHash(window.location.hash);
-} else {
-  showWelcomePage(true);
-}
-render();
