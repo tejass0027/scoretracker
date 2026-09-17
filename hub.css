@@ -752,18 +752,45 @@
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
   padding: 30px 0 60px;
-  animation: fadeInWelcome 0.35s ease-out;
 }
 
-@keyframes fadeInWelcome {
-  from { opacity: 0; transform: translateY(10px); }
+/* Staggered Entrance Animations */
+.welcome-hero {
+  animation: fadeInUpHero 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.welcome-stats-bar {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.welcome-grid {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+.welcome-demo-section {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+.welcome-steps-section {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+.welcome-faq-section {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+}
+.welcome-bottom-banner {
+  animation: fadeInUpSection 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+}
+
+@keyframes fadeInUpHero {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUpSection {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-hero {
   position: relative;
   text-align: center;
-  padding: 60px 24px 45px;
+  padding: 65px 24px 48px;
   background: 
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.18), transparent 70%),
     radial-gradient(ellipse 60% 40% at 85% 60%, rgba(59, 130, 246, 0.12), transparent 60%),
@@ -778,7 +805,52 @@
   margin-bottom: 32px;
 }
 
+/* Ambient Drifting Aurora Glow Orbs */
+.welcome-hero::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 15%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraDrift1 11s ease-in-out infinite alternate;
+}
+
+.welcome-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: 15%;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(139, 92, 246, 0.14) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraDrift2 13s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(45px, 28px) scale(1.16); }
+  100% { transform: translate(-30px, 15px) scale(0.92); }
+}
+
+@keyframes auroraDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-45px, -30px) scale(1.2); }
+  100% { transform: translate(25px, -35px) scale(0.94); }
+}
+
 .welcome-badge {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -793,22 +865,55 @@
   border: 1px solid rgba(16, 185, 129, 0.4);
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
   margin-bottom: 20px;
+  transition: all 0.25s ease;
+}
+
+.welcome-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(16, 185, 129, 0.4);
+}
+
+.welcome-badge .pulse-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #10b981 !important;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7) !important;
+  animation: liveBadgeRadar 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1) !important;
+}
+
+@keyframes liveBadgeRadar {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); }
+  70% { box-shadow: 0 0 0 9px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .welcome-title {
+  position: relative;
+  z-index: 1;
   font-size: clamp(2.3rem, 5vw, 3.6rem);
   font-weight: 900;
   line-height: 1.15;
   margin: 0 auto 18px;
   max-width: 900px;
   color: #ffffff;
-  background: linear-gradient(135deg, #ffffff 40%, #34d399 75%, #60a5fa 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #34d399 50%, #60a5fa 78%, #ffffff 98%);
+  background-size: 240% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.025em;
+  animation: titleGradientFlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes titleGradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .welcome-subtitle {
+  position: relative;
+  z-index: 1;
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: #94a3b8;
   max-width: 720px;
@@ -817,6 +922,8 @@
 }
 
 .welcome-actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -826,6 +933,8 @@
 }
 
 .welcome-btn-primary {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -842,6 +951,24 @@
   font-family: inherit;
 }
 
+/* Diagonal Sheen Sweep Effect */
+.welcome-btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-24deg);
+  animation: btnSheenSweep 4.2s ease-in-out infinite;
+}
+
+@keyframes btnSheenSweep {
+  0%, 65% { left: -130%; }
+  100% { left: 210%; }
+}
+
 .welcome-btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 16px 35px rgba(16, 185, 129, 0.55);
@@ -849,6 +976,10 @@
 
 .welcome-btn-primary:hover span:last-child {
   transform: translateX(4px);
+}
+
+.welcome-btn-primary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .welcome-btn-secondary {
@@ -906,15 +1037,21 @@
   font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   font-family: inherit;
 }
 
 .welcome-quick-pill:hover {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.55);
   color: #34d399;
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.25);
+}
+
+.welcome-quick-pill:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
 }
 
 /* Feature Pillars Grid */
@@ -949,9 +1086,9 @@
 }
 
 .welcome-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-7px);
   border-color: rgba(16, 185, 129, 0.45);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 28px rgba(16, 185, 129, 0.2);
 }
 
 .welcome-card-icon {
@@ -965,6 +1102,11 @@
   background: rgba(16, 185, 129, 0.14);
   border: 1px solid rgba(16, 185, 129, 0.3);
   margin-bottom: 20px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.welcome-card:hover .welcome-card-icon {
+  transform: translateY(-5px) scale(1.12) rotate(-4deg);
 }
 
 .welcome-card:nth-child(2) .welcome-card-icon {
@@ -1369,6 +1511,79 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Interactive Demo Animated Pop & Floating Particles */
+.score-pop-normal {
+  animation: scoreBounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.score-pop-four {
+  animation: scoreFourGlow 0.45s ease-out;
+}
+.score-pop-six {
+  animation: scoreSixExplode 0.52s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.score-pop-wicket {
+  animation: scoreWicketShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes scoreBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes scoreFourGlow {
+  0% { transform: scale(1); text-shadow: 0 0 0 transparent; }
+  35% { transform: scale(1.22); color: #60a5fa; text-shadow: 0 0 25px rgba(96, 165, 250, 0.8); }
+  100% { transform: scale(1); }
+}
+
+@keyframes scoreSixExplode {
+  0% { transform: scale(1); text-shadow: 0 0 0 transparent; }
+  35% { transform: scale(1.3) rotate(3deg); color: #fbbf24; text-shadow: 0 0 35px rgba(251, 191, 36, 0.9); }
+  70% { transform: scale(1.08) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes scoreWicketShake {
+  10%, 90% { transform: translate3d(-2px, 0, 0) scale(1.1); color: #f87171; text-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
+  20%, 80% { transform: translate3d(3px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* Floating Reaction Particle */
+.demo-floating-burst {
+  position: absolute;
+  pointer-events: none;
+  font-weight: 900;
+  font-size: 1.08rem;
+  border-radius: 999px;
+  padding: 5px 14px;
+  z-index: 100;
+  white-space: nowrap;
+  animation: floatBurstUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes floatBurstUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.15);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translateY(-28px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-46px) scale(0.9);
+  }
+}
+
 /* ==========================================================================
    HOW IT WORKS 3-STEP GRID
    ========================================================================== */
@@ -1399,12 +1614,13 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.25s ease;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .welcome-step-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 25px rgba(59, 130, 246, 0.18);
 }
 
 .welcome-step-badge {
@@ -1420,6 +1636,11 @@
 .welcome-step-icon {
   font-size: 2.2rem;
   margin-bottom: 16px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.welcome-step-card:hover .welcome-step-icon {
+  transform: translateY(-5px) scale(1.15) rotate(4deg);
 }
 
 .welcome-step-title {
@@ -1456,12 +1677,13 @@
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .welcome-faq-item[open] {
   border-color: rgba(16, 185, 129, 0.4);
   background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.1);
 }
 
 .welcome-faq-q {
@@ -1475,6 +1697,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: color 0.2s ease;
+}
+
+.welcome-faq-q:hover {
+  color: #34d399;
 }
 
 .welcome-faq-q::-webkit-details-marker {
@@ -1486,7 +1713,7 @@
   font-size: 1.4rem;
   font-weight: 600;
   color: #34d399;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .welcome-faq-item[open] .welcome-faq-q::after {
@@ -1500,19 +1727,72 @@
   line-height: 1.65;
 }
 
+.welcome-faq-item[open] .welcome-faq-a {
+  animation: faqContentSlide 0.28s ease-out;
+}
+
+@keyframes faqContentSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ==========================================================================
    BOTTOM CALL TO ACTION BANNER
    ========================================================================== */
 .welcome-bottom-banner {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding: 50px 24px;
   border-radius: 26px;
   background: 
-    radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.22), transparent 70%),
-    rgba(15, 23, 42, 0.8);
+    radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.24), transparent 70%),
+    rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(16, 185, 129, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
+  animation: bannerGlowPulse 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes bannerGlowPulse {
+  0% {
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(16, 185, 129, 0.08);
+  }
+  100% {
+    border-color: rgba(16, 185, 129, 0.65);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 45px rgba(16, 185, 129, 0.22);
+  }
+}
+
+/* Accessibility: User Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-hero::before,
+  .welcome-hero::after,
+  .welcome-title,
+  .welcome-badge .pulse-dot,
+  .welcome-btn-primary::before,
+  .welcome-bottom-banner,
+  .welcome-hero,
+  .welcome-stats-bar,
+  .welcome-grid,
+  .welcome-demo-section,
+  .welcome-steps-section,
+  .welcome-faq-section,
+  .score-pop-normal,
+  .score-pop-four,
+  .score-pop-six,
+  .score-pop-wicket,
+  .demo-floating-burst {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .welcome-bottom-title {

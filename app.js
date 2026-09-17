@@ -4744,7 +4744,7 @@ let demoBalls = 100; // 16.4 overs = 16*6 + 4
 const demoTarget = 185;
 const demoTotalBalls = 120; // 20 overs
 
-function updateDemoUI(msg = null) {
+function updateDemoUI(msg = null, burstType = null) {
   const scoreEl = document.querySelector("#demo-score-display");
   const oversEl = document.querySelector("#demo-overs-display");
   const eqEl = document.querySelector("#demo-equation-text");
@@ -4758,7 +4758,56 @@ function updateDemoUI(msg = null) {
   const crr = demoBalls > 0 ? ((demoRuns / demoBalls) * 6).toFixed(2) : "0.00";
   const rrr = remainingBalls > 0 ? ((remainingRuns / remainingBalls) * 6).toFixed(2) : "0.00";
 
-  if (scoreEl) scoreEl.textContent = `${demoRuns} / ${demoWickets}`;
+  if (scoreEl) {
+    scoreEl.textContent = `${demoRuns} / ${demoWickets}`;
+
+    // Score pop animation reaction
+    if (burstType) {
+      scoreEl.classList.remove("score-pop-normal", "score-pop-four", "score-pop-six", "score-pop-wicket");
+      void scoreEl.offsetWidth; // trigger DOM reflow for re-animation
+      if (burstType === "1") scoreEl.classList.add("score-pop-normal");
+      else if (burstType === "4") scoreEl.classList.add("score-pop-four");
+      else if (burstType === "6") scoreEl.classList.add("score-pop-six");
+      else if (burstType === "W") scoreEl.classList.add("score-pop-wicket");
+
+      // Spawn floating celebration chip
+      const scoreBox = document.querySelector(".welcome-demo-scorebox");
+      if (scoreBox) {
+        const burst = document.createElement("div");
+        burst.className = "demo-floating-burst";
+        if (burstType === "1") {
+          burst.textContent = "+1 Single";
+          burst.style.background = "rgba(16, 185, 129, 0.28)";
+          burst.style.color = "#34d399";
+          burst.style.border = "1px solid rgba(16, 185, 129, 0.5)";
+          burst.style.boxShadow = "0 0 16px rgba(16, 185, 129, 0.35)";
+        } else if (burstType === "4") {
+          burst.textContent = "🏏 4 FOUR!";
+          burst.style.background = "rgba(59, 130, 246, 0.35)";
+          burst.style.color = "#93c5fd";
+          burst.style.border = "1px solid #60a5fa";
+          burst.style.boxShadow = "0 0 22px rgba(59, 130, 246, 0.5)";
+        } else if (burstType === "6") {
+          burst.textContent = "🔥 6 MAXIMUM!";
+          burst.style.background = "rgba(245, 158, 11, 0.35)";
+          burst.style.color = "#fde047";
+          burst.style.border = "1px solid #fbbf24";
+          burst.style.boxShadow = "0 0 28px rgba(245, 158, 11, 0.6)";
+        } else if (burstType === "W") {
+          burst.textContent = "🔴 WICKET!";
+          burst.style.background = "rgba(239, 68, 68, 0.35)";
+          burst.style.color = "#fca5a5";
+          burst.style.border = "1px solid #f87171";
+          burst.style.boxShadow = "0 0 22px rgba(239, 68, 68, 0.5)";
+        }
+        scoreBox.style.position = "relative";
+        burst.style.top = "-10px";
+        burst.style.right = "0px";
+        scoreBox.appendChild(burst);
+        setTimeout(() => burst.remove(), 920);
+      }
+    }
+  }
   if (oversEl) oversEl.textContent = `Overs: ${oversStr} / 20`;
 
   if (eqEl) {
@@ -4792,7 +4841,7 @@ if (demoBtn1) {
     if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
       demoRuns += 1;
       demoBalls += 1;
-      updateDemoUI("Quick single taken! +1 run");
+      updateDemoUI("Quick single taken! +1 run", "1");
     }
   });
 }
@@ -4801,7 +4850,7 @@ if (demoBtn4) {
     if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
       demoRuns += 4;
       demoBalls += 1;
-      updateDemoUI("CRACKING SHOT! 🏏 Boundary four (+4)!");
+      updateDemoUI("CRACKING SHOT! 🏏 Boundary four (+4)!", "4");
     }
   });
 }
@@ -4810,7 +4859,7 @@ if (demoBtn6) {
     if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
       demoRuns += 6;
       demoBalls += 1;
-      updateDemoUI("HUGE MAXIMUM! 🔥 Six runs into the stands (+6)!");
+      updateDemoUI("HUGE MAXIMUM! 🔥 Six runs into the stands (+6)!", "6");
     }
   });
 }
@@ -4819,7 +4868,7 @@ if (demoBtnWicket) {
     if (demoRuns < demoTarget && demoWickets < 10 && demoBalls < demoTotalBalls) {
       demoWickets += 1;
       demoBalls += 1;
-      updateDemoUI("OUT! 🔴 Clean bowled! Wicket fell!");
+      updateDemoUI("OUT! 🔴 Clean bowled! Wicket fell!", "W");
     }
   });
 }
