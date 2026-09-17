@@ -5032,12 +5032,19 @@ if (demoBtnReset) {
             statusBox.className = "review-status-box success";
             statusBox.innerHTML = `
               🎉 <strong>Thank you for your review!</strong><br>
-              Your ${selectedRating}-star feedback has been sent directly to our team inbox at <strong>algobuilds@gmail.com</strong>.
+              Your ${selectedRating}-star feedback has been sent directly to our team inbox at <strong>algobuilds@gmail.com</strong>.<br>
+              <span style="font-size: 0.85rem; opacity: 0.9; margin-top: 6px; display: inline-block;">Taking you back to Sports Hub...</span>
             `;
             statusBox.classList.remove("hidden");
           }
           form.reset();
           updateStars(5);
+          if (typeof showToast === "function") {
+            showToast("Review submitted! Returning to Sports Hub...");
+          }
+          setTimeout(() => {
+            showSportsPage();
+          }, 1600);
         } else {
           throw new Error("Submission response not ok");
         }
