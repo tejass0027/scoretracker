@@ -4881,6 +4881,154 @@ if (demoBtnReset) {
   });
 }
 
+// Welcome Review Form Handler (Sends directly to algobuilds@gmail.com)
+(function initReviewSection() {
+  let selectedRating = 5;
+  const starBtns = document.querySelectorAll(".review-star-btn");
+  const starFeedback = document.querySelector("#review-star-feedback");
+  const reviewForm = document.querySelector("#welcome-review-form");
+  const reviewSubmitBtn = document.querySelector("#review-submit-btn");
+  const reviewStatusBox = document.querySelector("#review-status-box");
+
+  const ratingDescriptions = {
+    1: "⭐ 1 Star - Needs Improvement",
+    2: "⭐⭐ 2 Stars - Fair",
+    3: "⭐⭐⭐ 3 Stars - Good",
+    4: "⭐⭐⭐⭐ 4 Stars - Great Experience!",
+    5: "⭐⭐⭐⭐⭐ 5 Stars - Exceptional!"
+  };
+
+  function updateStars(val) {
+    selectedRating = val;
+    starBtns.forEach((btn) => {
+      const r = parseInt(btn.getAttribute("data-rating"), 10);
+      if (r <= val) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    if (starFeedback) {
+      starFeedback.textContent = ratingDescriptions[val] || `${val} Stars`;
+    }
+  }
+
+  starBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const r = parseInt(btn.getAttribute("data-rating"), 10);
+      updateStars(r);
+    });
+    btn.addEventListener("mouseenter", () => {
+      const r = parseInt(btn.getAttribute("data-rating"), 10);
+      starBtns.forEach((b) => {
+        const br = parseInt(b.getAttribute("data-rating"), 10);
+        if (br <= r) b.classList.add("active");
+        else b.classList.remove("active");
+      });
+    });
+  });
+
+  const starsRow = document.querySelector(".review-stars-row");
+  if (starsRow) {
+    starsRow.addEventListener("mouseleave", () => {
+      updateStars(selectedRating);
+    });
+  }
+
+  if (reviewForm) {
+    reviewForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nameInput = document.querySelector("#review-author-name");
+      const emailInput = document.querySelector("#review-author-email");
+      const categoryInput = document.querySelector("#review-sport-category");
+      const messageInput = document.querySelector("#review-message");
+
+      const name = (nameInput && nameInput.value.trim()) || "Anonymous Sports Fan";
+      const email = (emailInput && emailInput.value.trim()) || "Not provided";
+      const category = (categoryInput && categoryInput.value) || "General Experience";
+      const message = (messageInput && messageInput.value.trim()) || "";
+
+      if (!message) {
+        if (reviewStatusBox) {
+          reviewStatusBox.className = "review-status-box error";
+          reviewStatusBox.textContent = "Please enter your review message before submitting.";
+          reviewStatusBox.classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (reviewSubmitBtn) {
+        reviewSubmitBtn.disabled = true;
+        reviewSubmitBtn.innerHTML = "<span>⏳ Sending review to team...</span>";
+      }
+      if (reviewStatusBox) {
+        reviewStatusBox.classList.add("hidden");
+      }
+
+      const payload = {
+        _subject: `New ScoreTracker Review: ${selectedRating} Stars (${category}) from ${name}`,
+        _template: "table",
+        _captcha: "false",
+        Rating: `${selectedRating} / 5 Stars`,
+        Reviewer: name,
+        Email: email,
+        Category: category,
+        Review: message,
+        Timestamp: new Date().toLocaleString()
+      };
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/algobuilds@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          if (reviewStatusBox) {
+            reviewStatusBox.className = "review-status-box success";
+            reviewStatusBox.innerHTML = `
+              🎉 <strong>Thank you for your review!</strong><br>
+              Your ${selectedRating}-star feedback has been sent directly to our team inbox at <strong>algobuilds@gmail.com</strong>.
+            `;
+            reviewStatusBox.classList.remove("hidden");
+          }
+          reviewForm.reset();
+          updateStars(5);
+        } else {
+          throw new Error("Submission response not ok");
+        }
+      } catch (err) {
+        // Fallback: provide direct mailto link
+        const mailtoSubject = encodeURIComponent(`ScoreTracker Review: ${selectedRating} Stars (${category})`);
+        const mailtoBody = encodeURIComponent(`Rating: ${selectedRating} / 5 Stars\nFrom: ${name} (${email})\nCategory: ${category}\n\nReview:\n${message}`);
+        const mailtoUrl = `mailto:algobuilds@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+        if (reviewStatusBox) {
+          reviewStatusBox.className = "review-status-box success";
+          reviewStatusBox.innerHTML = `
+            📬 <strong>Network blocked automatic delivery.</strong> You can send it directly with 1 tap:
+            <br><br>
+            <a href="${mailtoUrl}" style="color: #34d399; font-weight: 800; text-decoration: underline;">
+              ✉️ Click here to send your review to algobuilds@gmail.com
+            </a>
+          `;
+          reviewStatusBox.classList.remove("hidden");
+        }
+      } finally {
+        if (reviewSubmitBtn) {
+          reviewSubmitBtn.disabled = false;
+          reviewSubmitBtn.innerHTML = "<span>🚀 Submit Review</span>";
+        }
+      }
+    });
+  }
+})();
+
 // Terms & Conditions / Privacy Modal Logic
 const termsModal = document.querySelector("#terms-modal");
 const termsModalCloseIcon = document.querySelector("#terms-modal-close-icon");

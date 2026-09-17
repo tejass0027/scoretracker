@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=317" />
-    <link rel="stylesheet" href="hub.css?v=317" />
+    <link rel="stylesheet" href="styles.css?v=318" />
+    <link rel="stylesheet" href="hub.css?v=318" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -331,6 +331,73 @@
             <summary class="welcome-faq-q">Which sports are supported?</summary>
             <div class="welcome-faq-a">ScoreTracker currently supports 14 sports: Cricket, Football, Basketball, Tennis, Badminton, Hockey, Volleyball, Baseball, Rugby, Kabaddi, Table Tennis, Golf, Boxing, and MMA.</div>
           </details>
+        </div>
+      </section>
+
+      <!-- 4.5 USER REVIEW & FEEDBACK SECTION -->
+      <section class="welcome-review-section" id="welcome-review-section" aria-label="User Reviews &amp; Feedback">
+        <div class="welcome-demo-header">
+          <div class="welcome-badge">
+            <span class="pulse-dot"></span>
+            <span>💬 Community Reviews &amp; Feedback</span>
+          </div>
+          <h2 class="welcome-section-title">Send Us Your Review</h2>
+          <p class="welcome-section-desc">
+            Your feedback directly shapes ScoreTracker. Share your rating, suggest features, or report issues—every submission is sent straight to our team inbox!
+          </p>
+        </div>
+
+        <div class="welcome-review-card">
+          <form id="welcome-review-form" class="welcome-review-form">
+            <div class="review-stars-wrapper">
+              <div class="review-stars-row" role="radiogroup" aria-label="Rating out of 5 stars">
+                <button type="button" class="review-star-btn active" data-rating="1" aria-label="1 Star">★</button>
+                <button type="button" class="review-star-btn active" data-rating="2" aria-label="2 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="3" aria-label="3 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="4" aria-label="4 Stars">★</button>
+                <button type="button" class="review-star-btn active" data-rating="5" aria-label="5 Stars">★</button>
+              </div>
+              <div id="review-star-feedback" class="review-star-feedback">⭐⭐⭐⭐⭐ 5 Stars - Exceptional!</div>
+            </div>
+
+            <div class="review-form-grid">
+              <div class="review-field-group">
+                <label for="review-author-name" class="review-label">Your Name</label>
+                <input type="text" id="review-author-name" class="review-input" placeholder="e.g. Rahul Sharma or Team Coach" autocomplete="name" />
+              </div>
+              <div class="review-field-group">
+                <label for="review-author-email" class="review-label">Your Email (Optional, so we can reply)</label>
+                <input type="email" id="review-author-email" class="review-input" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="review-form-grid" style="margin-bottom: 16px;">
+              <div class="review-field-group" style="grid-column: 1 / -1;">
+                <label for="review-sport-category" class="review-label">Review Category / Sport</label>
+                <select id="review-sport-category" class="review-select">
+                  <option value="General Experience">⭐ General Platform Experience</option>
+                  <option value="Cricket Tracker">🏏 Cricket Live Console</option>
+                  <option value="Football Tracker">⚽ Football Live Console</option>
+                  <option value="Basketball Tracker">🏀 Basketball Live Console</option>
+                  <option value="Tournament League Engine">🏆 Tournament &amp; League Engine</option>
+                  <option value="Feature Request">💡 Feature Request / Suggestion</option>
+                  <option value="Bug Report">🐞 Bug Report / Issue</option>
+                  <option value="Other Sports">⚡ Other 14 Sports</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="review-field-group" style="margin-bottom: 20px;">
+              <label for="review-message" class="review-label">Your Review &amp; Comments <span style="color:#f87171;">*</span></label>
+              <textarea id="review-message" class="review-textarea" placeholder="Tell us what you enjoyed, what rules or sports you'd love to see next, or any improvements..." required></textarea>
+            </div>
+
+            <button type="submit" id="review-submit-btn" class="review-submit-btn">
+              <span>🚀 Submit Review</span>
+            </button>
+
+            <div id="review-status-box" class="review-status-box hidden"></div>
+          </form>
         </div>
       </section>
 
@@ -5990,7 +6057,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=317"></script>
+    <script src="app.js?v=318"></script>
     <script src="sports/football.js?v=211"></script>
     <script src="sports/basketball.js?v=211"></script>
     <script src="sports/tennis.js?v=211"></script>
