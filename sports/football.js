@@ -2333,19 +2333,9 @@ console.log("ScoreTracker Football Module loaded - version 208");
     triggerFbToast("Match timer was stopped because the page refreshed. Press Resume Clock to continue.");
   }
 
-  // Handle first load checks. app.js resets location.hash to "#sports" on
-  // every load (showSportsPage()) before this code runs. Only restore the
-  // original hash (captured before app.js ran) when it was an active
-  // tracker view — a refresh on the live match/tournament dashboard stays
-  // there; a refresh anywhere else (format picker, setup forms) falls
-  // through to the all-sports page as normal.
-  const trackerHashes = ["#football-match", "#football-tdashboard"];
+  // If refreshing while on any football page, stay on that exact view
   const originalHash = window.__initialHash || window.location.hash;
-  if (trackerHashes.includes(originalHash)) {
-    if (window.location.hash !== originalHash) {
-      window.location.hash = originalHash;
-    } else {
-      handleFootballNavigation();
-    }
+  if (originalHash && originalHash.startsWith("#football")) {
+    handleFootballNavigation();
   }
 })();

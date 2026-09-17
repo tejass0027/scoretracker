@@ -6146,18 +6146,10 @@
       </div>
     </div>
 
-    <script>
-      // Always ensure starting webpage is shown first whenever anyone visits the website
-      try {
-        if (!window.location.hash || window.location.hash !== "#welcome") {
-          window.location.hash = "#welcome";
-        }
-      } catch (e) {}
-      window.__initialHash = "#welcome";
-    </script>
+    <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=324"></script>
-    <script src="sports/football.js?v=211"></script>
+    <script src="app.js?v=325"></script>
+    <script src="sports/football.js?v=212"></script>
     <script src="sports/basketball.js?v=211"></script>
     <script src="sports/tennis.js?v=211"></script>
     <script src="sports/badminton.js?v=211"></script>

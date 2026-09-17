@@ -5547,8 +5547,15 @@ if (btnSaveCricketTournVault) {
 
 syncScoringModeUI();
 
-// Always show starting welcome page first when visiting the site
-showWelcomePage(true);
+// Initialize Page state on reload/load:
+// If the visitor has an active hash in the URL (refreshing on #sports, #match, #review, etc.), stay on that page!
+// Otherwise (visiting the website without a hash or with #welcome), show the starting welcome page.
+const currentHash = window.location.hash;
+if (currentHash && currentHash !== "#welcome" && currentHash !== "#") {
+  navigateByHash(currentHash);
+} else {
+  showWelcomePage(true);
+}
 render();
 
 // Initialize Hash Routing for subsequent interactions & back/forward navigation
