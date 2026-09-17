@@ -527,6 +527,24 @@ function navigateByHash(hash) {
     return;
   }
 
+  if (hash === "#review") {
+    showWelcomePage(true);
+    setTimeout(() => {
+      const revSec = document.querySelector("#welcome-review-section");
+      if (revSec) {
+        revSec.scrollIntoView({ behavior: "smooth", block: "center" });
+        const card = revSec.querySelector(".welcome-review-card");
+        if (card) {
+          card.classList.add("review-highlight-pulse");
+          setTimeout(() => card.classList.remove("review-highlight-pulse"), 2600);
+        }
+        const msgInput = document.querySelector("#review-message");
+        if (msgInput) msgInput.focus();
+      }
+    }, 140);
+    return;
+  }
+
   // Ensure all prior pages (especially welcome landing page) are hidden
   hideAllPages();
   if (els.welcomePage) els.welcomePage.classList.add("hidden");
@@ -5039,6 +5057,48 @@ if (demoBtnReset) {
     });
   }
 })();
+
+// Open Review Section from anywhere (Sports Hub, navbar, floating button)
+function openReviewSection() {
+  if (window.location.hash !== "#review") {
+    window.location.hash = "#review";
+  }
+  showWelcomePage();
+  setTimeout(() => {
+    const revSec = document.querySelector("#welcome-review-section");
+    if (revSec) {
+      revSec.scrollIntoView({ behavior: "smooth", block: "center" });
+      const card = revSec.querySelector(".welcome-review-card");
+      if (card) {
+        card.classList.add("review-highlight-pulse");
+        setTimeout(() => card.classList.remove("review-highlight-pulse"), 2600);
+      }
+      const msgInput = document.querySelector("#review-message");
+      if (msgInput) msgInput.focus();
+    }
+  }, 140);
+}
+window.openReviewSection = openReviewSection;
+
+// Bind Review triggers in Sports Hub and navigation bar
+const hubReviewBtn = document.querySelector("#sports-hub-review-btn");
+if (hubReviewBtn) {
+  hubReviewBtn.addEventListener("click", () => {
+    openReviewSection();
+  });
+}
+const floatingReviewBtn = document.querySelector("#sports-floating-review-btn");
+if (floatingReviewBtn) {
+  floatingReviewBtn.addEventListener("click", () => {
+    openReviewSection();
+  });
+}
+const navReviewBtn = document.querySelector("#nav-btn-review");
+if (navReviewBtn) {
+  navReviewBtn.addEventListener("click", () => {
+    openReviewSection();
+  });
+}
 
 // Terms & Conditions / Privacy Modal Logic
 const termsModal = document.querySelector("#terms-modal");

@@ -1948,6 +1948,93 @@
   background: #ffffff !important;
 }
 
+/* Review Highlight Pulse */
+@keyframes reviewHighlightGlow {
+  0% { box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 0 0 rgba(251, 191, 36, 0.8); border-color: #fbbf24; }
+  50% { box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 35px 8px rgba(251, 191, 36, 0.6); border-color: #fbbf24; }
+  100% { box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45); border-color: rgba(16, 185, 129, 0.3); }
+}
+
+.review-highlight-pulse {
+  animation: reviewHighlightGlow 2.5s ease-out;
+}
+
+/* Sports Hub Review Pill Button (Right side of filter bar) */
+.hub-review-pill-btn {
+  margin-left: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 20px !important;
+  border-radius: 999px !important;
+  background: rgba(251, 191, 36, 0.12) !important;
+  border: 1px solid rgba(251, 191, 36, 0.45) !important;
+  color: #fbbf24 !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.15) !important;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  font-family: inherit !important;
+}
+
+.hub-review-pill-btn:hover {
+  background: rgba(251, 191, 36, 0.25) !important;
+  border-color: #fbbf24 !important;
+  transform: translateY(-2px) scale(1.04) !important;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.35) !important;
+}
+
+.hub-review-pill-btn:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
+.light-theme .hub-review-pill-btn {
+  background: #fefce8 !important;
+  border-color: #fde047 !important;
+  color: #b45309 !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1) !important;
+}
+
+.light-theme .hub-review-pill-btn:hover {
+  background: #fef08a !important;
+  border-color: #eab308 !important;
+  color: #92400e !important;
+}
+
+/* Floating Review Button on Sports Page */
+.sports-floating-review-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 990;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.45);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(10px);
+}
+
+.sports-floating-review-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 36px rgba(245, 158, 11, 0.6);
+}
+
+.sports-floating-review-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
 /* ==========================================================================
    BOTTOM CALL TO ACTION BANNER
    ========================================================================== */
