@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=334" />
-    <link rel="stylesheet" href="hub.css?v=334" />
+    <link rel="stylesheet" href="styles.css?v=335" />
+    <link rel="stylesheet" href="hub.css?v=335" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -143,14 +143,53 @@
     <!-- STARTING / WELCOME LANDING PAGE -->
     <main id="welcome-page" class="welcome-page">
       <section class="welcome-hero" aria-label="ScoreTracker Welcome Portal">
-        <div class="welcome-badge">
-          <span class="pulse-dot"></span>
-          <span>Live Multi-Sport Scoring Platform</span>
+        <!-- Ambient Floating Sport Icons -->
+        <div class="welcome-hero-particles" aria-hidden="true">
+          <span class="hero-float-icon hero-float-1">🏏</span>
+          <span class="hero-float-icon hero-float-2">⚽</span>
+          <span class="hero-float-icon hero-float-3">🏀</span>
+          <span class="hero-float-icon hero-float-4">🎾</span>
+          <span class="hero-float-icon hero-float-5">🥊</span>
+          <span class="hero-float-icon hero-float-6">🏆</span>
         </div>
-        <h1 class="welcome-title">Professional Live Sports Scoring &amp; Tournaments</h1>
+
+        <div class="welcome-badge-group">
+          <div class="welcome-badge">
+            <span class="pulse-dot"></span>
+            <span>Live Multi-Sport Scoring Platform</span>
+          </div>
+          <span class="welcome-badge-pill">✨ 14 Disciplines</span>
+          <span class="welcome-badge-pill welcome-badge-pwa">⚡ 100% Offline PWA</span>
+        </div>
+
+        <h1 class="welcome-title">
+          Professional Live Sports Scoring <br class="welcome-title-break" />
+          <span class="welcome-title-accent">&amp; Tournaments</span>
+        </h1>
+
         <p class="welcome-subtitle">
           Track matches ball-by-ball, manage round-robin leagues, and run dynamic digital scoreboards with period clocks, referee whistles, and Cloud Vault sync across 14 competitive disciplines.
         </p>
+
+        <!-- Core Feature Highlights Strip -->
+        <div class="welcome-hero-features" aria-label="Key Capabilities">
+          <div class="hero-feature-chip">
+            <span class="chip-icon">⚡</span>
+            <span>Ball-by-Ball Precision</span>
+          </div>
+          <div class="hero-feature-chip">
+            <span class="chip-icon">⏱️</span>
+            <span>Period Clocks &amp; Whistles</span>
+          </div>
+          <div class="hero-feature-chip">
+            <span class="chip-icon">📊</span>
+            <span>Auto Points &amp; NRR</span>
+          </div>
+          <div class="hero-feature-chip">
+            <span class="chip-icon">☁️</span>
+            <span>Cloud Vault Sync</span>
+          </div>
+        </div>
 
         <div class="welcome-actions">
           <button id="welcome-enter-btn" class="welcome-btn-primary" type="button">

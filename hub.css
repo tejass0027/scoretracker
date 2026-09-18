@@ -848,6 +848,68 @@
   100% { transform: translate(25px, -35px) scale(0.94); }
 }
 
+/* Ambient Floating Sport Particles */
+.welcome-hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-float-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  opacity: 0.16;
+  filter: blur(0.5px);
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.hero-float-1 { top: 12%; left: 5%; animation: floatBob1 9s ease-in-out infinite alternate; }
+.hero-float-2 { top: 18%; right: 6%; animation: floatBob2 11s ease-in-out infinite alternate; font-size: 2.5rem; }
+.hero-float-3 { bottom: 22%; left: 7%; animation: floatBob3 10s ease-in-out infinite alternate; font-size: 2.3rem; }
+.hero-float-4 { bottom: 24%; right: 7%; animation: floatBob1 12s ease-in-out infinite alternate; font-size: 2.1rem; }
+.hero-float-5 { top: 8%; right: 26%; animation: floatBob2 8s ease-in-out infinite alternate; font-size: 1.8rem; }
+.hero-float-6 { bottom: 12%; left: 26%; animation: floatBob3 13s ease-in-out infinite alternate; font-size: 2rem; }
+
+@keyframes floatBob1 {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-16px) rotate(8deg) scale(1.08); }
+  100% { transform: translateY(8px) rotate(-6deg) scale(0.96); }
+}
+
+@keyframes floatBob2 {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(18px) rotate(-10deg) scale(1.1); }
+  100% { transform: translateY(-12px) rotate(6deg) scale(0.95); }
+}
+
+@keyframes floatBob3 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(12px, -14px) rotate(12deg); }
+  100% { transform: translate(-8px, 10px) rotate(-8deg); }
+}
+
+/* Welcome Badge Group */
+.welcome-badge-group {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
 .welcome-badge {
   position: relative;
   z-index: 1;
@@ -864,7 +926,6 @@
   color: #34d399;
   border: 1px solid rgba(16, 185, 129, 0.4);
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-  margin-bottom: 20px;
   transition: all 0.25s ease;
 }
 
@@ -888,24 +949,65 @@
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
+.welcome-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  background: rgba(15, 23, 42, 0.6);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.welcome-badge-pill:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+}
+
+.welcome-badge-pwa {
+  color: #fbbf24 !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+}
+
+.welcome-badge-pwa:hover {
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.25) !important;
+}
+
+/* Enhanced Welcome Title with Accent Shimmer */
 .welcome-title {
   position: relative;
   z-index: 1;
-  font-size: clamp(2.3rem, 5vw, 3.6rem);
+  font-size: clamp(2.4rem, 5.2vw, 3.8rem);
   font-weight: 900;
   line-height: 1.15;
-  margin: 0 auto 18px;
-  max-width: 900px;
+  margin: 0 auto 20px;
+  max-width: 960px;
   color: #ffffff;
-  background: linear-gradient(135deg, #ffffff 20%, #34d399 50%, #60a5fa 78%, #ffffff 98%);
-  background-size: 240% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.025em;
-  animation: titleGradientFlow 8s ease-in-out infinite alternate;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes titleGradientFlow {
+.welcome-title-accent {
+  display: inline-block;
+  background: linear-gradient(135deg, #34d399 0%, #38bdf8 50%, #818cf8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleAccentShimmer 6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 16px rgba(52, 211, 153, 0.35));
+}
+
+@keyframes titleAccentShimmer {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -914,11 +1016,61 @@
 .welcome-subtitle {
   position: relative;
   z-index: 1;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
   color: #94a3b8;
-  max-width: 720px;
-  margin: 0 auto 32px;
-  line-height: 1.65;
+  max-width: 740px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+/* Core Feature Highlights Strip */
+.welcome-hero-features {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 auto 30px;
+  max-width: 860px;
+}
+
+.hero-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.hero-feature-chip:hover {
+  transform: translateY(-2px);
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.2);
+  color: #ffffff;
+}
+
+.hero-feature-chip .chip-icon {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hero-feature-chip:hover .chip-icon {
+  transform: scale(1.2);
 }
 
 .welcome-actions {
@@ -1316,6 +1468,44 @@
 
 .light-theme .welcome-subtitle {
   color: #64748b !important;
+}
+
+.light-theme .hero-float-icon {
+  opacity: 0.1 !important;
+}
+
+.light-theme .welcome-badge-pill {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+}
+
+.light-theme .welcome-badge-pwa {
+  color: #d97706 !important;
+  border-color: #fcd34d !important;
+}
+
+.light-theme .welcome-title-accent {
+  background: linear-gradient(135deg, #059669 0%, #0284c7 60%, #4f46e5 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: none !important;
+}
+
+.light-theme .hero-feature-chip {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+}
+
+.light-theme .hero-feature-chip:hover {
+  background: #f8fafc !important;
+  border-color: #10b981 !important;
+  color: #0f172a !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15) !important;
 }
 
 .light-theme .welcome-btn-secondary {
@@ -3086,18 +3276,55 @@
 @media (max-width: 540px) {
   /* Welcome Hero for small screens */
   .welcome-hero {
-    padding: 26px 14px 20px !important;
-    border-radius: 18px !important;
+    padding: 28px 14px 22px !important;
+    border-radius: 20px !important;
   }
 
   .welcome-title {
-    font-size: 1.65rem !important;
-    letter-spacing: -0.02em !important;
+    font-size: 1.75rem !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.18 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .welcome-title-break {
+    display: none !important;
+  }
+
+  .welcome-badge-group {
+    gap: 6px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .welcome-badge {
+    padding: 6px 13px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .welcome-badge-pill {
+    padding: 5px 10px !important;
+    font-size: 0.68rem !important;
   }
 
   .welcome-subtitle {
     font-size: 0.88rem !important;
-    line-height: 1.5 !important;
+    line-height: 1.55 !important;
+    margin-bottom: 18px !important;
+  }
+
+  .welcome-hero-features {
+    gap: 6px !important;
+    margin-bottom: 22px !important;
+  }
+
+  .hero-feature-chip {
+    padding: 6px 11px !important;
+    font-size: 0.76rem !important;
+  }
+
+  .hero-float-icon {
+    font-size: 1.6rem !important;
+    opacity: 0.1 !important;
   }
 
   .welcome-actions {
