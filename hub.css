@@ -2996,7 +2996,14 @@
     border-radius: 999px !important;
   }
 
+  .sport-card-body {
+    text-align: center !important;
+  }
+
   .sport-card-title {
+    text-align: center !important;
+    width: 100% !important;
+    display: block !important;
     font-size: 1.5rem !important;
     font-weight: 800 !important;
     letter-spacing: -0.01em !important;
@@ -3005,11 +3012,13 @@
   }
 
   .sport-card-desc {
+    text-align: center !important;
     font-size: 0.96rem !important;
     line-height: 1.45 !important;
   }
 
   .sport-chip-row {
+    justify-content: center !important;
     gap: 7px !important;
     margin-top: 10px !important;
   }
