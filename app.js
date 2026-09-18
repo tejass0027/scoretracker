@@ -5126,7 +5126,7 @@ if (demoBtnReset) {
             statusBox.className = "review-status-box success";
             statusBox.innerHTML = `
               🎉 <strong>Thank you for your review!</strong><br>
-              Your ${selectedRating}-star feedback has been sent directly to our team inbox at <strong>algobuilds@gmail.com</strong>.<br>
+              Your ${selectedRating}-star feedback has been sent directly to our team.<br>
               <span style="font-size: 0.85rem; opacity: 0.9; margin-top: 6px; display: inline-block;">Taking you back to Sports Hub...</span>
             `;
             statusBox.classList.remove("hidden");
@@ -5154,7 +5154,7 @@ if (demoBtnReset) {
             📬 <strong>Network blocked automatic delivery.</strong> You can send it directly with 1 tap:
             <br><br>
             <a href="${mailtoUrl}" style="color: #34d399; font-weight: 800; text-decoration: underline;">
-              ✉️ Click here to send your review to algobuilds@gmail.com
+              ✉️ Click here to send your review to our support team
             </a>
           `;
           statusBox.classList.remove("hidden");
