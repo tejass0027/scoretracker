@@ -1006,6 +1006,80 @@
   color: #ffffff !important;
 }
 
+/* App Store & Google Play Store Badges */
+.store-badges-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 0 auto 26px;
+}
+
+.store-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 18px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc !important;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  cursor: pointer;
+  min-width: 165px;
+}
+
+.store-badge-btn:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  color: #ffffff !important;
+}
+
+.store-badge-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.store-badge-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.store-badge-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.store-badge-caption {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.store-badge-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.2px;
+}
+
 .welcome-quick-strip {
   display: flex;
   align-items: center;
@@ -1181,6 +1255,28 @@
   background: #f1f5f9 !important;
   color: #059669 !important;
   border-color: #94a3b8 !important;
+}
+
+.light-theme .store-badge-btn {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .store-badge-btn:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .store-badge-title {
+  color: #0f172a !important;
+}
+
+.light-theme .store-badge-caption {
+  color: #64748b !important;
 }
 
 .light-theme .welcome-quick-strip {
@@ -2315,6 +2411,45 @@
   transform: translateY(-1px);
 }
 
+.footer-store-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer-store-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+}
+
+.footer-store-badges {
+  margin: 0 !important;
+  gap: 10px !important;
+  justify-content: flex-start !important;
+}
+
+.footer-store-badges .store-badge-btn {
+  padding: 7px 14px !important;
+  min-width: 145px !important;
+}
+
+.footer-store-badges .store-badge-icon {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.footer-store-badges .store-badge-caption {
+  font-size: 0.62rem !important;
+}
+
+.footer-store-badges .store-badge-title {
+  font-size: 0.92rem !important;
+}
+
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -2862,6 +2997,36 @@
     font-size: 0.94rem !important;
   }
 
+  .store-badges-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+
+  .store-badge-btn {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: 8px 10px !important;
+    gap: 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .store-badge-icon {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .store-badge-caption {
+    font-size: 0.58rem !important;
+  }
+
+  .store-badge-title {
+    font-size: 0.84rem !important;
+  }
+
   /* Horizontal swipeable chip rail for quick launch */
   .welcome-quick-strip {
     display: flex !important;
@@ -3104,6 +3269,17 @@
 
   .footer-tagline {
     font-size: 0.8rem !important;
+  }
+
+  .footer-store-col {
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .footer-store-badges {
+    width: 100% !important;
+    display: flex !important;
+    gap: 8px !important;
   }
 
   .footer-links-group {
