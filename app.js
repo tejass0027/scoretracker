@@ -2969,9 +2969,10 @@ function render() {
     els.matchNote.textContent = `${battingTeam()} batting against ${bowlingTeam()}.`;
   }
 
-  // Render Man of the Match card
+  // Render Man of the Match card (Only in Advanced Mode, disabled in Normal Mode)
   if (els.momCardContainer) {
-    if (isMatchOver) {
+    const isAdv = state.scoringMode === "advanced";
+    if (isMatchOver && isAdv) {
       const playerStats = compilePlayerMatchStats();
       const playersList = Object.values(playerStats);
       
@@ -3026,9 +3027,11 @@ function render() {
         els.momCardContainer.innerHTML = winnersHtml;
       } else {
         els.momCardContainer.classList.add("hidden");
+        els.momCardContainer.innerHTML = "";
       }
     } else {
       els.momCardContainer.classList.add("hidden");
+      els.momCardContainer.innerHTML = "";
     }
   }
 
