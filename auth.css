@@ -288,3 +288,28 @@
   border-color: rgba(16, 185, 129, 0.5);
   transform: translateY(-1px);
 }
+
+@media (max-width: 640px) {
+  .google-signin-btn {
+    padding: 6px 9px !important;
+    border-radius: 999px !important;
+    gap: 0 !important;
+  }
+  .google-signin-btn span {
+    display: none !important;
+  }
+  .vault-modal-card {
+    width: 95% !important;
+    max-height: 90vh !important;
+    padding: 18px 14px !important;
+    border-radius: 18px !important;
+  }
+  .vault-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .vault-card {
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+}

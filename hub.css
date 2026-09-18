@@ -2659,3 +2659,376 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE OPTIMIZATIONS (TABLETS & SMARTPHONES)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Welcome Page Container */
+  .welcome-page {
+    width: min(100% - 20px, 1200px) !important;
+    padding: 76px 0 50px !important;
+  }
+
+  /* Welcome Hero */
+  .welcome-hero {
+    padding: 36px 18px 24px !important;
+    border-radius: 22px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .welcome-title {
+    font-size: clamp(1.75rem, 5.5vw, 2.4rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 22px !important;
+  }
+
+  /* Stats Bar */
+  .welcome-stats-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .welcome-stat-box {
+    padding: 14px 10px !important;
+    border-radius: 14px !important;
+  }
+
+  .welcome-stat-number {
+    font-size: 1.6rem !important;
+  }
+
+  .welcome-stat-label {
+    font-size: 0.74rem !important;
+  }
+
+  /* Feature Grid */
+  .welcome-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .welcome-card {
+    padding: 20px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Demo Simulator */
+  .welcome-demo-section {
+    margin-bottom: 32px !important;
+  }
+
+  .welcome-demo-card {
+    padding: 20px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  /* How It Works Steps */
+  .welcome-steps-section {
+    margin-bottom: 32px !important;
+  }
+
+  .welcome-steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .welcome-step-card {
+    padding: 20px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Review Section */
+  .welcome-review-section {
+    margin-bottom: 32px !important;
+  }
+
+  .welcome-review-card,
+  .standalone-review-card {
+    padding: 20px 16px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Bottom Call to Action */
+  .welcome-bottom-banner {
+    padding: 32px 18px !important;
+    border-radius: 22px !important;
+    margin-bottom: 32px !important;
+  }
+
+  .welcome-bottom-title {
+    font-size: 1.7rem !important;
+  }
+
+  .welcome-bottom-desc {
+    font-size: 0.92rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* Sports Hub Page */
+  #sports-page.sports-page {
+    width: min(100% - 20px, 1280px) !important;
+    padding: 76px 0 60px !important;
+  }
+
+  .hero-banner {
+    padding: 24px 18px !important;
+    border-radius: 20px !important;
+    margin-bottom: 20px !important;
+    gap: 16px !important;
+  }
+
+  .hero-title {
+    font-size: 1.8rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-desc {
+    font-size: 0.92rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-visual-card {
+    display: none !important;
+  }
+
+  .sport-filter-bar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 8px !important;
+    padding: 4px 2px 8px !important;
+  }
+
+  .sport-filter-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .filter-pill,
+  .hub-review-pill-btn {
+    padding: 8px 14px !important;
+    font-size: 0.82rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Dedicated Review Page */
+  .review-page {
+    padding: 76px 14px 60px !important;
+  }
+
+  .review-page-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 540px) {
+  /* Welcome Hero for small screens */
+  .welcome-hero {
+    padding: 26px 14px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .welcome-title {
+    font-size: 1.65rem !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .welcome-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .welcome-btn-primary,
+  .welcome-btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 13px 18px !important;
+    font-size: 0.94rem !important;
+  }
+
+  /* Horizontal swipeable chip rail for quick launch */
+  .welcome-quick-strip {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    padding: 12px 2px 2px !important;
+    width: 100% !important;
+  }
+
+  .welcome-quick-strip::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .welcome-quick-label {
+    flex-shrink: 0 !important;
+    font-size: 0.72rem !important;
+  }
+
+  .welcome-quick-pill {
+    flex-shrink: 0 !important;
+    font-size: 0.78rem !important;
+    padding: 6px 12px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Live Simulator Controls */
+  .welcome-demo-matchup {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .welcome-demo-scorebox {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    text-align: left !important;
+    width: 100% !important;
+  }
+
+  .welcome-demo-score {
+    font-size: 2rem !important;
+  }
+
+  .welcome-demo-equation {
+    font-size: 0.82rem !important;
+    padding: 8px 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .welcome-demo-btn-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .demo-ctrl-btn {
+    width: 100% !important;
+    padding: 9px 4px !important;
+    font-size: 0.78rem !important;
+    justify-content: center !important;
+  }
+
+  .demo-ctrl-btn-reset {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Form inputs font-size 16px to prevent iOS auto-zoom */
+  .review-input,
+  .review-select,
+  .review-textarea {
+    font-size: 16px !important;
+    padding: 11px 14px !important;
+  }
+
+  .review-stars-row {
+    gap: 4px !important;
+  }
+
+  .review-star-btn {
+    font-size: 1.7rem !important;
+    padding: 2px !important;
+  }
+
+  .review-submit-btn {
+    padding: 13px 18px !important;
+    font-size: 0.92rem !important;
+  }
+
+  .welcome-bottom-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 13px 18px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Sports Hub cards */
+  .sports-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .sport-card {
+    min-height: auto !important;
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+  }
+
+  .sport-card-title {
+    font-size: 1.15rem !important;
+  }
+
+  .sport-card-desc {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .sport-emoji-box {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.35rem !important;
+    border-radius: 10px !important;
+  }
+
+  .sports-floating-review-btn {
+    bottom: 14px !important;
+    right: 12px !important;
+    padding: 8px 14px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* App Footer */
+  .app-footer {
+    margin-top: 24px !important;
+    padding: 20px 0 16px !important;
+  }
+
+  .footer-top {
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  .footer-brand-header {
+    gap: 8px !important;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem !important;
+  }
+
+  .footer-links-group {
+    gap: 8px 14px !important;
+  }
+
+  .footer-link-btn {
+    font-size: 0.76rem !important;
+  }
+
+  .footer-copyright {
+    font-size: 0.74rem !important;
+  }
+
+  .footer-subtext {
+    font-size: 0.7rem !important;
+  }
+}

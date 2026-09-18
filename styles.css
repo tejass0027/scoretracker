@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
 :root {
   --ink: #f8fafc;
   --muted: #94a3b8;
@@ -1794,11 +1800,73 @@ dd {
   }
 }
 
+@media (max-width: 768px) {
+  .theme-switch-label {
+    display: none !important;
+  }
+  .theme-switch-container {
+    gap: 0 !important;
+  }
+}
+
 @media (max-width: 720px) {
+  .welcome-page,
   .sports-page,
   .format-page,
-  .cricket-app {
-    padding-top: 84px !important;
+  .cricket-app,
+  .review-page {
+    padding-top: 80px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    height: 56px !important;
+  }
+  .header-container {
+    width: 100% !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+  }
+  .logo-wrapper svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .logo-text {
+    font-size: 1.15rem !important;
+  }
+  .nav-actions {
+    gap: 6px !important;
+  }
+  .nav-btn {
+    padding: 5px 9px !important;
+    font-size: 0.78rem !important;
+  }
+  .nav-text-hide-mobile {
+    display: none !important;
+  }
+  .welcome-page,
+  .sports-page,
+  .format-page,
+  .cricket-app,
+  .review-page {
+    padding-top: 70px !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .header-container {
+    padding: 0 6px !important;
+    gap: 4px !important;
+  }
+  .logo-text {
+    font-size: 1.05rem !important;
+  }
+  .nav-actions {
+    gap: 4px !important;
+  }
+  .nav-btn {
+    padding: 5px 7px !important;
   }
 }
 
