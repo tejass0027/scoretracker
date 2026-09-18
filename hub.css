@@ -2881,14 +2881,17 @@
 
   .welcome-quick-label {
     flex-shrink: 0 !important;
-    font-size: 0.72rem !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
   }
 
   .welcome-quick-pill {
     flex-shrink: 0 !important;
-    font-size: 0.78rem !important;
-    padding: 6px 12px !important;
+    font-size: 0.96rem !important;
+    padding: 8px 15px !important;
+    font-weight: 700 !important;
     white-space: nowrap !important;
+    border-radius: 999px !important;
   }
 
   /* Live Simulator Controls */
@@ -2962,39 +2965,117 @@
     font-size: 0.95rem !important;
   }
 
-  /* Sports Hub cards */
+  /* Sports Hub cards - Increased font sizes & tap targets for mobile */
   .sports-grid {
     grid-template-columns: 1fr !important;
-    gap: 10px !important;
+    gap: 14px !important;
   }
 
   .sport-card {
     min-height: auto !important;
-    padding: 14px 16px !important;
-    border-radius: 14px !important;
+    padding: 18px !important;
+    border-radius: 18px !important;
   }
 
-  .sport-card-title {
-    font-size: 1.15rem !important;
-  }
-
-  .sport-card-desc {
-    font-size: 0.8rem !important;
-    line-height: 1.35 !important;
+  .sport-card-top {
+    align-items: center !important;
+    margin-bottom: 8px !important;
   }
 
   .sport-emoji-box {
-    width: 40px !important;
-    height: 40px !important;
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 2.1rem !important;
+    border-radius: 14px !important;
+  }
+
+  .sport-status-tag {
+    font-size: 0.85rem !important;
+    padding: 5px 12px !important;
+    font-weight: 700 !important;
+    border-radius: 999px !important;
+  }
+
+  .sport-card-title {
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.25 !important;
+    margin: 4px 0 6px !important;
+  }
+
+  .sport-card-desc {
+    font-size: 0.96rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .sport-chip-row {
+    gap: 7px !important;
+    margin-top: 10px !important;
+  }
+
+  .sport-mini-chip {
+    font-size: 0.86rem !important;
+    padding: 5px 11px !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+  }
+
+  .sport-card-footer {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    margin-top: 14px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .sport-card-footer span {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+  }
+
+  .sport-card-arrow {
     font-size: 1.35rem !important;
-    border-radius: 10px !important;
+  }
+
+  /* Sports Hub Hero & Filter Bar Fonts */
+  .hero-title {
+    font-size: 1.7rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .hero-desc {
+    font-size: 0.96rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .stat-pill {
+    font-size: 0.88rem !important;
+    padding: 7px 13px !important;
+  }
+
+  .sport-filter-bar {
+    gap: 8px !important;
+    padding: 4px 2px 14px !important;
+  }
+
+  .filter-pill {
+    font-size: 0.96rem !important;
+    padding: 9px 15px !important;
+    font-weight: 700 !important;
+  }
+
+  .filter-count {
+    font-size: 0.84rem !important;
+    padding: 2px 7px !important;
   }
 
   .sports-floating-review-btn {
-    bottom: 14px !important;
-    right: 12px !important;
-    padding: 8px 14px !important;
-    font-size: 0.78rem !important;
+    bottom: 74px !important;
+    right: 14px !important;
+    padding: 10px 16px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
   }
 
   /* App Footer */
