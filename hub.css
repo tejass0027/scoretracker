@@ -1080,6 +1080,33 @@
   letter-spacing: -0.2px;
 }
 
+.store-badge-btn:disabled,
+.store-badge-btn.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+}
+
+.store-badge-coming-soon {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  margin-left: auto;
+  white-space: nowrap;
+  line-height: 1;
+}
+
 .welcome-quick-strip {
   display: flex;
   align-items: center;
@@ -1277,6 +1304,21 @@
 
 .light-theme .store-badge-caption {
   color: #64748b !important;
+}
+
+.light-theme .store-badge-btn:disabled,
+.light-theme .store-badge-btn.is-disabled {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  opacity: 0.65;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.light-theme .store-badge-coming-soon {
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+  border-color: rgba(217, 119, 6, 0.3);
 }
 
 .light-theme .welcome-quick-strip {
@@ -3025,6 +3067,12 @@
 
   .store-badge-title {
     font-size: 0.84rem !important;
+  }
+
+  .store-badge-coming-soon {
+    font-size: 0.52rem !important;
+    padding: 2px 5px !important;
+    letter-spacing: 0.2px !important;
   }
 
   /* Horizontal swipeable chip rail for quick launch */
