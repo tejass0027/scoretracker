@@ -345,3 +345,44 @@
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+/* Mobile Responsive Match Dashboard (Mobile Only) */
+@media (max-width: 640px) {
+  #fb-dashboard-view {
+    gap: 14px !important;
+  }
+
+  #fb-teamA-name,
+  #fb-teamB-name {
+    font-size: 1.15rem !important;
+  }
+
+  #fb-scoreA,
+  #fb-scoreB {
+    font-size: 2.2rem !important;
+  }
+
+  .fb-timer-panel {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  #fb-timer-string {
+    font-size: 3rem !important;
+    letter-spacing: 2px !important;
+  }
+
+  #fb-simple-controls,
+  #fb-advanced-controls {
+    padding: 14px 12px !important;
+    border-radius: 14px !important;
+    gap: 12px !important;
+  }
+
+  #fb-simple-goalA-btn,
+  #fb-simple-goalB-btn {
+    min-height: 48px !important;
+    font-size: 1.05rem !important;
+    border-radius: 10px !important;
+  }
+}

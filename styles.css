@@ -1498,77 +1498,305 @@ dd {
     justify-content: start;
   }
 
-  .team-ribbon,
-  .match-grid,
-  .run-buttons,
-  .event-buttons {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .match-stage,
   .match-grid,
   .scorer-console {
-    margin-inline: 14px;
+    margin-inline: 4px !important;
   }
 
+  /* Compact Team Ribbon on Mobile */
+  .team-ribbon {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  .team-ribbon div {
+    min-height: auto !important;
+    padding: 10px 10px !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+  }
+
+  .team-ribbon span {
+    justify-content: center !important;
+    font-size: 0.72rem !important;
+  }
+
+  .team-ribbon strong {
+    font-size: 1.05rem !important;
+    display: block !important;
+    margin-top: 2px !important;
+  }
+
+  /* Streamlined Score Hero on Mobile */
+  .score-hero {
+    min-height: auto !important;
+    padding: 16px 14px !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 6px !important;
+  }
+
+  .score-meta {
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .score-meta span {
+    font-size: 0.78rem !important;
+    padding: 4px 12px !important;
+  }
+
+  .score-hero strong {
+    font-size: clamp(2.8rem, 11vw, 3.8rem) !important;
+    line-height: 1.1 !important;
+    margin: 4px 0 !important;
+  }
+
+  .score-hero p.match-note {
+    font-size: 0.85rem !important;
+    padding: 8px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Compact 3-Column Stat Strip */
   .stat-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    margin-top: 6px !important;
   }
 
   .stat-strip div {
-    min-height: 84px;
-    padding: 12px;
+    min-height: auto !important;
+    padding: 8px 4px !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    border-left-width: 3px !important;
   }
 
-  .score-hero {
-    min-height: 250px;
-    padding: 22px;
+  .stat-strip span {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .stat-strip strong {
+    font-size: 1.15rem !important;
+    margin-top: 2px !important;
+  }
+
+  /* Scorer Console & Run Buttons on Mobile */
+  .scorer-console {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 18px !important;
+    padding: 14px 12px !important;
+    margin: 10px 0 !important;
+  }
+
+  .console-title {
+    margin-bottom: 12px !important;
+    text-align: center !important;
+  }
+
+  .console-title h2 {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+  }
+
+  .console-title span {
+    font-size: 0.78rem !important;
+    color: var(--muted) !important;
+  }
+
+  /* 6-Column Tactical Keypad for Run Buttons */
+  .run-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .run-buttons button {
+    min-height: 52px !important;
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25) !important;
+    transition: transform 0.1s ease, background 0.15s ease !important;
+  }
+
+  .run-buttons button:active {
+    transform: scale(0.9) !important;
+  }
+
+  .run-buttons button[data-run="4"] {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #60a5fa !important;
+    border-color: rgba(59, 130, 246, 0.45) !important;
+  }
+
+  .run-buttons button[data-run="6"] {
+    background: rgba(16, 185, 129, 0.22) !important;
+    color: #34d399 !important;
+    border-color: rgba(16, 185, 129, 0.45) !important;
+  }
+
+  /* Multi-Column Structured Control Grid for Events */
+  .event-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .event-buttons button {
+    min-height: 44px !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 4px 6px !important;
+    text-align: center !important;
+  }
+
+  .event-buttons button:active {
+    transform: scale(0.92) !important;
+  }
+
+  /* 4 Extras in 1 clean row: Wide, No ball, Bye, Leg bye */
+  .event-buttons button[data-extra] {
+    grid-column: span 1 !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--ink) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Wicket - bold prominent 2 columns */
+  .event-buttons button[data-wicket="true"] {
+    grid-column: span 2 !important;
+    min-height: 48px !important;
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #fca5a5 !important;
+    border-color: rgba(239, 68, 68, 0.45) !important;
+    font-size: 0.98rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* Undo - 2 columns */
+  .event-buttons #undo-btn {
+    grid-column: span 2 !important;
+    min-height: 48px !important;
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fcd34d !important;
+    border-color: rgba(245, 158, 11, 0.45) !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+  }
+
+  /* Next Innings & Save to Vault */
+  .event-buttons #innings-btn {
+    grid-column: span 2 !important;
+    background: rgba(59, 130, 246, 0.18) !important;
+    color: #93c5fd !important;
+    border-color: rgba(59, 130, 246, 0.35) !important;
+  }
+
+  .event-buttons #btn-save-cricket-vault {
+    grid-column: span 2 !important;
+    background: rgba(16, 185, 129, 0.18) !important;
+    color: #6ee7b7 !important;
+    border-color: rgba(16, 185, 129, 0.35) !important;
+  }
+
+  /* Secondary actions: Declare, Follow-on, Draw */
+  .event-buttons #declare-btn,
+  .event-buttons #follow-on-btn,
+  .event-buttons #draw-btn {
+    grid-column: span 2 !important;
+    min-height: 38px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Tournament submit */
+  .event-buttons #submit-tournament-btn {
+    grid-column: 1 / -1 !important;
+    min-height: 48px !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+  }
+
+  /* Live Batters & Bowler Panel on Mobile */
+  #live-batters-panel {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin: 8px 0 !important;
+  }
+
+  #btn-striker-card,
+  #btn-nonstriker-card {
+    height: auto !important;
+    min-height: 44px !important;
+    padding: 8px 10px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  #live-card-striker-content,
+  #live-card-nonstriker-content {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+
+  #live-batter-selector-row,
+  #live-bowler-selector-row {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    margin: 6px 0 !important;
+    font-size: 0.88rem !important;
+  }
+
+  #live-batter-selector-row button,
+  #live-bowler-selector-row button {
+    padding: 4px 10px !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
   }
 }
 
 @media (max-width: 430px) {
   h1 {
-    font-size: 2.35rem;
+    font-size: 2rem !important;
   }
 
   .sports-grid,
-  .format-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .format-grid,
   .custom-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sport-card {
-    min-height: 118px;
-    grid-template-columns: auto 1fr;
-    align-content: center;
-    align-items: center;
-  }
-
-  .sport-card small {
-    grid-column: 2;
-  }
-
-  .event-buttons {
-    grid-template-columns: 1fr;
-  }
-
-  .match-grid,
-  .team-ribbon,
-  .stat-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .cricket-topbar {
-    align-items: start;
-    display: grid;
+    align-items: center !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
   }
 
-  .run-buttons button,
-  .event-buttons button {
-    min-height: 50px;
+  .cricket-topbar h1 {
+    font-size: 1.35rem !important;
   }
 }
 
