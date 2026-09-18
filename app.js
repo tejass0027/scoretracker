@@ -542,7 +542,98 @@ function archiveCurrentTournament() {
   syncActiveTournamentToHistory();
 }
 
+function syncMobileBottomNav(route) {
+  const items = document.querySelectorAll(".mobile-bottom-nav-item");
+  if (!items || !items.length) return;
+
+  const current = route || window.location.hash || "#welcome";
+  items.forEach((item) => {
+    const itemRoute = item.getAttribute("data-mobile-route");
+    if (itemRoute === "#welcome") {
+      if (current === "#welcome" || !current || current === "#") {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    } else if (itemRoute === "#sports") {
+      const isSportView = current === "#sports" ||
+        current === "#match" ||
+        current === "#tdashboard" ||
+        current === "#tsetup" ||
+        current === "#tchoice" ||
+        current.startsWith("#football") ||
+        current.startsWith("#basketball") ||
+        current.startsWith("#tennis") ||
+        current.startsWith("#badminton") ||
+        current.startsWith("#hockey") ||
+        current.startsWith("#volleyball") ||
+        current.startsWith("#baseball") ||
+        current.startsWith("#rugby") ||
+        current.startsWith("#kabaddi") ||
+        current.startsWith("#tabletennis") ||
+        current.startsWith("#golf") ||
+        current.startsWith("#boxing") ||
+        current.startsWith("#mma");
+
+      if (isSportView) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    } else if (itemRoute === "#formats") {
+      if (current === "#formats") {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    } else if (itemRoute === "#review") {
+      if (current === "#review") {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    } else {
+      item.classList.remove("active");
+    }
+  });
+}
+window.syncMobileBottomNav = syncMobileBottomNav;
+
+function initMobileBottomNav() {
+  const bottomNav = document.querySelector("#mobile-bottom-nav");
+  if (!bottomNav) return;
+
+  bottomNav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".mobile-bottom-nav-item");
+    if (!btn) return;
+
+    const action = btn.getAttribute("data-mobile-action");
+    if (action === "vault") {
+      if (window.AuthVault && typeof window.AuthVault.openVaultModal === "function") {
+        window.AuthVault.openVaultModal("matches");
+      }
+      return;
+    }
+
+    const targetRoute = btn.getAttribute("data-mobile-route");
+    if (!targetRoute) return;
+
+    if (targetRoute === "#welcome") {
+      showWelcomePage();
+    } else if (targetRoute === "#sports") {
+      showSportsPage();
+    } else if (targetRoute === "#formats") {
+      showFormatPage();
+    } else if (targetRoute === "#review") {
+      showReviewPage();
+    }
+    syncMobileBottomNav(targetRoute);
+  });
+}
+window.initMobileBottomNav = initMobileBottomNav;
+
 function navigateByHash(hash) {
+  syncMobileBottomNav(hash);
   if (hash === "#welcome" || !hash) {
     showWelcomePage(true);
     return;
@@ -5547,6 +5638,11 @@ if (btnSaveCricketTournVault) {
 
 syncScoringModeUI();
 
+// Initialize Adaptive Mobile Bottom Navigation
+if (typeof initMobileBottomNav === "function") {
+  initMobileBottomNav();
+}
+
 // Initialize Page state on reload/load:
 // If the visitor has an active hash in the URL (refreshing on #sports, #match, #review, etc.), stay on that page!
 // Otherwise (visiting the website without a hash or with #welcome), show the starting welcome page.
@@ -5555,6 +5651,9 @@ if (currentHash && currentHash !== "#welcome" && currentHash !== "#") {
   navigateByHash(currentHash);
 } else {
   showWelcomePage(true);
+}
+if (typeof syncMobileBottomNav === "function") {
+  syncMobileBottomNav(currentHash || "#welcome");
 }
 render();
 

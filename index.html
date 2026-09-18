@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=326" />
-    <link rel="stylesheet" href="hub.css?v=326" />
+    <link rel="stylesheet" href="styles.css?v=327" />
+    <link rel="stylesheet" href="hub.css?v=327" />
     <link rel="stylesheet" href="sports/football.css?v=211" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -6146,9 +6146,33 @@
       </div>
     </div>
 
+    <!-- Native Mobile App Bottom Navigation Bar (Adaptive Mobile App Shell) -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <button class="mobile-bottom-nav-item active" id="mob-nav-home" data-mobile-route="#welcome" type="button" aria-label="Home">
+        <span class="mobile-nav-icon">🏠</span>
+        <span class="mobile-nav-label">Home</span>
+      </button>
+      <button class="mobile-bottom-nav-item" id="mob-nav-sports" data-mobile-route="#sports" type="button" aria-label="Sports">
+        <span class="mobile-nav-icon">⚡</span>
+        <span class="mobile-nav-label">Sports</span>
+      </button>
+      <button class="mobile-bottom-nav-item" id="mob-nav-formats" data-mobile-route="#formats" type="button" aria-label="Formats">
+        <span class="mobile-nav-icon">📋</span>
+        <span class="mobile-nav-label">Formats</span>
+      </button>
+      <button class="mobile-bottom-nav-item" id="mob-nav-vault" data-mobile-action="vault" type="button" aria-label="Cloud Vault">
+        <span class="mobile-nav-icon">📁</span>
+        <span class="mobile-nav-label">Vault</span>
+      </button>
+      <button class="mobile-bottom-nav-item" id="mob-nav-review" data-mobile-route="#review" type="button" aria-label="Reviews">
+        <span class="mobile-nav-icon">⭐</span>
+        <span class="mobile-nav-label">Review</span>
+      </button>
+    </nav>
+
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=326"></script>
+    <script src="app.js?v=327"></script>
     <script src="sports/football.js?v=212"></script>
     <script src="sports/basketball.js?v=211"></script>
     <script src="sports/tennis.js?v=211"></script>

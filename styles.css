@@ -1819,32 +1819,124 @@ dd {
   }
 }
 
-@media (max-width: 600px) {
+/* =========================================================================
+   ADAPTIVE MOBILE APP SHELL (Bottom Navigation Bar & Mobile-Only Layout)
+   ========================================================================= */
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 640px) {
   .app-header {
     height: 56px !important;
   }
   .header-container {
     width: 100% !important;
-    padding: 0 10px !important;
-    gap: 6px !important;
+    padding: 0 12px !important;
+    gap: 8px !important;
   }
   .logo-wrapper svg {
-    width: 30px !important;
-    height: 30px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
   .logo-text {
     font-size: 1.15rem !important;
   }
-  .nav-actions {
-    gap: 6px !important;
-  }
-  .nav-btn {
-    padding: 5px 9px !important;
-    font-size: 0.78rem !important;
-  }
-  .nav-text-hide-mobile {
+
+  /* Clean up top header: hide text-heavy desktop nav buttons on mobile */
+  .app-header .nav-actions #nav-btn-home,
+  .app-header .nav-actions #nav-btn-sports,
+  .app-header .nav-actions #nav-btn-formats,
+  .app-header .nav-actions #nav-btn-vault,
+  .app-header .nav-actions #nav-btn-review {
     display: none !important;
   }
+
+  /* Fixed Bottom Navigation Bar */
+  .mobile-bottom-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 58px !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: rgba(10, 15, 26, 0.94) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45) !important;
+    z-index: 1001 !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    box-sizing: content-box !important;
+    user-select: none !important;
+  }
+
+  .light-theme .mobile-bottom-nav {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .mobile-bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 4px 0;
+    color: var(--muted, #94a3b8);
+    text-decoration: none;
+    transition: color 0.18s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-bottom-nav-item:active {
+    transform: scale(0.9);
+  }
+
+  .mobile-nav-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    display: block;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .mobile-nav-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    display: block;
+    transition: color 0.18s ease;
+  }
+
+  .mobile-bottom-nav-item.active {
+    color: var(--field, #10b981) !important;
+  }
+
+  .mobile-bottom-nav-item.active .mobile-nav-icon {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.45));
+  }
+
+  .mobile-bottom-nav-item.active .mobile-nav-label {
+    font-weight: 800;
+  }
+
+  .light-theme .mobile-bottom-nav-item.active {
+    color: #059669 !important;
+  }
+
   .welcome-page,
   .sports-page,
   .format-page,
@@ -1852,21 +1944,38 @@ dd {
   .review-page {
     padding-top: 70px !important;
   }
+
+  /* Content bottom clearance to avoid bottom bar overlap */
+  .welcome-page,
+  .sports-page,
+  .format-page,
+  .cricket-app,
+  .review-page,
+  .sport-container,
+  .sports-view-container,
+  #football-page,
+  #tennis-page,
+  #badminton-page,
+  #hockey-page,
+  #volleyball-page,
+  #baseball-page,
+  #rugby-page,
+  #kabaddi-page,
+  #tabletennis-page,
+  #golf-page,
+  #boxing-page,
+  #mma-page {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 
 @media (max-width: 440px) {
   .header-container {
-    padding: 0 6px !important;
-    gap: 4px !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
   }
   .logo-text {
     font-size: 1.05rem !important;
-  }
-  .nav-actions {
-    gap: 4px !important;
-  }
-  .nav-btn {
-    padding: 5px 7px !important;
   }
 }
 
