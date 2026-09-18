@@ -1126,6 +1126,17 @@
   box-shadow: 0 3px 10px rgba(61, 220, 132, 0.2) !important;
 }
 
+.store-badge-apk:disabled,
+.store-badge-apk.is-disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  border-color: rgba(61, 220, 132, 0.25) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+}
+
 .store-badge-apk-tag {
   display: inline-block;
   font-size: 0.62rem;
@@ -1373,6 +1384,16 @@
   background: rgba(16, 185, 129, 0.12);
   color: #059669;
   border-color: rgba(16, 185, 129, 0.35);
+}
+
+.light-theme .store-badge-apk:disabled,
+.light-theme .store-badge-apk.is-disabled {
+  background: #f1f5f9 !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  opacity: 0.65 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  color: #64748b !important;
 }
 
 .light-theme .welcome-quick-strip {
