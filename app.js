@@ -3726,23 +3726,23 @@ function handlePlayNextMatch() {
 
   // Regular match reset for next match
   const keepSetup = {
-    teamA: els.teamA.value.trim() || defaultState.teamA,
-    teamB: els.teamB.value.trim() || defaultState.teamB,
-    maxOvers: Math.max(1, Math.min(100, Number(els.maxOvers.value) || 20)),
-    playersTeamA: Math.max(2, Math.min(11, Number(els.playersTeamA.value) || 11)),
-    playersTeamB: Math.max(2, Math.min(11, Number(els.playersTeamB.value) || 11)),
-    format: state.format,
-    scoringMode: state.scoringMode,
-    customTeamAPlayers: state.customTeamAPlayers,
-    customTeamBPlayers: state.customTeamBPlayers,
+    teamA: els.teamA ? (els.teamA.value.trim() || defaultState.teamA) : defaultState.teamA,
+    teamB: els.teamB ? (els.teamB.value.trim() || defaultState.teamB) : defaultState.teamB,
+    maxOvers: els.maxOvers ? Math.max(1, Math.min(100, Number(els.maxOvers.value) || 20)) : 20,
+    playersTeamA: els.playersTeamA ? Math.max(2, Math.min(11, Number(els.playersTeamA.value) || 11)) : 11,
+    playersTeamB: els.playersTeamB ? Math.max(2, Math.min(11, Number(els.playersTeamB.value) || 11)) : 11,
+    format: state.format || "Custom",
+    scoringMode: null,
+    customTeamAPlayers: [],
+    customTeamBPlayers: [],
   };
   state = { ...clone(defaultState), ...keepSetup, day: 1 };
   saveState();
-  showToast("Ready for next match! All scores reset.");
   render();
-  if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
-    setTimeout(() => { promptNewBatter("striker"); }, 150);
-  }
+
+  // Navigate to All Sports page so user can choose their sport mode
+  showSportsPage();
+  showToast("Ready for next match! Choose your sports mode.");
 }
 
 function formatBowlerOvers(balls) {
