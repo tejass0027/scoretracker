@@ -2766,6 +2766,13 @@ function isInningsClosed(innings = currentInnings()) {
       const chaseTarget = target();
       if (chaseTarget && innings.runs >= chaseTarget) return true;
     }
+  } else {
+    const batting = innings.team;
+    const bowling = batting === 0 ? 1 : 0;
+    if (inningsCount(batting) === 2 && inningsCount(bowling) === 2) {
+      const chaseTarget = target();
+      if (chaseTarget && innings.runs >= chaseTarget) return true;
+    }
   }
   return false;
 }
@@ -2795,10 +2802,24 @@ function scoreText(innings = currentInnings()) {
 }
 
 function target() {
-  if (!isTestMatch()) return state.inningsData[0].runs + 1;
-  const batting = currentInnings().team;
-  const other = batting === 0 ? 1 : 0;
-  return inningsCount(batting) === 2 && teamTotal(batting) <= teamTotal(other) ? teamTotal(other) + 1 : null;
+  if (!isTestMatch()) {
+    return state.innings === 1 && state.inningsData[0] ? state.inningsData[0].runs + 1 : null;
+  }
+  const current = currentInnings();
+  if (!current) return null;
+  const batting = current.team;
+  const bowling = batting === 0 ? 1 : 0;
+  const battingInnings = inningsCount(batting);
+  const bowlingInnings = inningsCount(bowling);
+
+  // In Test cricket, target ONLY exists in 4th innings (both teams in their 2nd innings)
+  if (battingInnings === 2 && bowlingInnings === 2) {
+    const batting1st = state.inningsData.find((i) => i.team === batting && i.number === 1);
+    const batting1stRuns = batting1st ? batting1st.runs : 0;
+    const targetRuns = teamTotal(bowling) - batting1stRuns + 1;
+    return Math.max(1, targetRuns);
+  }
+  return null;
 }
 
 function winnerText() {
@@ -2809,9 +2830,26 @@ function winnerText() {
   const second = state.inningsData[1];
 
   if (state.innings === 0 || !isInningsClosed(second)) return "";
-  if (second.runs >= target()) return `${state.teamB} won by ${maxWicketsForTeam(1) - second.wickets} wickets.`;
+  const t = target() || (first.runs + 1);
+  if (second.runs >= t) return `${state.teamB} won by ${maxWicketsForTeam(1) - second.wickets} wickets.`;
   if (second.runs === first.runs) return "Match tied.";
   return `${state.teamA} won by ${first.runs - second.runs} runs.`;
+}
+
+function isMatchFinishedTest() {
+  const current = currentInnings();
+  if (!current) return false;
+  const batting = current.team;
+  const bowling = batting === 0 ? 1 : 0;
+  const battingTotal = teamTotal(batting);
+  const bowlingTotal = teamTotal(bowling);
+  const battingInnings = inningsCount(batting);
+  const bowlingInnings = inningsCount(bowling);
+
+  if (battingInnings === 2 && bowlingInnings === 2 && battingTotal > bowlingTotal) return true;
+  if (isInningsClosed(current) && battingInnings === 2 && bowlingInnings === 2) return true;
+  if (isInningsClosed(current) && battingInnings === 2 && bowlingInnings === 1 && battingTotal < bowlingTotal && current.wickets >= maxWicketsForTeam(current.team)) return true;
+  return false;
 }
 
 function testResult() {
@@ -2824,15 +2862,23 @@ function testResult() {
   const battingInnings = inningsCount(batting);
   const bowlingInnings = inningsCount(bowling);
 
+  // 4th innings: Chasing team exceeded total
   if (battingInnings === 2 && bowlingInnings === 2 && battingTotal > bowlingTotal) {
     return `${teamName(batting)} won by ${maxWicketsForTeam(batting) - current.wickets} wickets.`;
   }
+  // 4th innings: Chasing team all out with scores level -> Tie
   if (isInningsClosed(current) && battingInnings === 2 && bowlingInnings === 2 && battingTotal === bowlingTotal && current.wickets >= maxWicketsForTeam(current.team)) {
     return "Match tied.";
   }
-  if (isInningsClosed(current) && battingInnings === 2 && battingTotal < bowlingTotal) {
+  // 4th innings: Chasing team all out (or closed) while behind -> Defending team wins by runs
+  if (isInningsClosed(current) && battingInnings === 2 && bowlingInnings === 2 && battingTotal < bowlingTotal) {
     return `${teamName(bowling)} won by ${bowlingTotal - battingTotal} runs.`;
   }
+  // 3rd innings: Batting team all out while behind -> Defending team wins by innings and runs
+  if (isInningsClosed(current) && battingInnings === 2 && bowlingInnings === 1 && battingTotal < bowlingTotal && current.wickets >= maxWicketsForTeam(current.team)) {
+    return `${teamName(bowling)} won by an innings and ${bowlingTotal - battingTotal} runs.`;
+  }
+  // Match drawn on Day 5 if all innings finished or draw agreed
   if (state.day >= 5 && isInningsClosed(current) && !nextTeamForTest()) {
     return "Match drawn.";
   }
@@ -2849,7 +2895,7 @@ function canEnforceFollowOn() {
 function nextTeamForTest() {
   if (!isTestMatch()) return null;
   const current = currentInnings();
-  if (!current || !isInningsClosed(current) || state.inningsData.length >= 4 || state.result) return null;
+  if (!current || !isInningsClosed(current) || state.inningsData.length >= 4 || state.result || isMatchFinishedTest()) return null;
   const order = state.inningsData.map((innings) => innings.team).join("");
 
   if (state.innings < state.inningsData.length - 1) return { existing: state.innings + 1 };
@@ -2876,16 +2922,31 @@ function inningsStatus(innings) {
 function testIndicator() {
   if (!isTestMatch()) return "";
   const current = currentInnings();
+  if (!current) return "";
   const batting = current.team;
-  const other = batting === 0 ? 1 : 0;
-  const lead = teamTotal(batting) - teamTotal(other);
-  const chaseTarget = target();
+  const bowling = batting === 0 ? 1 : 0;
+  const battingInnings = inningsCount(batting);
+  const bowlingInnings = inningsCount(bowling);
 
-  if (inningsCount(batting) === 2 && chaseTarget) {
-    return `${teamName(batting)} need ${chaseTarget - teamTotal(batting)} runs to win. Target ${chaseTarget}.`;
+  // 4th innings: Target chase
+  if (battingInnings === 2 && bowlingInnings === 2) {
+    const chaseTarget = target();
+    if (chaseTarget !== null) {
+      const needed = Math.max(0, chaseTarget - current.runs);
+      if (needed === 0) return `${teamName(batting)} won the match!`;
+      return `${teamName(batting)} need ${needed} run${needed === 1 ? "" : "s"} to win. Target ${chaseTarget}.`;
+    }
   }
-  if (lead > 0) return `${teamName(batting)} lead by ${lead} runs.`;
-  if (lead < 0) return `${teamName(batting)} trail by ${Math.abs(lead)} runs.`;
+
+  // 1st innings of match
+  if (battingInnings === 1 && bowlingInnings === 0) {
+    return `${teamName(batting)} 1st innings`;
+  }
+
+  // 2nd or 3rd innings: Lead or Trail
+  const diff = teamTotal(batting) - teamTotal(bowling);
+  if (diff > 0) return `${teamName(batting)} lead by ${diff} run${diff === 1 ? "" : "s"}.`;
+  if (diff < 0) return `${teamName(batting)} trail by ${Math.abs(diff)} run${Math.abs(diff) === 1 ? "" : "s"}.`;
   return "Scores level.";
 }
 
@@ -2921,8 +2982,10 @@ function render() {
   const legalBalls = innings.legalBalls;
   const runRate = legalBalls ? (innings.runs / (legalBalls / 6)).toFixed(2) : "0.00";
   const chaseTarget = target();
-  const required = chaseTarget ? Math.max(chaseTarget - teamTotal(innings.team), 0) : null;
-  const ballsLeft = state.innings === 1 ? Math.max(state.maxOvers * 6 - innings.legalBalls, 0) : null;
+  const required = chaseTarget
+    ? Math.max(chaseTarget - (isTestMatch() ? innings.runs : teamTotal(innings.team)), 0)
+    : null;
+  const ballsLeft = !isTestMatch() && state.innings === 1 ? Math.max(state.maxOvers * 6 - innings.legalBalls, 0) : null;
   const result = winnerText();
 
   els.inningsLabel.textContent = `${teamName(innings.team)} ${innings.number}${innings.number === 1 ? "st" : "nd"} innings`;
@@ -2930,7 +2993,7 @@ function render() {
   els.oversLabel.textContent = `${oversFromBalls(innings.legalBalls)} ov`;
   els.runRate.textContent = runRate;
   els.targetLabel.textContent = chaseTarget || "-";
-  els.needLabel.textContent = isTestMatch() ? testIndicator() || "-" : state.innings === 1 ? `${required} runs needed in ${ballsLeft} balls` : "-";
+  els.needLabel.textContent = isTestMatch() ? (result || testIndicator() || "-") : result ? result : state.innings === 1 ? `${required} runs needed in ${ballsLeft} balls` : "-";
   els.battingName.textContent = battingTeam();
   els.bowlingName.textContent = bowlingTeam();
   els.dayName.textContent = `${state.day} of 5`;
