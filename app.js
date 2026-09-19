@@ -2841,9 +2841,9 @@ function winnerText() {
 
   if (state.innings === 0 || !isInningsClosed(second)) return "";
   const t = target() || (first.runs + 1);
-  if (second.runs >= t) return `${state.teamB} won by ${maxWicketsForTeam(1) - second.wickets} wickets.`;
+  if (second.runs >= t) return `${teamName(second.team)} won by ${maxWicketsForTeam(second.team) - second.wickets} wickets.`;
   if (second.runs === first.runs) return "Match tied.";
-  return `${state.teamA} won by ${first.runs - second.runs} runs.`;
+  return `${teamName(first.team)} won by ${first.runs - second.runs} runs.`;
 }
 
 function isMatchFinishedTest() {
@@ -3064,9 +3064,7 @@ function render() {
     els.matchNote.title = "Click to view match summary and play next match";
     if (matchOverModalShownFor !== result) {
       matchOverModalShownFor = result;
-      setTimeout(() => {
-        showMatchOverModal(result);
-      }, 350);
+      showMatchOverModal(result);
     }
   } else {
     matchOverModalShownFor = null;
@@ -4244,7 +4242,14 @@ function addBall(ball) {
   syncInputs();
   const innings = currentInnings();
 
-  if (isInningsClosed(innings) || winnerText()) {
+  const alreadyWon = winnerText();
+  if (alreadyWon) {
+    showToast(`🏆 Match complete: ${alreadyWon}`);
+    showMatchOverModal(alreadyWon);
+    return;
+  }
+
+  if (isInningsClosed(innings)) {
     showToast("This innings is complete. Move to the next innings or reset the match.");
     return;
   }
@@ -4358,8 +4363,11 @@ function addBall(ball) {
     showToast("Over complete.");
   }
 
-  if (winnerText()) {
-    showToast(winnerText());
+  const win = winnerText();
+  if (win) {
+    showToast(`🏆 ${win}`);
+    matchOverModalShownFor = win;
+    showMatchOverModal(win);
   } else if (isInningsClosed(innings)) {
     showToast("Innings complete.");
   }
