@@ -450,7 +450,7 @@ button {
 
 .format-card {
   display: grid;
-  min-height: 190px;
+  min-height: 145px;
   align-content: space-between;
   justify-items: start;
   gap: 14px;
@@ -513,9 +513,7 @@ button {
 }
 
 .format-card small {
-  color: var(--muted);
-  font-weight: 600;
-  font-size: 0.85rem;
+  display: none !important;
 }
 
 .custom-setup {
@@ -1457,7 +1455,7 @@ dd {
   }
 
   .format-card {
-    min-height: 158px;
+    min-height: 125px;
     padding: 16px;
   }
 
