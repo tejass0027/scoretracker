@@ -1,0 +1,134 @@
+/* ==========================================================================
+   SQUASH SCORE TRACKER & TOURNAMENT STYLESHEET
+   ========================================================================== */
+
+:root {
+  --sq-primary: #f59e0b; /* PSA Amber Gold */
+  --sq-primary-rgb: 245, 158, 11;
+  --sq-let: #38bdf8;     /* Replay Let Cyan */
+  --sq-stroke: #10b981;  /* Stroke Green */
+  --sq-nolet: #ef4444;   /* No Let Red */
+  --sq-border: rgba(245, 158, 11, 0.25);
+}
+
+/* Big PAR Score Display */
+.sq-score-num {
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--sq-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+  font-family: monospace;
+}
+
+.sq-score-num.player2 {
+  color: #fbbf24;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+}
+
+/* Referee Decision Control Buttons */
+.sq-decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sq-decision-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  text-align: center;
+}
+
+.sq-decision-btn.let {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--sq-let);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.sq-decision-btn.let:hover {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: var(--sq-let);
+  transform: translateY(-2px);
+}
+
+.sq-decision-btn.stroke {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--sq-stroke);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.sq-decision-btn.stroke:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: var(--sq-stroke);
+  transform: translateY(-2px);
+}
+
+.sq-decision-btn.nolet {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--sq-nolet);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.sq-decision-btn.nolet:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: var(--sq-nolet);
+  transform: translateY(-2px);
+}
+
+/* Games Won Display */
+.sq-game-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: monospace;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  min-width: 44px;
+  text-align: center;
+}
+
+.sq-game-badge.active {
+  border-color: var(--sq-primary);
+  color: var(--sq-primary);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.sq-server-badge {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--sq-primary);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  width: fit-content;
+  margin: 0 auto 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+.sq-log-item {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

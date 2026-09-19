@@ -1,0 +1,107 @@
+/* ==========================================================================
+   PADEL SCORE TRACKER & TOURNAMENT STYLESHEET
+   ========================================================================== */
+
+:root {
+  --pdl-primary: #0ea5e9; /* WPT Electric Blue */
+  --pdl-primary-rgb: 14, 165, 233;
+  --pdl-gold: #f59e0b;
+  --pdl-border: rgba(14, 165, 233, 0.25);
+}
+
+/* Golden Point (Punto de Oro) Alert Badge */
+.pdl-golden-point-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+  border: 1.5px solid rgba(245, 158, 11, 0.6);
+  border-radius: 999px;
+  padding: 6px 18px;
+  color: #fbbf24;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+  animation: pdlGlowPulse 1.8s infinite;
+}
+
+@keyframes pdlGlowPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); }
+}
+
+/* Big Game Points (15, 30, 40, Adv, GP) */
+.pdl-point-num {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: var(--pdl-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(14, 165, 233, 0.35);
+  font-family: monospace;
+}
+
+.pdl-point-num.team2 {
+  color: #38bdf8;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+}
+
+/* Sets Matrix Table */
+.pdl-sets-table {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.pdl-set-cell {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  min-width: 44px;
+  text-align: center;
+}
+
+.pdl-set-cell.current {
+  border-color: var(--pdl-primary);
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--pdl-primary);
+}
+
+.pdl-server-badge {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(14, 165, 233, 0.2);
+  color: var(--pdl-primary);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  width: fit-content;
+  margin: 0 auto 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+.pdl-log-item {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

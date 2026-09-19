@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=343" />
-    <link rel="stylesheet" href="hub.css?v=341" />
+    <link rel="stylesheet" href="styles.css?v=344" />
+    <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="sports/golf.css?v=219" />
     <link rel="stylesheet" href="sports/boxing.css?v=220" />
     <link rel="stylesheet" href="sports/mma.css?v=221" />
+    <link rel="stylesheet" href="sports/pickleball.css?v=210" />
+    <link rel="stylesheet" href="sports/padel.css?v=210" />
+    <link rel="stylesheet" href="sports/squash.css?v=210" />
     <link rel="stylesheet" href="auth.css?v=301" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
@@ -158,7 +161,7 @@
             <span class="pulse-dot"></span>
             <span>Live Multi-Sport Scoring Platform</span>
           </div>
-          <span class="welcome-badge-pill">✨ 14 Disciplines</span>
+          <span class="welcome-badge-pill">✨ 17 Disciplines</span>
           <span class="welcome-badge-pill welcome-badge-pwa">⚡ 100% Offline PWA</span>
         </div>
 
@@ -168,7 +171,7 @@
         </h1>
 
         <p class="welcome-subtitle">
-          Track matches ball-by-ball, manage round-robin leagues, and run dynamic digital scoreboards with period clocks, referee whistles, and Cloud Vault sync across 14 competitive disciplines.
+          Track matches ball-by-ball, manage round-robin leagues, and run dynamic digital scoreboards with period clocks, referee whistles, and Cloud Vault sync across 17 competitive disciplines.
         </p>
 
         <!-- Core Feature Highlights Strip -->
@@ -471,7 +474,7 @@
                   <option value="Tournament League Engine">🏆 Tournament &amp; League Engine</option>
                   <option value="Feature Request">💡 Feature Request / Suggestion</option>
                   <option value="Bug Report">🐞 Bug Report / Issue</option>
-                  <option value="Other Sports">⚡ Other 14 Sports</option>
+                  <option value="Other Sports">⚡ Other 17 Sports</option>
                 </select>
               </div>
             </div>
@@ -565,11 +568,11 @@
             <span class="hero-edition-tag">v2.5 Pro Edition</span>
           </div>
           <h1 class="hero-title">Track Live Matches &amp; Run Tournaments</h1>
-          <p class="hero-desc">Professional scoring consoles, period timers, referee sound effects, and Cloud Vault sync for 14 competitive disciplines.</p>
+          <p class="hero-desc">Professional scoring consoles, period timers, referee sound effects, and Cloud Vault sync for 17 competitive disciplines.</p>
           <div class="hero-stats-ribbon">
             <div class="stat-pill">
               <span class="stat-pill-icon">⚡</span>
-              <span>14 Sports Active</span>
+              <span>17 Sports Active</span>
             </div>
             <div class="stat-pill">
               <span class="stat-pill-icon">🏆</span>
@@ -588,7 +591,7 @@
 
         <div class="hero-visual-card">
           <div class="hero-visual-icon">🏆</div>
-          <div class="hero-visual-title">14 Sports Ready</div>
+          <div class="hero-visual-title">17 Sports Ready</div>
           <p class="hero-visual-subtitle">Choose below to start</p>
         </div>
       </section>
@@ -597,7 +600,7 @@
       <section class="sport-filter-bar" aria-label="Sport categories">
         <button class="filter-pill active" type="button" data-sport-filter="all">
           <span>🔥 All Sports</span>
-          <span class="filter-count">14</span>
+          <span class="filter-count">17</span>
         </button>
         <button class="filter-pill" type="button" data-sport-filter="ball">
           <span>⚽ Ball &amp; Team</span>
@@ -605,7 +608,7 @@
         </button>
         <button class="filter-pill" type="button" data-sport-filter="racket">
           <span>🎾 Racket &amp; Net</span>
-          <span class="filter-count">3</span>
+          <span class="filter-count">6</span>
         </button>
         <button class="filter-pill" type="button" data-sport-filter="combat">
           <span>🥊 Combat &amp; Ring</span>
@@ -894,6 +897,63 @@
             <span class="sport-card-arrow">&rarr;</span>
           </div>
         </button>
+
+        <!-- 15. Pickleball -->
+        <button class="sport-card" type="button" data-open-sport="pickleball" data-category="racket" data-sport-theme="pickleball">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏓</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Pickleball</h2>
+            <div class="sport-chip-row">
+              <span class="sport-mini-chip">Side-Out Scoring</span>
+              <span class="sport-mini-chip">Kitchen Faults</span>
+            </div>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
+        </button>
+
+        <!-- 16. Padel -->
+        <button class="sport-card" type="button" data-open-sport="padel" data-category="racket" data-sport-theme="padel">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🎾</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Padel</h2>
+            <div class="sport-chip-row">
+              <span class="sport-mini-chip">Golden Point</span>
+              <span class="sport-mini-chip">Sets Matrix</span>
+            </div>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
+        </button>
+
+        <!-- 17. Squash -->
+        <button class="sport-card" type="button" data-open-sport="squash" data-category="racket" data-sport-theme="squash">
+          <div class="sport-card-top">
+            <div class="sport-emoji-box">🏸</div>
+            <span class="sport-status-tag">Ready</span>
+          </div>
+          <div class="sport-card-body">
+            <h2 class="sport-card-title">Squash</h2>
+            <div class="sport-chip-row">
+              <span class="sport-mini-chip">PAR-11 Scoring</span>
+              <span class="sport-mini-chip">Let / Stroke</span>
+            </div>
+          </div>
+          <div class="sport-card-footer">
+            <span>Score Match</span>
+            <span class="sport-card-arrow">&rarr;</span>
+          </div>
+        </button>
       </section>
 
       <!-- SPORTS PAGE FOOTER -->
@@ -905,7 +965,7 @@
                 <span class="logo-text" style="font-size: 1.25rem;">Score<span class="highlight">Tracker</span></span>
                 <span class="footer-badge">Pro Edition</span>
               </div>
-              <p class="footer-tagline">Professional real-time scoring consoles, period clocks, referee sound effects, and Cloud Vault sync across 14 competitive disciplines.</p>
+              <p class="footer-tagline">Professional real-time scoring consoles, period clocks, referee sound effects, and Cloud Vault sync across 17 competitive disciplines.</p>
             </div>
             <div class="footer-store-col">
               <span class="footer-store-title">Get Mobile App</span>
@@ -1015,7 +1075,7 @@
                   <option value="Tournament League Engine">🏆 Tournament &amp; League Engine</option>
                   <option value="Feature Request">💡 Feature Request / Suggestion</option>
                   <option value="Bug Report">🐞 Bug Report / Issue</option>
-                  <option value="Other Sports">⚡ Other 14 Sports</option>
+                  <option value="Other Sports">⚡ Other 17 Sports</option>
                 </select>
               </div>
             </div>
@@ -5976,6 +6036,660 @@
       </section>
     </main>
 
+    <!-- ==========================================
+         PICKLEBALL PAGE WRAPPER
+         ========================================== -->
+    <main id="pickleball-page" class="format-page hidden" style="max-width: 960px; margin: 0 auto; padding: 24px 20px; font-family: inherit;">
+      <!-- 1. PICKLEBALL FORMAT VIEW -->
+      <section id="pb-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(132, 204, 22, 0.15); border-color: rgba(132, 204, 22, 0.35);">🏓</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: #84cc16;">⚡ USA Pickleball Rules</p>
+              <h1 class="format-header-title">Pickleball Scoring Hub</h1>
+              <p class="format-header-subtitle">Official side-out scoring, 3-number callout, and tournament engine</p>
+            </div>
+          </div>
+          <button id="pb-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
+          <div id="pb-format-custom-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#84cc16';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #84cc16; border-color: rgba(132, 204, 22, 0.35); background: rgba(132, 204, 22, 0.1);">⚡ SIDE-OUT MATCH</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(132, 204, 22, 0.15);">🏓</div>
+              <h2>Custom Match (Side-Out)</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #84cc16;">Score Match &rarr;</div>
+          </div>
+
+          <div id="pb-format-tournament-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#84cc16';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #84cc16; border-color: rgba(132, 204, 22, 0.35); background: rgba(132, 204, 22, 0.1);">🏆 CHAMPIONSHIP</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(132, 204, 22, 0.15);">🏆</div>
+              <h2>Pickleball Championship Cup</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #84cc16;">Manage Tournament &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. PICKLEBALL SETUP VIEW -->
+      <section id="pb-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Pickleball Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #84cc16; font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="pb-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #84cc16; margin-bottom: 6px; font-weight: 700;">Serving Team (Team 1)</label>
+            <input id="pb-team1-input" type="text" maxlength="24" value="Team 1" placeholder="e.g. Johns / Frazier" autocomplete="off" style="width: 100%; height: 40px; background: rgba(132,204,22,0.08); border: 1px solid rgba(132,204,22,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #a3e635; margin-bottom: 6px; font-weight: 700;">Receiving Team (Team 2)</label>
+            <input id="pb-team2-input" type="text" maxlength="24" value="Team 2" placeholder="e.g. Waters / Bright" autocomplete="off" style="width: 100%; height: 40px; background: rgba(163,230,53,0.08); border: 1px solid rgba(163,230,53,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Type</label>
+            <select id="pb-type-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="doubles" selected>Doubles (2 Servers per turn)</option>
+              <option value="singles">Singles (1 Server per turn)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Game Points</label>
+            <select id="pb-points-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="11" selected>11 Points (Win by 2)</option>
+              <option value="15">15 Points (Win by 2)</option>
+              <option value="21">21 Points (Win by 2)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Format</label>
+            <select id="pb-games-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-family: inherit; font-size: 0.9rem;">
+              <option value="3" selected>Best of 3 Games</option>
+              <option value="1">Single Game (1 Set)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="pb-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#84cc16; color:#051201; font-weight:900;">Start Pickleball Match</button>
+      </section>
+
+      <!-- 3. PICKLEBALL LIVE SCORING CONSOLE -->
+      <section id="pb-match-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px 20px;">
+          <div>
+            <span class="eyebrow" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #84cc16;">LIVE MATCH</span>
+            <div id="pb-serving-team-indicator" style="font-size: 0.85rem; color: var(--muted); margin-top: 2px;">Team 1 Serving</div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="pb-match-back-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem;">Back</button>
+            <button id="pb-reset-match-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem; background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">Reset</button>
+          </div>
+        </div>
+
+        <!-- Callout Banner -->
+        <div class="pb-callout-card">
+          <div class="pb-callout-label">Official 3-Number Callout (Serving Score - Receiving Score - Server #)</div>
+          <div id="pb-callout-digits" class="pb-callout-digits">0 - 0 - 2</div>
+        </div>
+
+        <!-- Scoreboard Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(132, 204, 22, 0.3); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="pb-team1-server-badge" class="pb-server-badge">🟢 SERVING</div>
+            <h2 id="pb-team1-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Team 1</h2>
+            <div id="pb-team1-score-display" class="pb-score-num">0</div>
+            <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">Games Won: <span id="pb-team1-games-display" style="color:#84cc16; font-weight:800;">0</span></div>
+            <button id="pb-rally-win-btn1" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #84cc16; color: #051201; font-weight: 800; border-radius: 12px; cursor: pointer;">Team 1 Wins Rally</button>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="pb-team2-server-badge" class="pb-server-badge" style="display: none;">🟢 SERVING</div>
+            <h2 id="pb-team2-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Team 2</h2>
+            <div id="pb-team2-score-display" class="pb-score-num team2">0</div>
+            <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">Games Won: <span id="pb-team2-games-display" style="color:#a3e635; font-weight:800;">0</span></div>
+            <button id="pb-rally-win-btn2" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #a3e635; color: #051201; font-weight: 800; border-radius: 12px; cursor: pointer;">Team 2 Wins Rally</button>
+          </div>
+        </div>
+
+        <!-- Kitchen Fault & Undo Buttons -->
+        <div style="display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <button id="pb-kitchen-fault-btn" class="pb-kitchen-btn" type="button">⚠️ Non-Volley Zone ("Kitchen") Fault</button>
+          <div style="display: flex; gap: 10px;">
+            <button id="pb-undo-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700;">↩️ Undo</button>
+            <button id="pb-save-vault-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700; background: rgba(16,185,129,0.15); color:#10b981; border-color:rgba(16,185,129,0.3);">💾 Save to Vault</button>
+          </div>
+        </div>
+
+        <!-- Timeline Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; font-weight: 800; color: #84cc16; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Match Timeline Log</h3>
+          <div id="pb-timeline-list" style="display: grid; gap: 8px; max-height: 220px; overflow-y: auto;"></div>
+        </div>
+      </section>
+
+      <!-- 4. PICKLEBALL TOURNAMENT SETUP VIEW -->
+      <section id="pb-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #84cc16; font-family: inherit;">Pickleball Tournament</h1>
+          </div>
+          <button id="pb-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tournament Name</label>
+            <input id="pb-tname-input" type="text" maxlength="32" value="Pickleball Championship Cup" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Number of Teams</label>
+            <select id="pb-tcount-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="4" selected>4 Teams</option>
+              <option value="6">6 Teams</option>
+              <option value="8">8 Teams</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: #84cc16; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Teams / Pairs</h3>
+          <div id="pb-tteam-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="pb-tstart-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#84cc16; color:#051201; font-weight:900;">Create Tournament</button>
+      </section>
+
+      <!-- 5. PICKLEBALL TOURNAMENT DASHBOARD VIEW -->
+      <section id="pb-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Hub</p>
+            <h1 id="pb-tdashboard-title" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: #84cc16;">Pickleball Championship Cup</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="pb-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="pb-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Standings Table -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; color: #84cc16;">📊 League Standings</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 14px;">Team</th>
+                <th style="padding: 10px 14px; text-align: center;">P</th>
+                <th style="padding: 10px 14px; text-align: center; color: #10b981;">W</th>
+                <th style="padding: 10px 14px; text-align: center; color: #ef4444;">L</th>
+                <th style="padding: 10px 14px; text-align: center;">Games</th>
+                <th style="padding: 10px 14px; text-align: center; color: #84cc16; font-weight: 800;">Pts</th>
+              </tr>
+            </thead>
+            <tbody id="pb-tstandings-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures List -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 14px; font-size: 1rem; color: #84cc16;">🏓 Round-Robin Fixtures</h3>
+          <div id="pb-tfixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================
+         PADEL PAGE WRAPPER
+         ========================================== -->
+    <main id="padel-page" class="format-page hidden" style="max-width: 960px; margin: 0 auto; padding: 24px 20px; font-family: inherit;">
+      <!-- 1. PADEL FORMAT VIEW -->
+      <section id="pdl-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(14, 165, 233, 0.15); border-color: rgba(14, 165, 233, 0.35);">🎾</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: #0ea5e9;">⚡ FIP &amp; WPT Doubles Rules</p>
+              <h1 class="format-header-title">Padel Scoring Hub</h1>
+              <p class="format-header-subtitle">15-30-40 scoring, Punto de Oro (Golden Point), and sets tracker</p>
+            </div>
+          </div>
+          <button id="pdl-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
+          <div id="pdl-format-custom-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#0ea5e9';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #0ea5e9; border-color: rgba(14, 165, 233, 0.35); background: rgba(14, 165, 233, 0.1);">⚡ DOUBLES MATCH</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(14, 165, 233, 0.15);">🎾</div>
+              <h2>Custom Match (15-30-40)</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #0ea5e9;">Score Match &rarr;</div>
+          </div>
+
+          <div id="pdl-format-tournament-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#0ea5e9';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #0ea5e9; border-color: rgba(14, 165, 233, 0.35); background: rgba(14, 165, 233, 0.1);">🏆 OPEN LEAGUE</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(14, 165, 233, 0.15);">🏆</div>
+              <h2>Padel Open Championship</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #0ea5e9;">Manage League &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. PADEL SETUP VIEW -->
+      <section id="pdl-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Padel Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #0ea5e9; font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="pdl-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #0ea5e9; margin-bottom: 6px; font-weight: 700;">Pair 1 (Serving First)</label>
+            <input id="pdl-p1-input" type="text" maxlength="28" value="Pair 1" placeholder="e.g. Lebrón / Galán" autocomplete="off" style="width: 100%; height: 40px; background: rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #38bdf8; margin-bottom: 6px; font-weight: 700;">Pair 2 (Receiving First)</label>
+            <input id="pdl-p2-input" type="text" maxlength="28" value="Pair 2" placeholder="e.g. Coello / Tapia" autocomplete="off" style="width: 100%; height: 40px; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Deuce Mode</label>
+            <select id="pdl-mode-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="golden" selected>Golden Point (Punto de Oro - Sudden Death at 40-40)</option>
+              <option value="advantage">Traditional Advantage (Win by 2)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Sets Format</label>
+            <select id="pdl-sets-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="3" selected>Best of 3 Sets (Tiebreak at 6-6)</option>
+              <option value="1">Pro Set / Single Set</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="pdl-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#0ea5e9; color:#031422; font-weight:900;">Start Padel Match</button>
+      </section>
+
+      <!-- 3. PADEL LIVE SCORING CONSOLE -->
+      <section id="pdl-match-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px 20px;">
+          <div>
+            <span class="eyebrow" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #0ea5e9;">LIVE PADEL MATCH</span>
+            <div id="pdl-golden-point-alert" class="pdl-golden-alert hidden">⚡ PUNTO DE ORO (GOLDEN POINT) • RECEIVER CHOOSES SIDE!</div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="pdl-match-back-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem;">Back</button>
+            <button id="pdl-reset-match-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem; background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">Reset</button>
+          </div>
+        </div>
+
+        <!-- Sets Matrix Bar -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--muted);">Completed Sets:</span>
+          <div id="pdl-sets-matrix-list" style="display: flex; gap: 10px; align-items: center;"></div>
+        </div>
+
+        <!-- Scoreboard Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(14, 165, 233, 0.3); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="pdl-p1-server-badge" class="pdl-server-badge">🎾 SERVING</div>
+            <h2 id="pdl-p1-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Pair 1</h2>
+            <div id="pdl-p1-score-display" class="pdl-score-num">0</div>
+            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 16px; font-size: 0.9rem;">
+              <span>Games: <strong id="pdl-p1-games-display" style="color:#0ea5e9; font-size:1.1rem;">0</strong></span>
+              <span>Sets: <strong id="pdl-p1-sets-display" style="color:#38bdf8; font-size:1.1rem;">0</strong></span>
+            </div>
+            <button id="pdl-p1-point-btn" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #0ea5e9; color: #031422; font-weight: 800; border-radius: 12px; cursor: pointer;">Pair 1 Point (+1)</button>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="pdl-p2-server-badge" class="pdl-server-badge" style="display: none;">🎾 SERVING</div>
+            <h2 id="pdl-p2-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Pair 2</h2>
+            <div id="pdl-p2-score-display" class="pdl-score-num player2">0</div>
+            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 16px; font-size: 0.9rem;">
+              <span>Games: <strong id="pdl-p2-games-display" style="color:#38bdf8; font-size:1.1rem;">0</strong></span>
+              <span>Sets: <strong id="pdl-p2-sets-display" style="color:#38bdf8; font-size:1.1rem;">0</strong></span>
+            </div>
+            <button id="pdl-p2-point-btn" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #38bdf8; color: #031422; font-weight: 800; border-radius: 12px; cursor: pointer;">Pair 2 Point (+1)</button>
+          </div>
+        </div>
+
+        <!-- Controls (Undo, Save) -->
+        <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center;">
+          <button id="pdl-undo-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700;">↩️ Undo</button>
+          <button id="pdl-save-vault-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700; background: rgba(16,185,129,0.15); color:#10b981; border-color:rgba(16,185,129,0.3);">💾 Save to Vault</button>
+        </div>
+
+        <!-- Timeline Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; font-weight: 800; color: #0ea5e9; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Match Timeline Log</h3>
+          <div id="pdl-timeline-list" style="display: grid; gap: 8px; max-height: 220px; overflow-y: auto;"></div>
+        </div>
+      </section>
+
+      <!-- 4. PADEL TOURNAMENT SETUP VIEW -->
+      <section id="pdl-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #0ea5e9; font-family: inherit;">Padel Open Championship</h1>
+          </div>
+          <button id="pdl-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tournament Name</label>
+            <input id="pdl-tname-input" type="text" maxlength="32" value="Padel Open Championship" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Number of Pairs</label>
+            <select id="pdl-tcount-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="4" selected>4 Pairs</option>
+              <option value="6">6 Pairs</option>
+              <option value="8">8 Pairs</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: #0ea5e9; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Doubles Pairs</h3>
+          <div id="pdl-tteam-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="pdl-tstart-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#0ea5e9; color:#031422; font-weight:900;">Create Tournament</button>
+      </section>
+
+      <!-- 5. PADEL TOURNAMENT DASHBOARD VIEW -->
+      <section id="pdl-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Hub</p>
+            <h1 id="pdl-tdashboard-title" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: #0ea5e9;">Padel Open Championship</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="pdl-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="pdl-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Standings Table -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; color: #0ea5e9;">📊 League Standings</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 14px;">Pair</th>
+                <th style="padding: 10px 14px; text-align: center;">P</th>
+                <th style="padding: 10px 14px; text-align: center; color: #10b981;">W</th>
+                <th style="padding: 10px 14px; text-align: center; color: #ef4444;">L</th>
+                <th style="padding: 10px 14px; text-align: center;">Sets</th>
+                <th style="padding: 10px 14px; text-align: center; color: #0ea5e9; font-weight: 800;">Pts</th>
+              </tr>
+            </thead>
+            <tbody id="pdl-tstandings-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures List -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 14px; font-size: 1rem; color: #0ea5e9;">🎾 Round-Robin Fixtures</h3>
+          <div id="pdl-tfixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================
+         SQUASH PAGE WRAPPER
+         ========================================== -->
+    <main id="squash-page" class="format-page hidden" style="max-width: 960px; margin: 0 auto; padding: 24px 20px; font-family: inherit;">
+      <!-- 1. SQUASH FORMAT VIEW -->
+      <section id="sq-format-view" class="hidden" style="display: grid; gap: 20px;">
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.35);">🏸</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: #f59e0b;">⚡ PSA World Tour Rules</p>
+              <h1 class="format-header-title">Squash Scoring Hub</h1>
+              <p class="format-header-subtitle">PAR-11 scoring (Win by 2), referee Let/Stroke controls, and tournament league</p>
+            </div>
+          </div>
+          <button id="sq-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
+          <div id="sq-format-custom-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#f59e0b';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.1);">⚡ PAR-11 MATCH</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(245, 158, 11, 0.15);">🏸</div>
+              <h2>Custom Match (PAR-11)</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #f59e0b;">Score Match &rarr;</div>
+          </div>
+
+          <div id="sq-format-tournament-btn" class="sport-format-mode-card" onmouseover="this.style.borderColor='#f59e0b';" onmouseout="this.style.borderColor='var(--glass-border)';">
+            <div class="format-card-pill" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.1);">🏆 PSA OPEN</div>
+            <div>
+              <div class="mode-icon-badge" style="background: rgba(245, 158, 11, 0.15);">🏆</div>
+              <h2>PSA Squash Open Championship</h2>
+            </div>
+            <div class="mode-cta-link" style="color: #f59e0b;">Manage Championship &rarr;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. SQUASH SETUP VIEW -->
+      <section id="sq-setup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Squash Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #f59e0b; font-family: inherit;">Match Configuration</h1>
+          </div>
+          <button id="sq-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #f59e0b; margin-bottom: 6px; font-weight: 700;">Player 1 (Server)</label>
+            <input id="sq-p1-input" type="text" maxlength="28" value="Player 1" placeholder="e.g. Ali Farag" autocomplete="off" style="width: 100%; height: 40px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: #fbbf24; margin-bottom: 6px; font-weight: 700;">Player 2 (Receiver)</label>
+            <input id="sq-p2-input" type="text" maxlength="28" value="Player 2" placeholder="e.g. Paul Coll" autocomplete="off" style="width: 100%; height: 40px; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.3); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Format (PAR-11)</label>
+          <select id="sq-bestof-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+            <option value="5" selected>Best of 5 Games (Standard PSA Tournament - First to 3 Games)</option>
+            <option value="3">Best of 3 Games (First to 2 Games)</option>
+            <option value="1">Single Game (First to 11, Win by 2)</option>
+          </select>
+        </div>
+
+        <button id="sq-start-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#f59e0b; color:#180f02; font-weight:900;">Start Squash Match</button>
+      </section>
+
+      <!-- 3. SQUASH LIVE SCORING CONSOLE -->
+      <section id="sq-match-view" class="hidden" style="display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px 20px;">
+          <div>
+            <span class="eyebrow" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #f59e0b;">PSA SQUASH SCORING</span>
+            <div id="sq-game-status-badge" style="font-size: 0.85rem; color: var(--muted); margin-top: 2px; font-weight:700;">GAME 1 (BEST OF 5)</div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="sq-match-back-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem;">Back</button>
+            <button id="sq-reset-match-btn" class="sport-tab active" type="button" style="margin:0; padding:6px 14px; font-size:0.85rem; background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">Reset</button>
+          </div>
+        </div>
+
+        <!-- Games Matrix Bar -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--muted);">Game Scores:</span>
+          <div id="sq-game-matrix-list" style="display: flex; gap: 10px; align-items: center;"></div>
+        </div>
+
+        <!-- Scoreboard Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="sq-p1-server-badge" class="sq-server-badge">
+              <span>🏸 SERVING</span>
+              <span id="sq-p1-side-indicator" style="font-weight:900;">BOX: R</span>
+            </div>
+            <h2 id="sq-p1-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Player 1</h2>
+            <div id="sq-p1-score-display" class="sq-score-num">0</div>
+            <div style="margin-top: 10px; font-size: 0.9rem; color: var(--muted);">Games Won: <span id="sq-p1-games-badge" class="sq-game-badge">0</span></div>
+            <button id="sq-p1-point-btn" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #f59e0b; color: #180f02; font-weight: 800; border-radius: 12px; cursor: pointer;">Player 1 Point (+1)</button>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 24px; text-align: center;">
+            <div id="sq-p2-server-badge" class="sq-server-badge" style="display: none;">
+              <span>🏸 SERVING</span>
+              <span id="sq-p2-side-indicator" style="font-weight:900;">BOX: R</span>
+            </div>
+            <h2 id="sq-p2-name-display" style="font-size: 1.3rem; margin: 6px 0; color: #fff;">Player 2</h2>
+            <div id="sq-p2-score-display" class="sq-score-num player2">0</div>
+            <div style="margin-top: 10px; font-size: 0.9rem; color: var(--muted);">Games Won: <span id="sq-p2-games-badge" class="sq-game-badge">0</span></div>
+            <button id="sq-p2-point-btn" class="btn btn-primary" type="button" style="width: 100%; margin-top: 16px; padding: 14px; background: #fbbf24; color: #180f02; font-weight: 800; border-radius: 12px; cursor: pointer;">Player 2 Point (+1)</button>
+          </div>
+        </div>
+
+        <!-- Referee Decision Panel (PSA Official) -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(245,158,11,0.25); border-radius: 16px; padding: 18px;">
+          <div style="font-size: 0.85rem; font-weight: 800; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">⚖️ Official Referee Decisions</div>
+          <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 12px;">Call ruling on interference appeals during live rally</div>
+          <div class="sq-decision-grid">
+            <button id="sq-decision-let-btn" class="sq-decision-btn let" type="button">
+              <span>🔄 YES LET</span>
+              <span style="font-size: 0.68rem; opacity: 0.8; font-weight: normal;">Replay Rally</span>
+            </button>
+            <button id="sq-decision-stroke-p1-btn" class="sq-decision-btn stroke" type="button">
+              <span>⚡ STROKE P1</span>
+              <span style="font-size: 0.68rem; opacity: 0.8; font-weight: normal;">Award P1</span>
+            </button>
+            <button id="sq-decision-stroke-p2-btn" class="sq-decision-btn stroke" type="button">
+              <span>⚡ STROKE P2</span>
+              <span style="font-size: 0.68rem; opacity: 0.8; font-weight: normal;">Award P2</span>
+            </button>
+            <button id="sq-decision-nolet-btn" class="sq-decision-btn nolet" type="button" style="grid-column: 1 / -1;">
+              <span>❌ NO LET (Appeal Denied • Point to Opponent)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Controls (Undo, Save) -->
+        <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center;">
+          <button id="sq-undo-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700;">↩️ Undo</button>
+          <button id="sq-save-vault-btn" class="sport-tab active" type="button" style="margin: 0; padding: 10px 18px; font-weight: 700; background: rgba(16,185,129,0.15); color:#10b981; border-color:rgba(16,185,129,0.3);">💾 Save to Vault</button>
+        </div>
+
+        <!-- Timeline Log -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; font-weight: 800; color: #f59e0b; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">📝 Match Timeline Log</h3>
+          <div id="sq-timeline-list" style="display: grid; gap: 8px; max-height: 220px; overflow-y: auto;"></div>
+        </div>
+      </section>
+
+      <!-- 4. SQUASH TOURNAMENT SETUP VIEW -->
+      <section id="sq-tsetup-view" class="custom-setup hidden" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; display: grid; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Setup</p>
+            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; color: #f59e0b; font-family: inherit;">PSA Squash Championship</h1>
+          </div>
+          <button id="sq-tsetup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px;">Back</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Tournament Name</label>
+            <input id="sq-tname-input" type="text" maxlength="32" value="PSA Squash Open Championship" autocomplete="off" style="width: 100%; height: 40px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Players Count</label>
+            <select id="sq-tcount-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="4" selected>4 Players</option>
+              <option value="6">6 Players</option>
+              <option value="8">8 Players</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Match Format</label>
+            <select id="sq-tbestof-select" style="width: 100%; height: 40px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.9rem;">
+              <option value="5" selected>Best of 5</option>
+              <option value="3">Best of 3</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 12px; font-size: 0.95rem; color: #f59e0b; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px;">Register Players</h3>
+          <div id="sq-tplayer-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;"></div>
+        </div>
+
+        <button id="sq-tstart-btn" class="start-custom" type="button" style="margin-top: 10px; width: 100%; background:#f59e0b; color:#180f02; font-weight:900;">Create Tournament</button>
+      </section>
+
+      <!-- 5. SQUASH TOURNAMENT DASHBOARD VIEW -->
+      <section id="sq-tdashboard-view" class="hidden" style="display: grid; gap: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Tournament Hub</p>
+            <h1 id="sq-tdashboard-title" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: #f59e0b;">PSA Squash Open Championship</h1>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="sq-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Back</button>
+            <button id="sq-treset-btn" class="sport-tab active" type="button" style="background: rgba(239,68,68,0.1); color: #f87171; border-color: rgba(239,68,68,0.2); margin: 0; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px;">Reset</button>
+          </div>
+        </div>
+
+        <!-- Standings Table -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; overflow-x: auto;">
+          <h3 style="margin: 0 0 12px; font-size: 1rem; color: #f59e0b;">📊 League Standings</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                <th style="padding: 10px 14px;">Player</th>
+                <th style="padding: 10px 14px; text-align: center;">P</th>
+                <th style="padding: 10px 14px; text-align: center; color: #10b981;">W</th>
+                <th style="padding: 10px 14px; text-align: center; color: #ef4444;">L</th>
+                <th style="padding: 10px 14px; text-align: center;">Games</th>
+                <th style="padding: 10px 14px; text-align: center; color: #f59e0b; font-weight: 800;">Pts</th>
+              </tr>
+            </thead>
+            <tbody id="sq-tstandings-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Fixtures List -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
+          <h3 style="margin: 0 0 14px; font-size: 1rem; color: #f59e0b;">🏸 Round-Robin Fixtures</h3>
+          <div id="sq-tfixtures-list" style="display: grid; gap: 12px;"></div>
+        </div>
+      </section>
+    </main>
+
     <!-- EVENT MODALS & OVERLAYS (BASKETBALL SPECIFIC) -->
     <div id="bb-action-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
         <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 440px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
@@ -6305,7 +7019,7 @@
         <div id="vault-toolbar" style="padding: 12px 24px; background: rgba(255,255,255,0.01); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
           <input id="vault-search-input" type="text" placeholder="Search by team, player or tournament..." autocomplete="off" style="flex: 1; min-width: 180px; height: 36px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 12px; font-size: 0.85rem;" />
           <select id="vault-sport-filter" style="height: 36px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--ink); padding: 0 10px; font-size: 0.85rem;">
-            <option value="all" selected>All Sports (14)</option>
+            <option value="all" selected>All Sports (17)</option>
             <option value="cricket">Cricket</option>
             <option value="football">Football</option>
             <option value="basketball">Basketball</option>
@@ -6320,6 +7034,9 @@
             <option value="golf">Golf</option>
             <option value="boxing">Boxing</option>
             <option value="mma">MMA (UFC)</option>
+            <option value="pickleball">Pickleball</option>
+            <option value="padel">Padel</option>
+            <option value="squash">Squash</option>
           </select>
           <button id="vault-save-active-btn" class="save-to-vault-btn" type="button" title="Save whatever match or tournament is currently open in your browser">
             <span>💾</span>
@@ -6390,7 +7107,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=330"></script>
+    <script src="app.js?v=331"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
@@ -6404,5 +7121,8 @@
     <script src="sports/golf.js?v=219"></script>
     <script src="sports/boxing.js?v=220"></script>
     <script src="sports/mma.js?v=221"></script>
+    <script src="sports/pickleball.js?v=210"></script>
+    <script src="sports/padel.js?v=210"></script>
+    <script src="sports/squash.js?v=210"></script>
   </body>
 </html>

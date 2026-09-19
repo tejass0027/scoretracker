@@ -29,6 +29,9 @@ const els = {
   golfPage: document.querySelector("#golf-page"),
   boxingPage: document.querySelector("#boxing-page"),
   mmaPage: document.querySelector("#mma-page"),
+  pickleballPage: document.querySelector("#pickleball-page"),
+  padelPage: document.querySelector("#padel-page"),
+  squashPage: document.querySelector("#squash-page"),
   customSetup: document.querySelector("#custom-setup"),
   customFormatBtn: document.querySelector("#custom-format-btn"),
   startCustomMatch: document.querySelector("#start-custom-match"),
@@ -225,6 +228,9 @@ function hideAllPages() {
   if (els.golfPage) els.golfPage.classList.add("hidden");
   if (els.boxingPage) els.boxingPage.classList.add("hidden");
   if (els.mmaPage) els.mmaPage.classList.add("hidden");
+  if (els.pickleballPage) els.pickleballPage.classList.add("hidden");
+  if (els.padelPage) els.padelPage.classList.add("hidden");
+  if (els.squashPage) els.squashPage.classList.add("hidden");
 }
 window.hideAllPages = hideAllPages;
 
@@ -574,7 +580,10 @@ function syncMobileBottomNav(route) {
         current.startsWith("#tabletennis") ||
         current.startsWith("#golf") ||
         current.startsWith("#boxing") ||
-        current.startsWith("#mma");
+        current.startsWith("#mma") ||
+        current.startsWith("#pickleball") ||
+        current.startsWith("#padel") ||
+        current.startsWith("#squash");
 
       if (isSportView) {
         item.classList.add("active");
@@ -702,6 +711,18 @@ function navigateByHash(hash) {
   } else if (hash.startsWith("#mma")) {
     if (typeof window.showMmaPage === "function") {
       window.showMmaPage(true);
+    }
+  } else if (hash.startsWith("#pickleball")) {
+    if (typeof window.showPickleballPage === "function") {
+      window.showPickleballPage(true);
+    }
+  } else if (hash.startsWith("#padel")) {
+    if (typeof window.showPadelPage === "function") {
+      window.showPadelPage(true);
+    }
+  } else if (hash.startsWith("#squash")) {
+    if (typeof window.showSquashPage === "function") {
+      window.showSquashPage(true);
     }
   } else if (hash === "#tdashboard" && state.tournamentActive) {
     showTournamentDashboard(true);
@@ -4875,7 +4896,10 @@ function launchQuickSport(target) {
     tabletennis: window.showTableTennisPage,
     golf: window.showGolfPage,
     boxing: window.showBoxingPage,
-    mma: window.showMmaPage
+    mma: window.showMmaPage,
+    pickleball: window.showPickleballPage,
+    padel: window.showPadelPage,
+    squash: window.showSquashPage
   };
 
   const showFn = sportMethodMap[target];

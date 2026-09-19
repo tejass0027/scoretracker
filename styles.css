@@ -618,6 +618,18 @@ button {
 .sport-card[data-sport-theme="mma"]:hover { border-color: rgba(225, 29, 72, 0.5); box-shadow: 0 15px 35px -5px rgba(225, 29, 72, 0.25); }
 .sport-card[data-sport-theme="mma"] .sport-card-footer { color: #fb7185; }
 
+.sport-card[data-sport-theme="pickleball"] .sport-emoji-box { background: rgba(132, 204, 22, 0.12); border-color: rgba(132, 204, 22, 0.3); }
+.sport-card[data-sport-theme="pickleball"]:hover { border-color: rgba(132, 204, 22, 0.5); box-shadow: 0 15px 35px -5px rgba(132, 204, 22, 0.25); }
+.sport-card[data-sport-theme="pickleball"] .sport-card-footer { color: #a3e635; }
+
+.sport-card[data-sport-theme="padel"] .sport-emoji-box { background: rgba(14, 165, 233, 0.12); border-color: rgba(14, 165, 233, 0.3); }
+.sport-card[data-sport-theme="padel"]:hover { border-color: rgba(14, 165, 233, 0.5); box-shadow: 0 15px 35px -5px rgba(14, 165, 233, 0.25); }
+.sport-card[data-sport-theme="padel"] .sport-card-footer { color: #38bdf8; }
+
+.sport-card[data-sport-theme="squash"] .sport-emoji-box { background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); }
+.sport-card[data-sport-theme="squash"]:hover { border-color: rgba(245, 158, 11, 0.5); box-shadow: 0 15px 35px -5px rgba(245, 158, 11, 0.25); }
+.sport-card[data-sport-theme="squash"] .sport-card-footer { color: #fbbf24; }
+
 .format-card {
   display: flex !important;
   flex-direction: column !important;
