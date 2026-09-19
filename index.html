@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=342" />
-    <link rel="stylesheet" href="hub.css?v=340" />
+    <link rel="stylesheet" href="styles.css?v=343" />
+    <link rel="stylesheet" href="hub.css?v=341" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -1040,12 +1040,16 @@
     </main>
 
     <main id="format-page" class="format-page hidden" style="max-width: 1080px; margin: 0 auto; padding: 24px 20px; font-family: inherit;">
-      <header class="sports-header">
-        <div>
-          <p class="eyebrow">Cricket setup</p>
-          <h1>Choose Cricket Format</h1>
-          <button id="back-to-sports-from-format" class="all-sports-btn" type="button">&larr; All Sports</button>
+      <header class="format-header-banner">
+        <div class="format-header-left">
+          <div class="format-header-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35);">🏏</div>
+          <div class="format-header-text">
+            <p class="format-header-eyebrow" style="color: var(--field);">⚡ Cricket Setup</p>
+            <h1 class="format-header-title">Choose Cricket Format</h1>
+            <p class="format-header-subtitle">Select Test match, custom overs match, or IPL tournament league</p>
+          </div>
         </div>
+        <button id="back-to-sports-from-format" class="format-nav-back-btn all-sports-btn" type="button">&larr; All Sports</button>
       </header>
 
       <section class="format-grid" aria-label="Cricket formats" style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
@@ -1672,12 +1676,16 @@
       
       <!-- 1. FOOTBALL FORMAT SELECTION VIEW -->
       <section id="fb-format-view" class="hidden">
-        <header class="sports-header">
-          <div>
-            <p class="eyebrow">Football setup</p>
-            <h1>Choose Football Format</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35);">⚽</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: #34d399;">⚡ Football Setup</p>
+              <h1 class="format-header-title">Choose Football Format</h1>
+              <p class="format-header-subtitle">Select 1v1 custom match or tournament championship cup</p>
+            </div>
           </div>
-          <button id="fb-format-back-btn" class="sport-tab active" type="button">All sports</button>
+          <button id="fb-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
         </header>
 
         <div class="format-grid" style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -2045,12 +2053,16 @@
       
       <!-- 1. BASKETBALL FORMAT SELECTION VIEW -->
       <section id="bb-format-view" class="hidden">
-        <header class="sports-header">
-          <div>
-            <p class="eyebrow">Basketball setup</p>
-            <h1>Choose Basketball Format</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(249, 115, 22, 0.15); border-color: rgba(249, 115, 22, 0.35);">🏀</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: #f97316;">⚡ Basketball Setup</p>
+              <h1 class="format-header-title">Choose Basketball Format</h1>
+              <p class="format-header-subtitle">Select pickup game or tournament championship cup</p>
+            </div>
           </div>
-          <button id="bb-format-back-btn" class="sport-tab active" type="button">All sports</button>
+          <button id="bb-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
         </header>
 
         <div class="format-grid" style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -2441,12 +2453,16 @@
       
       <!-- 1. TENNIS FORMAT SELECTION VIEW -->
       <section id="ten-format-view" class="hidden">
-        <header class="sports-header">
-          <div>
-            <p class="eyebrow">Tennis setup</p>
-            <h1>Choose Tennis Format</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(163, 230, 53, 0.15); border-color: rgba(163, 230, 53, 0.35);">🎾</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--ten-primary);">⚡ Tennis Setup</p>
+              <h1 class="format-header-title">Choose Tennis Format</h1>
+              <p class="format-header-subtitle">Select singles match or Grand Slam tournament bracket</p>
+            </div>
           </div>
-          <button id="ten-format-back-btn" class="sport-tab active" type="button">All sports</button>
+          <button id="ten-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
         </header>
 
         <div class="format-grid" style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -2751,12 +2767,16 @@
       
       <!-- 1. BADMINTON FORMAT SELECTION VIEW -->
       <section id="bad-format-view" class="hidden">
-        <header class="sports-header">
-          <div>
-            <p class="eyebrow">Badminton setup</p>
-            <h1>Choose Badminton Format</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.35);">🏸</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--bad-primary);">⚡ Badminton Setup</p>
+              <h1 class="format-header-title">Choose Badminton Format</h1>
+              <p class="format-header-subtitle">Select singles/doubles match or Badminton championship cup</p>
+            </div>
           </div>
-          <button id="bad-format-back-btn" class="sport-tab active" type="button">All sports</button>
+          <button id="bad-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
         </header>
 
         <div class="format-grid" style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -3055,13 +3075,17 @@
       
       <!-- 1. HOCKEY FORMAT SELECTION VIEW -->
       <section id="hoc-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Field Hockey</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--hoc-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.35);">🏑</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--hoc-primary);">⚡ Field Hockey Setup</p>
+              <h1 class="format-header-title">Choose Hockey Format</h1>
+              <p class="format-header-subtitle">Select 1v1 custom match or championship tournament</p>
+            </div>
           </div>
-          <button id="hoc-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="hoc-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -3388,13 +3412,17 @@
       
       <!-- 1. VOLLEYBALL FORMAT SELECTION VIEW -->
       <section id="vb-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Volleyball</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--vb-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(249, 115, 22, 0.15); border-color: rgba(249, 115, 22, 0.35);">🏐</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--vb-primary);">⚡ Volleyball Setup</p>
+              <h1 class="format-header-title">Choose Volleyball Format</h1>
+              <p class="format-header-subtitle">Select 1v1 match or championship tournament</p>
+            </div>
           </div>
-          <button id="vb-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="vb-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -3707,13 +3735,17 @@
       
       <!-- 1. BASEBALL FORMAT SELECTION VIEW -->
       <section id="bs-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Baseball</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--bs-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.35);">⚾</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--bs-primary);">⚡ Baseball Setup</p>
+              <h1 class="format-header-title">Choose Baseball Format</h1>
+              <p class="format-header-subtitle">Select 1v1 match or championship series</p>
+            </div>
           </div>
-          <button id="bs-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="bs-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -4036,13 +4068,17 @@
       
       <!-- 1. RUGBY FORMAT SELECTION VIEW -->
       <section id="rg-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Rugby</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--rg-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35);">🏉</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--rg-primary);">⚡ Rugby Setup</p>
+              <h1 class="format-header-title">Choose Rugby Format</h1>
+              <p class="format-header-subtitle">Select 1v1 match or championship tournament</p>
+            </div>
           </div>
-          <button id="rg-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="rg-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -4357,13 +4393,17 @@
       
       <!-- 1. KABADDI FORMAT SELECTION VIEW -->
       <section id="kb-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Kabaddi</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--kb-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(249, 115, 22, 0.15); border-color: rgba(249, 115, 22, 0.35);">🤼</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--kb-primary);">⚡ Kabaddi Setup</p>
+              <h1 class="format-header-title">Choose Kabaddi Format</h1>
+              <p class="format-header-subtitle">Select 1v1 custom match or Pro Kabaddi League (PKL)</p>
+            </div>
           </div>
-          <button id="kb-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="kb-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -4694,13 +4734,17 @@
       
       <!-- 1. TABLE TENNIS FORMAT SELECTION VIEW -->
       <section id="tt-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Table Tennis</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--tt-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.35);">🏓</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--tt-primary);">⚡ Table Tennis Setup</p>
+              <h1 class="format-header-title">Choose Table Tennis Format</h1>
+              <p class="format-header-subtitle">Select 1v1 custom match or ITTF tournament</p>
+            </div>
           </div>
-          <button id="tt-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="tt-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Match Card -->
@@ -4967,13 +5011,17 @@
       
       <!-- 1. GOLF FORMAT SELECTION VIEW -->
       <section id="gf-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Golf</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--gf-primary);">Select Match Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35);">⛳</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--gf-primary);">⚡ Golf Setup</p>
+              <h1 class="format-header-title">Choose Golf Format</h1>
+              <p class="format-header-subtitle">Select custom round (1-4 players) or PGA tournament leaderboard</p>
+            </div>
           </div>
-          <button id="gf-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="gf-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Round Card -->
@@ -5204,13 +5252,17 @@
       
       <!-- 1. BOXING FORMAT SELECTION VIEW -->
       <section id="bx-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Boxing</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--bx-gold);">Select Bout Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.35);">🥊</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--bx-gold);">⚡ Boxing Setup</p>
+              <h1 class="format-header-title">Choose Boxing Format</h1>
+              <p class="format-header-subtitle">Select 10-point must bout or championship tournament</p>
+            </div>
           </div>
-          <button id="bx-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="bx-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Bout Card -->
@@ -5564,13 +5616,17 @@
       
       <!-- 1. MMA FORMAT SELECTION VIEW -->
       <section id="mma-format-view" class="hidden" style="display: grid; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px 20px;">
-          <div>
-            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">MMA / UFC</p>
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--mma-gold);">Select Fight Mode</h1>
+        <header class="format-header-banner">
+          <div class="format-header-left">
+            <div class="format-header-badge" style="background: rgba(234, 179, 8, 0.15); border-color: rgba(234, 179, 8, 0.35);">🥋</div>
+            <div class="format-header-text">
+              <p class="format-header-eyebrow" style="color: var(--mma-gold);">⚡ MMA / UFC Setup</p>
+              <h1 class="format-header-title">Choose Fight Format</h1>
+              <p class="format-header-subtitle">Select unified rules fight or MMA Grand Prix tournament</p>
+            </div>
           </div>
-          <button id="mma-format-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">Back to Sports</button>
-        </div>
+          <button id="mma-format-back-btn" class="format-nav-back-btn sport-tab active" type="button">&larr; All Sports</button>
+        </header>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 28px;">
           <!-- Custom Fight Card -->
