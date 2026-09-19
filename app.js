@@ -220,7 +220,7 @@ const defaultState = {
   tournamentActiveFixtureIndex: -1,
   setupTournamentName: "IPL 2026",
   setupTeamCount: 4,
-  setupOvers: 20,
+  setupOvers: null,
   setupTeamNames: []
 };
 
@@ -358,7 +358,8 @@ function showTournamentSetup(fromHash = false) {
     els.tournamentTeamCount.value = state.setupTeamCount || 4;
   }
   if (els.tournamentOvers) {
-    els.tournamentOvers.value = state.setupOvers || 20;
+    els.tournamentOvers.value = "";
+    els.tournamentOvers.placeholder = "e.g. 20";
   }
   if (els.tournamentPlayersCount) {
     els.tournamentPlayersCount.value = "";
@@ -880,6 +881,19 @@ function generateTournament() {
     return;
   }
 
+  const oversVal = els.tournamentOvers ? els.tournamentOvers.value.trim() : "";
+  if (!oversVal) {
+    showToast("Please enter the number of overs.");
+    if (els.tournamentOvers) els.tournamentOvers.focus();
+    return;
+  }
+  const tournamentOversNum = Number(oversVal);
+  if (isNaN(tournamentOversNum) || tournamentOversNum < 1 || tournamentOversNum > 50) {
+    showToast("Overs per match must be a number between 1 and 50.");
+    if (els.tournamentOvers) els.tournamentOvers.focus();
+    return;
+  }
+
   const playersCountVal = els.tournamentPlayersCount ? els.tournamentPlayersCount.value.trim() : "";
   if (!playersCountVal) {
     showToast("Please enter the number of players.");
@@ -999,7 +1013,7 @@ function generateTournament() {
   state.tournamentTeams = teams;
   state.tournamentFixtures = fixtures;
   state.tournamentActiveFixtureIndex = -1;
-  state.maxOvers = Number(els.tournamentOvers.value) || 20;
+  state.maxOvers = tournamentOversNum;
   state.tournamentPlayersCount = Math.max(2, Math.min(11, Number(els.tournamentPlayersCount.value) || 11));
   state.isResumedTournament = false;
 
@@ -2327,7 +2341,7 @@ function normalizeState(nextState) {
   nextState.tournamentCount = nextState.tournamentCount || 1;
   nextState.setupTournamentName = nextState.setupTournamentName || "IPL 2026";
   nextState.setupTeamCount = nextState.setupTeamCount || 4;
-  nextState.setupOvers = nextState.setupOvers || 20;
+  nextState.setupOvers = nextState.setupOvers || null;
   nextState.setupTeamNames = nextState.setupTeamNames || [];
   nextState.customTeamAPlayers = nextState.customTeamAPlayers || [];
   nextState.customTeamBPlayers = nextState.customTeamBPlayers || [];
@@ -4920,7 +4934,8 @@ document.querySelectorAll("[data-format]").forEach((button) => {
     // Prefill fields
     els.customTeamA.value = state.teamA;
     els.customTeamB.value = state.teamB;
-    els.customOvers.value = format === "Test" ? 90 : 20;
+    els.customOvers.value = "";
+    els.customOvers.placeholder = format === "Test" ? "e.g. 90" : (format === "ODI" ? "e.g. 50" : "e.g. 20");
     els.customPlayersA.value = "";
     els.customPlayersB.value = "";
 
@@ -4948,7 +4963,8 @@ els.customFormatBtn.addEventListener("click", () => {
   // Prefill fields
   els.customTeamA.value = state.teamA;
   els.customTeamB.value = state.teamB;
-  els.customOvers.value = state.maxOvers;
+  els.customOvers.value = "";
+  els.customOvers.placeholder = "e.g. 20";
   els.customPlayersA.value = "";
   els.customPlayersB.value = "";
 
@@ -5008,6 +5024,19 @@ els.startCustomMatch.addEventListener("click", () => {
   const tBVal = els.customTeamB ? els.customTeamB.value.trim() : "";
   if (tAVal && tBVal && tAVal.toLowerCase() === tBVal.toLowerCase()) {
     showToast("Team names must be unique. Please use different names for the two teams.");
+    return;
+  }
+
+  const oversVal = els.customOvers ? els.customOvers.value.trim() : "";
+  if (!oversVal) {
+    showToast("Please enter the number of overs.");
+    if (els.customOvers) els.customOvers.focus();
+    return;
+  }
+  const customOversNum = Number(oversVal);
+  if (isNaN(customOversNum) || customOversNum < 1 || customOversNum > 100) {
+    showToast("Number of overs must be a number between 1 and 100.");
+    if (els.customOvers) els.customOvers.focus();
     return;
   }
 
@@ -5255,7 +5284,7 @@ if (els.tournamentNameInput) {
 
 if (els.tournamentOvers) {
   els.tournamentOvers.addEventListener("input", () => {
-    state.setupOvers = Number(els.tournamentOvers.value) || 20;
+    state.setupOvers = els.tournamentOvers.value ? Number(els.tournamentOvers.value) : null;
     saveState();
   });
 }
