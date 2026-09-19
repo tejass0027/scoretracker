@@ -4234,72 +4234,84 @@ function syncScoringModeUI() {
 }
 
 function renderCustomPlayerInputs() {
-  const containerA = document.querySelector("#custom-team-a-players-inputs");
-  const containerB = document.querySelector("#custom-team-b-players-inputs");
+  // Maintained as stub; player names are now collected via modal table pop-up on Start Match
+}
 
-  if (!els.customPlayersA || !els.customPlayersB) return;
+function renderRosterModalTables() {
+  const container = document.querySelector("#roster-tables-container");
+  if (!container) return;
 
-  const valStrA = els.customPlayersA.value.trim();
-  const valStrB = els.customPlayersB.value.trim();
-  const countA = valStrA !== "" ? Math.max(2, Math.min(11, Number(valStrA) || 2)) : 0;
-  const countB = valStrB !== "" ? Math.max(2, Math.min(11, Number(valStrB) || 2)) : 0;
+  const valStrA = els.customPlayersA ? els.customPlayersA.value.trim() : "";
+  const valStrB = els.customPlayersB ? els.customPlayersB.value.trim() : "";
+  const countA = Math.max(2, Math.min(11, Number(valStrA) || 11));
+  const countB = Math.max(2, Math.min(11, Number(valStrB) || 11));
+
+  const teamNameA = (els.customTeamA && els.customTeamA.value.trim()) || "Team 1";
+  const teamNameB = (els.customTeamB && els.customTeamB.value.trim()) || "Team 2";
+  const abbrA = getTeamAbbr(teamNameA);
+  const abbrB = getTeamAbbr(teamNameB);
 
   if (!state.customTeamAPlayers) state.customTeamAPlayers = [];
   if (!state.customTeamBPlayers) state.customTeamBPlayers = [];
 
-  const teamNameA = els.customTeamA.value.trim() || "Team 1";
-  const abbrA = getTeamAbbr(teamNameA);
-
-  if (containerA) {
-    containerA.innerHTML = "";
-    for (let i = 0; i < countA; i++) {
-      const label = document.createElement("label");
-      label.style.fontSize = "0.85rem";
-      label.style.marginTop = "6px";
-      const savedVal = state.customTeamAPlayers[i] !== undefined ? state.customTeamAPlayers[i] : `${abbrA} Player ${i + 1}`;
-      label.innerHTML = `
-        Player ${i + 1} Name
-        <input type="text" class="custom-team-a-player-input" data-index="${i}" maxlength="24" value="${savedVal}" style="margin-top: 4px;" />
+  const renderTeamTable = (teamName, count, abbr, teamKey, borderCol, titleCol) => {
+    let rowsHtml = "";
+    const rosterArr = teamKey === "A" ? (state.customRosterTeam1 || []) : (state.customRosterTeam2 || []);
+    for (let i = 0; i < count; i++) {
+      const existing = (rosterArr && rosterArr[i]) ? rosterArr[i] : "";
+      const savedVal = (existing && !existing.toLowerCase().includes("player")) ? existing.replace(/"/g, "&quot;") : "";
+      rowsHtml += `
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <td style="padding: 7px 10px; color: var(--text-muted); font-size: 0.85rem; font-weight: 700; width: 36px; text-align: center;">${i + 1}</td>
+          <td style="padding: 6px 8px;">
+            <input type="text" class="roster-input-${teamKey.toLowerCase()}" data-index="${i}" value="${savedVal}" placeholder="Player ${i + 1} Name" maxlength="24" style="width: 100%; padding: 7px 12px; font-size: 0.88rem; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--ink); font-family: inherit; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='${borderCol}'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+          </td>
+        </tr>
       `;
-      containerA.append(label);
     }
-    
-    // Bind listeners
-    containerA.querySelectorAll(".custom-team-a-player-input").forEach(inp => {
-      inp.addEventListener("input", (e) => {
-        const idx = Number(e.target.dataset.index);
-        state.customTeamAPlayers[idx] = e.target.value;
-        saveState();
-      });
-    });
-  }
+    return `
+      <div style="background: rgba(255,255,255,0.02); border: 1.5px solid ${borderCol}; border-radius: 16px; padding: 16px; overflow: hidden; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+          <strong style="color: ${titleCol}; font-size: 1.05rem; font-family: inherit;">${teamName}</strong>
+          <span style="font-size: 0.78rem; font-weight: 700; background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 999px; color: var(--text-muted);">${count} Players</span>
+        </div>
+        <div style="max-height: 340px; overflow-y: auto; padding-right: 4px;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">
+                <th style="padding: 6px 10px; text-align: center; width: 36px;">#</th>
+                <th style="padding: 6px 8px; text-align: left;">Player Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  };
 
-  const teamNameB = els.customTeamB.value.trim() || "Team 2";
-  const abbrB = getTeamAbbr(teamNameB);
+  container.innerHTML = `
+    ${renderTeamTable(teamNameA, countA, abbrA, "A", "rgba(212,175,55,0.35)", "var(--gold)")}
+    ${renderTeamTable(teamNameB, countB, abbrB, "B", "rgba(96,165,250,0.35)", "#60a5fa")}
+  `;
+}
 
-  if (containerB) {
-    containerB.innerHTML = "";
-    for (let i = 0; i < countB; i++) {
-      const label = document.createElement("label");
-      label.style.fontSize = "0.85rem";
-      label.style.marginTop = "6px";
-      const savedVal = state.customTeamBPlayers[i] !== undefined ? state.customTeamBPlayers[i] : `${abbrB} Player ${i + 1}`;
-      label.innerHTML = `
-        Player ${i + 1} Name
-        <input type="text" class="custom-team-b-player-input" data-index="${i}" maxlength="24" value="${savedVal}" style="margin-top: 4px;" />
-      `;
-      containerB.append(label);
-    }
-    
-    // Bind listeners
-    containerB.querySelectorAll(".custom-team-b-player-input").forEach(inp => {
-      inp.addEventListener("input", (e) => {
-        const idx = Number(e.target.dataset.index);
-        state.customTeamBPlayers[idx] = e.target.value;
-        saveState();
-      });
-    });
-  }
+function openPlayerRosterModal() {
+  const modal = document.querySelector("#modal-player-roster-entry");
+  if (!modal) return;
+  renderRosterModalTables();
+  modal.classList.remove("hidden");
+  setTimeout(() => {
+    const firstInput = modal.querySelector("input.roster-input-a");
+    if (firstInput) firstInput.focus();
+  }, 100);
+}
+
+function closePlayerRosterModal() {
+  const modal = document.querySelector("#modal-player-roster-entry");
+  if (modal) modal.classList.add("hidden");
 }
 
 function renderLivePagePlayerInputs() {
@@ -4793,91 +4805,25 @@ els.startCustomMatch.addEventListener("click", () => {
     showToast("Players per team must be a number between 2 and 11.");
     return;
   }
-  const customOvers = Math.max(1, Math.min(100, Number(els.customOvers.value) || 20));
-
   if (state.scoringMode === "advanced") {
-    const inputsA = document.querySelectorAll(".custom-team-a-player-input");
-    const inputsB = document.querySelectorAll(".custom-team-b-player-input");
-
-    const tempA = Array.from(inputsA).map(inp => inp.value.trim());
-    const tempB = Array.from(inputsB).map(inp => inp.value.trim());
-
-    let okA = tempA.length >= customPlayersA;
-    if (okA) {
-      for (let i = 0; i < customPlayersA; i++) {
-        const val = tempA[i];
-        if (!val || val === "" || val.toLowerCase().includes("player")) {
-          okA = false;
-          break;
-        }
-      }
-    }
-
-    let okB = tempB.length >= customPlayersB;
-    if (okB) {
-      for (let i = 0; i < customPlayersB; i++) {
-        const val = tempB[i];
-        if (!val || val === "" || val.toLowerCase().includes("player")) {
-          okB = false;
-          break;
-        }
-      }
-    }
-
-    if (!okA || !okB) {
-      showToast("Please fill all the player names first.");
-      
-      const containerA = document.querySelector("#custom-team-a-players-inputs");
-      if (containerA && containerA.style.display === "none") {
-        containerA.style.display = "grid";
-        if (els.btnConfigurePlayersA) els.btnConfigurePlayersA.textContent = "Hide Player Names";
-        renderCustomPlayerInputs();
-      }
-      const containerB = document.querySelector("#custom-team-b-players-inputs");
-      if (containerB && containerB.style.display === "none") {
-        containerB.style.display = "grid";
-        if (els.btnConfigurePlayersB) els.btnConfigurePlayersB.textContent = "Hide Player Names";
-        renderCustomPlayerInputs();
-      }
-      return;
-    }
-
-    // Validate unique player names
-    const allNames = new Set();
-    for (let i = 0; i < customPlayersA; i++) {
-      const val = tempA[i];
-      const valKey = val.toLowerCase();
-      if (allNames.has(valKey)) {
-        showToast(`All player names must be unique. Duplicate found: "${val}". Please edit.`);
-        return;
-      }
-      allNames.add(valKey);
-    }
-    for (let i = 0; i < customPlayersB; i++) {
-      const val = tempB[i];
-      const valKey = val.toLowerCase();
-      if (allNames.has(valKey)) {
-        showToast(`All player names must be unique. Duplicate found: "${val}". Please edit.`);
-        return;
-      }
-      allNames.add(valKey);
-    }
-
-    const btnBat2 = document.querySelector("#btn-batfirst-2");
-    const isTeam2BattingFirst = btnBat2 && btnBat2.classList.contains("active");
-    
-    if (isTeam2BattingFirst) {
-      state.customTeamAPlayers = tempB;
-      state.customTeamBPlayers = tempA;
-    } else {
-      state.customTeamAPlayers = tempA;
-      state.customTeamBPlayers = tempB;
-    }
+    openPlayerRosterModal();
+    return;
   }
+
+  // Simple tracker mode: no player names needed
+  state.customTeamAPlayers = [];
+  state.customTeamBPlayers = [];
+  executeStartCustomMatch();
+});
+
+function executeStartCustomMatch() {
+  const customPlayersA = Math.max(2, Math.min(11, Number(els.customPlayersA.value) || 11));
+  const customPlayersB = Math.max(2, Math.min(11, Number(els.customPlayersB.value) || 11));
+  const customOvers = Math.max(1, Math.min(100, Number(els.customOvers.value) || 20));
 
   const btnBat2 = document.querySelector("#btn-batfirst-2");
   const isTeam2BattingFirst = btnBat2 && btnBat2.classList.contains("active");
-  
+
   const finalTeamA = isTeam2BattingFirst ? (els.customTeamB.value.trim() || defaultState.teamB) : (els.customTeamA.value.trim() || defaultState.teamA);
   const finalTeamB = isTeam2BattingFirst ? (els.customTeamA.value.trim() || defaultState.teamA) : (els.customTeamB.value.trim() || defaultState.teamB);
   const finalPlayersA = isTeam2BattingFirst ? customPlayersB : customPlayersA;
@@ -4893,7 +4839,102 @@ els.startCustomMatch.addEventListener("click", () => {
   render();
   showCricketPage();
   showToast(`${state.format} match started.`);
-});
+}
+
+// Modal Roster Confirmation & Close Handlers
+const btnConfirmRosterStart = document.querySelector("#btn-confirm-roster-start");
+if (btnConfirmRosterStart) {
+  btnConfirmRosterStart.addEventListener("click", () => {
+    const customPlayersA = Math.max(2, Math.min(11, Number(els.customPlayersA.value) || 11));
+    const customPlayersB = Math.max(2, Math.min(11, Number(els.customPlayersB.value) || 11));
+
+    const inputsA = document.querySelectorAll(".roster-input-a");
+    const inputsB = document.querySelectorAll(".roster-input-b");
+
+    const tempA = Array.from(inputsA).map(inp => inp.value.trim());
+    const tempB = Array.from(inputsB).map(inp => inp.value.trim());
+
+    const teamNameA = (els.customTeamA && els.customTeamA.value.trim()) || "Team 1";
+    const teamNameB = (els.customTeamB && els.customTeamB.value.trim()) || "Team 2";
+
+    // Validate that all names are entered
+    for (let i = 0; i < customPlayersA; i++) {
+      const val = tempA[i];
+      if (!val) {
+        showToast(`Please enter the name for Player ${i + 1} of ${teamNameA}.`);
+        if (inputsA[i]) inputsA[i].focus();
+        return;
+      }
+    }
+
+    for (let i = 0; i < customPlayersB; i++) {
+      const val = tempB[i];
+      if (!val) {
+        showToast(`Please enter the name for Player ${i + 1} of ${teamNameB}.`);
+        if (inputsB[i]) inputsB[i].focus();
+        return;
+      }
+    }
+
+    // Validate unique player names across both teams
+    const allNames = new Set();
+    for (let i = 0; i < customPlayersA; i++) {
+      const val = tempA[i];
+      const key = val.toLowerCase();
+      if (allNames.has(key)) {
+        showToast(`All player names must be unique. Duplicate found: "${val}".`);
+        if (inputsA[i]) inputsA[i].focus();
+        return;
+      }
+      allNames.add(key);
+    }
+    for (let i = 0; i < customPlayersB; i++) {
+      const val = tempB[i];
+      const key = val.toLowerCase();
+      if (allNames.has(key)) {
+        showToast(`All player names must be unique. Duplicate found: "${val}".`);
+        if (inputsB[i]) inputsB[i].focus();
+        return;
+      }
+      allNames.add(key);
+    }
+
+    // Save rosters for both teams
+    state.customRosterTeam1 = tempA.slice(0, customPlayersA);
+    state.customRosterTeam2 = tempB.slice(0, customPlayersB);
+
+    const btnBat2 = document.querySelector("#btn-batfirst-2");
+    const isTeam2BattingFirst = btnBat2 && btnBat2.classList.contains("active");
+
+    if (isTeam2BattingFirst) {
+      state.customTeamAPlayers = state.customRosterTeam2;
+      state.customTeamBPlayers = state.customRosterTeam1;
+    } else {
+      state.customTeamAPlayers = state.customRosterTeam1;
+      state.customTeamBPlayers = state.customRosterTeam2;
+    }
+
+    closePlayerRosterModal();
+    executeStartCustomMatch();
+  });
+}
+
+const btnCancelRosterModal = document.querySelector("#btn-cancel-roster-modal");
+if (btnCancelRosterModal) {
+  btnCancelRosterModal.addEventListener("click", closePlayerRosterModal);
+}
+const btnCloseRosterModal = document.querySelector("#close-roster-modal");
+if (btnCloseRosterModal) {
+  btnCloseRosterModal.addEventListener("click", closePlayerRosterModal);
+}
+const modalRosterOverlay = document.querySelector("#modal-player-roster-entry");
+if (modalRosterOverlay) {
+  modalRosterOverlay.addEventListener("click", (e) => {
+    if (e.target === modalRosterOverlay) {
+      closePlayerRosterModal();
+    }
+  });
+}
 
 els.backToSportsFromFormat.addEventListener("click", () => {
   showSportsPage();
@@ -5913,50 +5954,17 @@ inputsToValidate.forEach(({ input, error }) => {
   if (input) {
     input.addEventListener("input", () => {
       validatePlayersInput(input, error);
-      if (input.id === "custom-players-a" || input.id === "custom-players-b") {
-        renderCustomPlayerInputs();
-      } else if (input.id === "players-team-a" || input.id === "players-team-b") {
+      if (input.id === "players-team-a" || input.id === "players-team-b") {
         renderLivePagePlayerInputs();
       }
     });
   }
 });
 
-// Bind listeners for team name inputs to dynamically update abbreviations
-const customTeamAEl = document.querySelector("#custom-team-a");
-const customTeamBEl = document.querySelector("#custom-team-b");
-if (customTeamAEl) customTeamAEl.addEventListener("input", renderCustomPlayerInputs);
-if (customTeamBEl) customTeamBEl.addEventListener("input", renderCustomPlayerInputs);
-
 const liveTeamAEl = document.querySelector("#team-a");
 const liveTeamBEl = document.querySelector("#team-b");
 if (liveTeamAEl) liveTeamAEl.addEventListener("input", renderLivePagePlayerInputs);
 if (liveTeamBEl) liveTeamBEl.addEventListener("input", renderLivePagePlayerInputs);
-
-// Bind player name configuration toggle buttons
-if (els.btnConfigurePlayersA) {
-  els.btnConfigurePlayersA.addEventListener("click", () => {
-    const container = document.querySelector("#custom-team-a-players-inputs");
-    if (container) {
-      const isHidden = container.style.display === "none";
-      container.style.display = isHidden ? "grid" : "none";
-      els.btnConfigurePlayersA.textContent = isHidden ? "Hide Player Names" : "Enter Player Names";
-      if (isHidden) renderCustomPlayerInputs();
-    }
-  });
-}
-
-if (els.btnConfigurePlayersB) {
-  els.btnConfigurePlayersB.addEventListener("click", () => {
-    const container = document.querySelector("#custom-team-b-players-inputs");
-    if (container) {
-      const isHidden = container.style.display === "none";
-      container.style.display = isHidden ? "grid" : "none";
-      els.btnConfigurePlayersB.textContent = isHidden ? "Hide Player Names" : "Enter Player Names";
-      if (isHidden) renderCustomPlayerInputs();
-    }
-  });
-}
 
 
 
