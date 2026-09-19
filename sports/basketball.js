@@ -283,13 +283,15 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
       // Clear inputs
       if (els.teamAInput) els.teamAInput.value = "";
       if (els.teamBInput) els.teamBInput.value = "";
-      if (els.modeSimple) els.modeSimple.classList.add("active");
+      if (els.modeSimple) els.modeSimple.classList.remove("active");
       if (els.modeAdvanced) els.modeAdvanced.classList.remove("active");
     } else if (hash === "#basketball-match") {
       if (els.dashboardView) els.dashboardView.classList.remove("hidden");
       renderBbDashboard();
     } else if (hash === "#basketball-tsetup") {
       if (els.tsetupView) els.tsetupView.classList.remove("hidden");
+      if (els.tmodeSimple) els.tmodeSimple.classList.remove("active");
+      if (els.tmodeAdvanced) els.tmodeAdvanced.classList.remove("active");
       renderTournamentTeamInputs();
     } else if (hash === "#basketball-tdashboard") {
       if (els.tdashboardView) els.tdashboardView.classList.remove("hidden");
@@ -460,9 +462,33 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
     });
   }
 
+  function highlightBbModeButtons(type = "custom") {
+    const btn1 = type === "tournament" ? els.tmodeSimple : els.modeSimple;
+    const btn2 = type === "tournament" ? els.tmodeAdvanced : els.modeAdvanced;
+    const group = type === "tournament" ? document.querySelector("#bb-tscoring-mode-group") : document.querySelector("#bb-scoring-mode-group");
+    const targets = [btn1, btn2, group].filter(Boolean);
+    targets.forEach(el => {
+      el.classList.remove("mode-select-attention");
+      void el.offsetWidth;
+      el.classList.add("mode-select-attention");
+    });
+    if (btn1) btn1.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+      targets.forEach(el => el.classList.remove("mode-select-attention"));
+    }, 1600);
+  }
+
   // Start match
   if (els.startBtn) {
     els.startBtn.addEventListener("click", () => {
+      const isSimple = els.modeSimple && els.modeSimple.classList.contains("active");
+      const isAdv = els.modeAdvanced && els.modeAdvanced.classList.contains("active");
+      if (!isSimple && !isAdv) {
+        triggerBbToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+        highlightBbModeButtons("custom");
+        return;
+      }
+
       const tA = els.teamAInput.value.trim() || "Team 1";
       const tB = els.teamBInput.value.trim() || "Team 2";
 
@@ -471,7 +497,6 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
         return;
       }
 
-      const isAdv = els.modeAdvanced.classList.contains("active");
       const qDuration = Math.max(1, Math.min(20, Number(els.quarterDurationInput.value) || 10));
       const tLimit = Math.max(1, Math.min(10, Number(els.timeoutsInput.value) || 5));
       const fLimit = Math.max(3, Math.min(8, Number(els.foulLimitInput.value) || 5));
@@ -1172,6 +1197,14 @@ console.log("ScoreTracker Basketball Module loaded - version 209");
 
   if (els.tcreateBtn) {
     els.tcreateBtn.addEventListener("click", () => {
+      const isTSimple = els.tmodeSimple && els.tmodeSimple.classList.contains("active");
+      const isTAdv = els.tmodeAdvanced && els.tmodeAdvanced.classList.contains("active");
+      if (!isTSimple && !isTAdv) {
+        triggerBbToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+        highlightBbModeButtons("tournament");
+        return;
+      }
+
       const name = els.tnameInput.value.trim() || "Basketball Tournament Cup";
       const teamCount = Number(els.tteamCount.value) || 4;
       const duration = Math.max(1, Math.min(20, Number(els.tdurationInput.value) || 10));

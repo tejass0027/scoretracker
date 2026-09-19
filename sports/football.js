@@ -505,13 +505,15 @@ console.log("ScoreTracker Football Module loaded - version 208");
       if (els.etInput) els.etInput.checked = false;
       if (els.quarterBreaksInput) els.quarterBreaksInput.checked = false;
       if (els.etSetupContainer) els.etSetupContainer.style.display = "none";
-      if (els.modeSimple) els.modeSimple.classList.add("active");
+      if (els.modeSimple) els.modeSimple.classList.remove("active");
       if (els.modeAdvanced) els.modeAdvanced.classList.remove("active");
     } else if (hash === "#football-match") {
       if (els.dashboardView) els.dashboardView.classList.remove("hidden");
       renderFbDashboard();
     } else if (hash === "#football-tsetup") {
       if (els.tsetupView) els.tsetupView.classList.remove("hidden");
+      if (els.tmodeSimple) els.tmodeSimple.classList.remove("active");
+      if (els.tmodeAdvanced) els.tmodeAdvanced.classList.remove("active");
       renderFootballTournamentTeamInputs();
     } else if (hash === "#football-tdashboard") {
       if (els.tdashboardView) els.tdashboardView.classList.remove("hidden");
@@ -548,9 +550,33 @@ console.log("ScoreTracker Football Module loaded - version 208");
     }
   }
 
+  function highlightFbModeButtons(type = "custom") {
+    const btn1 = type === "tournament" ? els.tmodeSimple : els.modeSimple;
+    const btn2 = type === "tournament" ? els.tmodeAdvanced : els.modeAdvanced;
+    const group = type === "tournament" ? document.querySelector("#fb-tscoring-mode-group") : document.querySelector("#fb-scoring-mode-group");
+    const targets = [btn1, btn2, group].filter(Boolean);
+    targets.forEach(el => {
+      el.classList.remove("mode-select-attention");
+      void el.offsetWidth;
+      el.classList.add("mode-select-attention");
+    });
+    if (btn1) btn1.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+      targets.forEach(el => el.classList.remove("mode-select-attention"));
+    }, 1600);
+  }
+
   // 7. CUSTOM MATCH CONTROLS & EVENT LOGGERS
   if (els.startBtn) {
     els.startBtn.addEventListener("click", () => {
+      const isSimple = els.modeSimple && els.modeSimple.classList.contains("active");
+      const isAdv = els.modeAdvanced && els.modeAdvanced.classList.contains("active");
+      if (!isSimple && !isAdv) {
+        triggerFbToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+        highlightFbModeButtons("custom");
+        return;
+      }
+
       const tA = els.teamAInput.value.trim();
       const tB = els.teamBInput.value.trim();
       const durationVal = els.durationInput.value.trim();
@@ -580,7 +606,6 @@ console.log("ScoreTracker Football Module loaded - version 208");
         return;
       }
 
-      const isAdv = els.modeAdvanced.classList.contains("active");
       const fullDur = Math.max(2, Math.min(90, Number(durationVal)));
       const halfDur = Math.ceil(fullDur / 2);
       const maxSubs = Math.max(1, Math.min(11, Number(subsVal)));
@@ -1668,6 +1693,14 @@ console.log("ScoreTracker Football Module loaded - version 208");
   // Create Tournament league click handler
   if (els.tcreateBtn) {
     els.tcreateBtn.addEventListener("click", () => {
+      const isTSimple = els.tmodeSimple && els.tmodeSimple.classList.contains("active");
+      const isTAdv = els.tmodeAdvanced && els.tmodeAdvanced.classList.contains("active");
+      if (!isTSimple && !isTAdv) {
+        triggerFbToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+        highlightFbModeButtons("tournament");
+        return;
+      }
+
       const tName = els.tnameInput.value.trim();
       const tDuration = els.tdurationInput.value.trim();
       const tSubs = els.tsubsInput.value.trim();

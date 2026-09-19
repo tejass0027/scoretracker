@@ -182,7 +182,7 @@ const defaultState = {
   followOnEnforced: false,
   customTeamAPlayers: [],
   customTeamBPlayers: [],
-  scoringMode: "simple",
+  scoringMode: null,
   inningsData: [
     { team: 0, number: 1, runs: 0, wickets: 0, legalBalls: 0, balls: [], extras: { b: 0, lb: 0, wd: 0, nb: 0 }, declared: false, followOn: false, closed: false },
     { team: 1, number: 1, runs: 0, wickets: 0, legalBalls: 0, balls: [], extras: { b: 0, lb: 0, wd: 0, nb: 0 }, declared: false, followOn: false, closed: false },
@@ -314,6 +314,7 @@ function showTournamentSetup(fromHash = false) {
     state.setupTeamRosters = {};
     state.setupTeamNames = [];
     state.tournamentPlayersCount = undefined;
+    state.scoringMode = null;
   }
   hideAllPages();
   if (els.tournamentSetup) els.tournamentSetup.classList.remove("hidden");
@@ -831,6 +832,12 @@ function renderTournamentTeamInputs() {
 }
 
 function generateTournament() {
+  if (!state.scoringMode) {
+    showToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+    highlightScoringModeButtons("tournament");
+    return;
+  }
+
   const playersCountVal = els.tournamentPlayersCount ? els.tournamentPlayersCount.value.trim() : "";
   if (!playersCountVal) {
     showToast("Please enter the number of players.");
@@ -2282,7 +2289,7 @@ function normalizeState(nextState) {
   nextState.setupTeamNames = nextState.setupTeamNames || [];
   nextState.customTeamAPlayers = nextState.customTeamAPlayers || [];
   nextState.customTeamBPlayers = nextState.customTeamBPlayers || [];
-  nextState.scoringMode = nextState.scoringMode || "simple";
+  nextState.scoringMode = (nextState.scoringMode === "simple" || nextState.scoringMode === "advanced") ? nextState.scoringMode : null;
   
 
 
@@ -3745,12 +3752,34 @@ function promptNewBatter(target = "striker") {
   }
 }
 
+function highlightScoringModeButtons(type = "custom") {
+  const btn1 = type === "tournament" ? els.btnTModeSimple : els.btnModeSimple;
+  const btn2 = type === "tournament" ? els.btnTModeAdvanced : els.btnModeAdvanced;
+  const group = type === "tournament" ? document.querySelector("#tournament-scoring-mode-group") : document.querySelector("#custom-scoring-mode-group");
+  const targets = [btn1, btn2, group].filter(Boolean);
+  targets.forEach(el => {
+    el.classList.remove("mode-select-attention");
+    void el.offsetWidth;
+    el.classList.add("mode-select-attention");
+  });
+  if (btn1) {
+    btn1.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  setTimeout(() => {
+    targets.forEach(el => el.classList.remove("mode-select-attention"));
+  }, 1600);
+}
+
 function syncScoringModeUI() {
   const isSimple = state.scoringMode === "simple";
+  const isAdv = state.scoringMode === "advanced";
+
   if (els.btnModeSimple && els.btnModeAdvanced) {
     if (isSimple) {
       els.btnModeSimple.classList.add("active");
       els.btnModeAdvanced.classList.remove("active");
+      els.btnModeSimple.classList.remove("mode-select-attention");
+      els.btnModeAdvanced.classList.remove("mode-select-attention");
       if (els.btnConfigurePlayersA) els.btnConfigurePlayersA.classList.add("hidden");
       if (els.btnConfigurePlayersB) els.btnConfigurePlayersB.classList.add("hidden");
       
@@ -3758,9 +3787,11 @@ function syncScoringModeUI() {
       const containerB = document.querySelector("#custom-team-b-players-inputs");
       if (containerA) containerA.style.display = "none";
       if (containerB) containerB.style.display = "none";
-    } else {
+    } else if (isAdv) {
       els.btnModeSimple.classList.remove("active");
       els.btnModeAdvanced.classList.add("active");
+      els.btnModeSimple.classList.remove("mode-select-attention");
+      els.btnModeAdvanced.classList.remove("mode-select-attention");
       if (els.btnConfigurePlayersA) {
         els.btnConfigurePlayersA.classList.remove("hidden");
         els.btnConfigurePlayersA.textContent = "Enter Player Names";
@@ -3769,6 +3800,17 @@ function syncScoringModeUI() {
         els.btnConfigurePlayersB.classList.remove("hidden");
         els.btnConfigurePlayersB.textContent = "Enter Player Names";
       }
+    } else {
+      // Neither is pre-selected
+      els.btnModeSimple.classList.remove("active");
+      els.btnModeAdvanced.classList.remove("active");
+      if (els.btnConfigurePlayersA) els.btnConfigurePlayersA.classList.add("hidden");
+      if (els.btnConfigurePlayersB) els.btnConfigurePlayersB.classList.add("hidden");
+      
+      const containerA = document.querySelector("#custom-team-a-players-inputs");
+      const containerB = document.querySelector("#custom-team-b-players-inputs");
+      if (containerA) containerA.style.display = "none";
+      if (containerB) containerB.style.display = "none";
     }
   }
 
@@ -3776,9 +3818,17 @@ function syncScoringModeUI() {
     if (isSimple) {
       els.btnTModeSimple.classList.add("active");
       els.btnTModeAdvanced.classList.remove("active");
-    } else {
+      els.btnTModeSimple.classList.remove("mode-select-attention");
+      els.btnTModeAdvanced.classList.remove("mode-select-attention");
+    } else if (isAdv) {
       els.btnTModeSimple.classList.remove("active");
       els.btnTModeAdvanced.classList.add("active");
+      els.btnTModeSimple.classList.remove("mode-select-attention");
+      els.btnTModeAdvanced.classList.remove("mode-select-attention");
+    } else {
+      // Neither is pre-selected
+      els.btnTModeSimple.classList.remove("active");
+      els.btnTModeAdvanced.classList.remove("active");
     }
   }
 }
@@ -4237,6 +4287,7 @@ document.querySelectorAll("[data-format]").forEach((button) => {
     // Reset player rosters so a new match starts fresh
     state.customTeamAPlayers = [];
     state.customTeamBPlayers = [];
+    state.scoringMode = null;
 
     // Prefill fields
     els.customTeamA.value = state.teamA;
@@ -4264,6 +4315,7 @@ els.customFormatBtn.addEventListener("click", () => {
   // Reset player rosters so a new match starts fresh
   state.customTeamAPlayers = [];
   state.customTeamBPlayers = [];
+  state.scoringMode = null;
 
   // Prefill fields
   els.customTeamA.value = state.teamA;
@@ -4310,6 +4362,12 @@ if (els.customTeamA) els.customTeamA.addEventListener("input", updateCustomBatFi
 if (els.customTeamB) els.customTeamB.addEventListener("input", updateCustomBatFirstOptions);
 
 els.startCustomMatch.addEventListener("click", () => {
+  if (!state.scoringMode) {
+    showToast("Please select a scoring mode (Simple Tracker or Advanced) to proceed.");
+    highlightScoringModeButtons("custom");
+    return;
+  }
+
   const btn1 = document.querySelector("#btn-batfirst-1");
   const btn2 = document.querySelector("#btn-batfirst-2");
   const isSelected = (btn1 && btn1.classList.contains("active")) || (btn2 && btn2.classList.contains("active"));

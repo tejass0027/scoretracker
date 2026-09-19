@@ -2835,3 +2835,17 @@ dd {
 .light-theme .squad-checkbox-round {
   border-color: rgba(15, 23, 42, 0.3);
 }
+
+/* Attention highlight when scoring mode is not selected */
+@keyframes modeAttentionShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.mode-select-attention {
+  animation: modeAttentionShake 0.5s ease-in-out !important;
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.4), 0 0 16px rgba(248, 113, 113, 0.3) !important;
+}
+

@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=336" />
+    <link rel="stylesheet" href="styles.css?v=337" />
     <link rel="stylesheet" href="hub.css?v=336" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1070,9 +1070,9 @@
         <h2 id="setup-title">Match Setup</h2>
         <div class="custom-grid">
           <div class="setup-group" style="grid-column: 1 / -1; margin-bottom: 8px;">
-            <label style="font-weight: 700; margin-bottom: 8px; display: block;">Scoring Mode</label>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-              <button id="btn-mode-simple" class="sport-tab active" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Simple Tracker</button>
+            <label style="font-weight: 700; margin-bottom: 8px; display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+            <div id="custom-scoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <button id="btn-mode-simple" class="sport-tab" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Simple Tracker</button>
               <button id="btn-mode-advanced" class="sport-tab" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Advanced (With Player Names)</button>
             </div>
           </div>
@@ -1164,9 +1164,9 @@
       <section class="custom-setup" aria-label="IPL tournament setup" style="margin-top: 24px;">
         <div class="custom-grid">
           <div class="setup-group" style="grid-column: 1 / -1; margin-bottom: 8px;">
-            <label style="font-weight: 700; margin-bottom: 8px; display: block;">Scoring Mode</label>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-              <button id="btn-tmode-simple" class="sport-tab active" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Simple Tracker</button>
+            <label style="font-weight: 700; margin-bottom: 8px; display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+            <div id="tournament-scoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <button id="btn-tmode-simple" class="sport-tab" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Simple Tracker</button>
               <button id="btn-tmode-advanced" class="sport-tab" type="button" style="padding: 10px; font-weight: 700; border-radius: 8px; cursor: pointer;">Advanced (With Player Names)</button>
             </div>
           </div>
@@ -1703,9 +1703,9 @@
 
         <!-- Scoring Mode Selection -->
         <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px; margin-bottom: 8px;">
-          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <button id="fb-mode-simple" class="sport-tab active" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
+          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+          <div id="fb-scoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <button id="fb-mode-simple" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
             <button id="fb-mode-advanced" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Advanced (With Players)</button>
           </div>
         </div>
@@ -1898,9 +1898,9 @@
         </div>
 
         <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px; margin-bottom: 8px;">
-          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <button id="fb-tmode-simple" class="sport-tab active" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
+          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+          <div id="fb-tscoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <button id="fb-tmode-simple" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
             <button id="fb-tmode-advanced" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Advanced (With Players)</button>
           </div>
         </div>
@@ -2073,9 +2073,9 @@
         </div>
 
         <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px;">
-          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <button id="bb-mode-simple" class="sport-tab active" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
+          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+          <div id="bb-scoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <button id="bb-mode-simple" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
             <button id="bb-mode-advanced" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Advanced (With Players)</button>
           </div>
         </div>
@@ -2284,9 +2284,9 @@
         </div>
 
         <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: grid; gap: 12px; margin-bottom: 8px;">
-          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <button id="bb-tmode-simple" class="sport-tab active" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
+          <label style="font-weight: 700; font-size: 0.95rem; color: var(--gold); display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
+          <div id="bb-tscoring-mode-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <button id="bb-tmode-simple" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Simple Tracker</button>
             <button id="bb-tmode-advanced" class="sport-tab" type="button" style="padding: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; font-size: 1rem;">Advanced (With Players)</button>
           </div>
         </div>
@@ -6323,9 +6323,9 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=329"></script>
-    <script src="sports/football.js?v=212"></script>
-    <script src="sports/basketball.js?v=211"></script>
+    <script src="app.js?v=330"></script>
+    <script src="sports/football.js?v=213"></script>
+    <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
     <script src="sports/badminton.js?v=211"></script>
     <script src="sports/hockey.js?v=213"></script>
