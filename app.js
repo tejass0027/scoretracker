@@ -3291,14 +3291,12 @@ function renderLivePlayerStats(innings) {
 
   // Update pitch hub striker card
   const strikerNameEl = document.querySelector("#live-striker-name");
-  const strikerSubEl = document.querySelector("#live-striker-sub");
   const strikerRunsEl = document.querySelector("#live-striker-runs");
   const strikerRatesEl = document.querySelector("#live-striker-rates");
   const strikerCard = document.querySelector("#btn-striker-card");
 
   // Update pitch hub non-striker card
   const nonstrikerNameEl = document.querySelector("#live-nonstriker-name");
-  const nonstrikerSubEl = document.querySelector("#live-nonstriker-sub");
   const nonstrikerRunsEl = document.querySelector("#live-nonstriker-runs");
   const nonstrikerRatesEl = document.querySelector("#live-nonstriker-rates");
   const nonstrikerCard = document.querySelector("#btn-nonstriker-card");
@@ -3309,12 +3307,10 @@ function renderLivePlayerStats(innings) {
   if (slot1Batter) {
     const sr = slot1Batter.balls > 0 ? ((slot1Batter.runs / slot1Batter.balls) * 100).toFixed(1) : "0.0";
     if (strikerNameEl) strikerNameEl.textContent = slot1Batter.name;
-    if (strikerSubEl) strikerSubEl.textContent = isSlot1OnStrike ? "Facing the ball" : "At non-striker end";
     if (strikerRunsEl) strikerRunsEl.innerHTML = `${slot1Batter.runs} <small>(${slot1Batter.balls})</small>`;
     if (strikerRatesEl) strikerRatesEl.textContent = `4s: ${slot1Batter.fours} • 6s: ${slot1Batter.sixes} • SR: ${sr}`;
   } else {
     if (strikerNameEl) strikerNameEl.textContent = "Select Striker";
-    if (strikerSubEl) strikerSubEl.textContent = "Tap to pick striker";
     if (strikerRunsEl) strikerRunsEl.innerHTML = `0 <small>(0)</small>`;
     if (strikerRatesEl) strikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
   }
@@ -3322,12 +3318,10 @@ function renderLivePlayerStats(innings) {
   if (slot2Batter) {
     const sr = slot2Batter.balls > 0 ? ((slot2Batter.runs / slot2Batter.balls) * 100).toFixed(1) : "0.0";
     if (nonstrikerNameEl) nonstrikerNameEl.textContent = slot2Batter.name;
-    if (nonstrikerSubEl) nonstrikerSubEl.textContent = isSlot2OnStrike ? "Facing the ball" : "At bowler's end";
     if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `${slot2Batter.runs} <small>(${slot2Batter.balls})</small>`;
     if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: ${slot2Batter.fours} • 6s: ${slot2Batter.sixes} • SR: ${sr}`;
   } else {
     if (nonstrikerNameEl) nonstrikerNameEl.textContent = "Select Non-Striker";
-    if (nonstrikerSubEl) nonstrikerSubEl.textContent = "Tap to pick non-striker";
     if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `0 <small>(0)</small>`;
     if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
   }
@@ -3349,7 +3343,6 @@ function renderLivePlayerStats(innings) {
 
   // Update pitch hub bowler card
   const bowlerNameEl = document.querySelector("#live-card-bowler-name");
-  const bowlerSubEl = document.querySelector("#live-bowler-sub");
   const bowlerFigsEl = document.querySelector("#live-bowler-figures");
   const bowlerEconEl = document.querySelector("#live-bowler-economy");
   const bowlerOverLabel = document.querySelector("#live-bowler-over-label");
@@ -3360,12 +3353,10 @@ function renderLivePlayerStats(innings) {
   if (bowler) {
     const econ = bowler.ballsBowled > 0 ? (bowler.runsConceded / (bowler.ballsBowled / 6)).toFixed(2) : "0.00";
     if (bowlerNameEl) bowlerNameEl.textContent = bowler.name;
-    if (bowlerSubEl) bowlerSubEl.textContent = `${formatBowlerOvers(bowler.ballsBowled)} overs bowled`;
     if (bowlerFigsEl) bowlerFigsEl.textContent = `${formatBowlerOvers(bowler.ballsBowled)}-${bowler.maidens || 0}-${bowler.runsConceded}-${bowler.wickets}`;
     if (bowlerEconEl) bowlerEconEl.textContent = `Econ: ${econ} RPO`;
   } else {
     if (bowlerNameEl) bowlerNameEl.textContent = "Select Bowler";
-    if (bowlerSubEl) bowlerSubEl.textContent = "Tap to choose bowler";
     if (bowlerFigsEl) bowlerFigsEl.textContent = "0-0-0-0";
     if (bowlerEconEl) bowlerEconEl.textContent = "Econ: 0.00 RPO";
   }
@@ -4114,11 +4105,6 @@ function promptNewBowler() {
   const currentBowlerIndex = innings.currentBowlerIndex;
   const currentOverNum = Math.floor(innings.legalBalls / 6) + 1;
 
-  const subEl = document.querySelector("#modal-bowler-subtitle");
-  if (subEl) {
-    subEl.textContent = `Choose bowler for Over ${currentOverNum} (${bwTeam})`;
-  }
-
   const searchInput = document.querySelector("#search-bowlers-input");
   if (searchInput) searchInput.value = "";
 
@@ -4209,17 +4195,13 @@ function promptNewBatter(target = "striker") {
   if (teamBadge) teamBadge.textContent = `BATTING: ${bTeam}`;
 
   const titleEl = document.querySelector("#modal-batter-title");
-  const subEl = document.querySelector("#modal-batter-subtitle");
   if (titleEl) {
     if (target === "striker") {
       titleEl.innerHTML = `Select Striker <span style="color:#f87171;">🔴</span>`;
-      if (subEl) subEl.textContent = `Choose the batsman on strike for ${bTeam}`;
     } else if (target === "nonstriker") {
       titleEl.innerHTML = `Select Non-Striker 🏃`;
-      if (subEl) subEl.textContent = `Choose the partner at bowler's end for ${bTeam}`;
     } else {
       titleEl.innerHTML = `Select Incoming Batter 🏏`;
-      if (subEl) subEl.textContent = `Wicket fell! Choose next incoming batter for ${bTeam}`;
     }
   }
 
