@@ -125,6 +125,15 @@ const els = {
   btnPlayNextMatch: document.querySelector("#btn-play-next-match"),
   btnModalViewScorecard: document.querySelector("#btn-modal-view-scorecard"),
   btnModalDismiss: document.querySelector("#btn-modal-dismiss"),
+  nextInningsModal: document.querySelector("#next-innings-modal"),
+  closeNextInningsModal: document.querySelector("#close-next-innings-modal"),
+  nextInningsModalTitle: document.querySelector("#next-innings-modal-title"),
+  nextInningsModalSubtitle: document.querySelector("#next-innings-modal-subtitle"),
+  nextInningsModalBadge: document.querySelector("#next-innings-modal-badge"),
+  nextInningsModalSummary: document.querySelector("#next-innings-modal-summary"),
+  btnModalNextInnings: document.querySelector("#btn-modal-next-innings"),
+  btnNextInningsViewScorecard: document.querySelector("#btn-next-innings-view-scorecard"),
+  btnNextInningsDismiss: document.querySelector("#btn-next-innings-dismiss"),
   scorecardModal: document.querySelector("#scorecard-modal"),
   closeScorecardModal: document.querySelector("#close-scorecard-modal"),
   selectStriker: document.querySelector("#select-striker"),
@@ -180,6 +189,7 @@ const els = {
 };
 
 let matchOverModalShownFor = null;
+let nextInningsModalShownFor = null;
 
 const defaultState = {
   teamA: "Bengaluru Strikers",
@@ -3081,10 +3091,21 @@ function render() {
       els.matchNote.textContent = testIndicator() || `${battingTeam()} batting on day ${state.day}.`;
     } else if (state.innings === 1) {
       els.matchNote.textContent = `${battingTeam()} need ${required} runs in ${ballsLeft} balls.`;
-    } else if (isInningsClosed()) {
-      els.matchNote.textContent = `${state.teamA} finished on ${innings.runs}/${innings.wickets}. Start the chase when ready.`;
+    } else if (isInningsClosed(innings)) {
+      els.matchNote.textContent = `${state.teamA} finished on ${innings.runs}/${innings.wickets}. Click Next Innings to start the chase.`;
+      els.matchNote.style.cursor = "pointer";
+      els.matchNote.title = "Click to open Next Innings pop-up";
+      const inningsKey = `${state.innings}_${innings.runs}_${innings.wickets}_${innings.closed}`;
+      if (nextInningsModalShownFor !== inningsKey) {
+        nextInningsModalShownFor = inningsKey;
+        showNextInningsModal();
+      }
     } else {
       els.matchNote.textContent = `${battingTeam()} batting against ${bowlingTeam()}.`;
+    }
+    if (!isInningsClosed(innings)) {
+      nextInningsModalShownFor = null;
+      if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
     }
   }
 
@@ -3718,6 +3739,125 @@ function showMatchOverModal(result) {
   els.matchOverModal.classList.remove("hidden");
 }
 
+function showNextInningsModal() {
+  if (!els.nextInningsModal) return;
+  if (winnerText()) return;
+
+  const innings = currentInnings();
+  if (!innings) return;
+
+  const isTest = isTestMatch();
+  const currentTeamName = teamName(innings.team);
+  const otherTeamName = teamName(innings.team === 0 ? 1 : 0);
+
+  let nextTeamName = otherTeamName;
+  let targetInfo = "";
+  if (isTest) {
+    const next = nextTeamForTest();
+    if (next) {
+      nextTeamName = teamName(next.team);
+      if (next.number === 2 && inningsCount(0) >= 1 && inningsCount(1) >= 1) {
+        const lead = teamTotal(innings.team) - teamTotal(next.team);
+        if (lead > 0) {
+          targetInfo = `${currentTeamName} leads by ${lead} runs`;
+        } else if (lead < 0) {
+          targetInfo = `${nextTeamName} trails by ${Math.abs(lead)} runs`;
+        } else {
+          targetInfo = `Scores are level`;
+        }
+      } else {
+        targetInfo = `Test Match • Moving to ${nextTeamName}'s innings`;
+      }
+    } else {
+      targetInfo = `Innings complete.`;
+    }
+  } else {
+    const targetRuns = innings.runs + 1;
+    const maxOv = state.maxOvers || 20;
+    targetInfo = `Target: ${targetRuns} runs from ${maxOv} overs (${(targetRuns / maxOv).toFixed(2)} RPO)`;
+  }
+
+  if (els.nextInningsModalTitle) {
+    els.nextInningsModalTitle.textContent = `🏏 ${innings.number}${innings.number === 1 ? "st" : "nd"} Innings Complete!`;
+  }
+  if (els.nextInningsModalSubtitle) {
+    els.nextInningsModalSubtitle.textContent = `${currentTeamName} scored ${innings.runs}/${innings.wickets} in ${oversFromBalls(innings.legalBalls)} overs`;
+  }
+  if (els.nextInningsModalBadge) {
+    els.nextInningsModalBadge.textContent = targetInfo;
+  }
+  if (els.nextInningsModalSummary) {
+    const maxOv = state.maxOvers || (isTest ? 90 : 20);
+    els.nextInningsModalSummary.innerHTML = `
+      <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 16px; text-align: left; display: grid; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Total Runs</span>
+          <strong style="font-size: 1.25rem; color: var(--gold);">${innings.runs} / ${innings.wickets}</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Overs Bowled</span>
+          <span style="font-weight: 700; color: var(--ink);">${oversFromBalls(innings.legalBalls)} / ${maxOv} overs</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Run Rate</span>
+          <span style="font-weight: 700; color: #6ee7b7;">${innings.legalBalls ? (innings.runs / (innings.legalBalls / 6)).toFixed(2) : "0.00"}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Extras</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">${extrasTotal(innings)} (b ${innings.extras.b}, lb ${innings.extras.lb}, wd ${innings.extras.wd}, nb ${innings.extras.nb})</span>
+        </div>
+      </div>
+      <div style="margin-top: 4px; padding: 10px 14px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 10px; font-size: 0.9rem; color: #93c5fd; text-align: center; font-weight: 600;">
+        👉 Please click <strong>"Next Innings"</strong> below to begin ${nextTeamName}'s innings.
+      </div>
+    `;
+  }
+  if (els.btnModalNextInnings) {
+    els.btnModalNextInnings.innerHTML = `<span>▶️</span> Click Next Innings (${nextTeamName})`;
+  }
+
+  els.nextInningsModal.classList.remove("hidden");
+}
+
+function handleNextInnings() {
+  if (els.nextInningsModal) {
+    els.nextInningsModal.classList.add("hidden");
+  }
+  nextInningsModalShownFor = null;
+
+  syncInputs();
+  if (isTestMatch()) {
+    const next = nextTeamForTest();
+    if (!next) {
+      showToast("Close this innings first, or the match has a result.");
+      return;
+    }
+    remember();
+    if (Number.isInteger(next.existing)) {
+      state.innings = next.existing;
+    } else {
+      state.inningsData.push(createInnings(next.team, next.number));
+      state.innings = state.inningsData.length - 1;
+    }
+    render();
+    if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
+      setTimeout(() => { promptNewBatter("striker"); }, 100);
+    }
+    showToast(`${teamName(currentInnings().team)} start their innings.`);
+    return;
+  }
+
+  if (state.innings === 1) return;
+  remember();
+  closeCurrentInnings();
+  state.innings = 1;
+  render();
+  showToast(`${state.teamB} start their chase.`);
+  if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
+    setTimeout(() => { promptNewBatter("striker"); }, 100);
+  }
+}
+
 function handlePlayNextMatch() {
   if (els.matchOverModal) {
     els.matchOverModal.classList.add("hidden");
@@ -4260,7 +4400,8 @@ function addBall(ball) {
   }
 
   if (isInningsClosed(innings)) {
-    showToast("This innings is complete. Move to the next innings or reset the match.");
+    showToast("Innings is complete. Click Next Innings to continue.");
+    showNextInningsModal();
     return;
   }
 
@@ -4379,7 +4520,8 @@ function addBall(ball) {
     matchOverModalShownFor = win;
     showMatchOverModal(win);
   } else if (isInningsClosed(innings)) {
-    showToast("Innings complete.");
+    showToast("Innings complete. Click Next Innings to continue.");
+    showNextInningsModal();
   }
 
   render();
@@ -4421,7 +4563,9 @@ document.querySelector("[data-wicket]").addEventListener("click", () => {
 
 els.undoBtn.addEventListener("click", () => {
   if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+  if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
   matchOverModalShownFor = null;
+  nextInningsModalShownFor = null;
   const currentHistory = state.history;
   const previous = currentHistory.pop();
   if (!previous) {
@@ -4434,43 +4578,21 @@ els.undoBtn.addEventListener("click", () => {
 });
 
 els.inningsBtn.addEventListener("click", () => {
-  syncInputs();
-  if (isTestMatch()) {
-    const next = nextTeamForTest();
-    if (!next) {
-      showToast("Close this innings first, or the match has a result.");
-      return;
-    }
-    remember();
-    if (Number.isInteger(next.existing)) {
-      state.innings = next.existing;
-    } else {
-      state.inningsData.push(createInnings(next.team, next.number));
-      state.innings = state.inningsData.length - 1;
-    }
-    render();
-    if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
-      setTimeout(() => { promptNewBatter("striker"); }, 100);
-    }
-    return;
-  }
-  if (state.innings === 1) return;
-  remember();
-  closeCurrentInnings();
-  state.innings = 1;
-  showToast(`${state.teamB} start their chase.`);
-  render();
-  if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
-    setTimeout(() => { promptNewBatter("striker"); }, 100);
-  }
+  handleNextInnings();
 });
 
 els.declareBtn.addEventListener("click", () => {
   if (!isTestMatch() || isInningsClosed() || winnerText()) return;
   remember();
   closeCurrentInnings("declared");
-  showToast(`${battingTeam()} declared.`);
+  showToast(`${battingTeam()} declared. Click Next Innings to continue.`);
   render();
+  const win = winnerText();
+  if (win) {
+    showMatchOverModal(win);
+  } else {
+    showNextInningsModal();
+  }
 });
 
 els.followOnBtn.addEventListener("click", () => {
@@ -4495,7 +4617,9 @@ els.drawBtn.addEventListener("click", () => {
 if (els.resetBtn) {
   els.resetBtn.addEventListener("click", () => {
     if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+    if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
     matchOverModalShownFor = null;
+    nextInningsModalShownFor = null;
     const keepSetup = {
       teamA: els.teamA.value.trim() || defaultState.teamA,
       teamB: els.teamB.value.trim() || defaultState.teamB,
@@ -5052,11 +5176,51 @@ if (els.matchOverModal) {
   });
 }
 
+if (els.closeNextInningsModal) {
+  els.closeNextInningsModal.addEventListener("click", () => {
+    if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
+  });
+}
+
+if (els.btnNextInningsDismiss) {
+  els.btnNextInningsDismiss.addEventListener("click", () => {
+    if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
+  });
+}
+
+if (els.btnModalNextInnings) {
+  els.btnModalNextInnings.addEventListener("click", () => {
+    handleNextInnings();
+  });
+}
+
+if (els.btnNextInningsViewScorecard) {
+  els.btnNextInningsViewScorecard.addEventListener("click", () => {
+    if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
+    if (els.scorecardModal) {
+      const current = currentInnings();
+      scorecardActiveTeamIndex = current ? current.team : 0;
+      els.scorecardModal.classList.remove("hidden");
+      renderFullScorecardModal();
+    }
+  });
+}
+
+if (els.nextInningsModal) {
+  els.nextInningsModal.addEventListener("click", (e) => {
+    if (e.target === els.nextInningsModal) {
+      els.nextInningsModal.classList.add("hidden");
+    }
+  });
+}
+
 if (els.matchNote) {
   els.matchNote.addEventListener("click", () => {
     const res = winnerText();
     if (res) {
       showMatchOverModal(res);
+    } else if (isInningsClosed(currentInnings())) {
+      showNextInningsModal();
     }
   });
 }
