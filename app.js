@@ -3646,30 +3646,60 @@ function showMatchOverModal(result) {
     const teamAInnings = (state.inningsData || []).filter(i => i.team === 0);
     const teamBInnings = (state.inningsData || []).filter(i => i.team === 1);
 
-    const formatInningsList = (list) => {
-      if (!list || list.length === 0) return "-";
-      return list.map(i => `${i.runs}/${i.wickets} (${oversFromBalls(i.legalBalls)} ov)`).join(" & ");
+    const renderTeamScoreBlock = (teamName, teamColor, inningsList) => {
+      const totalRuns = inningsList.reduce((sum, i) => sum + i.runs, 0);
+
+      if (!isTest) {
+        // Limited overs: Single clean line per team
+        const inn = inningsList[0];
+        const scoreStr = inn ? `${inn.runs}/${inn.wickets} <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">(${oversFromBalls(inn.legalBalls)} ov)</span>` : "-";
+        return `
+          <div style="padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 700; color: ${teamColor}; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
+              <span>🏏</span> <span>${teamName}</span>
+            </div>
+            <div style="font-weight: 800; color: var(--ink); font-size: 0.95rem;">
+              ${scoreStr}
+            </div>
+          </div>
+        `;
+      }
+
+      // Test Match: Clean separate boxes for 1st Innings and 2nd Innings
+      const inn1 = inningsList.find(i => i.number === 1);
+      const inn2 = inningsList.find(i => i.number === 2);
+
+      const inn1Str = inn1 ? `${inn1.runs}/${inn1.wickets} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">(${oversFromBalls(inn1.legalBalls)} ov)</span>` : `<span style="color: var(--text-muted); font-size: 0.8rem;">-</span>`;
+      const inn2Str = inn2 ? `${inn2.runs}/${inn2.wickets} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">(${oversFromBalls(inn2.legalBalls)} ov)</span>` : `<span style="color: var(--text-muted); font-style: italic; font-size: 0.78rem;">Yet to bat</span>`;
+
+      return `
+        <div style="padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.07); display: grid; gap: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 700; color: ${teamColor}; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
+              <span>🏏</span> <span>${teamName}</span>
+            </div>
+            <div style="font-weight: 800; color: #fff; font-size: 0.95rem;">
+              ${totalRuns} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Total</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div style="background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); text-align: left;">
+              <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px;">1st Innings</div>
+              <div style="font-weight: 700; color: var(--ink); font-size: 0.88rem;">${inn1Str}</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); text-align: left;">
+              <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px;">2nd Innings</div>
+              <div style="font-weight: 700; color: var(--ink); font-size: 0.88rem;">${inn2Str}</div>
+            </div>
+          </div>
+        </div>
+      `;
     };
 
-    const totalRunsA = teamAInnings.reduce((sum, i) => sum + i.runs, 0);
-    const totalRunsB = teamBInnings.reduce((sum, i) => sum + i.runs, 0);
-
     els.matchOverScoresSummary.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-          <span>🏏</span> <span>${state.teamA}</span>
-        </div>
-        <div style="text-align: right; font-weight: 700; color: var(--ink); font-size: 0.95rem;">
-          ${formatInningsList(teamAInnings)} ${isTest ? `<span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 4px;">(${totalRunsA} tot)</span>` : ""}
-        </div>
-      </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 6px;">
-        <div style="font-weight: 700; color: #60a5fa; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-          <span>🏏</span> <span>${state.teamB}</span>
-        </div>
-        <div style="text-align: right; font-weight: 700; color: var(--ink); font-size: 0.95rem;">
-          ${formatInningsList(teamBInnings)} ${isTest ? `<span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 4px;">(${totalRunsB} tot)</span>` : ""}
-        </div>
+      <div style="display: grid; gap: 8px; width: 100%;">
+        ${renderTeamScoreBlock(state.teamA, "var(--gold)", teamAInnings)}
+        ${renderTeamScoreBlock(state.teamB, "#60a5fa", teamBInnings)}
       </div>
     `;
   }
