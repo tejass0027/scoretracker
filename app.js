@@ -295,6 +295,7 @@ function showFormatPage(fromHash = false) {
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function showCricketPage(fromHash = false) {
@@ -3744,9 +3745,14 @@ function handlePlayNextMatch() {
   saveState();
   render();
 
-  // Navigate to All Sports page so user can choose their sport mode
-  showSportsPage();
-  showToast("Ready for next match! Choose your sports mode.");
+  // Reset custom match setup container if visible so format cards are clearly visible
+  if (els.customSetup) {
+    els.customSetup.classList.add("hidden");
+  }
+
+  // Navigate to respective sport format & mode selection page
+  showFormatPage();
+  showToast("Select match format and mode to start next match.");
 }
 
 function formatBowlerOvers(balls) {
