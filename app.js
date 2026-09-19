@@ -3275,9 +3275,85 @@ function renderLivePlayerStats(innings) {
   const slot2Batter = innings.batters[innings.slot2BatterIndex];
   const bowler = innings.bowlers[innings.currentBowlerIndex];
 
+  // Update pitch hub striker card
+  const strikerNameEl = document.querySelector("#live-striker-name");
+  const strikerSubEl = document.querySelector("#live-striker-sub");
+  const strikerRunsEl = document.querySelector("#live-striker-runs");
+  const strikerRatesEl = document.querySelector("#live-striker-rates");
+  const strikerCard = document.querySelector("#btn-striker-card");
+
+  // Update pitch hub non-striker card
+  const nonstrikerNameEl = document.querySelector("#live-nonstriker-name");
+  const nonstrikerSubEl = document.querySelector("#live-nonstriker-sub");
+  const nonstrikerRunsEl = document.querySelector("#live-nonstriker-runs");
+  const nonstrikerRatesEl = document.querySelector("#live-nonstriker-rates");
+  const nonstrikerCard = document.querySelector("#btn-nonstriker-card");
+
+  const isSlot1OnStrike = innings.currentStrikerIndex === innings.slot1BatterIndex;
+  const isSlot2OnStrike = innings.currentStrikerIndex === innings.slot2BatterIndex;
+
+  if (slot1Batter) {
+    const sr = slot1Batter.balls > 0 ? ((slot1Batter.runs / slot1Batter.balls) * 100).toFixed(1) : "0.0";
+    if (strikerNameEl) strikerNameEl.textContent = slot1Batter.name;
+    if (strikerSubEl) strikerSubEl.textContent = isSlot1OnStrike ? "Facing the ball" : "At non-striker end";
+    if (strikerRunsEl) strikerRunsEl.innerHTML = `${slot1Batter.runs} <small>(${slot1Batter.balls})</small>`;
+    if (strikerRatesEl) strikerRatesEl.textContent = `4s: ${slot1Batter.fours} • 6s: ${slot1Batter.sixes} • SR: ${sr}`;
+  } else {
+    if (strikerNameEl) strikerNameEl.textContent = "Select Striker";
+    if (strikerSubEl) strikerSubEl.textContent = "Tap to pick striker";
+    if (strikerRunsEl) strikerRunsEl.innerHTML = `0 <small>(0)</small>`;
+    if (strikerRatesEl) strikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
+  }
+
+  if (slot2Batter) {
+    const sr = slot2Batter.balls > 0 ? ((slot2Batter.runs / slot2Batter.balls) * 100).toFixed(1) : "0.0";
+    if (nonstrikerNameEl) nonstrikerNameEl.textContent = slot2Batter.name;
+    if (nonstrikerSubEl) nonstrikerSubEl.textContent = isSlot2OnStrike ? "Facing the ball" : "At bowler's end";
+    if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `${slot2Batter.runs} <small>(${slot2Batter.balls})</small>`;
+    if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: ${slot2Batter.fours} • 6s: ${slot2Batter.sixes} • SR: ${sr}`;
+  } else {
+    if (nonstrikerNameEl) nonstrikerNameEl.textContent = "Select Non-Striker";
+    if (nonstrikerSubEl) nonstrikerSubEl.textContent = "Tap to pick non-striker";
+    if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `0 <small>(0)</small>`;
+    if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
+  }
+
+  if (strikerCard) {
+    if (isSlot1OnStrike) {
+      strikerCard.classList.add("active-strike");
+    } else {
+      strikerCard.classList.remove("active-strike");
+    }
+  }
+  if (nonstrikerCard) {
+    if (isSlot2OnStrike) {
+      nonstrikerCard.classList.add("active-strike");
+    } else {
+      nonstrikerCard.classList.remove("active-strike");
+    }
+  }
+
+  // Update pitch hub bowler card
   const bowlerNameEl = document.querySelector("#live-card-bowler-name");
-  if (bowlerNameEl) {
-    bowlerNameEl.textContent = bowler ? bowler.name : "Select Bowler";
+  const bowlerSubEl = document.querySelector("#live-bowler-sub");
+  const bowlerFigsEl = document.querySelector("#live-bowler-figures");
+  const bowlerEconEl = document.querySelector("#live-bowler-economy");
+  const bowlerOverLabel = document.querySelector("#live-bowler-over-label");
+
+  const currentOverNum = Math.floor(innings.legalBalls / 6) + 1;
+  if (bowlerOverLabel) bowlerOverLabel.textContent = `Over ${currentOverNum}`;
+
+  if (bowler) {
+    const econ = bowler.ballsBowled > 0 ? (bowler.runsConceded / (bowler.ballsBowled / 6)).toFixed(2) : "0.00";
+    if (bowlerNameEl) bowlerNameEl.textContent = bowler.name;
+    if (bowlerSubEl) bowlerSubEl.textContent = `${formatBowlerOvers(bowler.ballsBowled)} overs bowled`;
+    if (bowlerFigsEl) bowlerFigsEl.textContent = `${formatBowlerOvers(bowler.ballsBowled)}-${bowler.maidens || 0}-${bowler.runsConceded}-${bowler.wickets}`;
+    if (bowlerEconEl) bowlerEconEl.textContent = `Econ: ${econ} RPO`;
+  } else {
+    if (bowlerNameEl) bowlerNameEl.textContent = "Select Bowler";
+    if (bowlerSubEl) bowlerSubEl.textContent = "Tap to choose bowler";
+    if (bowlerFigsEl) bowlerFigsEl.textContent = "0-0-0-0";
+    if (bowlerEconEl) bowlerEconEl.textContent = "Econ: 0.00 RPO";
   }
 
   if (els.liveCardStrikerContent) {
@@ -4017,43 +4093,89 @@ function promptNewBowler() {
   const innings = currentInnings();
   if (!innings) return;
 
-  const currentBowlerIndex = innings.currentBowlerIndex;
+  const bwTeam = bowlingTeam();
+  const teamBadge = document.querySelector("#modal-bowler-team-badge");
+  if (teamBadge) teamBadge.textContent = `BOWLING: ${bwTeam}`;
 
-  if (els.modalBowlersList) {
-    els.modalBowlersList.innerHTML = "";
-    
+  const currentBowlerIndex = innings.currentBowlerIndex;
+  const currentOverNum = Math.floor(innings.legalBalls / 6) + 1;
+
+  const subEl = document.querySelector("#modal-bowler-subtitle");
+  if (subEl) {
+    subEl.textContent = `Choose bowler for Over ${currentOverNum} (${bwTeam})`;
+  }
+
+  const searchInput = document.querySelector("#search-bowlers-input");
+  if (searchInput) searchInput.value = "";
+
+  const container = document.querySelector("#modal-bowlers-list");
+  if (!container) return;
+
+  const renderBowlerCards = (filterQuery = "") => {
+    container.innerHTML = "";
+    const q = filterQuery.trim().toLowerCase();
+
+    let matchedCount = 0;
     innings.bowlers.forEach((b, idx) => {
+      if (q && !b.name.toLowerCase().includes(q)) return;
+
+      matchedCount++;
+      const isJustBowled = idx === currentBowlerIndex && innings.legalBalls > 0;
+      const econ = b.ballsBowled > 0 ? (b.runsConceded / (b.ballsBowled / 6)).toFixed(2) : "0.00";
+
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.style.width = "100%";
-      btn.style.margin = "0";
-      btn.style.textAlign = "left";
-      btn.style.padding = "8px 12px";
-      btn.style.fontSize = "0.95rem";
-      btn.style.background = "transparent";
-      btn.style.border = "none";
-      btn.style.borderBottom = "1px solid rgba(255,255,255,0.06)";
-      btn.style.cursor = idx === currentBowlerIndex ? "not-allowed" : "pointer";
-      btn.style.color = idx === currentBowlerIndex ? "var(--text-muted)" : "var(--ink)";
-      
-      if (idx === currentBowlerIndex) {
+      btn.className = "player-select-card";
+
+      let statsHtml = "";
+      if (isJustBowled) {
         btn.disabled = true;
-        btn.innerHTML = `<span style="font-weight: 700; color: var(--gold); font-family: inherit;">${b.name}</span> <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: 8px; font-family: inherit;">(just bowled)</span>`;
+        statsHtml = `<span style="color: #f87171; font-weight: 600;">⚠️ Just Bowled (Cannot bowl consecutive overs)</span>`;
+      } else if (b.ballsBowled > 0) {
+        statsHtml = `<span style="color: #60a5fa;">${formatBowlerOvers(b.ballsBowled)} ov • ${b.wickets} wkts / ${b.runsConceded} runs • Econ: ${econ}</span>`;
       } else {
-        btn.innerHTML = `<span style="font-weight: 700; color: var(--gold); font-family: inherit;">${b.name}</span>`;
+        statsHtml = `<span style="color: #34d399; font-weight: 600;">⚡ Fresh Bowler • 0.0 overs</span>`;
       }
 
-      btn.addEventListener("click", () => {
-        innings.currentBowlerIndex = idx;
-        saveState();
-        render();
-        if (els.bowlerSelectModal) {
-          els.bowlerSelectModal.classList.add("hidden");
-        }
-      });
+      btn.innerHTML = `
+        <div class="psc-left">
+          <span class="psc-num">#${idx + 1}</span>
+          <div class="psc-info">
+            <span class="psc-name">${b.name}</span>
+            <span class="psc-stats">${statsHtml}</span>
+          </div>
+        </div>
+        ${!isJustBowled ? `<span class="psc-btn" style="background: rgba(96,165,250,0.15); color: #60a5fa; border-color: rgba(96,165,250,0.3);">Select Bowler ➔</span>` : `<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Just Bowled</span>`}
+      `;
 
-      els.modalBowlersList.append(btn);
+      if (!isJustBowled) {
+        btn.addEventListener("click", () => {
+          innings.currentBowlerIndex = idx;
+          saveState();
+          render();
+          if (els.bowlerSelectModal) {
+            els.bowlerSelectModal.classList.add("hidden");
+          }
+        });
+      }
+
+      container.append(btn);
     });
+
+    if (matchedCount === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 24px 12px; color: var(--text-muted); font-size: 0.9rem;">
+          No matching bowlers found.
+        </div>
+      `;
+    }
+  };
+
+  renderBowlerCards("");
+
+  if (searchInput) {
+    searchInput.oninput = (e) => renderBowlerCards(e.target.value);
+    setTimeout(() => searchInput.focus(), 150);
   }
 
   if (els.bowlerSelectModal) {
@@ -4068,42 +4190,74 @@ function promptNewBatter(target = "striker") {
   const innings = currentInnings();
   if (!innings) return;
 
-  if (els.modalBatterTitle) {
+  const bTeam = battingTeam();
+  const teamBadge = document.querySelector("#modal-batter-team-badge");
+  if (teamBadge) teamBadge.textContent = `BATTING: ${bTeam}`;
+
+  const titleEl = document.querySelector("#modal-batter-title");
+  const subEl = document.querySelector("#modal-batter-subtitle");
+  if (titleEl) {
     if (target === "striker") {
-      els.modalBatterTitle.textContent = "Select Striker";
-      if (els.modalBatterSubtitle) els.modalBatterSubtitle.textContent = "Choose the striker batsman";
+      titleEl.innerHTML = `Select Striker <span style="color:#f87171;">🔴</span>`;
+      if (subEl) subEl.textContent = `Choose the batsman on strike for ${bTeam}`;
     } else if (target === "nonstriker") {
-      els.modalBatterTitle.textContent = "Select Non-Striker";
-      if (els.modalBatterSubtitle) els.modalBatterSubtitle.textContent = "Choose the non-striker batsman";
+      titleEl.innerHTML = `Select Non-Striker 🏃`;
+      if (subEl) subEl.textContent = `Choose the partner at bowler's end for ${bTeam}`;
     } else {
-      els.modalBatterTitle.textContent = "Select Next Batter";
-      if (els.modalBatterSubtitle) els.modalBatterSubtitle.textContent = "Choose the incoming batter";
+      titleEl.innerHTML = `Select Incoming Batter 🏏`;
+      if (subEl) subEl.textContent = `Wicket fell! Choose next incoming batter for ${bTeam}`;
     }
   }
 
-  if (els.modalBattersList) {
-    els.modalBattersList.innerHTML = "";
-    
+  const searchInput = document.querySelector("#search-batters-input");
+  if (searchInput) searchInput.value = "";
+
+  const container = document.querySelector("#modal-batters-list");
+  if (!container) return;
+
+  const renderBatterCards = (filterQuery = "") => {
+    container.innerHTML = "";
+    const q = filterQuery.trim().toLowerCase();
+
+    let matchedCount = 0;
     innings.batters.forEach((b, idx) => {
       const isCurrentlyBatting = idx === innings.currentStrikerIndex || idx === innings.currentNonStrikerIndex;
       const isOut = b.outInfo !== "Not Out";
-      
-      if (!isCurrentlyBatting && !isOut) {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.style.width = "100%";
-        btn.style.margin = "0";
-        btn.style.textAlign = "left";
-        btn.style.padding = "8px 12px";
-        btn.style.fontSize = "0.95rem";
-        btn.style.background = "transparent";
-        btn.style.border = "none";
-        btn.style.borderBottom = "1px solid rgba(255,255,255,0.06)";
-        btn.style.cursor = "pointer";
-        btn.style.color = "var(--ink)";
-        
-        btn.innerHTML = `<span style="font-weight: 700; color: var(--gold); font-family: inherit;">${b.name}</span>`;
 
+      if (q && !b.name.toLowerCase().includes(q)) return;
+
+      matchedCount++;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "player-select-card";
+
+      const sr = b.balls > 0 ? ((b.runs / b.balls) * 100).toFixed(1) : "0.0";
+      let statsHtml = "";
+      if (isOut) {
+        btn.disabled = true;
+        statsHtml = `<span style="color: #f87171; font-weight: 600;">Out: ${b.outInfo} (${b.runs} off ${b.balls}b)</span>`;
+      } else if (isCurrentlyBatting) {
+        btn.disabled = true;
+        const role = idx === innings.currentStrikerIndex ? "Current Striker 🔴" : "Current Non-Striker 🏃";
+        statsHtml = `<span style="color: var(--gold); font-weight: 600;">${role} • ${b.runs}* (${b.balls}b, SR ${sr})</span>`;
+      } else if (b.balls > 0) {
+        statsHtml = `<span style="color: #60a5fa;">${b.runs} runs (${b.balls}b) • 4s: ${b.fours} | 6s: ${b.sixes} • SR: ${sr}</span>`;
+      } else {
+        statsHtml = `<span style="color: #34d399; font-weight: 600;">⚡ Yet to Bat</span>`;
+      }
+
+      btn.innerHTML = `
+        <div class="psc-left">
+          <span class="psc-num">#${idx + 1}</span>
+          <div class="psc-info">
+            <span class="psc-name">${b.name}</span>
+            <span class="psc-stats">${statsHtml}</span>
+          </div>
+        </div>
+        ${(!isOut && !isCurrentlyBatting) ? `<span class="psc-btn">Select Batter ➔</span>` : `<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Unavailable</span>`}
+      `;
+
+      if (!isOut && !isCurrentlyBatting) {
         btn.addEventListener("click", () => {
           if (activeBatterSelectTarget === "striker") {
             if (innings.slot1BatterIndex === innings.currentStrikerIndex || innings.slot1BatterIndex === -1) {
@@ -4125,7 +4279,7 @@ function promptNewBatter(target = "striker") {
           if (els.batterSelectModal) {
             els.batterSelectModal.classList.add("hidden");
           }
-          
+
           // Auto-prompt sequence: Striker -> Non-Striker -> Bowler
           if (innings.currentStrikerIndex === -1) {
             setTimeout(() => {
@@ -4141,10 +4295,25 @@ function promptNewBatter(target = "striker") {
             }, 300);
           }
         });
-
-        els.modalBattersList.append(btn);
       }
+
+      container.append(btn);
     });
+
+    if (matchedCount === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 24px 12px; color: var(--text-muted); font-size: 0.9rem;">
+          No matching batters found.
+        </div>
+      `;
+    }
+  };
+
+  renderBatterCards("");
+
+  if (searchInput) {
+    searchInput.oninput = (e) => renderBatterCards(e.target.value);
+    setTimeout(() => searchInput.focus(), 150);
   }
 
   if (els.batterSelectModal) {
@@ -6208,20 +6377,64 @@ if (els.btnSquadPlay) {
 }
 
 if (els.btnChangeBowlerModal) {
-  els.btnChangeBowlerModal.addEventListener("click", () => {
+  els.btnChangeBowlerModal.addEventListener("click", (e) => {
+    e.stopPropagation();
+    promptNewBowler();
+  });
+}
+
+const btnBowlerCardEl = document.querySelector("#btn-bowler-card");
+if (btnBowlerCardEl) {
+  btnBowlerCardEl.addEventListener("click", (e) => {
+    if (e.target.closest("#btn-change-bowler-modal")) return;
     promptNewBowler();
   });
 }
 
 if (els.btnChangeStriker) {
-  els.btnChangeStriker.addEventListener("click", () => {
+  els.btnChangeStriker.addEventListener("click", (e) => {
+    e.stopPropagation();
+    promptNewBatter("striker");
+  });
+}
+
+const btnStrikerCardEl = document.querySelector("#btn-striker-card");
+if (btnStrikerCardEl) {
+  btnStrikerCardEl.addEventListener("click", (e) => {
+    if (e.target.closest("#btn-change-striker") || e.target.closest("#btn-swap-strike")) return;
     promptNewBatter("striker");
   });
 }
 
 if (els.btnChangeNonStriker) {
-  els.btnChangeNonStriker.addEventListener("click", () => {
+  els.btnChangeNonStriker.addEventListener("click", (e) => {
+    e.stopPropagation();
     promptNewBatter("nonstriker");
+  });
+}
+
+const btnNonStrikerCardEl = document.querySelector("#btn-nonstriker-card");
+if (btnNonStrikerCardEl) {
+  btnNonStrikerCardEl.addEventListener("click", (e) => {
+    if (e.target.closest("#btn-change-nonstriker")) return;
+    promptNewBatter("nonstriker");
+  });
+}
+
+const btnSwapStrikeEl = document.querySelector("#btn-swap-strike");
+if (btnSwapStrikeEl) {
+  btnSwapStrikeEl.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const inn = currentInnings();
+    if (!inn) return;
+    if (inn.currentStrikerIndex !== -1 && inn.currentNonStrikerIndex !== -1) {
+      const temp = inn.currentStrikerIndex;
+      inn.currentStrikerIndex = inn.currentNonStrikerIndex;
+      inn.currentNonStrikerIndex = temp;
+      saveState();
+      render();
+      showToast("Strike rotated.");
+    }
   });
 }
 
@@ -6233,9 +6446,25 @@ if (els.closeBowlerSelectModal) {
   });
 }
 
+if (els.bowlerSelectModal) {
+  els.bowlerSelectModal.addEventListener("click", (e) => {
+    if (e.target === els.bowlerSelectModal) {
+      els.bowlerSelectModal.classList.add("hidden");
+    }
+  });
+}
+
 if (els.closeBatterSelectModal) {
   els.closeBatterSelectModal.addEventListener("click", () => {
     if (els.batterSelectModal) {
+      els.batterSelectModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.batterSelectModal) {
+  els.batterSelectModal.addEventListener("click", (e) => {
+    if (e.target === els.batterSelectModal) {
       els.batterSelectModal.classList.add("hidden");
     }
   });

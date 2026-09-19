@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=347" />
+    <link rel="stylesheet" href="styles.css?v=348" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1501,35 +1501,85 @@
         <input id="max-overs" type="hidden" value="20" />
         <input id="match-day" type="hidden" value="1" />
 
-        <!-- Live Batters Card Panel -->
-        <div id="live-batters-panel" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 6px 0 10px;">
-          <button id="btn-striker-card" class="sport-card" type="button" style="padding: 1px 6px; height: 26px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); border-radius: 4px; cursor: pointer; transition: all 0.2s; margin: 0; width: 100%; line-height: 1;">
-            <strong id="live-card-striker-content" style="font-size: 1.1rem; color: var(--ink); line-height: 1;">🔴 Batter A 0 (0)</strong>
-          </button>
-          <button id="btn-nonstriker-card" class="sport-card" type="button" style="padding: 1px 6px; height: 26px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); border-radius: 4px; cursor: pointer; transition: all 0.2s; margin: 0; width: 100%; line-height: 1;">
-            <strong id="live-card-nonstriker-content" style="font-size: 1.1rem; color: var(--ink); line-height: 1;">Batter B 0 (0)</strong>
-          </button>
-        </div>
+        <!-- Live Pitch Players Hub (Striker, Non-Striker, Bowler) -->
+        <div id="live-pitch-hub" class="pitch-hub-container">
+          <!-- Batters Section (Striker & Non-Striker) -->
+          <div class="pitch-batters-grid">
+            <!-- Striker Card -->
+            <div id="btn-striker-card" class="pitch-card striker active-strike" title="Click to change striker batter">
+              <div class="pitch-card-header">
+                <span class="pitch-role-badge striker-badge"><span class="pulse-indicator"></span> ON STRIKE</span>
+                <button id="btn-swap-strike" class="btn-pitch-action" type="button" title="Rotate strike between batsmen">⇄ Rotate Strike</button>
+              </div>
+              <div class="pitch-card-body">
+                <div class="pitch-player-identity">
+                  <span class="pitch-avatar">🏏</span>
+                  <div class="pitch-name-wrap">
+                    <strong id="live-striker-name" class="pitch-name">Select Striker</strong>
+                    <span id="live-striker-sub" class="pitch-detail">Tap to pick striker</span>
+                  </div>
+                </div>
+                <div id="live-striker-stats-box" class="pitch-score-box">
+                  <div id="live-striker-runs" class="pitch-main-runs">0 <small>(0)</small></div>
+                  <div id="live-striker-rates" class="pitch-rates">4s: 0 • 6s: 0 • SR: 0.0</div>
+                </div>
+                <!-- Hidden compatibility anchor -->
+                <span id="live-card-striker-content" class="hidden"></span>
+              </div>
+              <div class="pitch-card-footer">
+                <button id="btn-change-striker" class="btn-pitch-change" type="button">Change Striker ▾</button>
+              </div>
+            </div>
 
-        <!-- Live Batter Selector Row -->
-        <div id="live-batter-selector-row" style="display: flex; align-items: center; justify-content: space-between; margin: 6px 0 10px; padding: 0 4px; font-size: 0.85rem;">
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="color: var(--text-muted); font-weight: 700;">Striker:</span>
-            <button id="btn-change-striker" type="button" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--ink); font-weight: 500; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; outline: none; font-family: inherit; margin: 0; line-height: 1.2;">Change</button>
+            <!-- Non-Striker Card -->
+            <div id="btn-nonstriker-card" class="pitch-card nonstriker" title="Click to change non-striker batter">
+              <div class="pitch-card-header">
+                <span class="pitch-role-badge nonstriker-badge">🏃 NON-STRIKER</span>
+              </div>
+              <div class="pitch-card-body">
+                <div class="pitch-player-identity">
+                  <span class="pitch-avatar">🏏</span>
+                  <div class="pitch-name-wrap">
+                    <strong id="live-nonstriker-name" class="pitch-name">Select Non-Striker</strong>
+                    <span id="live-nonstriker-sub" class="pitch-detail">Tap to pick non-striker</span>
+                  </div>
+                </div>
+                <div id="live-nonstriker-stats-box" class="pitch-score-box">
+                  <div id="live-nonstriker-runs" class="pitch-main-runs">0 <small>(0)</small></div>
+                  <div id="live-nonstriker-rates" class="pitch-rates">4s: 0 • 6s: 0 • SR: 0.0</div>
+                </div>
+                <!-- Hidden compatibility anchor -->
+                <span id="live-card-nonstriker-content" class="hidden"></span>
+              </div>
+              <div class="pitch-card-footer">
+                <button id="btn-change-nonstriker" class="btn-pitch-change" type="button">Change Non-Striker ▾</button>
+              </div>
+            </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="color: var(--text-muted); font-weight: 700;">Non-Striker:</span>
-            <button id="btn-change-nonstriker" type="button" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--ink); font-weight: 500; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; outline: none; font-family: inherit; margin: 0; line-height: 1.2;">Change</button>
-          </div>
-        </div>
 
-        <!-- Live Bowler Selector Row -->
-        <div id="live-bowler-selector-row" style="display: flex; align-items: center; gap: 8px; margin: 6px 0 10px; padding: 0 4px;">
-          <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">Current Bowler:</span>
-          <span id="live-card-bowler-name" style="color: var(--gold); font-weight: 700; font-size: 0.85rem;">Select Bowler</span>
-          <button id="btn-change-bowler-modal" type="button" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--ink); font-weight: 500; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; outline: none; font-family: inherit; margin: 0; line-height: 1.2; transition: all 0.2s;">
-            Change
-          </button>
+          <!-- Current Bowler Card -->
+          <div id="btn-bowler-card" class="pitch-card bowler" title="Click to change bowler">
+            <div class="pitch-card-header">
+              <span class="pitch-role-badge bowler-badge">⚡ CURRENT BOWLER</span>
+              <span id="live-bowler-over-label" class="pitch-role-badge" style="background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.1);">Over 1</span>
+            </div>
+            <div class="pitch-card-body">
+              <div class="pitch-player-identity">
+                <span class="pitch-avatar bowler-avatar">🎯</span>
+                <div class="pitch-name-wrap">
+                  <strong id="live-card-bowler-name" class="pitch-name">Select Bowler</strong>
+                  <span id="live-bowler-sub" class="pitch-detail">Tap to choose bowler</span>
+                </div>
+              </div>
+              <div id="live-bowler-stats-box" class="pitch-score-box">
+                <div id="live-bowler-figures" class="pitch-main-runs">0-0-0-0</div>
+                <div id="live-bowler-economy" class="pitch-rates">Econ: 0.00 RPO</div>
+              </div>
+            </div>
+            <div class="pitch-card-footer">
+              <button id="btn-change-bowler-modal" class="btn-pitch-change" type="button">Change Bowler ▾</button>
+            </div>
+          </div>
         </div>
 
         <section class="controls scorer-console" aria-label="Scoring controls">
@@ -1866,21 +1916,33 @@
     </div>
 
     <!-- Bowler Selection Modal Overlay -->
-    <div id="bowler-select-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
-      <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 420px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+    <div id="bowler-select-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 16px;">
+      <div class="match-over-card" style="background: linear-gradient(145deg, #101626, #090d16); border: 1.5px solid rgba(96, 165, 250, 0.4); border-radius: 24px; width: 100%; max-width: 540px; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 30px rgba(96, 165, 250, 0.15);">
         
         <!-- Modal Header -->
-        <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.01); display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h2 style="margin: 0; font-size: 1.15rem; color: var(--gold); font-family: inherit;">Select Bowler</h2>
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: inherit;">Choose the bowler for the next over</span>
+        <div style="padding: 18px 22px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); background: linear-gradient(90deg, rgba(96,165,250,0.08), rgba(96,165,250,0.18), rgba(96,165,250,0.08));">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.1rem;">⚡</span>
+                <span id="modal-bowler-team-badge" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #60a5fa; background: rgba(96,165,250,0.12); padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(96,165,250,0.25);">BOWLING TEAM</span>
+              </div>
+              <h2 id="modal-bowler-title" style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #fff; font-family: inherit;">Select Bowler</h2>
+              <span id="modal-bowler-subtitle" style="font-size: 0.8rem; color: var(--text-muted); font-family: inherit;">Choose the bowler for the next over</span>
+            </div>
+            <button id="close-bowler-select-modal" type="button" aria-label="Close" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;">&times;</button>
           </div>
-          <button id="close-bowler-select-modal" type="button" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; outline: none; padding: 0 4px; line-height: 1; transition: color 0.2s;">&times;</button>
+
+          <!-- Quick Search Filter -->
+          <div style="margin-top: 14px; position: relative;">
+            <input id="search-bowlers-input" type="text" placeholder="Search bowler by name..." style="width: 100%; padding: 8px 14px 8px 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.88rem; outline: none; font-family: inherit;" />
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;">🔍</span>
+          </div>
         </div>
 
-        <!-- Modal Body (Scrollable) -->
-        <div id="modal-bowlers-list" style="flex: 1; overflow-y: auto; padding: 20px; display: grid; gap: 8px; max-height: 350px;">
-          <!-- Dynamically populated buttons -->
+        <!-- Modal Body (Scrollable List of Cards) -->
+        <div id="modal-bowlers-list" style="flex: 1; overflow-y: auto; padding: 18px 20px; display: grid; gap: 8px; max-height: 400px;">
+          <!-- Dynamically populated cards -->
         </div>
 
       </div>
@@ -7062,21 +7124,33 @@
       </div>
     </div>
     <!-- Batter Selection Modal Overlay -->
-    <div id="batter-select-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
-      <div style="background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 420px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+    <div id="batter-select-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99998; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 16px;">
+      <div class="match-over-card" style="background: linear-gradient(145deg, #101626, #090d16); border: 1.5px solid rgba(255, 215, 0, 0.4); border-radius: 24px; width: 100%; max-width: 540px; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 30px rgba(255, 215, 0, 0.15);">
         
         <!-- Modal Header -->
-        <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.01); display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h2 id="modal-batter-title" style="margin: 0; font-size: 1.15rem; color: var(--gold); font-family: inherit;">Select Next Batter</h2>
-            <span id="modal-batter-subtitle" style="font-size: 0.75rem; color: var(--text-muted); font-family: inherit;">Choose the incoming batter</span>
+        <div style="padding: 18px 22px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); background: linear-gradient(90deg, rgba(255,215,0,0.08), rgba(255,215,0,0.18), rgba(255,215,0,0.08));">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.1rem;">🏏</span>
+                <span id="modal-batter-team-badge" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); background: rgba(255,215,0,0.12); padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(255,215,0,0.25);">BATTING TEAM</span>
+              </div>
+              <h2 id="modal-batter-title" style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #fff; font-family: inherit;">Select Striker</h2>
+              <span id="modal-batter-subtitle" style="font-size: 0.8rem; color: var(--text-muted); font-family: inherit;">Choose who takes the strike</span>
+            </div>
+            <button id="close-batter-select-modal" type="button" aria-label="Close" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;">&times;</button>
           </div>
-          <button id="close-batter-select-modal" type="button" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; outline: none; padding: 0 4px; line-height: 1; transition: color 0.2s;">&times;</button>
+
+          <!-- Quick Search Filter -->
+          <div style="margin-top: 14px; position: relative;">
+            <input id="search-batters-input" type="text" placeholder="Search batter by name..." style="width: 100%; padding: 8px 14px 8px 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.4); color: #fff; font-size: 0.88rem; outline: none; font-family: inherit;" />
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;">🔍</span>
+          </div>
         </div>
 
-        <!-- Modal Body (Scrollable) -->
-        <div id="modal-batters-list" style="flex: 1; overflow-y: auto; padding: 20px; display: grid; gap: 8px; max-height: 350px;">
-          <!-- Dynamically populated buttons -->
+        <!-- Modal Body (Scrollable List of Cards) -->
+        <div id="modal-batters-list" style="flex: 1; overflow-y: auto; padding: 18px 20px; display: grid; gap: 8px; max-height: 400px;">
+          <!-- Dynamically populated cards -->
         </div>
 
       </div>
@@ -7262,7 +7336,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=341"></script>
+    <script src="app.js?v=342"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
