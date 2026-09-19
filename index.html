@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=346" />
+    <link rel="stylesheet" href="styles.css?v=347" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1733,6 +1733,40 @@
           <button id="btn-cancel-roster-modal" class="sport-tab" type="button" style="padding: 10px 18px; font-weight: 600; border-radius: 10px; cursor: pointer;">Cancel</button>
           <button id="btn-confirm-roster-start" class="sport-tab active" type="button" style="padding: 10px 24px; font-weight: 800; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; border: none; box-shadow: 0 4px 15px rgba(255, 170, 0, 0.4); display: flex; align-items: center; gap: 8px; font-family: inherit;">
             <span>🏏</span> Confirm &amp; Start Match
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pop-up Alert Modal for Missing or Repeated Player Names -->
+    <div id="modal-roster-alert" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100005; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(12px); padding: 16px;">
+      <div class="match-over-card" style="background: linear-gradient(145deg, #151926, #0c0f18); border: 1.5px solid rgba(239, 68, 68, 0.5); border-radius: 24px; width: 100%; max-width: 460px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 35px rgba(239, 68, 68, 0.25); position: relative;">
+        
+        <!-- Header with close button -->
+        <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(239, 68, 68, 0.05);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.1rem;">⚠️</span>
+            <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #f87171;">Action Required</span>
+          </div>
+          <button id="close-roster-alert" type="button" aria-label="Close" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%;">&times;</button>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 24px 24px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+          <div style="width: 58px; height: 58px; border-radius: 50%; background: rgba(239, 68, 68, 0.12); border: 2px solid rgba(239, 68, 68, 0.45); display: flex; align-items: center; justify-content: center; font-size: 1.9rem; box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);">
+            ✏️
+          </div>
+          <h3 id="roster-alert-title" style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #fff;">Please Make a Change</h3>
+          <p id="roster-alert-message" style="margin: 0; font-size: 0.92rem; color: #cbd5e1; line-height: 1.55;">
+            A player name has not been typed or is repeated.
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); display: flex; justify-content: center;">
+          <button id="btn-roster-alert-action" class="sport-tab active" type="button" style="width: 100%; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; border: none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>✏️</span> Make Change
           </button>
         </div>
 
@@ -7228,7 +7262,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=340"></script>
+    <script src="app.js?v=341"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

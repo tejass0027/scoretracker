@@ -1786,7 +1786,7 @@ dd {
   transition:
     opacity 180ms ease,
     transform 180ms ease;
-  z-index: 9999;
+  z-index: 100010;
 }
 
 .toast.show {
@@ -3290,4 +3290,12 @@ dd {
 .match-over-card {
   animation: matchOverPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+.roster-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.55) !important;
+  background: rgba(239, 68, 68, 0.14) !important;
+  animation: modeAttentionShake 0.4s ease-in-out !important;
+}
+
 

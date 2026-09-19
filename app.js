@@ -4314,6 +4314,55 @@ function closePlayerRosterModal() {
   if (modal) modal.classList.add("hidden");
 }
 
+let currentRosterAlertTarget = null;
+
+function showRosterAlertModal(title, message, targetInput = null) {
+  const modal = document.querySelector("#modal-roster-alert");
+  if (!modal) {
+    showToast(message);
+    if (targetInput) targetInput.focus();
+    return;
+  }
+
+  const titleEl = document.querySelector("#roster-alert-title");
+  const msgEl = document.querySelector("#roster-alert-message");
+  if (titleEl) titleEl.textContent = title || "Please Make a Change";
+  if (msgEl) msgEl.textContent = message;
+
+  currentRosterAlertTarget = targetInput;
+
+  if (targetInput) {
+    targetInput.classList.add("roster-input-error");
+    const clearError = () => {
+      targetInput.classList.remove("roster-input-error");
+      targetInput.removeEventListener("input", clearError);
+    };
+    targetInput.addEventListener("input", clearError);
+  }
+
+  modal.classList.remove("hidden");
+
+  const btnAction = document.querySelector("#btn-roster-alert-action");
+  if (btnAction) {
+    setTimeout(() => btnAction.focus(), 50);
+  }
+}
+
+function closeRosterAlertModal() {
+  const modal = document.querySelector("#modal-roster-alert");
+  if (modal) modal.classList.add("hidden");
+
+  if (currentRosterAlertTarget) {
+    currentRosterAlertTarget.focus();
+    if (typeof currentRosterAlertTarget.select === "function") {
+      currentRosterAlertTarget.select();
+    }
+    currentRosterAlertTarget.scrollIntoView({ behavior: "smooth", block: "center" });
+    currentRosterAlertTarget = null;
+  }
+}
+
+
 function renderLivePagePlayerInputs() {
   const containerA = document.querySelector("#team-a-players-inputs");
   const containerB = document.querySelector("#team-b-players-inputs");
@@ -4861,8 +4910,11 @@ if (btnConfirmRosterStart) {
     for (let i = 0; i < customPlayersA; i++) {
       const val = tempA[i];
       if (!val) {
-        showToast(`Please enter the name for Player ${i + 1} of ${teamNameA}.`);
-        if (inputsA[i]) inputsA[i].focus();
+        showRosterAlertModal(
+          "Player Name Missing",
+          `Player ${i + 1} of "${teamNameA}" has not been typed. Please make the change by entering the player's name.`,
+          inputsA[i]
+        );
         return;
       }
     }
@@ -4870,33 +4922,45 @@ if (btnConfirmRosterStart) {
     for (let i = 0; i < customPlayersB; i++) {
       const val = tempB[i];
       if (!val) {
-        showToast(`Please enter the name for Player ${i + 1} of ${teamNameB}.`);
-        if (inputsB[i]) inputsB[i].focus();
+        showRosterAlertModal(
+          "Player Name Missing",
+          `Player ${i + 1} of "${teamNameB}" has not been typed. Please make the change by entering the player's name.`,
+          inputsB[i]
+        );
         return;
       }
     }
 
-    // Validate unique player names across both teams
-    const allNames = new Set();
+    // Validate unique player names across both teams (no repeated names)
+    const seenNames = new Map();
     for (let i = 0; i < customPlayersA; i++) {
       const val = tempA[i];
       const key = val.toLowerCase();
-      if (allNames.has(key)) {
-        showToast(`All player names must be unique. Duplicate found: "${val}".`);
-        if (inputsA[i]) inputsA[i].focus();
+      if (seenNames.has(key)) {
+        const prev = seenNames.get(key);
+        showRosterAlertModal(
+          "Player Name Repeated",
+          `The name "${val}" is repeated (${prev.teamName} Player ${prev.playerNumber} and ${teamNameA} Player ${i + 1}). All player names must be unique. Please make the change.`,
+          inputsA[i]
+        );
         return;
       }
-      allNames.add(key);
+      seenNames.set(key, { name: val, input: inputsA[i], teamName: teamNameA, playerNumber: i + 1 });
     }
+
     for (let i = 0; i < customPlayersB; i++) {
       const val = tempB[i];
       const key = val.toLowerCase();
-      if (allNames.has(key)) {
-        showToast(`All player names must be unique. Duplicate found: "${val}".`);
-        if (inputsB[i]) inputsB[i].focus();
+      if (seenNames.has(key)) {
+        const prev = seenNames.get(key);
+        showRosterAlertModal(
+          "Player Name Repeated",
+          `The name "${val}" is repeated (${prev.teamName} Player ${prev.playerNumber} and ${teamNameB} Player ${i + 1}). All player names must be unique. Please make the change.`,
+          inputsB[i]
+        );
         return;
       }
-      allNames.add(key);
+      seenNames.set(key, { name: val, input: inputsB[i], teamName: teamNameB, playerNumber: i + 1 });
     }
 
     // Save rosters for both teams
@@ -4932,6 +4996,24 @@ if (modalRosterOverlay) {
   modalRosterOverlay.addEventListener("click", (e) => {
     if (e.target === modalRosterOverlay) {
       closePlayerRosterModal();
+    }
+  });
+}
+
+// Alert Modal Handlers
+const btnRosterAlertAction = document.querySelector("#btn-roster-alert-action");
+if (btnRosterAlertAction) {
+  btnRosterAlertAction.addEventListener("click", closeRosterAlertModal);
+}
+const closeRosterAlertBtn = document.querySelector("#close-roster-alert");
+if (closeRosterAlertBtn) {
+  closeRosterAlertBtn.addEventListener("click", closeRosterAlertModal);
+}
+const modalRosterAlertOverlay = document.querySelector("#modal-roster-alert");
+if (modalRosterAlertOverlay) {
+  modalRosterAlertOverlay.addEventListener("click", (e) => {
+    if (e.target === modalRosterAlertOverlay) {
+      closeRosterAlertModal();
     }
   });
 }
@@ -6078,6 +6160,37 @@ if (els.btnSquadPlay) {
     if (selectedPlayersB.length !== count) {
       showToast(`Please select exactly ${count} players for ${fixture.teamB}. Currently selected: ${selectedPlayersB.length}`);
       return;
+    }
+
+    for (let i = 0; i < selectedPlayersA.length; i++) {
+      if (!selectedPlayersA[i]) {
+        showRosterAlertModal("Player Name Missing", `A player name for ${fixture.teamA} has not been typed. Please make the change by entering the player's name.`);
+        return;
+      }
+    }
+    for (let i = 0; i < selectedPlayersB.length; i++) {
+      if (!selectedPlayersB[i]) {
+        showRosterAlertModal("Player Name Missing", `A player name for ${fixture.teamB} has not been typed. Please make the change by entering the player's name.`);
+        return;
+      }
+    }
+
+    const seenTournamentNames = new Set();
+    for (let i = 0; i < selectedPlayersA.length; i++) {
+      const k = selectedPlayersA[i].toLowerCase();
+      if (seenTournamentNames.has(k)) {
+        showRosterAlertModal("Player Name Repeated", `The name "${selectedPlayersA[i]}" is repeated. All player names must be unique. Please make the change.`);
+        return;
+      }
+      seenTournamentNames.add(k);
+    }
+    for (let i = 0; i < selectedPlayersB.length; i++) {
+      const k = selectedPlayersB[i].toLowerCase();
+      if (seenTournamentNames.has(k)) {
+        showRosterAlertModal("Player Name Repeated", `The name "${selectedPlayersB[i]}" is repeated. All player names must be unique. Please make the change.`);
+        return;
+      }
+      seenTournamentNames.add(k);
     }
 
     state.customTeamAPlayers = selectedPlayersA;
