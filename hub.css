@@ -724,18 +724,25 @@
 }
 
 /* ==========================================================================
-   SYMMETRICAL 3-COLUMN CRICKET FORMAT GRID
+   FORMAT GRID & BIG HEROIC CARDS
    ========================================================================== */
-.format-grid {
+#format-page .format-grid {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 20px !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+
+.format-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 28px !important;
   align-items: stretch !important;
 }
 
 .format-card {
   height: 100% !important;
-  min-height: 280px !important;
+  min-height: 350px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -744,9 +751,10 @@
 }
 
 @media (max-width: 768px) {
+  #format-page .format-grid,
   .format-grid {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 16px !important;
   }
 }
 

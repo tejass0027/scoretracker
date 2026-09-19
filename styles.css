@@ -454,17 +454,17 @@ button {
   align-items: center !important;
   justify-content: space-between !important;
   text-align: center !important;
-  min-height: 290px;
-  gap: 16px;
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
+  min-height: 350px !important;
+  gap: 18px;
+  border: 1.5px solid var(--glass-border);
+  border-radius: 28px;
   background: var(--panel);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: var(--ink);
-  padding: 32px 24px 26px 24px;
-  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.35);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 38px 26px 32px 26px;
+  box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.4);
+  transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -490,11 +490,11 @@ button {
 
 .format-card:hover,
 .format-card:focus-visible {
-  border-color: rgba(59, 130, 246, 0.55);
-  box-shadow: 0 16px 40px -8px rgba(59, 130, 246, 0.35), 0 0 25px rgba(59, 130, 246, 0.15);
-  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.65);
+  box-shadow: 0 20px 48px -8px rgba(59, 130, 246, 0.4), 0 0 35px rgba(59, 130, 246, 0.2);
+  transform: translateY(-8px);
   outline: none;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .format-card.featured {
@@ -516,50 +516,50 @@ button {
 
 /* Format Card Visual Elements */
 .format-card-pill {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  padding: 5px 14px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 1.4px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
   pointer-events: none;
   transition: all 0.25s ease;
 }
 
 .format-card:hover .format-card-pill,
 .sport-format-mode-card:hover .format-card-pill {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
 
 .format-card span,
 .format-card span.format-icon {
   display: grid;
-  width: 82px;
-  height: 82px;
+  width: 102px;
+  height: 102px;
   place-items: center;
   border-radius: 50%;
   background: rgba(59, 130, 246, 0.15);
   color: #60a5fa;
-  border: 1.5px solid rgba(59, 130, 246, 0.35);
-  font-size: 2.2rem;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  font-size: 2.9rem;
   font-weight: 800;
   letter-spacing: 0.5px;
-  margin: 8px auto;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  margin: 10px auto;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.32s ease;
   flex-shrink: 0;
   pointer-events: none;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
 }
 
 .format-card:hover span,
 .format-card:hover span.format-icon {
-  transform: scale(1.12);
-  box-shadow: 0 0 28px rgba(96, 165, 250, 0.45);
+  transform: scale(1.14);
+  box-shadow: 0 0 36px rgba(96, 165, 250, 0.55);
 }
 
 .format-card.featured span,
@@ -571,13 +571,13 @@ button {
 
 .format-card.featured:hover span,
 .format-card.featured:hover span.format-icon {
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 35px rgba(251, 191, 36, 0.55);
 }
 
 .format-card strong {
-  font-size: 1.45rem;
+  font-size: 1.7rem;
   font-weight: 800;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   line-height: 1.25;
   text-align: center;
   width: 100%;
@@ -586,26 +586,27 @@ button {
 }
 
 .format-card-action {
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 10px;
+  padding: 10px 24px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--ink);
   pointer-events: none;
-  transition: all 0.25s ease;
-  margin-top: 4px;
+  transition: all 0.28s ease;
+  margin-top: 8px;
 }
 
 .format-card:hover .format-card-action {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .format-card small {
@@ -621,18 +622,18 @@ button {
   align-items: center !important;
   justify-content: space-between !important;
   text-align: center !important;
-  min-height: 290px !important;
+  min-height: 350px !important;
   background: var(--panel) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border) !important;
-  border-radius: 24px !important;
-  padding: 32px 24px 26px 24px !important;
+  border: 1.5px solid var(--glass-border) !important;
+  border-radius: 28px !important;
+  padding: 38px 26px 32px 26px !important;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.4);
 }
 
 .sport-format-mode-card::before {
@@ -652,63 +653,64 @@ button {
 }
 
 .sport-format-mode-card:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45), 0 0 30px rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.5), 0 0 36px rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 .sport-format-mode-card .mode-icon-badge {
-  width: 82px !important;
-  height: 82px !important;
-  border-radius: 22px !important;
+  width: 102px !important;
+  height: 102px !important;
+  border-radius: 26px !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.4rem !important;
-  margin: 8px auto !important;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-size: 3rem !important;
+  margin: 10px auto !important;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.32s ease !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
   pointer-events: none;
 }
 
 .sport-format-mode-card:hover .mode-icon-badge {
-  transform: scale(1.12);
+  transform: scale(1.14);
 }
 
 .sport-format-mode-card h2 {
   margin: 0 !important;
-  font-size: 1.45rem !important;
+  font-size: 1.7rem !important;
   font-weight: 800 !important;
   color: #fff !important;
   text-align: center !important;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   line-height: 1.25;
   width: 100%;
   pointer-events: none;
 }
 
 .sport-format-mode-card .mode-cta-link {
-  font-size: 0.88rem !important;
-  font-weight: 700 !important;
+  font-size: 0.96rem !important;
+  font-weight: 800 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
-  padding: 8px 20px !important;
-  border-radius: 12px !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  margin-top: 4px !important;
-  transition: all 0.25s ease !important;
+  gap: 10px !important;
+  padding: 10px 24px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  margin-top: 8px !important;
+  transition: all 0.28s ease !important;
   pointer-events: none;
   width: auto !important;
 }
 
 .sport-format-mode-card:hover .mode-cta-link {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: translateY(-2px) !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .light-theme .sport-format-mode-card {
@@ -1660,54 +1662,54 @@ dd {
   }
 
   .format-card {
-    min-height: 220px;
-    padding: 24px 16px 20px 16px;
-    gap: 12px;
-    border-radius: 20px;
+    min-height: 250px;
+    padding: 26px 18px 22px 18px;
+    gap: 14px;
+    border-radius: 22px;
   }
 
   .format-card span,
   .format-card span.format-icon {
-    width: 62px;
-    height: 62px;
-    font-size: 1.7rem;
-    margin: 4px auto;
+    width: 76px;
+    height: 76px;
+    font-size: 2.1rem;
+    margin: 6px auto;
   }
 
   .format-card strong {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
 
   .format-card-pill {
-    font-size: 0.68rem;
-    padding: 4px 10px;
+    font-size: 0.72rem;
+    padding: 5px 12px;
   }
 
   .format-card-action {
-    font-size: 0.8rem;
-    padding: 6px 14px;
+    font-size: 0.86rem;
+    padding: 8px 18px;
   }
 
   .sport-format-mode-card {
-    min-height: 220px !important;
-    padding: 24px 16px 20px 16px !important;
-    border-radius: 20px !important;
+    min-height: 250px !important;
+    padding: 26px 18px 22px 18px !important;
+    border-radius: 22px !important;
   }
 
   .sport-format-mode-card .mode-icon-badge {
-    width: 62px !important;
-    height: 62px !important;
-    font-size: 1.7rem !important;
-    margin: 4px auto !important;
+    width: 76px !important;
+    height: 76px !important;
+    font-size: 2.1rem !important;
+    margin: 6px auto !important;
   }
 
   .sport-format-mode-card h2 {
-    font-size: 1.25rem !important;
+    font-size: 1.35rem !important;
   }
 
   .sport-format-mode-card .mode-cta-link {
-    font-size: 0.8rem !important;
-    padding: 6px 14px !important;
+    font-size: 0.86rem !important;
+    padding: 8px 18px !important;
   }
 
   .custom-setup {
