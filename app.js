@@ -2808,7 +2808,8 @@ function extrasTotal(innings = currentInnings()) {
 }
 
 function scoreText(innings = currentInnings()) {
-  return `${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)} ov)`;
+  const total = state.maxOvers || (isTestMatch() ? 90 : 20);
+  return `${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)}/${total} ov)`;
 }
 
 function target() {
@@ -2986,7 +2987,10 @@ function render() {
   if (els.playersTeamA) els.playersTeamA.value = state.playersTeamA || 11;
   if (els.playersTeamB) els.playersTeamB.value = state.playersTeamB || 11;
   els.matchDay.value = state.day;
-  els.formatLabel.textContent = `${state.format || "Cricket"} tracker`;
+  const totalOvers = state.maxOvers || (isTestMatch() ? 90 : 20);
+  els.formatLabel.textContent = isTestMatch()
+    ? `Test Match (${totalOvers} ov/day)`
+    : `${state.format || "Cricket"} (${totalOvers} ov)`;
 
   const innings = currentInnings();
   const legalBalls = innings.legalBalls;
@@ -3000,7 +3004,7 @@ function render() {
 
   els.inningsLabel.textContent = `${teamName(innings.team)} ${innings.number}${innings.number === 1 ? "st" : "nd"} innings`;
   els.mainScore.textContent = `${innings.runs}/${innings.wickets}`;
-  els.oversLabel.textContent = `${oversFromBalls(innings.legalBalls)} ov`;
+  els.oversLabel.textContent = `${oversFromBalls(innings.legalBalls)} / ${totalOvers} overs`;
   els.runRate.textContent = runRate;
   els.targetLabel.textContent = chaseTarget || "-";
   els.needLabel.textContent = isTestMatch() ? (result || testIndicator() || "-") : result ? result : state.innings === 1 ? `${required} runs needed in ${ballsLeft} balls` : "-";
@@ -3232,7 +3236,7 @@ function render() {
 
   // Update dynamic tab title based on score
   if (!els.cricketPage.classList.contains("hidden")) {
-    document.title = `${battingTeam()} ${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)} ov) • ScoreTracker`;
+    document.title = `${battingTeam()} ${innings.runs}/${innings.wickets} (${oversFromBalls(innings.legalBalls)}/${totalOvers} ov) • ScoreTracker`;
   } else {
     document.title = "ScoreTracker • Live Sports Score Tracker";
   }
