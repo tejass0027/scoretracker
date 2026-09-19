@@ -117,6 +117,14 @@ const els = {
   squadEditShortcutBtn: document.querySelector("#squad-edit-shortcut-btn"),
   statsRecords: document.querySelector("#stats-records"),
   btnFullScorecard: document.querySelector("#btn-full-scorecard"),
+  matchOverModal: document.querySelector("#match-over-modal"),
+  closeMatchOverModal: document.querySelector("#close-match-over-modal"),
+  matchOverWinnerTitle: document.querySelector("#match-over-winner-title"),
+  matchOverResultBadge: document.querySelector("#match-over-result-badge"),
+  matchOverScoresSummary: document.querySelector("#match-over-scores-summary"),
+  btnPlayNextMatch: document.querySelector("#btn-play-next-match"),
+  btnModalViewScorecard: document.querySelector("#btn-modal-view-scorecard"),
+  btnModalDismiss: document.querySelector("#btn-modal-dismiss"),
   scorecardModal: document.querySelector("#scorecard-modal"),
   closeScorecardModal: document.querySelector("#close-scorecard-modal"),
   selectStriker: document.querySelector("#select-striker"),
@@ -170,6 +178,8 @@ const els = {
   closeBowlerSelectModal: document.querySelector("#close-bowler-select-modal"),
   closeBatterSelectModal: document.querySelector("#close-batter-select-modal"),
 };
+
+let matchOverModalShownFor = null;
 
 const defaultState = {
   teamA: "Bengaluru Strikers",
@@ -3050,14 +3060,29 @@ function render() {
 
   if (result) {
     els.matchNote.textContent = result;
-  } else if (isTestMatch()) {
-    els.matchNote.textContent = testIndicator() || `${battingTeam()} batting on day ${state.day}.`;
-  } else if (state.innings === 1) {
-    els.matchNote.textContent = `${battingTeam()} need ${required} runs in ${ballsLeft} balls.`;
-  } else if (isInningsClosed()) {
-    els.matchNote.textContent = `${state.teamA} finished on ${innings.runs}/${innings.wickets}. Start the chase when ready.`;
+    els.matchNote.style.cursor = "pointer";
+    els.matchNote.title = "Click to view match summary and play next match";
+    if (matchOverModalShownFor !== result) {
+      matchOverModalShownFor = result;
+      setTimeout(() => {
+        showMatchOverModal(result);
+      }, 350);
+    }
   } else {
-    els.matchNote.textContent = `${battingTeam()} batting against ${bowlingTeam()}.`;
+    matchOverModalShownFor = null;
+    els.matchNote.style.cursor = "";
+    els.matchNote.title = "";
+    if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+
+    if (isTestMatch()) {
+      els.matchNote.textContent = testIndicator() || `${battingTeam()} batting on day ${state.day}.`;
+    } else if (state.innings === 1) {
+      els.matchNote.textContent = `${battingTeam()} need ${required} runs in ${ballsLeft} balls.`;
+    } else if (isInningsClosed()) {
+      els.matchNote.textContent = `${state.teamA} finished on ${innings.runs}/${innings.wickets}. Start the chase when ready.`;
+    } else {
+      els.matchNote.textContent = `${battingTeam()} batting against ${bowlingTeam()}.`;
+    }
   }
 
   // Render Man of the Match card (Only in Advanced Mode, disabled in Normal Mode)
@@ -3576,6 +3601,119 @@ function renderFullScorecardModal() {
     if (bowlingContainer) {
       bowlingContainer.innerHTML = generateBowlingScorecardHtml(innings, ctx);
     }
+  }
+}
+
+function showMatchOverModal(result) {
+  if (!els.matchOverModal) return;
+
+  let winnerTitle = "Match Completed!";
+  let winnerEmoji = "🏆";
+  let bannerBg = "rgba(255, 215, 0, 0.12)";
+  let bannerBorder = "rgba(255, 215, 0, 0.3)";
+  let bannerColor = "#ffdf79";
+
+  if (result.includes(" won by ")) {
+    const winnerName = result.split(" won by ")[0].trim();
+    winnerTitle = `${winnerName} Won!`;
+    winnerEmoji = "🏆";
+  } else if (result.toLowerCase().includes("tied")) {
+    winnerTitle = "Match Tied!";
+    winnerEmoji = "🤝";
+    bannerBg = "rgba(96, 165, 250, 0.12)";
+    bannerBorder = "rgba(96, 165, 250, 0.3)";
+    bannerColor = "#93c5fd";
+  } else if (result.toLowerCase().includes("drawn")) {
+    winnerTitle = "Match Drawn!";
+    winnerEmoji = "🤝";
+    bannerBg = "rgba(167, 139, 250, 0.12)";
+    bannerBorder = "rgba(167, 139, 250, 0.3)";
+    bannerColor = "#c4b5fd";
+  }
+
+  if (els.matchOverWinnerTitle) {
+    els.matchOverWinnerTitle.textContent = `${winnerEmoji} ${winnerTitle}`;
+  }
+  if (els.matchOverResultBadge) {
+    els.matchOverResultBadge.textContent = result;
+    els.matchOverResultBadge.style.background = bannerBg;
+    els.matchOverResultBadge.style.borderColor = bannerBorder;
+    els.matchOverResultBadge.style.color = bannerColor;
+  }
+
+  if (els.matchOverScoresSummary) {
+    const isTest = isTestMatch();
+    const teamAInnings = (state.inningsData || []).filter(i => i.team === 0);
+    const teamBInnings = (state.inningsData || []).filter(i => i.team === 1);
+
+    const formatInningsList = (list) => {
+      if (!list || list.length === 0) return "-";
+      return list.map(i => `${i.runs}/${i.wickets} (${oversFromBalls(i.legalBalls)} ov)`).join(" & ");
+    };
+
+    const totalRunsA = teamAInnings.reduce((sum, i) => sum + i.runs, 0);
+    const totalRunsB = teamBInnings.reduce((sum, i) => sum + i.runs, 0);
+
+    els.matchOverScoresSummary.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <div style="font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
+          <span>🏏</span> <span>${state.teamA}</span>
+        </div>
+        <div style="text-align: right; font-weight: 700; color: var(--ink); font-size: 0.95rem;">
+          ${formatInningsList(teamAInnings)} ${isTest ? `<span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 4px;">(${totalRunsA} tot)</span>` : ""}
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 6px;">
+        <div style="font-weight: 700; color: #60a5fa; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
+          <span>🏏</span> <span>${state.teamB}</span>
+        </div>
+        <div style="text-align: right; font-weight: 700; color: var(--ink); font-size: 0.95rem;">
+          ${formatInningsList(teamBInnings)} ${isTest ? `<span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 4px;">(${totalRunsB} tot)</span>` : ""}
+        </div>
+      </div>
+    `;
+  }
+
+  if (els.btnPlayNextMatch) {
+    if (state.tournamentActive && state.tournamentActiveFixtureIndex !== -1) {
+      els.btnPlayNextMatch.innerHTML = `<span>🏆</span> Submit & Next Fixture`;
+    } else {
+      els.btnPlayNextMatch.innerHTML = `<span>▶️</span> Play Next Match`;
+    }
+  }
+
+  els.matchOverModal.classList.remove("hidden");
+}
+
+function handlePlayNextMatch() {
+  if (els.matchOverModal) {
+    els.matchOverModal.classList.add("hidden");
+  }
+  matchOverModalShownFor = null;
+
+  if (state.tournamentActive && state.tournamentActiveFixtureIndex !== -1) {
+    submitTournamentMatchResult();
+    return;
+  }
+
+  // Regular match reset for next match
+  const keepSetup = {
+    teamA: els.teamA.value.trim() || defaultState.teamA,
+    teamB: els.teamB.value.trim() || defaultState.teamB,
+    maxOvers: Math.max(1, Math.min(100, Number(els.maxOvers.value) || 20)),
+    playersTeamA: Math.max(2, Math.min(11, Number(els.playersTeamA.value) || 11)),
+    playersTeamB: Math.max(2, Math.min(11, Number(els.playersTeamB.value) || 11)),
+    format: state.format,
+    scoringMode: state.scoringMode,
+    customTeamAPlayers: state.customTeamAPlayers,
+    customTeamBPlayers: state.customTeamBPlayers,
+  };
+  state = { ...clone(defaultState), ...keepSetup, day: 1 };
+  saveState();
+  showToast("Ready for next match! All scores reset.");
+  render();
+  if (state.scoringMode === "advanced" && currentInnings().currentStrikerIndex === -1) {
+    setTimeout(() => { promptNewBatter("striker"); }, 150);
   }
 }
 
@@ -4234,6 +4372,8 @@ document.querySelector("[data-wicket]").addEventListener("click", () => {
 });
 
 els.undoBtn.addEventListener("click", () => {
+  if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+  matchOverModalShownFor = null;
   const currentHistory = state.history;
   const previous = currentHistory.pop();
   if (!previous) {
@@ -4306,6 +4446,8 @@ els.drawBtn.addEventListener("click", () => {
 
 if (els.resetBtn) {
   els.resetBtn.addEventListener("click", () => {
+    if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+    matchOverModalShownFor = null;
     const keepSetup = {
       teamA: els.teamA.value.trim() || defaultState.teamA,
       teamB: els.teamB.value.trim() || defaultState.teamB,
@@ -4820,6 +4962,53 @@ if (els.closeScorecardModal) {
   els.closeScorecardModal.addEventListener("click", () => {
     if (els.scorecardModal) {
       els.scorecardModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.closeMatchOverModal) {
+  els.closeMatchOverModal.addEventListener("click", () => {
+    if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+  });
+}
+
+if (els.btnModalDismiss) {
+  els.btnModalDismiss.addEventListener("click", () => {
+    if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+  });
+}
+
+if (els.btnPlayNextMatch) {
+  els.btnPlayNextMatch.addEventListener("click", () => {
+    handlePlayNextMatch();
+  });
+}
+
+if (els.btnModalViewScorecard) {
+  els.btnModalViewScorecard.addEventListener("click", () => {
+    if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
+    if (els.scorecardModal) {
+      const current = currentInnings();
+      scorecardActiveTeamIndex = current ? current.team : 0;
+      els.scorecardModal.classList.remove("hidden");
+      renderFullScorecardModal();
+    }
+  });
+}
+
+if (els.matchOverModal) {
+  els.matchOverModal.addEventListener("click", (e) => {
+    if (e.target === els.matchOverModal) {
+      els.matchOverModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.matchNote) {
+  els.matchNote.addEventListener("click", () => {
+    const res = winnerText();
+    if (res) {
+      showMatchOverModal(res);
     }
   });
 }

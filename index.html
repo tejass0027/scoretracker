@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=345" />
+    <link rel="stylesheet" href="styles.css?v=346" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1618,6 +1618,50 @@
     </main>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Match Over Celebration & Next Match Modal -->
+    <div id="match-over-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1100; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 16px;">
+      <div class="match-over-card" style="background: linear-gradient(145deg, #101626, #090d16); border: 1.5px solid rgba(255, 215, 0, 0.35); border-radius: 24px; width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.15); text-align: center; position: relative;">
+        
+        <!-- Top banner / decoration -->
+        <div style="background: linear-gradient(90deg, rgba(255,215,0,0.08), rgba(255,215,0,0.22), rgba(255,215,0,0.08)); padding: 28px 24px 16px; position: relative; border-bottom: 1px solid rgba(255, 215, 0, 0.15);">
+          <button id="close-match-over-modal" type="button" aria-label="Close" style="position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;">&times;</button>
+          <div style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6)); margin-bottom: 8px;">🏆</div>
+          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px;">Match Completed</div>
+          <h2 id="match-over-winner-title" style="margin: 0; font-size: 1.5rem; font-weight: 800; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Bengaluru Strikers Won!</h2>
+        </div>
+
+        <!-- Modal Body -->
+        <div style="padding: 22px; display: grid; gap: 18px;">
+          
+          <!-- Result pill / banner -->
+          <div id="match-over-result-badge" style="background: rgba(255, 215, 0, 0.12); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 12px 16px; color: #ffdf79; font-size: 0.95rem; font-weight: 600;">
+            Match Result
+          </div>
+
+          <!-- Quick match score summary box -->
+          <div id="match-over-scores-summary" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; display: grid; gap: 8px; text-align: left;">
+            <!-- Injected via JS -->
+          </div>
+
+          <!-- Call to Action Buttons -->
+          <div style="display: grid; gap: 10px; margin-top: 4px;">
+            <button id="btn-play-next-match" type="button" class="sport-tab active" style="padding: 14px 20px; font-size: 1.05rem; font-weight: 800; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; border: none; box-shadow: 0 4px 15px rgba(255, 170, 0, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit;">
+              <span>▶️</span> Play Next Match
+            </button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button id="btn-modal-view-scorecard" type="button" class="sport-tab" style="padding: 10px; font-size: 0.85rem; font-weight: 600; border-radius: 10px; cursor: pointer; font-family: inherit;">
+                📊 View Scorecard
+              </button>
+              <button id="btn-modal-dismiss" type="button" class="sport-tab" style="padding: 10px; font-size: 0.85rem; font-weight: 600; border-radius: 10px; cursor: pointer; font-family: inherit;">
+                Close
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <!-- Full Scorecard Modal Overlay -->
     <div id="scorecard-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
@@ -7108,7 +7152,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=332"></script>
+    <script src="app.js?v=333"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

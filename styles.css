@@ -3281,3 +3281,13 @@ dd {
   box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.4), 0 0 16px rgba(248, 113, 113, 0.3) !important;
 }
 
+/* Match Over Celebration Modal Animation */
+@keyframes matchOverPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.match-over-card {
+  animation: matchOverPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
