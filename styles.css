@@ -9,6 +9,7 @@ html {
 :root {
   --ink: #f8fafc;
   --muted: #94a3b8;
+  --text-muted: #94a3b8;
   --panel: rgba(15, 23, 42, 0.55);
   --panel-solid: #0f172a;
   --line: rgba(255, 255, 255, 0.08);
@@ -2710,6 +2711,7 @@ dd {
 .light-theme {
   --ink: #0f172a;
   --muted: #475569;
+  --text-muted: #64748b;
   --panel: rgba(255, 255, 255, 0.65);
   --panel-solid: #ffffff;
   --line: rgba(15, 23, 42, 0.06);
@@ -3690,6 +3692,79 @@ dd {
 .light-theme #close-over-modal:hover {
   background: rgba(15, 23, 42, 0.12) !important;
   color: #0f172a !important;
+}
+
+/* Full Scorecard Modal */
+.scorecard-modal-card {
+  background: #0b0f19;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ink);
+}
+
+.light-theme .scorecard-modal-card {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .scorecard-modal-header {
+  background: rgba(15, 23, 42, 0.02) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme #modal-scorecard-title {
+  color: #d97706 !important;
+}
+
+.light-theme #modal-scorecard-subtitle {
+  color: #64748b !important;
+}
+
+.light-theme #modal-batting-header,
+.light-theme #modal-bowling-header {
+  color: #0f172a !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .scorecard-modal-card table thead tr {
+  color: #64748b !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .scorecard-modal-card th {
+  color: #64748b !important;
+}
+
+.light-theme .scorecard-modal-card tbody {
+  color: #0f172a !important;
+}
+
+.light-theme .scorecard-modal-card tbody tr {
+  border-bottom-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+.light-theme .scorecard-modal-card tbody td {
+  color: #0f172a !important;
+}
+
+.light-theme .scorecard-modal-card td[style*="var(--gold)"],
+.light-theme .scorecard-modal-card h4[style*="var(--gold)"] {
+  color: #d97706 !important;
+}
+
+.light-theme .scorecard-modal-card td[style*="var(--text-muted)"],
+.light-theme .scorecard-modal-card span[style*="var(--text-muted)"],
+.light-theme .scorecard-modal-card div[style*="var(--text-muted)"] {
+  color: #64748b !important;
+}
+
+.light-theme .scorecard-modal-card tr[style*="border-top"] {
+  border-top-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+.light-theme .scorecard-modal-card td[style*="border-top"] {
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 /* Player Selection Modal Items */
