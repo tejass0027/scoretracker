@@ -1738,10 +1738,15 @@ dd {
 }
 
 .recent-balls-container .ball-empty {
-  border-radius: 8px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.02);
-  color: var(--muted);
-  border-style: dashed;
+  color: transparent;
+  border: 1.5px dashed rgba(255, 255, 255, 0.16);
+  box-shadow: none;
+}
+
+.recent-balls-container .ball-empty:hover {
+  transform: none;
 }
 
 .summary-row {
@@ -2997,7 +3002,10 @@ dd {
 }
 
 .light-theme .recent-balls-container .ball-empty {
-  background: rgba(15, 23, 42, 0.01);
+  background: rgba(15, 23, 42, 0.02) !important;
+  border: 1.5px dashed rgba(15, 23, 42, 0.18) !important;
+  color: transparent !important;
+  box-shadow: none !important;
 }
 
 .light-theme .summary-row {

@@ -3211,10 +3211,20 @@ function render() {
     }
   });
 
-  if (currentOverBalls.length > 0) {
+  const maxOv = isTestMatch() ? 90 : (state.maxOvers || 20);
+  const isMatchActive = !isInningsClosed(innings) && !winnerText() && (innings.legalBalls < (maxOv * 6));
+
+  if (isMatchActive) {
     overs.push({
       number: Math.floor(legalBallsCount / 6) + 1,
-      balls: currentOverBalls
+      balls: currentOverBalls,
+      isCurrent: true
+    });
+  } else if (currentOverBalls.length > 0) {
+    overs.push({
+      number: Math.floor(legalBallsCount / 6) + 1,
+      balls: currentOverBalls,
+      isCurrent: false
     });
   }
 
@@ -3248,11 +3258,22 @@ function render() {
       ballsList.append(item);
     });
 
+    if (over.isCurrent) {
+      const legalInThisOver = over.balls.filter((b) => b.legal).length;
+      const emptySlots = Math.max(0, 6 - legalInThisOver);
+      for (let i = 0; i < emptySlots; i++) {
+        const emptyItem = document.createElement("li");
+        emptyItem.className = "ball-node ball-empty";
+        emptyItem.textContent = "";
+        ballsList.append(emptyItem);
+      }
+    }
+
     overRow.append(ballsList);
     els.recentBalls.append(overRow);
   });
 
-  if (!innings.balls.length) {
+  if (!displayOvers.length) {
     const emptyNote = document.createElement("div");
     emptyNote.className = "over-row-empty";
     emptyNote.textContent = "No balls bowled yet.";
@@ -3985,6 +4006,7 @@ function showOverCompleteModal() {
 function hideOverCompleteModal() {
   const modal = els.overCompleteModal || document.querySelector("#over-complete-modal");
   if (modal) modal.classList.add("hidden");
+  render();
   const innings = currentInnings();
   if (state.scoringMode === "advanced" && innings && !isInningsClosed(innings) && !winnerText()) {
     promptNewBowler();
