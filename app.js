@@ -3976,11 +3976,7 @@ function showOverCompleteModal() {
   if (noteEl) noteEl.textContent = `Strike rotated • ${strikerName} is now on strike.`;
 
   if (btnContinue) {
-    if (state.scoringMode === "advanced") {
-      btnContinue.innerHTML = `<span>⚡</span> Choose Next Bowler ➔`;
-    } else {
-      btnContinue.innerHTML = `<span>▶</span> Continue Scoring`;
-    }
+    btnContinue.innerHTML = `<span>▶</span> Start Next Over`;
   }
 
   modal.classList.remove("hidden");
