@@ -3301,8 +3301,16 @@ function renderLivePlayerStats(innings) {
   const nonstrikerRatesEl = document.querySelector("#live-nonstriker-rates");
   const nonstrikerCard = document.querySelector("#btn-nonstriker-card");
 
-  const isSlot1OnStrike = innings.currentStrikerIndex === innings.slot1BatterIndex;
-  const isSlot2OnStrike = innings.currentStrikerIndex === innings.slot2BatterIndex;
+  const card1BadgeEl = document.querySelector("#live-card1-badge");
+  const card2BadgeEl = document.querySelector("#live-card2-badge");
+  const card1Header = document.querySelector("#card1-header");
+  const card2Header = document.querySelector("#card2-header");
+  const swapBtn = document.querySelector("#btn-swap-strike");
+  const btnChange1 = document.querySelector("#btn-change-striker");
+  const btnChange2 = document.querySelector("#btn-change-nonstriker");
+
+  const isSlot2OnStrike = innings.currentStrikerIndex !== -1 && innings.currentStrikerIndex === innings.slot2BatterIndex;
+  const isSlot1OnStrike = !isSlot2OnStrike;
 
   if (slot1Batter) {
     const sr = slot1Batter.balls > 0 ? ((slot1Batter.runs / slot1Batter.balls) * 100).toFixed(1) : "0.0";
@@ -3310,7 +3318,7 @@ function renderLivePlayerStats(innings) {
     if (strikerRunsEl) strikerRunsEl.innerHTML = `${slot1Batter.runs} <small>(${slot1Batter.balls})</small>`;
     if (strikerRatesEl) strikerRatesEl.textContent = `4s: ${slot1Batter.fours} • 6s: ${slot1Batter.sixes} • SR: ${sr}`;
   } else {
-    if (strikerNameEl) strikerNameEl.textContent = "Select Striker";
+    if (strikerNameEl) strikerNameEl.textContent = isSlot1OnStrike ? "Select Striker" : "Select Non-Striker";
     if (strikerRunsEl) strikerRunsEl.innerHTML = `0 <small>(0)</small>`;
     if (strikerRatesEl) strikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
   }
@@ -3321,24 +3329,51 @@ function renderLivePlayerStats(innings) {
     if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `${slot2Batter.runs} <small>(${slot2Batter.balls})</small>`;
     if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: ${slot2Batter.fours} • 6s: ${slot2Batter.sixes} • SR: ${sr}`;
   } else {
-    if (nonstrikerNameEl) nonstrikerNameEl.textContent = "Select Non-Striker";
+    if (nonstrikerNameEl) nonstrikerNameEl.textContent = isSlot2OnStrike ? "Select Striker" : "Select Non-Striker";
     if (nonstrikerRunsEl) nonstrikerRunsEl.innerHTML = `0 <small>(0)</small>`;
     if (nonstrikerRatesEl) nonstrikerRatesEl.textContent = `4s: 0 • 6s: 0 • SR: 0.0`;
   }
 
-  if (strikerCard) {
-    if (isSlot1OnStrike) {
+  if (isSlot1OnStrike) {
+    if (card1BadgeEl) card1BadgeEl.innerHTML = `<span class="pitch-role-badge striker-badge"><span class="pulse-indicator"></span> ON STRIKE</span>`;
+    if (card2BadgeEl) card2BadgeEl.innerHTML = `<span class="pitch-role-badge nonstriker-badge" style="cursor: pointer;" title="Click to rotate strike">🏃 NON-STRIKER</span>`;
+    if (strikerCard) {
       strikerCard.classList.add("active-strike");
-    } else {
-      strikerCard.classList.remove("active-strike");
+      strikerCard.classList.add("striker");
+      strikerCard.classList.remove("nonstriker");
+      strikerCard.title = "Batter 1 (On Strike) - Click to change batter";
     }
-  }
-  if (nonstrikerCard) {
-    if (isSlot2OnStrike) {
-      nonstrikerCard.classList.add("active-strike");
-    } else {
+    if (nonstrikerCard) {
       nonstrikerCard.classList.remove("active-strike");
+      nonstrikerCard.classList.add("nonstriker");
+      nonstrikerCard.classList.remove("striker");
+      nonstrikerCard.title = "Batter 2 (Non-Striker) - Click to change batter";
     }
+    if (swapBtn && card1Header && !card1Header.contains(swapBtn)) {
+      card1Header.appendChild(swapBtn);
+    }
+    if (btnChange1) btnChange1.textContent = "Change Striker ▾";
+    if (btnChange2) btnChange2.textContent = "Change Non-Striker ▾";
+  } else {
+    if (card1BadgeEl) card1BadgeEl.innerHTML = `<span class="pitch-role-badge nonstriker-badge" style="cursor: pointer;" title="Click to rotate strike">🏃 NON-STRIKER</span>`;
+    if (card2BadgeEl) card2BadgeEl.innerHTML = `<span class="pitch-role-badge striker-badge"><span class="pulse-indicator"></span> ON STRIKE</span>`;
+    if (strikerCard) {
+      strikerCard.classList.remove("active-strike");
+      strikerCard.classList.add("nonstriker");
+      strikerCard.classList.remove("striker");
+      strikerCard.title = "Batter 1 (Non-Striker) - Click to change batter";
+    }
+    if (nonstrikerCard) {
+      nonstrikerCard.classList.add("active-strike");
+      nonstrikerCard.classList.add("striker");
+      nonstrikerCard.classList.remove("nonstriker");
+      nonstrikerCard.title = "Batter 2 (On Strike) - Click to change batter";
+    }
+    if (swapBtn && card2Header && !card2Header.contains(swapBtn)) {
+      card2Header.appendChild(swapBtn);
+    }
+    if (btnChange1) btnChange1.textContent = "Change Non-Striker ▾";
+    if (btnChange2) btnChange2.textContent = "Change Striker ▾";
   }
 
   // Update pitch hub bowler card
@@ -6402,33 +6437,78 @@ if (btnBowlerCardEl) {
   });
 }
 
-if (els.btnChangeStriker) {
-  els.btnChangeStriker.addEventListener("click", (e) => {
-    e.stopPropagation();
-    promptNewBatter("striker");
-  });
+function rotateStrike() {
+  const inn = currentInnings();
+  if (!inn) return;
+  if (inn.currentStrikerIndex !== -1 && inn.currentNonStrikerIndex !== -1) {
+    const temp = inn.currentStrikerIndex;
+    inn.currentStrikerIndex = inn.currentNonStrikerIndex;
+    inn.currentNonStrikerIndex = temp;
+    saveState();
+    render();
+    showToast("Strike rotated.");
+  }
 }
 
 const btnStrikerCardEl = document.querySelector("#btn-striker-card");
 if (btnStrikerCardEl) {
   btnStrikerCardEl.addEventListener("click", (e) => {
-    if (e.target.closest("#btn-change-striker") || e.target.closest("#btn-swap-strike")) return;
-    promptNewBatter("striker");
+    if (e.target.closest("#btn-change-striker") || e.target.closest("#btn-swap-strike") || e.target.closest("#live-card1-badge")) return;
+    const inn = currentInnings();
+    const isSlot1OnStrike = inn && inn.currentStrikerIndex === inn.slot1BatterIndex;
+    promptNewBatter(isSlot1OnStrike ? "striker" : "nonstriker");
+  });
+}
+
+if (els.btnChangeStriker) {
+  els.btnChangeStriker.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const inn = currentInnings();
+    const isSlot1OnStrike = inn && inn.currentStrikerIndex === inn.slot1BatterIndex;
+    promptNewBatter(isSlot1OnStrike ? "striker" : "nonstriker");
   });
 }
 
 if (els.btnChangeNonStriker) {
   els.btnChangeNonStriker.addEventListener("click", (e) => {
     e.stopPropagation();
-    promptNewBatter("nonstriker");
+    const inn = currentInnings();
+    const isSlot1OnStrike = inn && inn.currentStrikerIndex === inn.slot1BatterIndex;
+    promptNewBatter(isSlot1OnStrike ? "nonstriker" : "striker");
   });
 }
 
 const btnNonStrikerCardEl = document.querySelector("#btn-nonstriker-card");
 if (btnNonStrikerCardEl) {
   btnNonStrikerCardEl.addEventListener("click", (e) => {
-    if (e.target.closest("#btn-change-nonstriker")) return;
-    promptNewBatter("nonstriker");
+    if (e.target.closest("#btn-change-nonstriker") || e.target.closest("#btn-swap-strike") || e.target.closest("#live-card2-badge")) return;
+    const inn = currentInnings();
+    const isSlot1OnStrike = inn && inn.currentStrikerIndex === inn.slot1BatterIndex;
+    promptNewBatter(isSlot1OnStrike ? "nonstriker" : "striker");
+  });
+}
+
+const liveCard1Badge = document.querySelector("#live-card1-badge");
+if (liveCard1Badge) {
+  liveCard1Badge.addEventListener("click", (e) => {
+    const inn = currentInnings();
+    if (!inn) return;
+    if (inn.currentStrikerIndex !== inn.slot1BatterIndex) {
+      e.stopPropagation();
+      rotateStrike();
+    }
+  });
+}
+
+const liveCard2Badge = document.querySelector("#live-card2-badge");
+if (liveCard2Badge) {
+  liveCard2Badge.addEventListener("click", (e) => {
+    const inn = currentInnings();
+    if (!inn) return;
+    if (inn.currentStrikerIndex !== inn.slot2BatterIndex) {
+      e.stopPropagation();
+      rotateStrike();
+    }
   });
 }
 
@@ -6436,16 +6516,7 @@ const btnSwapStrikeEl = document.querySelector("#btn-swap-strike");
 if (btnSwapStrikeEl) {
   btnSwapStrikeEl.addEventListener("click", (e) => {
     e.stopPropagation();
-    const inn = currentInnings();
-    if (!inn) return;
-    if (inn.currentStrikerIndex !== -1 && inn.currentNonStrikerIndex !== -1) {
-      const temp = inn.currentStrikerIndex;
-      inn.currentStrikerIndex = inn.currentNonStrikerIndex;
-      inn.currentNonStrikerIndex = temp;
-      saveState();
-      render();
-      showToast("Strike rotated.");
-    }
+    rotateStrike();
   });
 }
 

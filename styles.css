@@ -3345,6 +3345,7 @@ dd {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+.pitch-card.active-strike,
 .pitch-card.striker.active-strike {
   border-color: rgba(239, 68, 68, 0.45);
   background: linear-gradient(145deg, rgba(239, 68, 68, 0.07), rgba(255, 255, 255, 0.02));
@@ -3539,6 +3540,7 @@ dd {
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.09);
 }
 
+.light-theme .pitch-card.active-strike,
 .light-theme .pitch-card.striker.active-strike {
   border-color: rgba(220, 38, 38, 0.45);
   background: linear-gradient(145deg, #fff5f5, #ffffff);

@@ -1486,9 +1486,11 @@
           <!-- Batters Section (Striker & Non-Striker) -->
           <div class="pitch-batters-grid">
             <!-- Striker Card -->
-            <div id="btn-striker-card" class="pitch-card striker active-strike" title="Click to change striker batter">
-              <div class="pitch-card-header">
-                <span class="pitch-role-badge striker-badge"><span class="pulse-indicator"></span> ON STRIKE</span>
+            <div id="btn-striker-card" class="pitch-card striker active-strike" title="Click to change batter">
+              <div id="card1-header" class="pitch-card-header">
+                <div id="live-card1-badge">
+                  <span class="pitch-role-badge striker-badge"><span class="pulse-indicator"></span> ON STRIKE</span>
+                </div>
                 <button id="btn-swap-strike" class="btn-pitch-action" type="button" title="Rotate strike between batsmen">⇄ Rotate Strike</button>
               </div>
               <div class="pitch-card-body">
@@ -1511,9 +1513,11 @@
             </div>
 
             <!-- Non-Striker Card -->
-            <div id="btn-nonstriker-card" class="pitch-card nonstriker" title="Click to change non-striker batter">
-              <div class="pitch-card-header">
-                <span class="pitch-role-badge nonstriker-badge">🏃 NON-STRIKER</span>
+            <div id="btn-nonstriker-card" class="pitch-card nonstriker" title="Click to change batter">
+              <div id="card2-header" class="pitch-card-header">
+                <div id="live-card2-badge">
+                  <span class="pitch-role-badge nonstriker-badge">🏃 NON-STRIKER</span>
+                </div>
               </div>
               <div class="pitch-card-body">
                 <div class="pitch-player-identity">
@@ -7311,7 +7315,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=345"></script>
+    <script src="app.js?v=346"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
