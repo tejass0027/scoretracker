@@ -186,6 +186,9 @@ const els = {
   modalBatterSubtitle: document.querySelector("#modal-batter-subtitle"),
   closeBowlerSelectModal: document.querySelector("#close-bowler-select-modal"),
   closeBatterSelectModal: document.querySelector("#close-batter-select-modal"),
+  overCompleteModal: document.querySelector("#over-complete-modal"),
+  closeOverModal: document.querySelector("#close-over-modal"),
+  btnOverModalContinue: document.querySelector("#btn-over-modal-continue"),
 };
 
 let matchOverModalShownFor = null;
@@ -3935,6 +3938,63 @@ function showNextInningsModal() {
   els.nextInningsModal.classList.remove("hidden");
 }
 
+function showOverCompleteModal() {
+  const innings = currentInnings();
+  if (!innings) return;
+  const modal = els.overCompleteModal || document.querySelector("#over-complete-modal");
+  if (!modal) return;
+
+  const overNum = Math.floor(innings.legalBalls / 6);
+  const titleEl = document.querySelector("#over-modal-title");
+  const subEl = document.querySelector("#over-modal-subtitle");
+  const scoreEl = document.querySelector("#over-modal-score");
+  const overRunsEl = document.querySelector("#over-modal-over-runs");
+  const crrEl = document.querySelector("#over-modal-crr");
+  const noteEl = document.querySelector("#over-modal-note");
+  const btnContinue = els.btnOverModalContinue || document.querySelector("#btn-over-modal-continue");
+
+  let runsInThisOver = 0;
+  let legalCount = 0;
+  for (let i = innings.balls.length - 1; i >= 0; i--) {
+    const b = innings.balls[i];
+    runsInThisOver += (b.runs || 0);
+    if (b.legal) {
+      legalCount++;
+      if (legalCount === 6) break;
+    }
+  }
+
+  const crr = innings.legalBalls > 0 ? (innings.runs / (innings.legalBalls / 6)).toFixed(2) : "0.00";
+  const striker = innings.batters[innings.currentStrikerIndex];
+  const strikerName = striker ? striker.name : "Batter";
+
+  if (titleEl) titleEl.textContent = `Over ${overNum} Completed`;
+  if (subEl) subEl.textContent = `${battingTeam()} batting`;
+  if (scoreEl) scoreEl.textContent = `${innings.runs}/${innings.wickets}`;
+  if (overRunsEl) overRunsEl.textContent = runsInThisOver;
+  if (crrEl) crrEl.textContent = crr;
+  if (noteEl) noteEl.textContent = `Strike rotated • ${strikerName} is now on strike.`;
+
+  if (btnContinue) {
+    if (state.scoringMode === "advanced") {
+      btnContinue.innerHTML = `<span>⚡</span> Choose Next Bowler ➔`;
+    } else {
+      btnContinue.innerHTML = `<span>▶</span> Continue Scoring`;
+    }
+  }
+
+  modal.classList.remove("hidden");
+}
+
+function hideOverCompleteModal() {
+  const modal = els.overCompleteModal || document.querySelector("#over-complete-modal");
+  if (modal) modal.classList.add("hidden");
+  const innings = currentInnings();
+  if (state.scoringMode === "advanced" && innings && !isInningsClosed(innings) && !winnerText()) {
+    promptNewBowler();
+  }
+}
+
 function handleNextInnings() {
   if (els.nextInningsModal) {
     els.nextInningsModal.classList.add("hidden");
@@ -4759,19 +4819,21 @@ function addBall(ball) {
   }
 
   // Swap ends at the end of the over
+  let overJustCompleted = false;
   if (ball.legal && innings.legalBalls % 6 === 0 && innings.legalBalls > 0) {
     const temp = innings.currentStrikerIndex;
     innings.currentStrikerIndex = innings.currentNonStrikerIndex;
     innings.currentNonStrikerIndex = temp;
 
     if (state.scoringMode === "advanced" && !isInningsClosed(innings) && !winnerText()) {
-      promptNewBowler();
+      // Prompt bowler selection will open when over complete modal is continued/dismissed
     } else {
       // Cycle bowler automatically (user can manually change via select dropdown)
       if (innings.bowlers.length > 0) {
         innings.currentBowlerIndex = (innings.currentBowlerIndex + 1) % innings.bowlers.length;
       }
     }
+    overJustCompleted = true;
     showToast("Over complete.");
   }
 
@@ -4783,6 +4845,8 @@ function addBall(ball) {
   } else if (isInningsClosed(innings)) {
     showToast("Innings complete. Click Next Innings to continue.");
     showNextInningsModal();
+  } else if (overJustCompleted) {
+    showOverCompleteModal();
   }
 
   render();
@@ -4825,6 +4889,7 @@ document.querySelector("[data-wicket]").addEventListener("click", () => {
 els.undoBtn.addEventListener("click", () => {
   if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
   if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
+  if (els.overCompleteModal) els.overCompleteModal.classList.add("hidden");
   matchOverModalShownFor = null;
   nextInningsModalShownFor = null;
   const currentHistory = state.history;
@@ -4879,6 +4944,7 @@ if (els.resetBtn) {
   els.resetBtn.addEventListener("click", () => {
     if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
     if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
+    if (els.overCompleteModal) els.overCompleteModal.classList.add("hidden");
     matchOverModalShownFor = null;
     nextInningsModalShownFor = null;
     const keepSetup = {
@@ -5548,6 +5614,26 @@ if (els.nextInningsModal) {
   els.nextInningsModal.addEventListener("click", (e) => {
     if (e.target === els.nextInningsModal) {
       els.nextInningsModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.closeOverModal) {
+  els.closeOverModal.addEventListener("click", () => {
+    hideOverCompleteModal();
+  });
+}
+
+if (els.btnOverModalContinue) {
+  els.btnOverModalContinue.addEventListener("click", () => {
+    hideOverCompleteModal();
+  });
+}
+
+if (els.overCompleteModal) {
+  els.overCompleteModal.addEventListener("click", (e) => {
+    if (e.target === els.overCompleteModal) {
+      hideOverCompleteModal();
     }
   });
 }

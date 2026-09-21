@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=349" />
+    <link rel="stylesheet" href="styles.css?v=350" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1732,6 +1732,50 @@
           </div>
 
         </div>
+      </div>
+    </div>
+
+    <!-- Over Complete Pop-up Modal -->
+    <div id="over-complete-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 99997; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
+      <div class="over-modal-card" style="background: var(--panel-solid, #101626); border: 1.5px solid var(--line-light, rgba(255, 215, 0, 0.3)); border-radius: 20px; width: 100%; max-width: 400px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 215, 0, 0.12); text-align: center; position: relative;">
+        
+        <!-- Header -->
+        <div style="padding: 22px 20px 14px; position: relative; border-bottom: 1px solid var(--line, rgba(255,255,255,0.08));">
+          <button id="close-over-modal" type="button" aria-label="Close" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-family: inherit;">&times;</button>
+          <div style="font-size: 2.2rem; line-height: 1; margin-bottom: 6px;">⏱️</div>
+          <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); background: rgba(255,215,0,0.1); padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(255,215,0,0.25);">OVER COMPLETED</span>
+          <h2 id="over-modal-title" style="margin: 8px 0 0; font-size: 1.35rem; font-weight: 800; color: var(--ink, #fff);">Over 1 Completed</h2>
+          <p id="over-modal-subtitle" style="margin: 4px 0 0; font-size: 0.85rem; color: var(--muted, #94a3b8); font-weight: 500;">Bengaluru Strikers batting</p>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 18px 20px; display: grid; gap: 14px;">
+          <div class="over-stat-box" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line, rgba(255,255,255,0.08)); border-radius: 12px; padding: 12px 14px; display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--muted, #94a3b8); text-transform: uppercase; font-weight: 700;">Score</div>
+              <strong id="over-modal-score" style="font-size: 1.4rem; font-weight: 800; color: var(--gold);">0/0</strong>
+            </div>
+            <div style="width: 1px; height: 28px; background: var(--line, rgba(255,255,255,0.1));"></div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--muted, #94a3b8); text-transform: uppercase; font-weight: 700;">Runs In Over</div>
+              <strong id="over-modal-over-runs" style="font-size: 1.4rem; font-weight: 800; color: var(--ink, #fff);">0</strong>
+            </div>
+            <div style="width: 1px; height: 28px; background: var(--line, rgba(255,255,255,0.1));"></div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--muted, #94a3b8); text-transform: uppercase; font-weight: 700;">Run Rate</div>
+              <strong id="over-modal-crr" style="font-size: 1.4rem; font-weight: 800; color: var(--ink, #fff);">0.00</strong>
+            </div>
+          </div>
+
+          <div id="over-modal-note" style="font-size: 0.84rem; color: var(--muted, #94a3b8); font-weight: 500;">
+            Strike has rotated for the next over.
+          </div>
+
+          <button id="btn-over-modal-continue" type="button" class="sport-tab active" style="padding: 12px 20px; font-size: 0.95rem; font-weight: 800; border-radius: 10px; cursor: pointer; background: var(--gold, #d97706); color: #000; border: none; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35); font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>▶</span> Continue
+          </button>
+        </div>
+
       </div>
     </div>
 
@@ -7315,7 +7359,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=346"></script>
+    <script src="app.js?v=347"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

@@ -3638,6 +3638,46 @@ dd {
   color: #0f172a;
 }
 
+.over-modal-card {
+  animation: matchOverPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.light-theme .over-modal-card {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15) !important;
+}
+
+.light-theme #over-modal-title {
+  color: #0f172a !important;
+}
+
+.light-theme #over-modal-subtitle,
+.light-theme #over-modal-note {
+  color: #64748b !important;
+}
+
+.light-theme .over-stat-box {
+  background: rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+.light-theme #over-modal-over-runs,
+.light-theme #over-modal-crr {
+  color: #0f172a !important;
+}
+
+.light-theme #close-over-modal {
+  background: rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  color: #475569 !important;
+}
+
+.light-theme #close-over-modal:hover {
+  background: rgba(15, 23, 42, 0.12) !important;
+  color: #0f172a !important;
+}
+
 /* Player Selection Modal Items */
 .player-select-card {
   background: rgba(255, 255, 255, 0.03);
