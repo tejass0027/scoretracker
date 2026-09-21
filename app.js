@@ -136,6 +136,8 @@ const els = {
   btnNextInningsDismiss: document.querySelector("#btn-next-innings-dismiss"),
   scorecardModal: document.querySelector("#scorecard-modal"),
   closeScorecardModal: document.querySelector("#close-scorecard-modal"),
+  btnTopScoreboard: document.querySelector("#btn-top-scoreboard"),
+  btnActionScoreboard: document.querySelector("#btn-action-scoreboard"),
   selectStriker: document.querySelector("#select-striker"),
   selectNonStriker: document.querySelector("#select-nonstriker"),
   selectBowler: document.querySelector("#select-bowler"),
@@ -3629,7 +3631,13 @@ function generateBattingScorecardHtml(innings, s = state) {
     `;
   }
 
+  const totalExtras = (innings.extras?.b || 0) + (innings.extras?.lb || 0) + (innings.extras?.wd || 0) + (innings.extras?.nb || 0);
   html += `
+      <tr style="border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.82rem;">
+        <td colspan="2" style="padding: 8px 4px; color: var(--text-muted);">Extras</td>
+        <td style="padding: 8px 4px; text-align: right; font-weight: 700;">${totalExtras}</td>
+        <td colspan="4" style="padding: 8px 4px; text-align: right; color: var(--text-muted); font-size: 0.78rem;">(b ${innings.extras?.b || 0}, lb ${innings.extras?.lb || 0}, wd ${innings.extras?.wd || 0}, nb ${innings.extras?.nb || 0})</td>
+      </tr>
       <tr style="border-top: 1.5px solid rgba(255,255,255,0.1); font-weight: 700;">
         <td colspan="2" style="padding: 10px 4px;">Total</td>
         <td style="padding: 10px 4px; text-align: right; font-weight: 800; color: var(--gold);">${innings.runs}/${innings.wickets}</td>
@@ -3665,21 +3673,31 @@ function generateBowlingScorecardHtml(innings, s = state) {
 
   const activeBowlers = innings.bowlers.filter(b => b.ballsBowled > 0 || b === innings.bowlers[innings.currentBowlerIndex]);
 
-  activeBowlers.forEach((b) => {
-    const econ = b.ballsBowled > 0 ? (b.runsConceded / (b.ballsBowled / 6)).toFixed(1) : "0.0";
-    const isCurrent = b === innings.bowlers[innings.currentBowlerIndex];
-
+  if (activeBowlers.length === 0) {
     html += `
-      <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-        <td style="padding: 10px 4px; font-weight: ${isCurrent ? '700' : 'normal'}; color: ${isCurrent ? 'var(--gold)' : 'var(--ink)'};">${b.name} ${isCurrent ? '(current)' : ''}</td>
-        <td style="padding: 10px 4px; text-align: right;">${formatBowlerOvers(b.ballsBowled)}</td>
-        <td style="padding: 10px 4px; text-align: right;">${b.maidens || 0}</td>
-        <td style="padding: 10px 4px; text-align: right;">${b.runsConceded}</td>
-        <td style="padding: 10px 4px; text-align: right; font-weight: 700;">${b.wickets}</td>
-        <td style="padding: 10px 4px; text-align: right; color: var(--text-muted);">${econ}</td>
+      <tr>
+        <td colspan="6" style="padding: 14px 4px; font-size: 0.82rem; color: var(--text-muted); font-style: italic; text-align: center;">
+          No bowling figures recorded yet.
+        </td>
       </tr>
     `;
-  });
+  } else {
+    activeBowlers.forEach((b) => {
+      const econ = b.ballsBowled > 0 ? (b.runsConceded / (b.ballsBowled / 6)).toFixed(1) : "0.0";
+      const isCurrent = b === innings.bowlers[innings.currentBowlerIndex];
+
+      html += `
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+          <td style="padding: 10px 4px; font-weight: ${isCurrent ? '700' : 'normal'}; color: ${isCurrent ? 'var(--gold)' : 'var(--ink)'};">${b.name} ${isCurrent ? '(current)' : ''}</td>
+          <td style="padding: 10px 4px; text-align: right;">${formatBowlerOvers(b.ballsBowled)}</td>
+          <td style="padding: 10px 4px; text-align: right;">${b.maidens || 0}</td>
+          <td style="padding: 10px 4px; text-align: right;">${b.runsConceded}</td>
+          <td style="padding: 10px 4px; text-align: right; font-weight: 700;">${b.wickets}</td>
+          <td style="padding: 10px 4px; text-align: right; color: var(--text-muted);">${econ}</td>
+        </tr>
+      `;
+    });
+  }
 
   html += `
           </tbody>
@@ -3699,28 +3717,24 @@ function renderFullScorecardModal() {
   const btnB = document.querySelector("#btn-scorecard-team-b");
   
   if (tabContainer && btnA && btnB) {
-    if (isAdv) {
-      tabContainer.style.display = "grid";
-      btnA.textContent = ctx.teamA;
-      btnB.textContent = ctx.teamB;
-      
-      if (scorecardActiveTeamIndex === 0) {
-        btnA.classList.add("active");
-        btnB.classList.remove("active");
-      } else {
-        btnB.classList.add("active");
-        btnA.classList.remove("active");
-      }
+    tabContainer.style.display = "grid";
+    btnA.textContent = ctx.teamA || "Team 1";
+    btnB.textContent = ctx.teamB || "Team 2";
+    
+    if (scorecardActiveTeamIndex === 0) {
+      btnA.classList.add("active");
+      btnB.classList.remove("active");
     } else {
-      tabContainer.style.display = "none";
+      btnB.classList.add("active");
+      btnA.classList.remove("active");
     }
   }
 
-  const targetTeamName = scorecardActiveTeamIndex === 0 ? ctx.teamA : ctx.teamB;
-  const opponentTeamName = scorecardActiveTeamIndex === 0 ? ctx.teamB : ctx.teamA;
+  const targetTeamName = scorecardActiveTeamIndex === 0 ? (ctx.teamA || "Team 1") : (ctx.teamB || "Team 2");
+  const opponentTeamName = scorecardActiveTeamIndex === 0 ? (ctx.teamB || "Team 2") : (ctx.teamA || "Team 1");
   
   if (els.modalScorecardTitle) {
-    els.modalScorecardTitle.textContent = isAdv ? `${targetTeamName} Scorecard` : "Full Scorecard";
+    els.modalScorecardTitle.textContent = `${targetTeamName} Scoreboard`;
   }
   if (els.modalScorecardSubtitle) {
     els.modalScorecardSubtitle.textContent = ctx.result || (isAdv ? `Match Statistics` : `Innings Statistics`);
@@ -3739,35 +3753,24 @@ function renderFullScorecardModal() {
   if (battingContainer) battingContainer.innerHTML = "";
   if (bowlingContainer) bowlingContainer.innerHTML = "";
 
-  if (isAdv) {
-    const battingInningsList = (ctx.inningsData || []).filter(inn => inn.team === scorecardActiveTeamIndex);
-    if (battingContainer) {
-      if (battingInningsList.length === 0) {
-        battingContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 0.82rem; font-style: italic; padding: 8px;">Yet to bat.</div>`;
-      } else {
-        battingInningsList.forEach(innings => {
-          battingContainer.innerHTML += generateBattingScorecardHtml(innings, ctx);
-        });
-      }
+  const battingInningsList = (ctx.inningsData || []).filter(inn => inn.team === scorecardActiveTeamIndex);
+  if (battingContainer) {
+    if (battingInningsList.length === 0) {
+      battingContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 16px 8px; text-align: center;">Yet to bat.</div>`;
+    } else {
+      battingInningsList.forEach(innings => {
+        battingContainer.innerHTML += generateBattingScorecardHtml(innings, ctx);
+      });
     }
+  }
 
-    if (bowlingContainer) {
-      if (battingInningsList.length === 0) {
-        bowlingContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 0.82rem; font-style: italic; padding: 8px;">Yet to bowl.</div>`;
-      } else {
-        battingInningsList.forEach(innings => {
-          bowlingContainer.innerHTML += generateBowlingScorecardHtml(innings, ctx);
-        });
-      }
-    }
-  } else {
-    // Simple Mode: fall back to current active innings scorecard
-    const innings = ctx.inningsData[ctx.innings || 0] || ctx.inningsData[0];
-    if (battingContainer) {
-      battingContainer.innerHTML = generateBattingScorecardHtml(innings, ctx);
-    }
-    if (bowlingContainer) {
-      bowlingContainer.innerHTML = generateBowlingScorecardHtml(innings, ctx);
+  if (bowlingContainer) {
+    if (battingInningsList.length === 0) {
+      bowlingContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 16px 8px; text-align: center;">Yet to bowl.</div>`;
+    } else {
+      battingInningsList.forEach(innings => {
+        bowlingContainer.innerHTML += generateBowlingScorecardHtml(innings, ctx);
+      });
     }
   }
 }
@@ -5550,20 +5553,38 @@ if (els.submitTournamentBtn) {
   });
 }
 
+function openScorecardModal() {
+  if (!els.scorecardModal) return;
+  const current = currentInnings();
+  scorecardSourceCtx = null;
+  scorecardActiveTeamIndex = current ? current.team : 0;
+  els.scorecardModal.classList.remove("hidden");
+  renderFullScorecardModal();
+}
+
+if (els.btnTopScoreboard) {
+  els.btnTopScoreboard.addEventListener("click", openScorecardModal);
+}
+
+if (els.btnActionScoreboard) {
+  els.btnActionScoreboard.addEventListener("click", openScorecardModal);
+}
+
 if (els.btnFullScorecard) {
-  els.btnFullScorecard.addEventListener("click", () => {
-    if (els.scorecardModal) {
-      const current = currentInnings();
-      scorecardActiveTeamIndex = current ? current.team : 0;
-      els.scorecardModal.classList.remove("hidden");
-      renderFullScorecardModal();
-    }
-  });
+  els.btnFullScorecard.addEventListener("click", openScorecardModal);
 }
 
 if (els.closeScorecardModal) {
   els.closeScorecardModal.addEventListener("click", () => {
     if (els.scorecardModal) {
+      els.scorecardModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.scorecardModal) {
+  els.scorecardModal.addEventListener("click", (e) => {
+    if (e.target === els.scorecardModal) {
       els.scorecardModal.classList.add("hidden");
     }
   });

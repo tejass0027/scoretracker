@@ -1205,6 +1205,37 @@ h2 {
   border-color: #34d399;
 }
 
+.cricket-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#btn-top-scoreboard {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 0 16px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  min-height: 38px;
+  transition: all 0.2s ease;
+}
+
+#btn-top-scoreboard:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #070a13;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
+}
+
 .match-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1595,6 +1626,30 @@ input:focus {
 #innings-btn:not(:disabled):hover {
   background: var(--field);
   color: #070a13;
+}
+
+#btn-action-scoreboard {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  border-radius: 10px;
+  min-height: 56px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#btn-action-scoreboard:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #070a13;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+  transform: translateY(-2px);
 }
 
 .event-buttons button:disabled,
@@ -2154,11 +2209,22 @@ dd {
     border-color: rgba(59, 130, 246, 0.35) !important;
   }
 
-  .event-buttons #btn-save-cricket-vault {
+  .event-buttons #btn-action-scoreboard {
     grid-column: span 2 !important;
+    background: rgba(212, 175, 55, 0.18) !important;
+    color: var(--gold) !important;
+    border-color: rgba(212, 175, 55, 0.4) !important;
+    min-height: 48px !important;
+    font-size: 0.92rem !important;
+    font-weight: 800 !important;
+  }
+
+  .event-buttons #btn-save-cricket-vault {
+    grid-column: 1 / -1 !important;
     background: rgba(16, 185, 129, 0.18) !important;
     color: #6ee7b7 !important;
     border-color: rgba(16, 185, 129, 0.35) !important;
+    min-height: 44px !important;
   }
 
   /* Secondary actions: Declare, Follow-on, Draw */
@@ -2241,6 +2307,19 @@ dd {
 
   .cricket-topbar h1 {
     font-size: 1.35rem !important;
+  }
+
+  .cricket-topbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  #btn-top-scoreboard {
+    min-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 0.78rem !important;
+    gap: 4px !important;
   }
 }
 
@@ -2963,6 +3042,32 @@ dd {
 .light-theme #innings-btn:not(:disabled):hover {
   background: #059669;
   color: #ffffff;
+}
+
+.light-theme #btn-top-scoreboard {
+  background: rgba(217, 119, 6, 0.12);
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #b45309;
+}
+
+.light-theme #btn-top-scoreboard:hover {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+}
+
+.light-theme #btn-action-scoreboard {
+  background: rgba(217, 119, 6, 0.1);
+  border-color: rgba(217, 119, 6, 0.35);
+  color: #b45309;
+}
+
+.light-theme #btn-action-scoreboard:hover {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.2);
 }
 
 /* Sidebar elements */

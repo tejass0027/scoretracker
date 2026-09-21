@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=354" />
+    <link rel="stylesheet" href="styles.css?v=355" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1429,7 +1429,10 @@
             <p id="format-label" class="eyebrow">Cricket tracker</p>
             <h1 id="app-title">Cricket Score Tracker</h1>
           </div>
-          <button id="back-to-formats" class="sport-tab active" type="button">Formats</button>
+          <div class="cricket-topbar-actions">
+            <button id="btn-top-scoreboard" class="sport-tab" type="button" title="View Scoreboard">📊 Scoreboard</button>
+            <button id="back-to-formats" class="sport-tab active" type="button">Formats</button>
+          </div>
         </header>
 
         <section class="match-stage" aria-label="Live cricket score">
@@ -1582,12 +1585,13 @@
             <button type="button" data-extra="b">Bye</button>
             <button type="button" data-extra="lb">Leg bye</button>
             <button type="button" data-wicket="true">Wicket</button>
-            <button type="button" id="declare-btn">Declare</button>
-            <button type="button" id="follow-on-btn">Follow-on</button>
             <button type="button" id="undo-btn">Undo</button>
             <button type="button" id="innings-btn">Next innings</button>
-            <button type="button" id="draw-btn">Draw</button>
+            <button type="button" id="btn-action-scoreboard" class="scoreboard-action-btn" title="View Scoreboard">📊 Scoreboard</button>
             <button type="button" id="btn-save-cricket-vault" class="save-to-vault-btn" style="border-radius:6px; font-size:0.8rem; padding:8px 6px;">💾 Save to Vault</button>
+            <button type="button" id="declare-btn">Declare</button>
+            <button type="button" id="follow-on-btn">Follow-on</button>
+            <button type="button" id="draw-btn">Draw</button>
             <button type="button" id="submit-tournament-btn" class="hidden" style="background: var(--gold) !important; color: #000 !important; font-weight: 700; border-color: var(--gold) !important;">Submit to Tournament</button>
           </div>
         </section>
@@ -7359,7 +7363,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=350"></script>
+    <script src="app.js?v=351"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
