@@ -3062,6 +3062,10 @@ function render() {
 
   // Toggle Scoring Mode elements (Simple vs. Advanced)
   const isSimple = state.scoringMode === "simple";
+  if (els.cricketPage) {
+    els.cricketPage.classList.toggle("mode-simple", isSimple);
+    els.cricketPage.classList.toggle("mode-advanced", !isSimple);
+  }
   if (isSimple) {
     if (els.liveBattersPanel) els.liveBattersPanel.classList.add("hidden");
     if (els.liveBatterSelectorRow) els.liveBatterSelectorRow.classList.add("hidden");
@@ -4451,6 +4455,11 @@ function highlightScoringModeButtons(type = "custom") {
 function syncScoringModeUI() {
   const isSimple = state.scoringMode === "simple";
   const isAdv = state.scoringMode === "advanced";
+
+  if (els.cricketPage) {
+    els.cricketPage.classList.toggle("mode-simple", isSimple);
+    els.cricketPage.classList.toggle("mode-advanced", !isSimple);
+  }
 
   if (els.btnModeSimple && els.btnModeAdvanced) {
     if (isSimple) {

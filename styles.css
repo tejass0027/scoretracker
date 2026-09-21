@@ -1612,7 +1612,13 @@ input:focus {
 }
 
 .cricket-side {
-  align-self: start;
+  grid-template-rows: auto auto 1fr;
+}
+
+/* In Normal/Simple mode, Bowler Scoreboard is hidden, so remove the stretch/dead space */
+.mode-simple .cricket-side {
+  grid-template-rows: none !important;
+  align-self: start !important;
 }
 
 .stadium-art,
