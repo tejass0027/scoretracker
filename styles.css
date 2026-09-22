@@ -2404,6 +2404,14 @@ dd {
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.live-indicator:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-1px);
 }
 
 .live-dot {
@@ -3961,5 +3969,165 @@ dd {
   color: #000;
 }
 
+/* Active Match in Progress Banner & Safeguard */
+.active-match-banner {
+  margin: 0 0 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  padding: 20px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: matchOverPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
+.light-theme .active-match-banner {
+  background: linear-gradient(135deg, #fffdf2 0%, #f0fdf4 100%);
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
 
+.active-match-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.active-match-card-content {
+  flex: 1;
+  min-width: 260px;
+}
+
+.active-match-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.active-match-badge-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #f87171;
+  text-transform: uppercase;
+}
+
+.light-theme .active-match-badge-text {
+  color: #dc2626;
+}
+
+.active-match-teams {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.active-match-summary {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.active-match-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-resume-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: #070a13;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-resume-active:hover {
+  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.btn-vault-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-vault-active:hover {
+  background: var(--field);
+  color: #070a13;
+  transform: translateY(-1px);
+}
+
+.light-theme .btn-vault-active {
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.35);
+}
+
+.btn-discard-active {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-discard-active:hover {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.light-theme .btn-discard-active {
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #64748b;
+}
+
+@media (max-width: 640px) {
+  .active-match-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .active-match-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-resume-active,
+  .btn-vault-active,
+  .btn-discard-active {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -267,7 +267,13 @@ function showWelcomePage(fromHash = false) {
   if (els.navHomeBtn) els.navHomeBtn.classList.add("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
-  if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  if (els.navLiveIndicator) {
+    if (typeof hasActiveCricketMatch === "function" && hasActiveCricketMatch()) {
+      els.navLiveIndicator.classList.remove("hidden");
+    } else {
+      els.navLiveIndicator.classList.add("hidden");
+    }
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -279,7 +285,16 @@ function showSportsPage(fromHash = false) {
   if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.add("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
-  if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  if (els.navLiveIndicator) {
+    if (typeof hasActiveCricketMatch === "function" && hasActiveCricketMatch()) {
+      els.navLiveIndicator.classList.remove("hidden");
+    } else {
+      els.navLiveIndicator.classList.add("hidden");
+    }
+  }
+  if (typeof updateSportsHubCricketStatus === "function") {
+    updateSportsHubCricketStatus();
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -309,7 +324,16 @@ function showFormatPage(fromHash = false) {
   if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
-  if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
+  if (els.navLiveIndicator) {
+    if (typeof hasActiveCricketMatch === "function" && hasActiveCricketMatch()) {
+      els.navLiveIndicator.classList.remove("hidden");
+    } else {
+      els.navLiveIndicator.classList.add("hidden");
+    }
+  }
+  if (typeof updateActiveMatchBanner === "function") {
+    updateActiveMatchBanner();
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -322,6 +346,7 @@ function showCricketPage(fromHash = false) {
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.remove("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.remove("hidden");
+  render();
 }
 window.showCricketPage = showCricketPage;
 
@@ -2359,7 +2384,115 @@ function normalizeState(nextState) {
 
 function saveState() {
   syncActiveTournamentToHistory();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if (hasActiveCricketMatch()) {
+      localStorage.setItem("cricket_active_match_backup", JSON.stringify(state));
+    }
+  } catch (e) {
+    console.warn("Storage write failed", e);
+  }
+}
+
+function hasActiveCricketMatch() {
+  if (!state || !state.inningsData || !state.inningsData.length) return false;
+  if (state.tournamentActive) return false; // Tournaments have their own fixture engine
+  if (state.result) return false; // Match has ended
+  const totalBalls = state.inningsData.reduce((acc, inn) => acc + (inn.balls ? inn.balls.length : 0), 0);
+  const totalRuns = state.inningsData.reduce((acc, inn) => acc + (inn.runs || 0), 0);
+  const totalWickets = state.inningsData.reduce((acc, inn) => acc + (inn.wickets || 0), 0);
+  return totalBalls > 0 || totalRuns > 0 || totalWickets > 0;
+}
+
+function discardActiveCricketMatch() {
+  state = {
+    ...clone(defaultState),
+    scoringMode: null
+  };
+  saveState();
+  try {
+    localStorage.removeItem("cricket_active_match_backup");
+  } catch (e) {}
+  updateActiveMatchBanner();
+  updateSportsHubCricketStatus();
+}
+
+function updateActiveMatchBanner() {
+  const banner = document.querySelector("#active-match-banner");
+  if (!banner) return;
+  
+  if (hasActiveCricketMatch()) {
+    banner.classList.remove("hidden");
+    const teamsEl = document.querySelector("#active-match-teams");
+    const summaryEl = document.querySelector("#active-match-summary");
+    const inn = currentInnings();
+    const ov = oversFromBalls(inn ? inn.legalBalls : 0);
+    const totOv = state.maxOvers || (isTestMatch() ? 90 : 20);
+    const crr = inn && inn.legalBalls ? (inn.runs / (inn.legalBalls / 6)).toFixed(2) : "0.00";
+    const modeLabel = state.scoringMode === "advanced" ? "Advanced Mode" : "Normal Mode";
+    const innLabel = inn ? `Innings ${inn.number}` : "1st Innings";
+    
+    if (teamsEl) {
+      teamsEl.textContent = `${state.teamA} vs ${state.teamB}`;
+    }
+    if (summaryEl) {
+      summaryEl.textContent = `${innLabel} • ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${ov}/${totOv} ov) • CRR: ${crr} • ${state.format || "Cricket"} • ${modeLabel}`;
+    }
+  } else {
+    banner.classList.add("hidden");
+  }
+}
+
+function updateSportsHubCricketStatus() {
+  const cricketCard = document.querySelector("[data-open-sport='cricket']");
+  if (!cricketCard) return;
+  const statusTag = cricketCard.querySelector(".sport-status-tag");
+  const footerAction = cricketCard.querySelector(".sport-card-footer span:first-child");
+  if (hasActiveCricketMatch()) {
+    const inn = currentInnings();
+    if (statusTag) {
+      statusTag.innerHTML = `🔴 In Progress`;
+      statusTag.style.background = "rgba(239, 68, 68, 0.2)";
+      statusTag.style.color = "#f87171";
+      statusTag.style.borderColor = "rgba(239, 68, 68, 0.4)";
+    }
+    if (footerAction) {
+      footerAction.textContent = `Resume (${inn ? inn.runs : 0}/${inn ? inn.wickets : 0})`;
+    }
+  } else {
+    if (statusTag) {
+      statusTag.innerHTML = `Ready`;
+      statusTag.style.background = "";
+      statusTag.style.color = "";
+      statusTag.style.borderColor = "";
+    }
+    if (footerAction) {
+      footerAction.textContent = "Score Match";
+    }
+  }
+}
+
+let pendingNewMatchCallback = null;
+
+function promptOverwriteMatchConfirm(callback) {
+  const modal = document.querySelector("#active-match-confirm-modal");
+  const desc = document.querySelector("#confirm-overwrite-desc");
+  if (!modal) {
+    callback();
+    return;
+  }
+  const inn = currentInnings();
+  if (desc) {
+    desc.textContent = `You have an ongoing match: "${state.teamA} vs ${state.teamB}" (${inn ? inn.runs : 0}/${inn ? inn.wickets : 0}, ${oversFromBalls(inn ? inn.legalBalls : 0)} ov). Starting a new match will replace it.`;
+  }
+  pendingNewMatchCallback = callback;
+  modal.classList.remove("hidden");
+}
+
+function closeOverwriteModal() {
+  const modal = document.querySelector("#active-match-confirm-modal");
+  if (modal) modal.classList.add("hidden");
+  pendingNewMatchCallback = null;
 }
 
 function compileTournamentSeriesStats() {
@@ -5028,7 +5161,12 @@ document.querySelectorAll(".filter-pill[data-sport-filter]").forEach((pill) => {
 const cricketBtn = document.querySelector("[data-open-sport='cricket']");
 if (cricketBtn) {
   cricketBtn.addEventListener("click", () => {
-    showFormatPage();
+    if (hasActiveCricketMatch()) {
+      showCricketPage();
+      showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
+    } else {
+      showFormatPage();
+    }
   });
 }
 
@@ -5037,7 +5175,45 @@ let pendingFormat = "Custom";
 document.querySelectorAll("[data-format]").forEach((button) => {
   button.addEventListener("click", () => {
     const format = button.dataset.format;
-    pendingFormat = format;
+    const proceed = () => {
+      pendingFormat = format;
+
+      // Reset player rosters so a new match starts fresh
+      state.customTeamAPlayers = [];
+      state.customTeamBPlayers = [];
+      state.scoringMode = null;
+
+      // Prefill fields
+      els.customTeamA.value = state.teamA;
+      els.customTeamB.value = state.teamB;
+      els.customOvers.value = "";
+      els.customOvers.placeholder = format === "Test" ? "e.g. 90" : (format === "ODI" ? "e.g. 50" : "e.g. 20");
+      els.customPlayersA.value = "";
+      els.customPlayersB.value = "";
+
+      const setupTitle = document.querySelector("#setup-title");
+      if (setupTitle) {
+        setupTitle.textContent = `${format} Match Setup`;
+      }
+
+      els.customSetup.classList.remove("hidden");
+      syncScoringModeUI();
+      renderCustomPlayerInputs();
+      updateCustomBatFirstOptions();
+      els.customSetup.scrollIntoView({ behavior: "smooth" });
+    };
+
+    if (hasActiveCricketMatch()) {
+      promptOverwriteMatchConfirm(proceed);
+    } else {
+      proceed();
+    }
+  });
+});
+
+els.customFormatBtn.addEventListener("click", () => {
+  const proceed = () => {
+    pendingFormat = "Custom";
 
     // Reset player rosters so a new match starts fresh
     state.customTeamAPlayers = [];
@@ -5048,13 +5224,13 @@ document.querySelectorAll("[data-format]").forEach((button) => {
     els.customTeamA.value = state.teamA;
     els.customTeamB.value = state.teamB;
     els.customOvers.value = "";
-    els.customOvers.placeholder = format === "Test" ? "e.g. 90" : (format === "ODI" ? "e.g. 50" : "e.g. 20");
+    els.customOvers.placeholder = "e.g. 20";
     els.customPlayersA.value = "";
     els.customPlayersB.value = "";
 
     const setupTitle = document.querySelector("#setup-title");
     if (setupTitle) {
-      setupTitle.textContent = `${format} Match Setup`;
+      setupTitle.textContent = "Custom Match Setup";
     }
 
     els.customSetup.classList.remove("hidden");
@@ -5062,35 +5238,13 @@ document.querySelectorAll("[data-format]").forEach((button) => {
     renderCustomPlayerInputs();
     updateCustomBatFirstOptions();
     els.customSetup.scrollIntoView({ behavior: "smooth" });
-  });
-});
+  };
 
-els.customFormatBtn.addEventListener("click", () => {
-  pendingFormat = "Custom";
-
-  // Reset player rosters so a new match starts fresh
-  state.customTeamAPlayers = [];
-  state.customTeamBPlayers = [];
-  state.scoringMode = null;
-
-  // Prefill fields
-  els.customTeamA.value = state.teamA;
-  els.customTeamB.value = state.teamB;
-  els.customOvers.value = "";
-  els.customOvers.placeholder = "e.g. 20";
-  els.customPlayersA.value = "";
-  els.customPlayersB.value = "";
-
-  const setupTitle = document.querySelector("#setup-title");
-  if (setupTitle) {
-    setupTitle.textContent = "Custom Match Setup";
+  if (hasActiveCricketMatch()) {
+    promptOverwriteMatchConfirm(proceed);
+  } else {
+    proceed();
   }
-
-  els.customSetup.classList.remove("hidden");
-  syncScoringModeUI();
-  renderCustomPlayerInputs();
-  updateCustomBatFirstOptions();
-  els.customSetup.scrollIntoView({ behavior: "smooth" });
 });
 
 const updateCustomBatFirstOptions = () => {
@@ -5334,6 +5488,10 @@ els.backToSportsFromFormat.addEventListener("click", () => {
 });
 
 els.backToFormats.addEventListener("click", () => {
+  saveState();
+  if (hasActiveCricketMatch()) {
+    showToast("💾 Match saved! You can resume it anytime.");
+  }
   if (state.tournamentActive) {
     showTournamentDashboard();
   } else {
@@ -5343,9 +5501,119 @@ els.backToFormats.addEventListener("click", () => {
 
 if (els.tournamentFormatBtn) {
   els.tournamentFormatBtn.addEventListener("click", () => {
-    showTournamentChoice();
+    const proceed = () => {
+      showTournamentChoice();
+    };
+    if (hasActiveCricketMatch()) {
+      promptOverwriteMatchConfirm(proceed);
+    } else {
+      proceed();
+    }
   });
 }
+
+// Active Match In Progress Banner Actions
+const btnResumeActiveMatch = document.querySelector("#btn-resume-active-match");
+if (btnResumeActiveMatch) {
+  btnResumeActiveMatch.addEventListener("click", () => {
+    showCricketPage();
+    render();
+    showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
+  });
+}
+
+const btnVaultActiveMatch = document.querySelector("#btn-vault-active-match");
+if (btnVaultActiveMatch) {
+  btnVaultActiveMatch.addEventListener("click", () => {
+    if (window.AuthVault && typeof window.AuthVault.saveMatch === "function") {
+      const inn = currentInnings();
+      const summary = `${inn ? 'Innings ' + inn.number : 'Match'}: ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${oversFromBalls(inn ? inn.legalBalls : 0)} ov)`;
+      window.AuthVault.saveMatch("cricket", "Cricket", state.teamA, state.teamB, summary, state);
+      showToast("💾 Match saved to Cloud Vault!");
+    } else {
+      showToast("💾 Match saved locally!");
+    }
+  });
+}
+
+const btnDiscardActiveMatch = document.querySelector("#btn-discard-active-match");
+if (btnDiscardActiveMatch) {
+  btnDiscardActiveMatch.addEventListener("click", () => {
+    if (confirm(`Are you sure you want to discard the match between "${state.teamA}" and "${state.teamB}" and start fresh?`)) {
+      discardActiveCricketMatch();
+      showToast("Match discarded. Ready to start fresh.");
+    }
+  });
+}
+
+// Overwrite Confirmation Modal Actions
+const btnConfirmResumeMatch = document.querySelector("#btn-confirm-resume-match");
+if (btnConfirmResumeMatch) {
+  btnConfirmResumeMatch.addEventListener("click", () => {
+    closeOverwriteModal();
+    showCricketPage();
+    render();
+    showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
+  });
+}
+
+const btnConfirmSaveVaultFirst = document.querySelector("#btn-confirm-save-vault-first");
+if (btnConfirmSaveVaultFirst) {
+  btnConfirmSaveVaultFirst.addEventListener("click", () => {
+    if (window.AuthVault && typeof window.AuthVault.saveMatch === "function") {
+      const inn = currentInnings();
+      const summary = `${inn ? 'Innings ' + inn.number : 'Match'}: ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${oversFromBalls(inn ? inn.legalBalls : 0)} ov)`;
+      window.AuthVault.saveMatch("cricket", "Cricket", state.teamA, state.teamB, summary, state);
+      showToast("💾 Saved to Vault!");
+    }
+    const cb = pendingNewMatchCallback;
+    closeOverwriteModal();
+    discardActiveCricketMatch();
+    if (cb) cb();
+  });
+}
+
+const btnConfirmDiscardNew = document.querySelector("#btn-confirm-discard-new");
+if (btnConfirmDiscardNew) {
+  btnConfirmDiscardNew.addEventListener("click", () => {
+    const cb = pendingNewMatchCallback;
+    closeOverwriteModal();
+    discardActiveCricketMatch();
+    if (cb) cb();
+  });
+}
+
+const btnConfirmCancel = document.querySelector("#btn-confirm-cancel");
+if (btnConfirmCancel) {
+  btnConfirmCancel.addEventListener("click", closeOverwriteModal);
+}
+
+const overwriteModalOverlay = document.querySelector("#active-match-confirm-modal");
+if (overwriteModalOverlay) {
+  overwriteModalOverlay.addEventListener("click", (e) => {
+    if (e.target === overwriteModalOverlay) {
+      closeOverwriteModal();
+    }
+  });
+}
+
+// Header live indicator click binding
+if (els.navLiveIndicator) {
+  els.navLiveIndicator.style.cursor = "pointer";
+  els.navLiveIndicator.addEventListener("click", () => {
+    if (hasActiveCricketMatch()) {
+      showCricketPage();
+      showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
+    }
+  });
+}
+
+// Save active match state if user navigates away or closes tab
+window.addEventListener("beforeunload", () => {
+  if (hasActiveCricketMatch()) {
+    saveState();
+  }
+});
 
 if (els.btnResumeTournament) {
   els.btnResumeTournament.addEventListener("click", () => {

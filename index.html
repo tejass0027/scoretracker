@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=355" />
+    <link rel="stylesheet" href="styles.css?v=356" />
     <link rel="stylesheet" href="hub.css?v=342" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1092,6 +1092,33 @@
         <button id="back-to-sports-from-format" class="format-nav-back-btn all-sports-btn" type="button">&larr; All Sports</button>
       </header>
 
+      <!-- Active Match in Progress Banner (Safeguard when pressing back) -->
+      <section id="active-match-banner" class="active-match-banner hidden" aria-label="Active match in progress">
+        <div class="active-match-card">
+          <div class="active-match-card-content">
+            <div class="active-match-badge-row">
+              <span class="pulse-dot"></span>
+              <span class="active-match-badge-text">MATCH IN PROGRESS • PROGRESS SAVED</span>
+            </div>
+            <h2 id="active-match-teams" class="active-match-teams">Bengaluru Strikers vs Mumbai Royals</h2>
+            <div id="active-match-summary" class="active-match-summary">1st Innings • 0/0 (0.0 ov) • Cricket</div>
+          </div>
+          <div class="active-match-actions">
+            <button id="btn-resume-active-match" class="btn-resume-active" type="button">
+              <span>▶</span>
+              <span>Resume Match</span>
+            </button>
+            <button id="btn-vault-active-match" class="btn-vault-active" type="button" title="Save to Vault">
+              <span>💾</span>
+              <span>Save to Vault</span>
+            </button>
+            <button id="btn-discard-active-match" class="btn-discard-active" type="button" title="Discard this match to start a new one">
+              <span>Start New Match</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <section class="format-grid" aria-label="Cricket formats" style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
         <button class="format-card" type="button" data-format="Test" data-overs="90">
           <div class="format-card-pill" style="color: #60a5fa; border-color: rgba(59, 130, 246, 0.35); background: rgba(59, 130, 246, 0.1);">🔴 RED BALL</div>
@@ -1890,6 +1917,31 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Confirm Overwrite Active Match Modal Overlay -->
+    <div id="active-match-confirm-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1100; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
+      <div class="scorecard-modal-card" style="border-radius: 20px; width: 100%; max-width: 480px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;">⚠️</div>
+        <h2 style="margin: 0 0 8px; font-size: 1.25rem; color: var(--gold);">Match In Progress</h2>
+        <p id="confirm-overwrite-desc" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin: 0 0 20px;">
+          You have an ongoing match that was saved automatically. Starting a new match will replace it.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button id="btn-confirm-resume-match" class="sport-tab active" type="button" style="width: 100%; padding: 12px; font-size: 0.95rem; font-weight: 800; border-radius: 10px; cursor: pointer;">
+            ▶ Resume Saved Match
+          </button>
+          <button id="btn-confirm-save-vault-first" class="sport-tab" type="button" style="width: 100%; padding: 10px; font-size: 0.88rem; font-weight: 700; border-radius: 10px; cursor: pointer; border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+            💾 Save to Vault &amp; Start New
+          </button>
+          <button id="btn-confirm-discard-new" type="button" style="background: transparent; border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 10px; font-size: 0.85rem; font-weight: 700; border-radius: 10px; cursor: pointer;">
+            Discard &amp; Start New Match
+          </button>
+          <button id="btn-confirm-cancel" type="button" style="background: transparent; border: none; color: var(--muted); padding: 8px; font-size: 0.8rem; cursor: pointer;">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
 
@@ -7363,7 +7415,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=351"></script>
+    <script src="app.js?v=352"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
