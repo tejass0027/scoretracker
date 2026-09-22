@@ -23,7 +23,7 @@
     <meta property="og:type" content="website" />
     
     <link rel="stylesheet" href="styles.css?v=356" />
-    <link rel="stylesheet" href="hub.css?v=343" />
+    <link rel="stylesheet" href="hub.css?v=344" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -312,34 +312,101 @@
           <p class="welcome-section-desc">Try tapping the scoring buttons below to see how fast and responsive ScoreTracker is:</p>
         </div>
 
-        <div class="welcome-demo-card">
-          <div class="welcome-demo-top">
-            <div class="welcome-demo-badge">🏏 T20 MATCH • CHASE IN PROGRESS</div>
-            <div id="demo-indicator" class="welcome-demo-status">⚡ LIVE SIMULATOR</div>
-          </div>
-          <div class="welcome-demo-matchup">
-            <div class="welcome-demo-team">
-              <span class="welcome-demo-team-name">Bengaluru Strikers</span>
-              <span class="welcome-demo-target-badge">Target: 185</span>
+        <div class="welcome-demo-grid">
+          <!-- 1. CRICKET SIMULATOR CARD -->
+          <div class="welcome-demo-card demo-card-cricket">
+            <div class="welcome-demo-top">
+              <div class="welcome-demo-badge">🏏 CRICKET • T20 RUN CHASE</div>
+              <div id="demo-indicator" class="welcome-demo-status">⚡ LIVE SIMULATOR</div>
             </div>
-            <div class="welcome-demo-scorebox">
-              <div id="demo-score-display" class="welcome-demo-score">164 / 3</div>
-              <div id="demo-overs-display" class="welcome-demo-overs">Overs: 16.4 / 20</div>
+            <div class="welcome-demo-matchup">
+              <div class="welcome-demo-team">
+                <span class="welcome-demo-team-name">Bengaluru Strikers</span>
+                <span class="welcome-demo-target-badge">Target: 185</span>
+              </div>
+              <div class="welcome-demo-scorebox welcome-demo-scorebox-cricket">
+                <div id="demo-score-display" class="welcome-demo-score">164 / 3</div>
+                <div id="demo-overs-display" class="welcome-demo-overs">Overs: 16.4 / 20</div>
+              </div>
+            </div>
+            <div class="welcome-demo-equation" id="demo-equation-text">
+              Need <strong>21 runs</strong> from <strong>20 balls</strong> &bull; CRR: 9.84 &bull; RRR: 6.30
+            </div>
+            <div class="welcome-demo-controls">
+              <span class="welcome-demo-controls-label">Tap to test cricket controls:</span>
+              <div class="welcome-demo-btn-row">
+                <button id="demo-btn-1" class="demo-ctrl-btn" type="button">+1 Single</button>
+                <button id="demo-btn-4" class="demo-ctrl-btn four" type="button">+4 Four! 🏏</button>
+                <button id="demo-btn-6" class="demo-ctrl-btn six" type="button">+6 Six! 🔥</button>
+                <button id="demo-btn-wicket" class="demo-ctrl-btn wicket" type="button">Wicket! 🔴</button>
+                <button id="demo-btn-reset" class="demo-ctrl-btn reset" type="button">Reset</button>
+              </div>
+              <div id="demo-toast" class="demo-toast-msg hidden">Nice shot! Score updated in real-time.</div>
             </div>
           </div>
-          <div class="welcome-demo-equation" id="demo-equation-text">
-            Need <strong>21 runs</strong> from <strong>20 balls</strong> &bull; CRR: 9.84 &bull; RRR: 6.30
-          </div>
-          <div class="welcome-demo-controls">
-            <span class="welcome-demo-controls-label">Tap to test live match controls:</span>
-            <div class="welcome-demo-btn-row">
-              <button id="demo-btn-1" class="demo-ctrl-btn" type="button">+1 Single</button>
-              <button id="demo-btn-4" class="demo-ctrl-btn four" type="button">+4 Four! 🏏</button>
-              <button id="demo-btn-6" class="demo-ctrl-btn six" type="button">+6 Six! 🔥</button>
-              <button id="demo-btn-wicket" class="demo-ctrl-btn wicket" type="button">Wicket! 🔴</button>
-              <button id="demo-btn-reset" class="demo-ctrl-btn reset" type="button">Reset</button>
+
+          <!-- 2. FOOTBALL SIMULATOR CARD -->
+          <div class="welcome-demo-card demo-card-football">
+            <div class="welcome-demo-top">
+              <div class="welcome-demo-badge">⚽ FOOTBALL • 2ND HALF</div>
+              <div class="welcome-demo-status status-fb">⚡ LIVE SIMULATOR</div>
             </div>
-            <div id="demo-toast" class="demo-toast-msg hidden">Nice shot! Score updated in real-time.</div>
+            <div class="welcome-demo-matchup">
+              <div class="welcome-demo-team">
+                <span class="welcome-demo-team-name">Real Madrid</span>
+                <span class="welcome-demo-target-badge fb-lead-badge" id="demo-fb-lead-badge">vs Barcelona • Madrid +1</span>
+              </div>
+              <div class="welcome-demo-scorebox welcome-demo-scorebox-fb">
+                <div id="demo-fb-score-display" class="welcome-demo-score fb-score">2 - 1</div>
+                <div id="demo-fb-clock-display" class="welcome-demo-overs fb-clock">Minute: 78' / 90'</div>
+              </div>
+            </div>
+            <div class="welcome-demo-equation" id="demo-fb-equation-text">
+              Real Madrid leading by 1 &bull; <strong>12 mins</strong> + stoppage remaining
+            </div>
+            <div class="welcome-demo-controls">
+              <span class="welcome-demo-controls-label">Tap to test football controls:</span>
+              <div class="welcome-demo-btn-row">
+                <button id="demo-fb-btn-goal" class="demo-ctrl-btn fb-goal" type="button">⚽ +1 Goal</button>
+                <button id="demo-fb-btn-yellow" class="demo-ctrl-btn fb-yellow" type="button">🟨 Card</button>
+                <button id="demo-fb-btn-red" class="demo-ctrl-btn fb-red" type="button">🟥 Red</button>
+                <button id="demo-fb-btn-var" class="demo-ctrl-btn fb-var" type="button">📺 VAR Check</button>
+                <button id="demo-fb-btn-reset" class="demo-ctrl-btn reset" type="button">Reset</button>
+              </div>
+              <div id="demo-fb-toast" class="demo-toast-msg hidden">Goal confirmed!</div>
+            </div>
+          </div>
+
+          <!-- 3. BASKETBALL SIMULATOR CARD -->
+          <div class="welcome-demo-card demo-card-basketball">
+            <div class="welcome-demo-top">
+              <div class="welcome-demo-badge">🏀 BASKETBALL • 4TH QUARTER</div>
+              <div class="welcome-demo-status status-bb">⚡ LIVE SIMULATOR</div>
+            </div>
+            <div class="welcome-demo-matchup">
+              <div class="welcome-demo-team">
+                <span class="welcome-demo-team-name">LA Lakers</span>
+                <span class="welcome-demo-target-badge bb-lead-badge" id="demo-bb-lead-badge">vs Warriors • Lakers +3</span>
+              </div>
+              <div class="welcome-demo-scorebox welcome-demo-scorebox-bb">
+                <div id="demo-bb-score-display" class="welcome-demo-score bb-score">98 - 95</div>
+                <div id="demo-bb-clock-display" class="welcome-demo-overs bb-clock">Clock: Q4 • 01:45</div>
+              </div>
+            </div>
+            <div class="welcome-demo-equation" id="demo-bb-equation-text">
+              Lakers lead by 3 &bull; <strong>105s left</strong> &bull; Bonus active
+            </div>
+            <div class="welcome-demo-controls">
+              <span class="welcome-demo-controls-label">Tap to test basketball controls:</span>
+              <div class="welcome-demo-btn-row">
+                <button id="demo-bb-btn-1" class="demo-ctrl-btn bb-1" type="button">+1 Free Throw</button>
+                <button id="demo-bb-btn-2" class="demo-ctrl-btn bb-2" type="button">+2 Paint 🏀</button>
+                <button id="demo-bb-btn-3" class="demo-ctrl-btn bb-3" type="button">+3 Downtown 🎯</button>
+                <button id="demo-bb-btn-foul" class="demo-ctrl-btn bb-foul" type="button">Foul! ⚠️</button>
+                <button id="demo-bb-btn-reset" class="demo-ctrl-btn reset" type="button">Reset</button>
+              </div>
+              <div id="demo-bb-toast" class="demo-toast-msg hidden">Free throw converted!</div>
+            </div>
           </div>
         </div>
       </section>
@@ -7415,7 +7482,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=353"></script>
+    <script src="app.js?v=354"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

@@ -6177,7 +6177,7 @@ function updateDemoUI(msg = null, burstType = null) {
       else if (burstType === "W") scoreEl.classList.add("score-pop-wicket");
 
       // Spawn floating celebration chip
-      const scoreBox = document.querySelector(".welcome-demo-scorebox");
+      const scoreBox = document.querySelector(".welcome-demo-scorebox-cricket") || document.querySelector(".welcome-demo-scorebox");
       if (scoreBox) {
         const burst = document.createElement("div");
         burst.className = "demo-floating-burst";
@@ -6283,7 +6283,260 @@ if (demoBtnReset) {
     demoRuns = 164;
     demoWickets = 3;
     demoBalls = 100;
-    updateDemoUI("Simulator reset to starting match situation.");
+    updateDemoUI("Cricket simulator reset to starting match situation.");
+  });
+}
+
+// 2. Football Interactive Demo Simulator
+let fbHomeScore = 2;
+let fbAwayScore = 1;
+let fbMinute = 78;
+
+function updateFbDemoUI(msg = null, burstText = null, burstClass = "goal") {
+  const scoreEl = document.querySelector("#demo-fb-score-display");
+  const clockEl = document.querySelector("#demo-fb-clock-display");
+  const eqEl = document.querySelector("#demo-fb-equation-text");
+  const badgeEl = document.querySelector("#demo-fb-lead-badge");
+  const toastEl = document.querySelector("#demo-fb-toast");
+
+  if (scoreEl) {
+    scoreEl.textContent = `${fbHomeScore} - ${fbAwayScore}`;
+
+    if (burstText) {
+      scoreEl.classList.remove("score-pop-normal", "score-pop-four", "score-pop-six", "score-pop-wicket");
+      void scoreEl.offsetWidth;
+      scoreEl.classList.add("score-pop-four");
+
+      const scoreBox = document.querySelector(".welcome-demo-scorebox-fb");
+      if (scoreBox) {
+        const burst = document.createElement("div");
+        burst.className = "demo-floating-burst";
+        burst.textContent = burstText;
+        if (burstClass === "goal") {
+          burst.style.background = "rgba(56, 189, 248, 0.35)";
+          burst.style.color = "#bae6fd";
+          burst.style.border = "1px solid #38bdf8";
+          burst.style.boxShadow = "0 0 22px rgba(56, 189, 248, 0.5)";
+        } else if (burstClass === "yellow") {
+          burst.style.background = "rgba(234, 179, 8, 0.35)";
+          burst.style.color = "#fef08a";
+          burst.style.border = "1px solid #facc15";
+          burst.style.boxShadow = "0 0 20px rgba(234, 179, 8, 0.5)";
+        } else if (burstClass === "red") {
+          burst.style.background = "rgba(239, 68, 68, 0.35)";
+          burst.style.color = "#fca5a5";
+          burst.style.border = "1px solid #f87171";
+          burst.style.boxShadow = "0 0 22px rgba(239, 68, 68, 0.5)";
+        } else if (burstClass === "var") {
+          burst.style.background = "rgba(168, 85, 247, 0.35)";
+          burst.style.color = "#e9d5ff";
+          burst.style.border = "1px solid #c084fc";
+          burst.style.boxShadow = "0 0 22px rgba(168, 85, 247, 0.5)";
+        }
+        scoreBox.style.position = "relative";
+        burst.style.top = "-10px";
+        burst.style.right = "0px";
+        scoreBox.appendChild(burst);
+        setTimeout(() => burst.remove(), 920);
+      }
+    }
+  }
+
+  if (clockEl) clockEl.textContent = `Minute: ${fbMinute}' / 90'`;
+
+  const lead = fbHomeScore - fbAwayScore;
+  if (badgeEl) {
+    if (lead > 0) badgeEl.textContent = `vs Barcelona • Madrid +${lead}`;
+    else if (lead < 0) badgeEl.textContent = `vs Barcelona • Barca +${Math.abs(lead)}`;
+    else badgeEl.textContent = `vs Barcelona • Scores Level`;
+  }
+
+  if (eqEl) {
+    if (fbMinute >= 90) {
+      if (lead > 0) eqEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">🏆 Full Time! Real Madrid wins ${fbHomeScore} - ${fbAwayScore}!</span>`;
+      else if (lead === 0) eqEl.innerHTML = `<span style="color:#fbbf24; font-weight:800;">Full Time Draw (${fbHomeScore} - ${fbAwayScore})! Extra Time next.</span>`;
+      else eqEl.innerHTML = `<span style="color:#f87171; font-weight:800;">Full Time! Barcelona leads ${fbAwayScore} - ${fbHomeScore}!</span>`;
+    } else {
+      const rem = 90 - fbMinute;
+      if (lead > 0) eqEl.innerHTML = `Real Madrid leading by ${lead} &bull; <strong>${rem} mins</strong> + stoppage remaining`;
+      else if (lead === 0) eqEl.innerHTML = `Match tied at ${fbHomeScore}-${fbAwayScore} &bull; <strong>${rem} mins</strong> to find a winner`;
+      else eqEl.innerHTML = `Barcelona ahead &bull; <strong>${rem} mins</strong> remaining in regulation`;
+    }
+  }
+
+  if (toastEl && msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.remove("hidden");
+    clearTimeout(window._demoFbToastTimer);
+    window._demoFbToastTimer = setTimeout(() => {
+      toastEl.classList.add("hidden");
+    }, 2200);
+  }
+}
+
+const demoFbBtnGoal = document.querySelector("#demo-fb-btn-goal");
+const demoFbBtnYellow = document.querySelector("#demo-fb-btn-yellow");
+const demoFbBtnRed = document.querySelector("#demo-fb-btn-red");
+const demoFbBtnVar = document.querySelector("#demo-fb-btn-var");
+const demoFbBtnReset = document.querySelector("#demo-fb-btn-reset");
+
+if (demoFbBtnGoal) {
+  demoFbBtnGoal.addEventListener("click", () => {
+    fbHomeScore += 1;
+    fbMinute = Math.min(90, fbMinute + 2);
+    updateFbDemoUI(`GOOOAL! Real Madrid scores! (Score: ${fbHomeScore} - ${fbAwayScore})`, "⚽ GOOOAL!", "goal");
+  });
+}
+if (demoFbBtnYellow) {
+  demoFbBtnYellow.addEventListener("click", () => {
+    updateFbDemoUI("🟨 Tactical foul - Yellow card shown!", "🟨 YELLOW", "yellow");
+  });
+}
+if (demoFbBtnRed) {
+  demoFbBtnRed.addEventListener("click", () => {
+    updateFbDemoUI("🟥 Straight Red Card! Player sent off to locker room!", "🟥 RED CARD", "red");
+  });
+}
+if (demoFbBtnVar) {
+  demoFbBtnVar.addEventListener("click", () => {
+    updateFbDemoUI("📺 VAR Review Completed: Decision stands and confirmed!", "📺 VAR CHECK", "var");
+  });
+}
+if (demoFbBtnReset) {
+  demoFbBtnReset.addEventListener("click", () => {
+    fbHomeScore = 2;
+    fbAwayScore = 1;
+    fbMinute = 78;
+    updateFbDemoUI("Football simulator reset to 78' match situation.");
+  });
+}
+
+// 3. Basketball Interactive Demo Simulator
+let bbHomeScore = 98;
+let bbAwayScore = 95;
+let bbSecondsLeft = 105;
+
+function updateBbDemoUI(msg = null, burstText = null, burstClass = "ft") {
+  const scoreEl = document.querySelector("#demo-bb-score-display");
+  const clockEl = document.querySelector("#demo-bb-clock-display");
+  const eqEl = document.querySelector("#demo-bb-equation-text");
+  const badgeEl = document.querySelector("#demo-bb-lead-badge");
+  const toastEl = document.querySelector("#demo-bb-toast");
+
+  if (scoreEl) {
+    scoreEl.textContent = `${bbHomeScore} - ${bbAwayScore}`;
+
+    if (burstText) {
+      scoreEl.classList.remove("score-pop-normal", "score-pop-four", "score-pop-six", "score-pop-wicket");
+      void scoreEl.offsetWidth;
+      scoreEl.classList.add("score-pop-six");
+
+      const scoreBox = document.querySelector(".welcome-demo-scorebox-bb");
+      if (scoreBox) {
+        const burst = document.createElement("div");
+        burst.className = "demo-floating-burst";
+        burst.textContent = burstText;
+        if (burstClass === "three") {
+          burst.style.background = "rgba(249, 115, 22, 0.35)";
+          burst.style.color = "#ffedd5";
+          burst.style.border = "1px solid #fb923c";
+          burst.style.boxShadow = "0 0 24px rgba(249, 115, 22, 0.6)";
+        } else if (burstClass === "two") {
+          burst.style.background = "rgba(245, 158, 11, 0.35)";
+          burst.style.color = "#fef08a";
+          burst.style.border = "1px solid #fbbf24";
+          burst.style.boxShadow = "0 0 20px rgba(245, 158, 11, 0.5)";
+        } else if (burstClass === "ft") {
+          burst.style.background = "rgba(16, 185, 129, 0.35)";
+          burst.style.color = "#a7f3d0";
+          burst.style.border = "1px solid #34d399";
+          burst.style.boxShadow = "0 0 18px rgba(16, 185, 129, 0.4)";
+        } else if (burstClass === "foul") {
+          burst.style.background = "rgba(239, 68, 68, 0.35)";
+          burst.style.color = "#fca5a5";
+          burst.style.border = "1px solid #f87171";
+          burst.style.boxShadow = "0 0 20px rgba(239, 68, 68, 0.5)";
+        }
+        scoreBox.style.position = "relative";
+        burst.style.top = "-10px";
+        burst.style.right = "0px";
+        scoreBox.appendChild(burst);
+        setTimeout(() => burst.remove(), 920);
+      }
+    }
+  }
+
+  const mins = Math.floor(bbSecondsLeft / 60);
+  const secs = (bbSecondsLeft % 60).toString().padStart(2, "0");
+  if (clockEl) clockEl.textContent = `Clock: Q4 • ${mins}:${secs}`;
+
+  const lead = bbHomeScore - bbAwayScore;
+  if (badgeEl) {
+    if (lead > 0) badgeEl.textContent = `vs Warriors • Lakers +${lead}`;
+    else if (lead < 0) badgeEl.textContent = `vs Warriors • GSW +${Math.abs(lead)}`;
+    else badgeEl.textContent = `vs Warriors • Tied`;
+  }
+
+  if (eqEl) {
+    if (bbSecondsLeft <= 0) {
+      if (lead > 0) eqEl.innerHTML = `<span style="color:#fbbf24; font-weight:800;">🏆 Final Buzzer! LA Lakers win ${bbHomeScore} - ${bbAwayScore}!</span>`;
+      else if (lead === 0) eqEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">Overtime! Tied at ${bbHomeScore}-${bbAwayScore}.</span>`;
+      else eqEl.innerHTML = `<span style="color:#f87171; font-weight:800;">Final Buzzer! Golden State wins ${bbAwayScore} - ${bbHomeScore}!</span>`;
+    } else {
+      if (lead > 0) eqEl.innerHTML = `Lakers lead by ${lead} &bull; <strong>${bbSecondsLeft}s left</strong> &bull; Bonus active`;
+      else if (lead === 0) eqEl.innerHTML = `Deadlocked at ${bbHomeScore} &bull; <strong>${bbSecondsLeft}s left</strong> in clutch time`;
+      else eqEl.innerHTML = `Warriors up by ${Math.abs(lead)} &bull; <strong>${bbSecondsLeft}s left</strong> in regulation`;
+    }
+  }
+
+  if (toastEl && msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.remove("hidden");
+    clearTimeout(window._demoBbToastTimer);
+    window._demoBbToastTimer = setTimeout(() => {
+      toastEl.classList.add("hidden");
+    }, 2200);
+  }
+}
+
+const demoBbBtn1 = document.querySelector("#demo-bb-btn-1");
+const demoBbBtn2 = document.querySelector("#demo-bb-btn-2");
+const demoBbBtn3 = document.querySelector("#demo-bb-btn-3");
+const demoBbBtnFoul = document.querySelector("#demo-bb-btn-foul");
+const demoBbBtnReset = document.querySelector("#demo-bb-btn-reset");
+
+if (demoBbBtn1) {
+  demoBbBtn1.addEventListener("click", () => {
+    bbHomeScore += 1;
+    bbSecondsLeft = Math.max(0, bbSecondsLeft - 5);
+    updateBbDemoUI(`Swish! Free throw converted! (${bbHomeScore} - ${bbAwayScore})`, "🎯 +1 FT", "ft");
+  });
+}
+if (demoBbBtn2) {
+  demoBbBtn2.addEventListener("click", () => {
+    bbHomeScore += 2;
+    bbSecondsLeft = Math.max(0, bbSecondsLeft - 14);
+    updateBbDemoUI(`Slams it down! 2-Point field goal! (${bbHomeScore} - ${bbAwayScore})`, "🏀 +2 DUNK", "two");
+  });
+}
+if (demoBbBtn3) {
+  demoBbBtn3.addEventListener("click", () => {
+    bbHomeScore += 3;
+    bbSecondsLeft = Math.max(0, bbSecondsLeft - 18);
+    updateBbDemoUI(`BANG! Deep three-pointer from downtown! (${bbHomeScore} - ${bbAwayScore})`, "🔥 +3 THREE!", "three");
+  });
+}
+if (demoBbBtnFoul) {
+  demoBbBtnFoul.addEventListener("click", () => {
+    updateBbDemoUI("Whistle blown: Defensive reaching foul (in the bonus)!", "⚠️ FOUL", "foul");
+  });
+}
+if (demoBbBtnReset) {
+  demoBbBtnReset.addEventListener("click", () => {
+    bbHomeScore = 98;
+    bbAwayScore = 95;
+    bbSecondsLeft = 105;
+    updateBbDemoUI("Basketball simulator reset to Q4 clutch time.");
   });
 }
 
