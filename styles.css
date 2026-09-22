@@ -1760,16 +1760,19 @@ input:focus {
   align-self: start !important;
 }
 
-/* In Normal/Simple mode, hide Change Striker and Change Batsman buttons */
+/* In Normal/Simple mode, hide Change Striker, Change Batsman, and Change Bowler buttons */
 .mode-simple #btn-change-striker,
 .mode-simple #btn-change-nonstriker,
+.mode-simple #btn-change-bowler-modal,
 .mode-simple #btn-striker-card .pitch-card-footer,
-.mode-simple #btn-nonstriker-card .pitch-card-footer {
+.mode-simple #btn-nonstriker-card .pitch-card-footer,
+.mode-simple #btn-bowler-card .pitch-card-footer {
   display: none !important;
 }
 
 .mode-simple #btn-striker-card,
-.mode-simple #btn-nonstriker-card {
+.mode-simple #btn-nonstriker-card,
+.mode-simple #btn-bowler-card {
   cursor: default !important;
 }
 

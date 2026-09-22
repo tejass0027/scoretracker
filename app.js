@@ -3211,10 +3211,13 @@ function render() {
     if (scoreboard) scoreboard.classList.add("hidden");
     if (els.btnChangeStriker) els.btnChangeStriker.classList.add("hidden");
     if (els.btnChangeNonStriker) els.btnChangeNonStriker.classList.add("hidden");
+    if (els.btnChangeBowlerModal) els.btnChangeBowlerModal.classList.add("hidden");
     const strikerFooter = document.querySelector("#btn-striker-card .pitch-card-footer");
     const nonstrikerFooter = document.querySelector("#btn-nonstriker-card .pitch-card-footer");
+    const bowlerFooter = document.querySelector("#btn-bowler-card .pitch-card-footer");
     if (strikerFooter) strikerFooter.classList.add("hidden");
     if (nonstrikerFooter) nonstrikerFooter.classList.add("hidden");
+    if (bowlerFooter) bowlerFooter.classList.add("hidden");
   } else {
     if (els.liveBattersPanel) els.liveBattersPanel.classList.remove("hidden");
     if (els.liveBatterSelectorRow) els.liveBatterSelectorRow.classList.remove("hidden");
@@ -3224,10 +3227,13 @@ function render() {
     if (scoreboard) scoreboard.classList.remove("hidden");
     if (els.btnChangeStriker) els.btnChangeStriker.classList.remove("hidden");
     if (els.btnChangeNonStriker) els.btnChangeNonStriker.classList.remove("hidden");
+    if (els.btnChangeBowlerModal) els.btnChangeBowlerModal.classList.remove("hidden");
     const strikerFooter = document.querySelector("#btn-striker-card .pitch-card-footer");
     const nonstrikerFooter = document.querySelector("#btn-nonstriker-card .pitch-card-footer");
+    const bowlerFooter = document.querySelector("#btn-bowler-card .pitch-card-footer");
     if (strikerFooter) strikerFooter.classList.remove("hidden");
     if (nonstrikerFooter) nonstrikerFooter.classList.remove("hidden");
+    if (bowlerFooter) bowlerFooter.classList.remove("hidden");
   }
 
   // Manage Tournament submit button
@@ -3559,17 +3565,21 @@ function renderLivePlayerStats(innings) {
   const bowlerFigsEl = document.querySelector("#live-bowler-figures");
   const bowlerEconEl = document.querySelector("#live-bowler-economy");
   const bowlerOverLabel = document.querySelector("#live-bowler-over-label");
+  const bowlerCard = document.querySelector("#btn-bowler-card");
+  if (bowlerCard) {
+    bowlerCard.title = state.scoringMode === "simple" ? "Current Bowler" : "Current Bowler - Click to change bowler";
+  }
 
   const currentOverNum = Math.floor(innings.legalBalls / 6) + 1;
   if (bowlerOverLabel) bowlerOverLabel.textContent = `Over ${currentOverNum}`;
 
   if (bowler) {
     const econ = bowler.ballsBowled > 0 ? (bowler.runsConceded / (bowler.ballsBowled / 6)).toFixed(2) : "0.00";
-    if (bowlerNameEl) bowlerNameEl.textContent = bowler.name;
+    if (bowlerNameEl) bowlerNameEl.textContent = state.scoringMode === "simple" ? "Bowler" : bowler.name;
     if (bowlerFigsEl) bowlerFigsEl.textContent = `${formatBowlerOvers(bowler.ballsBowled)}-${bowler.maidens || 0}-${bowler.runsConceded}-${bowler.wickets}`;
     if (bowlerEconEl) bowlerEconEl.textContent = `Econ: ${econ} RPO`;
   } else {
-    if (bowlerNameEl) bowlerNameEl.textContent = "Select Bowler";
+    if (bowlerNameEl) bowlerNameEl.textContent = state.scoringMode === "simple" ? "Bowler" : "Select Bowler";
     if (bowlerFigsEl) bowlerFigsEl.textContent = "0-0-0-0";
     if (bowlerEconEl) bowlerEconEl.textContent = "Econ: 0.00 RPO";
   }
@@ -4367,6 +4377,7 @@ function openSquadModal(fixtureIndex) {
 }
 
 function promptNewBowler() {
+  if (state.scoringMode === "simple") return;
   const innings = currentInnings();
   if (!innings) return;
 
@@ -7283,6 +7294,7 @@ if (els.btnSquadPlay) {
 if (els.btnChangeBowlerModal) {
   els.btnChangeBowlerModal.addEventListener("click", (e) => {
     e.stopPropagation();
+    if (state.scoringMode === "simple") return;
     promptNewBowler();
   });
 }
@@ -7290,6 +7302,7 @@ if (els.btnChangeBowlerModal) {
 const btnBowlerCardEl = document.querySelector("#btn-bowler-card");
 if (btnBowlerCardEl) {
   btnBowlerCardEl.addEventListener("click", (e) => {
+    if (state.scoringMode === "simple") return;
     if (e.target.closest("#btn-change-bowler-modal")) return;
     promptNewBowler();
   });
