@@ -2419,10 +2419,12 @@ function discardActiveCricketMatch() {
 
 function updateActiveMatchBanner() {
   const banner = document.querySelector("#active-match-banner");
-  const resumeCard = document.querySelector("#resume-format-card");
-  const resumeDesc = document.querySelector("#resume-format-card-desc");
+  if (!banner) return;
   
   if (hasActiveCricketMatch()) {
+    banner.classList.remove("hidden");
+    const teamsEl = document.querySelector("#active-match-teams");
+    const summaryEl = document.querySelector("#active-match-summary");
     const inn = currentInnings();
     const ov = oversFromBalls(inn ? inn.legalBalls : 0);
     const totOv = state.maxOvers || (isTestMatch() ? 90 : 20);
@@ -2430,27 +2432,14 @@ function updateActiveMatchBanner() {
     const modeLabel = state.scoringMode === "advanced" ? "Advanced Mode" : "Normal Mode";
     const innLabel = inn ? `Innings ${inn.number}` : "1st Innings";
     
-    if (banner) {
-      banner.classList.remove("hidden");
-      const teamsEl = document.querySelector("#active-match-teams");
-      const summaryEl = document.querySelector("#active-match-summary");
-      if (teamsEl) {
-        teamsEl.textContent = `${state.teamA} vs ${state.teamB}`;
-      }
-      if (summaryEl) {
-        summaryEl.textContent = `${innLabel} • ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${ov}/${totOv} ov) • CRR: ${crr} • ${state.format || "Cricket"} • ${modeLabel}`;
-      }
+    if (teamsEl) {
+      teamsEl.textContent = `${state.teamA} vs ${state.teamB}`;
     }
-
-    if (resumeCard) {
-      resumeCard.classList.remove("hidden");
-      if (resumeDesc) {
-        resumeDesc.textContent = `${state.teamA} vs ${state.teamB} • ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${ov}/${totOv} ov)`;
-      }
+    if (summaryEl) {
+      summaryEl.textContent = `${innLabel} • ${inn ? inn.runs : 0}/${inn ? inn.wickets : 0} (${ov}/${totOv} ov) • CRR: ${crr} • ${state.format || "Cricket"} • ${modeLabel}`;
     }
   } else {
-    if (banner) banner.classList.add("hidden");
-    if (resumeCard) resumeCard.classList.add("hidden");
+    banner.classList.add("hidden");
   }
 }
 
@@ -5518,19 +5507,10 @@ if (els.tournamentFormatBtn) {
   });
 }
 
-// Active Match In Progress Banner & Card Actions
+// Active Match In Progress Banner Actions
 const btnResumeActiveMatch = document.querySelector("#btn-resume-active-match");
 if (btnResumeActiveMatch) {
   btnResumeActiveMatch.addEventListener("click", () => {
-    showCricketPage();
-    render();
-    showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
-  });
-}
-
-const resumeFormatCardBtn = document.querySelector("#resume-format-card");
-if (resumeFormatCardBtn) {
-  resumeFormatCardBtn.addEventListener("click", () => {
     showCricketPage();
     render();
     showToast(`Resumed: ${state.teamA} vs ${state.teamB}`);
