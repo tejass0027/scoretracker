@@ -6052,7 +6052,7 @@ if (els.welcomeEnterBtn) {
 }
 if (els.welcomeTournamentBtn) {
   els.welcomeTournamentBtn.addEventListener("click", () => {
-    showTournamentChoice();
+    showSportsPage();
     render();
   });
 }
