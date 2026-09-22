@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=356" />
+    <link rel="stylesheet" href="styles.css?v=357" />
     <link rel="stylesheet" href="hub.css?v=344" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="sports/pickleball.css?v=210" />
     <link rel="stylesheet" href="sports/padel.css?v=210" />
     <link rel="stylesheet" href="sports/squash.css?v=210" />
-    <link rel="stylesheet" href="auth.css?v=301" />
+    <link rel="stylesheet" href="auth.css?v=302" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
@@ -69,7 +69,16 @@
           <button id="nav-btn-home" class="nav-btn hidden" type="button" title="Back to Starting Page"><span>🏠</span> <span class="nav-text-hide-mobile">Home</span></button>
           <button id="nav-btn-sports" class="nav-btn hidden" type="button" title="View All Sports"><span>⚡</span> <span class="nav-text-hide-mobile">All Sports</span></button>
           <button id="nav-btn-formats" class="nav-btn hidden" type="button"><span class="nav-text-hide-mobile">Formats</span></button>
-          <button id="nav-btn-vault" class="nav-btn" type="button" title="Open Cloud Match & Tournament Vault" style="color:var(--field); border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.08);"><span>📁</span> <span class="nav-text-hide-mobile">Vault</span></button>
+          <button id="nav-btn-vault" class="nav-btn nav-vault-btn" type="button" title="Open Cloud Match & Tournament Vault">
+            <svg class="nav-vault-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 9v6" />
+              <path d="M9 12h6" />
+              <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
+            </svg>
+            <span class="nav-text-hide-mobile">Vault</span>
+          </button>
           <button id="nav-btn-review" class="nav-btn" type="button" title="Leave a Review" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.08);"><span>⭐</span> <span class="nav-text-hide-mobile">Review</span></button>
 
           <div class="theme-switch-container">
@@ -7467,7 +7476,15 @@
         <span class="mobile-nav-label">Formats</span>
       </button>
       <button class="mobile-bottom-nav-item" id="mob-nav-vault" data-mobile-action="vault" type="button" aria-label="Cloud Vault">
-        <span class="mobile-nav-icon">📁</span>
+        <span class="mobile-nav-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 9v6" />
+            <path d="M9 12h6" />
+            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
+          </svg>
+        </span>
         <span class="mobile-nav-label">Vault</span>
       </button>
       <button class="mobile-bottom-nav-item" id="mob-nav-review" data-mobile-route="#review" type="button" aria-label="Reviews">
