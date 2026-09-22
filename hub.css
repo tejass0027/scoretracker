@@ -2226,6 +2226,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
+  align-items: start;
 }
 
 @media (max-width: 640px) {
@@ -2242,13 +2243,24 @@
   flex-direction: column;
   gap: 6px;
   text-align: left;
+  justify-content: flex-start;
 }
 
 .review-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
   font-size: 0.82rem;
   font-weight: 700;
   color: #cbd5e1;
   letter-spacing: 0.3px;
+  line-height: 1.2;
+  min-height: 20px;
+}
+
+.review-label span {
+  display: inline-block;
+  line-height: 1;
 }
 
 .review-input,
