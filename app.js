@@ -191,6 +191,12 @@ const els = {
   overCompleteModal: document.querySelector("#over-complete-modal"),
   closeOverModal: document.querySelector("#close-over-modal"),
   btnOverModalContinue: document.querySelector("#btn-over-modal-continue"),
+  btnRetireHurt: document.querySelector("#btn-retire-hurt"),
+  retireHurtModal: document.querySelector("#retire-hurt-modal"),
+  closeRetireHurtModal: document.querySelector("#close-retire-hurt-modal"),
+  btnRetireStrikerChoice: document.querySelector("#btn-retire-striker-choice"),
+  btnRetireNonstrikerChoice: document.querySelector("#btn-retire-nonstriker-choice"),
+  btnCancelRetireHurt: document.querySelector("#btn-cancel-retire-hurt"),
 };
 
 let matchOverModalShownFor = null;
@@ -3755,10 +3761,14 @@ function generateBattingScorecardHtml(innings, s = state) {
     let nameHTML = b.name;
     if (isStriker) nameHTML = `🏏 ${b.name}*`;
 
+    const dismissalHTML = b.outInfo === "Retired Hurt"
+      ? `<span style="color: #fb923c; font-weight: 600;">🩹 Retired Hurt</span>`
+      : (b.outInfo === "Not Out" ? `<span style="color: #34d399; font-weight: 600;">not out</span>` : b.outInfo);
+
     html += `
       <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
         <td style="padding: 10px 4px; font-weight: ${isStriker || isNonStriker ? '700' : 'normal'}; color: ${isStriker ? 'var(--gold)' : 'var(--ink)'};">${nameHTML}</td>
-        <td style="padding: 10px 4px; color: var(--text-muted); font-size: 0.8rem;">${b.outInfo}</td>
+        <td style="padding: 10px 4px; color: var(--text-muted); font-size: 0.8rem;">${dismissalHTML}</td>
         <td style="padding: 10px 4px; text-align: right; font-weight: 700;">${b.runs}</td>
         <td style="padding: 10px 4px; text-align: right; color: var(--text-muted);">${b.balls}</td>
         <td style="padding: 10px 4px; text-align: right; color: var(--text-muted);">${b.fours}</td>
@@ -4486,7 +4496,8 @@ function promptNewBatter(target = "striker") {
     let matchedCount = 0;
     innings.batters.forEach((b, idx) => {
       const isCurrentlyBatting = idx === innings.currentStrikerIndex || idx === innings.currentNonStrikerIndex;
-      const isOut = b.outInfo !== "Not Out";
+      const isRetiredHurt = b.outInfo === "Retired Hurt";
+      const isOut = b.outInfo !== "Not Out" && !isRetiredHurt;
 
       if (q && !b.name.toLowerCase().includes(q)) return;
 
@@ -4500,6 +4511,8 @@ function promptNewBatter(target = "striker") {
       if (isOut) {
         btn.disabled = true;
         statsHtml = `<span style="color: #f87171; font-weight: 600;">Out: ${b.outInfo} (${b.runs} off ${b.balls}b)</span>`;
+      } else if (isRetiredHurt) {
+        statsHtml = `<span style="color: #fb923c; font-weight: 600;">🩹 Retired Hurt (${b.runs} off ${b.balls}b) • Available to Resume</span>`;
       } else if (isCurrentlyBatting) {
         btn.disabled = true;
         const role = idx === innings.currentStrikerIndex ? "Current Striker 🔴" : "Current Non-Striker 🏃";
@@ -4518,11 +4531,12 @@ function promptNewBatter(target = "striker") {
             <span class="psc-stats">${statsHtml}</span>
           </div>
         </div>
-        ${(!isOut && !isCurrentlyBatting) ? `<span class="psc-btn">Select Batter ➔</span>` : `<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Unavailable</span>`}
+        ${(!isOut && !isCurrentlyBatting) ? `<span class="psc-btn">${isRetiredHurt ? 'Resume Batting ➔' : 'Select Batter ➔'}</span>` : `<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Unavailable</span>`}
       `;
 
       if (!isOut && !isCurrentlyBatting) {
         btn.addEventListener("click", () => {
+          b.outInfo = "Not Out";
           if (activeBatterSelectTarget === "striker") {
             if (innings.slot1BatterIndex === innings.currentStrikerIndex || innings.slot1BatterIndex === -1) {
               innings.slot1BatterIndex = idx;
@@ -4582,6 +4596,160 @@ function promptNewBatter(target = "striker") {
 
   if (els.batterSelectModal) {
     els.batterSelectModal.classList.remove("hidden");
+  }
+}
+
+function openRetireHurtModal() {
+  const innings = currentInnings();
+  if (!innings) {
+    showToast("No active innings.");
+    return;
+  }
+
+  const alreadyWon = winnerText();
+  if (alreadyWon) {
+    showToast(`🏆 Match complete: ${alreadyWon}`);
+    return;
+  }
+
+  if (isInningsClosed(innings)) {
+    showToast("Innings is complete.");
+    return;
+  }
+
+  ensurePlayerStats(innings);
+
+  const slot1 = innings.batters[innings.slot1BatterIndex];
+  const slot2 = innings.batters[innings.slot2BatterIndex];
+  const isSlot2OnStrike = innings.currentStrikerIndex !== -1 && innings.currentStrikerIndex === innings.slot2BatterIndex;
+
+  const strikerBatter = isSlot2OnStrike ? slot2 : slot1;
+  const nonStrikerBatter = isSlot2OnStrike ? slot1 : slot2;
+
+  const isSimple = state.scoringMode === "simple";
+
+  const strikerNameEl = document.querySelector("#retire-modal-striker-name");
+  const strikerStatsEl = document.querySelector("#retire-modal-striker-stats");
+  const nonstrikerNameEl = document.querySelector("#retire-modal-nonstriker-name");
+  const nonstrikerStatsEl = document.querySelector("#retire-modal-nonstriker-stats");
+
+  if (strikerNameEl) {
+    strikerNameEl.textContent = isSimple ? "Striker" : (strikerBatter ? strikerBatter.name : "Striker");
+  }
+  if (strikerStatsEl) {
+    strikerStatsEl.textContent = strikerBatter ? `${strikerBatter.runs} runs (${strikerBatter.balls} balls)` : "0 runs (0 balls)";
+  }
+
+  if (nonstrikerNameEl) {
+    nonstrikerNameEl.textContent = isSimple ? "Non-Striker" : (nonStrikerBatter ? nonStrikerBatter.name : "Non-Striker");
+  }
+  if (nonstrikerStatsEl) {
+    nonstrikerStatsEl.textContent = nonStrikerBatter ? `${nonStrikerBatter.runs} runs (${nonStrikerBatter.balls} balls)` : "0 runs (0 balls)";
+  }
+
+  const modal = els.retireHurtModal || document.querySelector("#retire-hurt-modal");
+  if (modal) modal.classList.remove("hidden");
+}
+
+function closeRetireHurtModal() {
+  const modal = els.retireHurtModal || document.querySelector("#retire-hurt-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function retireBatter(target) {
+  const innings = currentInnings();
+  if (!innings) return;
+  if (isInningsClosed(innings) || winnerText()) return;
+
+  remember();
+  ensurePlayerStats(innings);
+
+  const isSlot2OnStrike = innings.currentStrikerIndex !== -1 && innings.currentStrikerIndex === innings.slot2BatterIndex;
+
+  let retiringIndex = -1;
+  let isSlot1 = false;
+  if (target === "striker") {
+    retiringIndex = isSlot2OnStrike ? innings.slot2BatterIndex : innings.slot1BatterIndex;
+    isSlot1 = !isSlot2OnStrike;
+  } else {
+    retiringIndex = isSlot2OnStrike ? innings.slot1BatterIndex : innings.slot2BatterIndex;
+    isSlot1 = isSlot2OnStrike;
+  }
+
+  if (retiringIndex === -1 || !innings.batters[retiringIndex]) {
+    closeRetireHurtModal();
+    return;
+  }
+
+  const retiringBatter = innings.batters[retiringIndex];
+  retiringBatter.outInfo = "Retired Hurt";
+
+  closeRetireHurtModal();
+
+  const isSimple = state.scoringMode === "simple";
+  const batterDisplayName = isSimple ? (target === "striker" ? "Striker" : "Non-Striker") : retiringBatter.name;
+
+  if (isSimple) {
+    // In Simple/Normal mode: find the next available batter from innings.batters
+    let nextIndex = -1;
+    for (let i = 0; i < innings.batters.length; i++) {
+      if (i !== innings.slot1BatterIndex && i !== innings.slot2BatterIndex && innings.batters[i].outInfo === "Not Out") {
+        nextIndex = i;
+        break;
+      }
+    }
+
+    if (nextIndex !== -1) {
+      if (isSlot1) {
+        innings.slot1BatterIndex = nextIndex;
+      } else {
+        innings.slot2BatterIndex = nextIndex;
+      }
+      if (target === "striker") {
+        innings.currentStrikerIndex = nextIndex;
+      } else {
+        innings.currentNonStrikerIndex = nextIndex;
+      }
+      showToast(`${batterDisplayName} retired hurt.`);
+      render();
+    } else {
+      innings.closed = true;
+      showToast(`${batterDisplayName} retired hurt. No more batters available. Innings closed.`);
+      render();
+      showNextInningsModal();
+    }
+  } else {
+    // In Advanced mode: clear current slot and prompt user to select incoming batter
+    if (isSlot1) {
+      innings.slot1BatterIndex = -1;
+    } else {
+      innings.slot2BatterIndex = -1;
+    }
+    if (target === "striker") {
+      innings.currentStrikerIndex = -1;
+    } else {
+      innings.currentNonStrikerIndex = -1;
+    }
+
+    // Check if any available batters remain in squad (either Not Out or Retired Hurt who can resume)
+    const hasAvailable = innings.batters.some((b, i) =>
+      i !== innings.slot1BatterIndex &&
+      i !== innings.slot2BatterIndex &&
+      (b.outInfo === "Not Out" || b.outInfo === "Retired Hurt")
+    );
+
+    if (!hasAvailable) {
+      innings.closed = true;
+      showToast(`${batterDisplayName} retired hurt. No more batters available. Innings closed.`);
+      render();
+      showNextInningsModal();
+    } else {
+      showToast(`${batterDisplayName} retired hurt. Please select incoming batter.`);
+      render();
+      setTimeout(() => {
+        promptNewBatter(target);
+      }, 150);
+    }
   }
 }
 
@@ -5064,10 +5232,18 @@ document.querySelector("[data-wicket]").addEventListener("click", () => {
   addBall({ kind: "wicket", runs: 0, legal: true, wicket: true });
 });
 
+const btnRetireHurtEl = document.querySelector("#btn-retire-hurt");
+if (btnRetireHurtEl) {
+  btnRetireHurtEl.addEventListener("click", () => {
+    openRetireHurtModal();
+  });
+}
+
 els.undoBtn.addEventListener("click", () => {
   if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
   if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
   if (els.overCompleteModal) els.overCompleteModal.classList.add("hidden");
+  closeRetireHurtModal();
   matchOverModalShownFor = null;
   nextInningsModalShownFor = null;
   const currentHistory = state.history;
@@ -5123,6 +5299,7 @@ if (els.resetBtn) {
     if (els.matchOverModal) els.matchOverModal.classList.add("hidden");
     if (els.nextInningsModal) els.nextInningsModal.classList.add("hidden");
     if (els.overCompleteModal) els.overCompleteModal.classList.add("hidden");
+    closeRetireHurtModal();
     matchOverModalShownFor = null;
     nextInningsModalShownFor = null;
     const keepSetup = {
@@ -7224,6 +7401,38 @@ if (els.batterSelectModal) {
   els.batterSelectModal.addEventListener("click", (e) => {
     if (e.target === els.batterSelectModal) {
       els.batterSelectModal.classList.add("hidden");
+    }
+  });
+}
+
+if (els.closeRetireHurtModal) {
+  els.closeRetireHurtModal.addEventListener("click", () => {
+    closeRetireHurtModal();
+  });
+}
+
+if (els.btnCancelRetireHurt) {
+  els.btnCancelRetireHurt.addEventListener("click", () => {
+    closeRetireHurtModal();
+  });
+}
+
+if (els.btnRetireStrikerChoice) {
+  els.btnRetireStrikerChoice.addEventListener("click", () => {
+    retireBatter("striker");
+  });
+}
+
+if (els.btnRetireNonstrikerChoice) {
+  els.btnRetireNonstrikerChoice.addEventListener("click", () => {
+    retireBatter("nonstriker");
+  });
+}
+
+if (els.retireHurtModal) {
+  els.retireHurtModal.addEventListener("click", (e) => {
+    if (e.target === els.retireHurtModal) {
+      closeRetireHurtModal();
     }
   });
 }

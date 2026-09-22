@@ -1705,6 +1705,36 @@ input:focus {
   transform: translateY(-2px);
 }
 
+#btn-retire-hurt {
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  color: #fb923c;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  border-radius: 10px;
+  min-height: 56px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#btn-retire-hurt:hover {
+  background: #ea580c;
+  border-color: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35);
+  transform: translateY(-2px);
+}
+
+.retire-choice-card:hover {
+  background: rgba(249, 115, 22, 0.08) !important;
+  border-color: rgba(249, 115, 22, 0.45) !important;
+  transform: translateY(-2px);
+}
+
 .event-buttons button:disabled,
 .sport-tab:disabled {
   cursor: not-allowed;
@@ -2254,6 +2284,17 @@ dd {
     font-size: 0.98rem !important;
     font-weight: 800 !important;
     letter-spacing: 0.02em !important;
+  }
+
+  /* Retire Hurt - 2 columns */
+  .event-buttons #btn-retire-hurt {
+    grid-column: span 2 !important;
+    min-height: 48px !important;
+    background: rgba(249, 115, 22, 0.2) !important;
+    color: #fdba74 !important;
+    border-color: rgba(249, 115, 22, 0.45) !important;
+    font-size: 0.92rem !important;
+    font-weight: 800 !important;
   }
 
   /* Undo - 2 columns */
@@ -3174,6 +3215,38 @@ dd {
 .light-theme .event-buttons button[data-wicket="true"]:hover {
   background: #dc2626;
   color: #ffffff;
+}
+
+.light-theme .event-buttons #btn-retire-hurt {
+  background: rgba(234, 88, 12, 0.08);
+  color: #ea580c;
+  border-color: rgba(234, 88, 12, 0.25);
+}
+
+.light-theme .event-buttons #btn-retire-hurt:hover {
+  background: #ea580c;
+  color: #ffffff;
+}
+
+.light-theme .retire-choice-card {
+  background: #f8fafc !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+.light-theme .retire-choice-card:hover {
+  background: #fff7ed !important;
+  border-color: #ea580c !important;
+}
+
+.light-theme #close-retire-hurt-modal {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+.light-theme #close-retire-hurt-modal:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
 }
 
 .light-theme #undo-btn, 

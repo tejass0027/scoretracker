@@ -22,7 +22,7 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=361" />
+    <link rel="stylesheet" href="styles.css?v=362" />
     <link rel="stylesheet" href="hub.css?v=344" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -1689,6 +1689,7 @@
             <button type="button" data-extra="b">Bye</button>
             <button type="button" data-extra="lb">Leg bye</button>
             <button type="button" data-wicket="true">Wicket</button>
+            <button type="button" id="btn-retire-hurt" title="Retire Hurt (Batter leaves field injured • Not out)">Retire Hurt</button>
             <button type="button" id="undo-btn">Undo</button>
             <button type="button" id="innings-btn">Next innings</button>
             <button type="button" id="btn-action-scoreboard" class="scoreboard-action-btn" title="View Scoreboard">📊 Scoreboard</button>
@@ -1881,6 +1882,59 @@
 
           <button id="btn-over-modal-continue" type="button" class="sport-tab active" style="padding: 12px 20px; font-size: 0.95rem; font-weight: 800; border-radius: 10px; cursor: pointer; background: var(--gold, #d97706); color: #000; border: none; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35); font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>▶</span> Start Next Over
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Retire Hurt Pop-up Modal -->
+    <div id="retire-hurt-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99998; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
+      <div class="over-modal-card" style="background: var(--panel-solid, #101626); border: 1.5px solid rgba(249, 115, 22, 0.35); border-radius: 20px; width: 100%; max-width: 440px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(249, 115, 22, 0.15); text-align: center; position: relative;">
+        
+        <!-- Header -->
+        <div style="padding: 22px 20px 14px; position: relative; border-bottom: 1px solid var(--line, rgba(255,255,255,0.08));">
+          <button id="close-retire-hurt-modal" type="button" aria-label="Close" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-family: inherit;">&times;</button>
+          <div style="font-size: 2.2rem; line-height: 1; margin-bottom: 6px;">🩹</div>
+          <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #fb923c; background: rgba(249,115,22,0.12); padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(249,115,22,0.3);">RETIRE HURT</span>
+          <h2 style="margin: 8px 0 0; font-size: 1.3rem; font-weight: 800; color: var(--ink, #fff);">Select Batter Retiring Hurt</h2>
+          <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--muted, #94a3b8); font-weight: 500;">Injured batter leaves the crease (not out • no wicket charged)</p>
+        </div>
+
+        <!-- Body with Batter Choices -->
+        <div style="padding: 18px 20px; display: grid; gap: 12px;">
+          <!-- Striker Option -->
+          <button id="btn-retire-striker-choice" type="button" class="retire-choice-card" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f87171;"></span>
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #f87171;">Striker (Facing)</span>
+              </div>
+              <strong id="retire-modal-striker-name" style="font-size: 1.05rem; color: var(--ink, #fff); display: block;">Striker</strong>
+              <span id="retire-modal-striker-stats" style="font-size: 0.8rem; color: var(--muted, #94a3b8);">0 runs (0 balls)</span>
+            </div>
+            <span style="background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;">Retire ➔</span>
+          </button>
+
+          <!-- Non-Striker Option -->
+          <button id="btn-retire-nonstriker-choice" type="button" class="retire-choice-card" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #60a5fa;"></span>
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #60a5fa;">Non-Striker</span>
+              </div>
+              <strong id="retire-modal-nonstriker-name" style="font-size: 1.05rem; color: var(--ink, #fff); display: block;">Non-Striker</strong>
+              <span id="retire-modal-nonstriker-stats" style="font-size: 0.8rem; color: var(--muted, #94a3b8);">0 runs (0 balls)</span>
+            </div>
+            <span style="background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;">Retire ➔</span>
+          </button>
+
+          <div style="font-size: 0.78rem; color: var(--muted, #94a3b8); margin-top: 4px;">
+            💡 You can undo this action at any time with the Undo button.
+          </div>
+
+          <button id="btn-cancel-retire-hurt" type="button" class="sport-tab" style="padding: 10px; font-size: 0.88rem; font-weight: 600; border-radius: 10px; cursor: pointer; margin-top: 4px;">
+            Cancel
           </button>
         </div>
 
@@ -7500,7 +7554,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=359"></script>
+    <script src="app.js?v=360"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
