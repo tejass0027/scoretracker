@@ -67,7 +67,7 @@
         </div>
         <div class="nav-actions">
           <button id="nav-btn-home" class="nav-btn hidden" type="button" title="Back to Starting Page"><span>🏠</span> <span class="nav-text-hide-mobile">Home</span></button>
-          <button id="nav-btn-sports" class="nav-btn hidden" type="button" title="View All Sports"><span>⚡</span> <span class="nav-text-hide-mobile">All Sports</span></button>
+          <button id="nav-btn-sports" class="nav-btn hidden" type="button" title="View Sports"><span>⚽</span> <span class="nav-text-hide-mobile">Sports</span></button>
           <button id="nav-btn-formats" class="nav-btn hidden" type="button"><span class="nav-text-hide-mobile">Formats</span></button>
           <button id="nav-btn-vault" class="nav-btn nav-vault-btn" type="button" title="Open Cloud Match & Tournament Vault">
             <svg class="nav-vault-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1074,9 +1074,14 @@
       <div class="review-page-container">
         <!-- Top navigation with back button -->
         <div class="review-page-nav">
-          <button id="review-back-btn" class="all-sports-btn review-page-back-btn" type="button">
-            &larr; Back to Sports Hub
-          </button>
+          <div class="review-nav-left" style="display: flex; align-items: center; gap: 10px;">
+            <button id="review-back-btn" class="all-sports-btn review-page-back-btn" type="button" title="Back to Sports">
+              <span>&larr;</span> <span>Sports</span>
+            </button>
+            <button id="review-home-btn" class="all-sports-btn review-page-back-btn" type="button" title="Back to Home" style="opacity: 0.85;">
+              <span>🏠</span> <span>Home</span>
+            </button>
+          </div>
           <div class="review-page-badge">
             <span class="pulse-dot"></span>
             <span>⭐ ScoreTracker Feedback</span>
@@ -7495,7 +7500,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=357"></script>
+    <script src="app.js?v=358"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

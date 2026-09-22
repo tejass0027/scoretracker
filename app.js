@@ -6757,6 +6757,13 @@ if (reviewBackBtn) {
   });
 }
 
+const reviewHomeBtn = document.querySelector("#review-home-btn");
+if (reviewHomeBtn) {
+  reviewHomeBtn.addEventListener("click", () => {
+    showWelcomePage();
+  });
+}
+
 // Terms & Conditions / Privacy Modal Logic
 const termsModal = document.querySelector("#terms-modal");
 const termsModalCloseIcon = document.querySelector("#terms-modal-close-icon");
