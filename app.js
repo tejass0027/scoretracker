@@ -5534,9 +5534,9 @@ if (btnVaultActiveMatch) {
 const btnDiscardActiveMatch = document.querySelector("#btn-discard-active-match");
 if (btnDiscardActiveMatch) {
   btnDiscardActiveMatch.addEventListener("click", () => {
-    if (confirm(`Are you sure you want to discard the match between "${state.teamA}" and "${state.teamB}" and start fresh?`)) {
+    if (confirm(`Are you sure you want to delete the match between "${state.teamA}" and "${state.teamB}"?`)) {
       discardActiveCricketMatch();
-      showToast("Match discarded. Ready to start fresh.");
+      showToast("Match deleted successfully.");
     }
   });
 }
