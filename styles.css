@@ -1730,6 +1730,19 @@ input:focus {
   align-self: start !important;
 }
 
+/* In Normal/Simple mode, hide Change Striker and Change Batsman buttons */
+.mode-simple #btn-change-striker,
+.mode-simple #btn-change-nonstriker,
+.mode-simple #btn-striker-card .pitch-card-footer,
+.mode-simple #btn-nonstriker-card .pitch-card-footer {
+  display: none !important;
+}
+
+.mode-simple #btn-striker-card,
+.mode-simple #btn-nonstriker-card {
+  cursor: default !important;
+}
+
 .stadium-art,
 .mini-card {
   border-radius: 12px;
