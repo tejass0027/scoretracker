@@ -697,6 +697,59 @@ button {
   box-shadow: 0 18px 48px -8px rgba(245, 158, 11, 0.4), 0 0 30px rgba(245, 158, 11, 0.2);
 }
 
+/* Sport-Specific Featured Format Cards (Dark Theme) */
+.format-card.featured-football {
+  background: radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.22), transparent 50%), rgba(17, 24, 39, 0.75);
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 10px 32px -8px rgba(16, 185, 129, 0.25), var(--shadow);
+}
+.format-card.featured-football::before {
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.9), transparent);
+}
+.format-card.featured-football:hover {
+  border-color: rgba(16, 185, 129, 0.7);
+  box-shadow: 0 18px 48px -8px rgba(16, 185, 129, 0.4), 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.format-card.featured-basketball {
+  background: radial-gradient(circle at 88% 18%, rgba(249, 115, 22, 0.22), transparent 50%), rgba(17, 24, 39, 0.75);
+  border-color: rgba(249, 115, 22, 0.45);
+  box-shadow: 0 10px 32px -8px rgba(249, 115, 22, 0.25), var(--shadow);
+}
+.format-card.featured-basketball::before {
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.9), transparent);
+}
+.format-card.featured-basketball:hover {
+  border-color: rgba(249, 115, 22, 0.7);
+  box-shadow: 0 18px 48px -8px rgba(249, 115, 22, 0.4), 0 0 30px rgba(249, 115, 22, 0.2);
+}
+
+.format-card.featured-tennis {
+  background: radial-gradient(circle at 88% 18%, rgba(163, 230, 53, 0.22), transparent 50%), rgba(17, 24, 39, 0.75);
+  border-color: rgba(163, 230, 53, 0.45);
+  box-shadow: 0 10px 32px -8px rgba(163, 230, 53, 0.25), var(--shadow);
+}
+.format-card.featured-tennis::before {
+  background: linear-gradient(90deg, transparent, rgba(163, 230, 53, 0.9), transparent);
+}
+.format-card.featured-tennis:hover {
+  border-color: rgba(163, 230, 53, 0.7);
+  box-shadow: 0 18px 48px -8px rgba(163, 230, 53, 0.4), 0 0 30px rgba(163, 230, 53, 0.2);
+}
+
+.format-card.featured-badminton {
+  background: radial-gradient(circle at 88% 18%, rgba(56, 189, 248, 0.22), transparent 50%), rgba(17, 24, 39, 0.75);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 10px 32px -8px rgba(56, 189, 248, 0.25), var(--shadow);
+}
+.format-card.featured-badminton::before {
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.9), transparent);
+}
+.format-card.featured-badminton:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 18px 48px -8px rgba(56, 189, 248, 0.4), 0 0 30px rgba(56, 189, 248, 0.2);
+}
+
 /* Format Card Visual Elements */
 .format-card-pill {
   font-size: 0.8rem;
@@ -2952,6 +3005,40 @@ dd {
     rgba(255, 255, 255, 0.85);
   border-color: rgba(217, 119, 6, 0.25);
   box-shadow: 0 10px 30px -10px rgba(217, 119, 6, 0.08), var(--shadow);
+}
+
+.light-theme .format-card.featured.featured-football {
+  background: radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.1), transparent 45%), #ffffff !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.12), var(--shadow) !important;
+}
+
+.light-theme .format-card.featured.featured-basketball {
+  background: radial-gradient(circle at 88% 18%, rgba(249, 115, 22, 0.1), transparent 45%), #ffffff !important;
+  border-color: rgba(249, 115, 22, 0.3) !important;
+  box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.12), var(--shadow) !important;
+}
+
+.light-theme .format-card.featured.featured-tennis {
+  background: radial-gradient(circle at 88% 18%, rgba(163, 230, 53, 0.1), transparent 45%), #ffffff !important;
+  border-color: rgba(163, 230, 53, 0.3) !important;
+  box-shadow: 0 10px 30px -10px rgba(163, 230, 53, 0.12), var(--shadow) !important;
+}
+
+.light-theme .format-card.featured.featured-badminton {
+  background: radial-gradient(circle at 88% 18%, rgba(56, 189, 248, 0.1), transparent 45%), #ffffff !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.12), var(--shadow) !important;
+}
+
+.light-theme .format-card-action {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.light-theme .format-card:hover .format-card-action {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.22);
 }
 
 /* Match Arena */
