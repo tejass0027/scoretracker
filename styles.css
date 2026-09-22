@@ -2581,7 +2581,8 @@ dd {
 /* Offsets for page layouts to account for sticky header */
 .sports-page,
 .format-page,
-.cricket-app {
+.cricket-app,
+.review-page {
   padding-top: 96px !important;
 }
 

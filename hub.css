@@ -3197,7 +3197,7 @@
    ========================================================================== */
 .review-page {
   min-height: 100vh;
-  padding: 32px 20px 80px;
+  padding: 96px 20px 80px;
   animation: fadeInPage 0.35s ease-out;
 }
 
@@ -3221,26 +3221,50 @@
 }
 
 .review-page-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary, #ffffff);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(8px);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--text-primary, #ffffff) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 10px 22px !important;
+  border-radius: 999px !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .review-page-back-btn:hover {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: #10b981;
-  color: #34d399;
-  transform: translateX(-3px);
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.25) !important;
+}
+
+.review-quick-nav-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--text-primary, #ffffff) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 8px 18px !important;
+  border-radius: 999px !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.review-quick-nav-btn:hover {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+  transform: translateY(-2px) !important;
 }
 
 .review-page-badge {
@@ -3293,15 +3317,31 @@
 
 /* Light Theme adaptations for standalone review page */
 .light-theme .review-page-back-btn {
-  background: #ffffff;
-  color: #1e293b;
-  border-color: #cbd5e1;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
 }
 
 .light-theme .review-page-back-btn:hover {
-  background: #ecfdf5;
-  border-color: #059669;
-  color: #059669;
+  background: #ecfdf5 !important;
+  border-color: #059669 !important;
+  color: #059669 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.15) !important;
+}
+
+.light-theme .review-quick-nav-btn {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme .review-quick-nav-btn:hover {
+  background: #ecfdf5 !important;
+  border-color: #059669 !important;
+  color: #059669 !important;
+  transform: translateY(-2px) !important;
 }
 
 .light-theme .review-page-title {

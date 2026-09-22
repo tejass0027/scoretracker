@@ -22,8 +22,8 @@
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
     
-    <link rel="stylesheet" href="styles.css?v=362" />
-    <link rel="stylesheet" href="hub.css?v=344" />
+    <link rel="stylesheet" href="styles.css?v=363" />
+    <link rel="stylesheet" href="hub.css?v=345" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -1074,11 +1074,11 @@
       <div class="review-page-container">
         <!-- Top navigation with back button -->
         <div class="review-page-nav">
-          <div class="review-nav-left" style="display: flex; align-items: center; gap: 10px;">
+          <div class="review-nav-left" style="display: flex; align-items: center; gap: 12px;">
             <button id="review-back-btn" class="all-sports-btn review-page-back-btn" type="button" title="Back to Sports">
-              <span>&larr;</span> <span>Sports</span>
+              <span>⚽</span> <span>Sports</span>
             </button>
-            <button id="review-home-btn" class="all-sports-btn review-page-back-btn" type="button" title="Back to Home" style="opacity: 0.85;">
+            <button id="review-home-btn" class="all-sports-btn review-page-back-btn" type="button" title="Back to Home">
               <span>🏠</span> <span>Home</span>
             </button>
           </div>
@@ -1145,6 +1145,13 @@
             <button type="submit" id="standalone-review-submit-btn" class="review-submit-btn">
               <span>🚀 Submit Review</span>
             </button>
+
+            <!-- Quick Navigation Row inside review card -->
+            <div class="review-quick-nav" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);">
+              <span style="font-size: 0.82rem; color: var(--muted, #94a3b8);">Quick navigation:</span>
+              <button type="button" class="review-quick-nav-btn" id="review-card-sports-btn" title="Back to Sports Hub"><span>⚽</span> Sports</button>
+              <button type="button" class="review-quick-nav-btn" id="review-card-home-btn" title="Back to Welcome Page"><span>🏠</span> Home</button>
+            </div>
 
             <div id="standalone-review-status-box" class="review-status-box hidden"></div>
           </form>
@@ -7554,7 +7561,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=360"></script>
+    <script src="app.js?v=361"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

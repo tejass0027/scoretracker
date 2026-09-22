@@ -313,12 +313,7 @@ function showReviewPage(fromHash = false) {
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.add("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  setTimeout(() => {
-    const input = document.querySelector("#standalone-review-author-name") || document.querySelector("#review-author-name");
-    if (input) input.focus();
-  }, 120);
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 window.showReviewPage = showReviewPage;
 
@@ -6952,6 +6947,20 @@ if (reviewBackBtn) {
 const reviewHomeBtn = document.querySelector("#review-home-btn");
 if (reviewHomeBtn) {
   reviewHomeBtn.addEventListener("click", () => {
+    showWelcomePage();
+  });
+}
+
+const reviewCardSportsBtn = document.querySelector("#review-card-sports-btn");
+if (reviewCardSportsBtn) {
+  reviewCardSportsBtn.addEventListener("click", () => {
+    showSportsPage();
+  });
+}
+
+const reviewCardHomeBtn = document.querySelector("#review-card-home-btn");
+if (reviewCardHomeBtn) {
+  reviewCardHomeBtn.addEventListener("click", () => {
     showWelcomePage();
   });
 }
