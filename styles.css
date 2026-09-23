@@ -1308,7 +1308,7 @@ label {
   font-weight: 700;
 }
 
-input {
+input:not([type="checkbox"]):not([type="radio"]) {
   width: 100%;
   min-height: 46px;
   border: 1px solid var(--glass-border);
@@ -1320,10 +1320,41 @@ input {
   transition: all 0.2s ease;
 }
 
-input:focus {
+input:not([type="checkbox"]):not([type="radio"]):focus {
   border-color: var(--field);
   background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Native Checkbox and Radio Resets - Remove any outer rectangular border/shadow */
+input[type="checkbox"]:not(.squad-checkbox-round),
+input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: unset !important;
+  min-width: unset !important;
+  max-height: 18px !important;
+  max-width: 18px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:not(.squad-checkbox-round):focus,
+input[type="checkbox"]:not(.squad-checkbox-round):focus-visible,
+input[type="checkbox"]:not(.squad-checkbox-round):active,
+input[type="radio"]:focus,
+input[type="radio"]:focus-visible,
+input[type="radio"]:active {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .scoreboard,
