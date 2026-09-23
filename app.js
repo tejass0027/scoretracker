@@ -6251,80 +6251,22 @@ if (els.welcomeTournamentBtn) {
 }
 if (els.welcomeCricketBtn) {
   els.welcomeCricketBtn.addEventListener("click", () => {
-    showFormatPage();
+    showSportsPage();
     render();
   });
 }
 
-// Welcome Quick-Launch Pill Handlers
+// Welcome Quick-Launch Pill Handlers - take user to the sports page
 function launchQuickSport(target) {
-  if (!target || target === "all") {
-    showSportsPage();
-    render();
-    return;
-  }
-  if (target === "cricket") {
-    showFormatPage();
-    render();
-    return;
-  }
-  if (target === "football") {
-    showFootballPage();
-    render();
-    return;
-  }
-
-  // Hide welcome landing page & ensure navigation header is accessible
-  hideAllPages();
-  if (els.welcomePage) els.welcomePage.classList.add("hidden");
-  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
-  if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
-
-  // Sport handler lookup
-  const sportMethodMap = {
-    basketball: window.showBasketballPage,
-    tennis: window.showTennisPage,
-    badminton: window.showBadmintonPage,
-    hockey: window.showHockeyPage,
-    volleyball: window.showVolleyballPage,
-    baseball: window.showBaseballPage,
-    rugby: window.showRugbyPage,
-    kabaddi: window.showKabaddiPage,
-    tabletennis: window.showTableTennisPage,
-    golf: window.showGolfPage,
-    boxing: window.showBoxingPage,
-    mma: window.showMmaPage,
-    pickleball: window.showPickleballPage,
-    padel: window.showPadelPage,
-    squash: window.showSquashPage
-  };
-
-  const showFn = sportMethodMap[target];
-  if (typeof showFn === "function") {
-    showFn();
-  } else {
-    const card = document.querySelector(`[data-open-sport='${target}']`);
-    if (card) {
-      card.click();
-    } else {
-      showSportsPage();
-    }
-  }
-
-  const targetHash = `#${target}`;
-  if (window.location.hash !== targetHash) {
-    window.location.hash = targetHash;
-  } else {
-    navigateByHash(targetHash);
-  }
+  showSportsPage();
   render();
 }
 window.launchQuickSport = launchQuickSport;
 
 document.querySelectorAll(".welcome-quick-pill").forEach((pill) => {
   pill.addEventListener("click", () => {
-    const target = pill.getAttribute("data-sport-target");
-    launchQuickSport(target);
+    showSportsPage();
+    render();
   });
 });
 
@@ -6335,6 +6277,15 @@ if (welcomeBottomEnterBtn) {
     render();
   });
 }
+
+// Any welcome cards or step cards navigate to sports page
+document.querySelectorAll(".welcome-card, .welcome-step-card").forEach((card) => {
+  card.style.cursor = "pointer";
+  card.addEventListener("click", () => {
+    showSportsPage();
+    render();
+  });
+});
 
 // Welcome Page Interactive Demo Simulator
 let demoRuns = 164;
