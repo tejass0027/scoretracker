@@ -84,7 +84,7 @@
         <div class="nav-actions">
           <button id="nav-btn-home" class="nav-btn hidden" type="button" title="Back to Starting Page"><span>🏠</span> <span class="nav-text-hide-mobile">Home</span></button>
           <button id="nav-btn-sports" class="nav-btn hidden" type="button" title="View Sports"><span>⚽</span> <span class="nav-text-hide-mobile">Sports</span></button>
-          <button id="nav-btn-formats" class="nav-btn hidden" type="button"><span class="nav-text-hide-mobile">Formats</span></button>
+          <button id="nav-btn-formats" class="nav-btn hidden" type="button" title="Cricket Formats"><span>🏏</span> <span class="nav-text-hide-mobile">Formats</span></button>
           <button id="nav-btn-vault" class="nav-btn nav-vault-btn" type="button" title="Open Cloud Match & Tournament Vault">
             <svg class="nav-vault-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="3" />
@@ -1328,7 +1328,10 @@
           <p class="eyebrow">Cricket setup</p>
           <h1>IPL Tournament Setup</h1>
         </div>
-        <button id="back-to-formats-from-tsetup" class="sport-tab active" type="button">Back</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="back-to-formats-from-tsetup" class="sport-tab" type="button" title="Back to Tournament Choice">Back</button>
+          <button id="btn-tsetup-to-formats" class="sport-tab active" type="button" title="Back to Formats Page">Formats</button>
+        </div>
       </header>
 
       <section class="custom-setup" aria-label="IPL tournament setup" style="margin-top: 24px;">
@@ -1388,8 +1391,9 @@
           <p class="eyebrow" style="text-align: right; margin-bottom: 4px;">Cricket tracker</p>
           <h1 id="tournament-dashboard-title" style="text-align: right;">#1 IPL 2026</h1>
         </div>
-        <div style="display: flex; gap: 8px; margin-left: 0; margin-right: auto;">
-          <button id="reset-tournament-btn" class="sport-tab active" type="button">New Tournament</button>
+        <div style="display: flex; gap: 8px; margin-left: 0; margin-right: auto; align-items: center; flex-wrap: wrap;">
+          <button id="back-to-formats-from-tdashboard" class="sport-tab active" type="button" title="Back to Formats Page">Formats</button>
+          <button id="reset-tournament-btn" class="sport-tab" type="button">New Tournament</button>
           <button id="btn-save-cricket-tourn-vault" class="save-to-vault-btn" type="button">💾 Save Tournament</button>
         </div>
       </header>
@@ -2477,7 +2481,10 @@
             <p class="eyebrow" style="text-align: right; margin-bottom: 4px;">Tournament Mode</p>
             <h1 id="fb-tdashboard-title" style="text-align: right; color: #34d399; margin: 0; font-size: 1.8rem;">Football Tournament</h1>
           </div>
-          <button id="fb-treset-btn" class="sport-tab active" type="button" style="margin: 0; background: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border: 1px solid rgba(239, 68, 68, 0.2) !important;">New Tournament</button>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <button id="fb-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0;" title="Back to Football Formats">Formats</button>
+            <button id="fb-treset-btn" class="sport-tab active" type="button" style="margin: 0; background: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border: 1px solid rgba(239, 68, 68, 0.2) !important;">New Tournament</button>
+          </div>
         </header>
 
         <!-- Tab Links -->
@@ -7577,8 +7584,8 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=365"></script>
-    <script src="sports/football.js?v=213"></script>
+    <script src="app.js?v=366"></script>
+    <script src="sports/football.js?v=214"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
     <script src="sports/badminton.js?v=211"></script>

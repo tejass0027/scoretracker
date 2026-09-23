@@ -174,6 +174,7 @@ console.log("ScoreTracker Football Module loaded - version 208");
 
     // Tournament dashboard elements
     tdashboardTitle: document.querySelector("#fb-tdashboard-title"),
+    tdashboardBackBtn: document.querySelector("#fb-tdashboard-back-btn"),
     tresetBtn: document.querySelector("#fb-treset-btn"),
     tabTable: document.querySelector("#fb-tab-table"),
     tabFixtures: document.querySelector("#fb-tab-fixtures"),
@@ -2271,6 +2272,12 @@ console.log("ScoreTracker Football Module loaded - version 208");
   }
   if (els.tsetupBackBtn) {
     els.tsetupBackBtn.addEventListener("click", () => {
+      window.location.hash = "#football";
+    });
+  }
+  if (els.tdashboardBackBtn) {
+    els.tdashboardBackBtn.addEventListener("click", () => {
+      saveFbState();
       window.location.hash = "#football";
     });
   }

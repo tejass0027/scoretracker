@@ -84,6 +84,8 @@ const els = {
   tournamentOvers: document.querySelector("#tournament-overs"),
   tournamentTeamInputs: document.querySelector("#tournament-team-inputs"),
   resetTournamentBtn: document.querySelector("#reset-tournament-btn"),
+  backToFormatsFromTdashboard: document.querySelector("#back-to-formats-from-tdashboard"),
+  btnTsetupToFormats: document.querySelector("#btn-tsetup-to-formats"),
   tabPointsTable: document.querySelector("#tab-points-table"),
   tabFixtures: document.querySelector("#tab-fixtures"),
   tableView: document.querySelector("#tournament-table-view"),
@@ -378,6 +380,7 @@ function showTournamentSetup(fromHash = false) {
   if (els.tournamentSetup) els.tournamentSetup.classList.remove("hidden");
   syncScoringModeUI();
 
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.remove("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
@@ -403,6 +406,7 @@ function showTournamentDashboard(fromHash = false) {
   hideAllPages();
   if (els.tournamentDashboard) els.tournamentDashboard.classList.remove("hidden");
 
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.remove("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
@@ -429,6 +433,7 @@ function showTournamentChoice(fromHash = false) {
   hideAllPages();
   if (els.tournamentChoice) els.tournamentChoice.classList.remove("hidden");
 
+  if (els.navHomeBtn) els.navHomeBtn.classList.remove("hidden");
   if (els.navSportsBtn) els.navSportsBtn.classList.remove("hidden");
   if (els.navFormatsBtn) els.navFormatsBtn.classList.remove("hidden");
   if (els.navLiveIndicator) els.navLiveIndicator.classList.add("hidden");
@@ -5838,6 +5843,23 @@ if (els.backToFormatsFromTchoice) {
 if (els.backToFormatsFromTsetup) {
   els.backToFormatsFromTsetup.addEventListener("click", () => {
     showTournamentChoice();
+  });
+}
+
+if (els.btnTsetupToFormats) {
+  els.btnTsetupToFormats.addEventListener("click", () => {
+    showFormatPage();
+    render();
+  });
+}
+
+if (els.backToFormatsFromTdashboard) {
+  els.backToFormatsFromTdashboard.addEventListener("click", () => {
+    saveState();
+    syncActiveTournamentToHistory();
+    showToast("💾 Tournament saved! You can resume it anytime.");
+    showFormatPage();
+    render();
   });
 }
 
