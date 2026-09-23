@@ -21,8 +21,24 @@
     <meta property="og:description" content="Track live cricket and football scores in real-time. Standalone progressive web app featuring animated score updates and boundary rewards." />
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:type" content="website" />
+
+    <!-- Dark Mode by default initialization -->
+    <meta name="color-scheme" content="dark" />
+    <script>
+      (function() {
+        try {
+          localStorage.removeItem("scoretracker-theme");
+          localStorage.removeItem("scorecentral-theme");
+          if (sessionStorage.getItem("scoretracker-theme") === "light") {
+            document.documentElement.classList.add("light-theme");
+          } else {
+            document.documentElement.classList.remove("light-theme");
+          }
+        } catch (e) {}
+      })();
+    </script>
     
-    <link rel="stylesheet" href="styles.css?v=364" />
+    <link rel="stylesheet" href="styles.css?v=365" />
     <link rel="stylesheet" href="hub.css?v=345" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
@@ -7561,7 +7577,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=362"></script>
+    <script src="app.js?v=363"></script>
     <script src="sports/football.js?v=213"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

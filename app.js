@@ -7059,12 +7059,18 @@ if (els.navFormatsBtn) {
   });
 }
 
-// Theme toggle logic
+// Theme toggle logic - Default theme is always Dark Mode when anyone opens the website
 const themeToggleBtn = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector("#theme-switch-label");
 
 function initTheme() {
-  const storedTheme = localStorage.getItem("scoretracker-theme");
+  // Clear any legacy persistent light mode from localStorage so fresh visits always default to dark mode
+  try {
+    localStorage.removeItem("scoretracker-theme");
+    localStorage.removeItem("scorecentral-theme");
+  } catch (e) {}
+
+  const storedTheme = sessionStorage.getItem("scoretracker-theme");
   const isLight = storedTheme === "light";
   setTheme(isLight);
 }
@@ -7074,12 +7080,16 @@ function setTheme(isLight) {
     document.documentElement.classList.add("light-theme");
     if (themeToggleBtn) themeToggleBtn.setAttribute("aria-checked", "false");
     if (themeLabel) themeLabel.textContent = "Light Mode";
-    localStorage.setItem("scoretracker-theme", "light");
+    try {
+      sessionStorage.setItem("scoretracker-theme", "light");
+    } catch (e) {}
   } else {
     document.documentElement.classList.remove("light-theme");
     if (themeToggleBtn) themeToggleBtn.setAttribute("aria-checked", "true");
     if (themeLabel) themeLabel.textContent = "Dark Mode";
-    localStorage.setItem("scoretracker-theme", "dark");
+    try {
+      sessionStorage.setItem("scoretracker-theme", "dark");
+    } catch (e) {}
   }
 }
 
