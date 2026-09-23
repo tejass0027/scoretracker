@@ -2004,6 +2004,46 @@
       </div>
     </div>
 
+    <!-- Retired Hurt Last Batter Decision Modal -->
+    <div id="retired-hurt-decision-modal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 16px;">
+      <div class="over-modal-card" style="background: var(--panel-solid, #101626); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 20px; width: 100%; max-width: 460px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.18); text-align: center; position: relative;">
+        
+        <!-- Header -->
+        <div style="padding: 22px 20px 14px; position: relative; border-bottom: 1px solid var(--line, rgba(255,255,255,0.08));">
+          <button id="close-retired-hurt-decision-modal" type="button" aria-label="Close" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-family: inherit;">&times;</button>
+          <div style="font-size: 2.2rem; line-height: 1; margin-bottom: 6px;">🏏 🩹</div>
+          <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); background: rgba(245,158,11,0.12); padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(245,158,11,0.3);">LAST BATTER DECISION</span>
+          <h2 id="retired-hurt-decision-title" style="margin: 8px 0 0; font-size: 1.3rem; font-weight: 800; color: var(--ink, #fff);">Retired Hurt Batter Decision</h2>
+          <p id="retired-hurt-decision-subtitle" style="margin: 4px 0 0; font-size: 0.85rem; color: var(--muted, #94a3b8); font-weight: 500;">All other wickets have fallen! Only the retired hurt batter remains to bat.</p>
+        </div>
+
+        <!-- Body with Batter details and Choices -->
+        <div style="padding: 20px; display: grid; gap: 14px;">
+          <!-- Batter Info Card Container -->
+          <div id="retired-hurt-batter-card-container" style="display: grid; gap: 8px;">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div style="display: grid; gap: 10px; margin-top: 4px;">
+            <!-- Option 1: Resume Batting -->
+            <button id="btn-retired-hurt-decision-resume" type="button" class="start-custom" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800; padding: 13px 16px; border-radius: 12px; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+              <span>🏏</span> <span id="btn-retired-hurt-resume-label">Resume Batting</span>
+            </button>
+
+            <!-- Option 2: Unable to Bat / Next Innings -->
+            <button id="btn-retired-hurt-decision-end" type="button" class="sport-tab" style="background: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border: 1.5px solid rgba(239, 68, 68, 0.35) !important; font-weight: 700; padding: 13px 16px; border-radius: 12px; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+              <span>⏩</span> <span id="btn-retired-hurt-end-label">Unable to Bat &bull; Go to Next Innings</span>
+            </button>
+          </div>
+
+          <div style="font-size: 0.78rem; color: var(--muted, #94a3b8); margin-top: 2px;">
+            💡 If the batter cannot resume, the innings will be closed and you can proceed to the next innings.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Advanced Mode Player Names Entry Modal (Table Pop-up) -->
     <div id="modal-player-roster-entry" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99999; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 16px;">
       <div class="match-over-card" style="background: linear-gradient(145deg, #101626, #090d16); border: 1.5px solid rgba(255, 215, 0, 0.35); border-radius: 24px; width: 100%; max-width: 760px; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.15); position: relative;">
@@ -7626,7 +7666,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=368"></script>
+    <script src="app.js?v=369"></script>
     <script src="sports/football.js?v=216"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
