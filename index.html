@@ -629,6 +629,12 @@
     </main>
 
     <main id="sports-page" class="sports-page hidden">
+      <div style="max-width: 1200px; margin: 0 auto 16px; padding: 0 4px; display: flex; align-items: center; justify-content: flex-start;">
+        <button id="sports-back-to-home-btn" class="format-nav-back-btn all-sports-btn" type="button" title="Back to Starting Page">
+          <span>🏠</span> <span>&larr; Back to Home</span>
+        </button>
+      </div>
+
       <!-- HERO BANNER -->
       <section class="hero-banner" aria-label="Welcome banner">
         <div class="hero-content">
@@ -1189,7 +1195,10 @@
             <p class="format-header-subtitle">Select Test match, custom overs match, or IPL tournament league</p>
           </div>
         </div>
-        <button id="back-to-sports-from-format" class="format-nav-back-btn all-sports-btn" type="button">&larr; All Sports</button>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button id="format-back-to-home-btn" class="format-nav-back-btn all-sports-btn" type="button" title="Back to Home"><span>🏠</span> <span>Home</span></button>
+          <button id="back-to-sports-from-format" class="format-nav-back-btn all-sports-btn" type="button" title="Back to Sports">&larr; All Sports</button>
+        </div>
       </header>
 
       <!-- Active Match in Progress Banner (Safeguard when pressing back) -->
@@ -1241,7 +1250,13 @@
       </section>
 
       <section id="custom-setup" class="custom-setup hidden" aria-label="Cricket match setup">
-        <h2 id="setup-title">Match Setup</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; margin-bottom: 20px;">
+          <div>
+            <p class="eyebrow" style="margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--field);">⚡ Cricket Setup</p>
+            <h2 id="setup-title" style="margin: 0; font-size: 1.6rem; font-weight: 800; color: var(--ink); font-family: inherit;">Match Setup</h2>
+          </div>
+          <button id="custom-setup-back-btn" class="sport-tab active" type="button" style="margin: 0; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;" title="Back to Formats">&larr; Back</button>
+        </div>
         <div class="custom-grid">
           <div class="setup-group" style="grid-column: 1 / -1; margin-bottom: 8px;">
             <label style="font-weight: 700; margin-bottom: 8px; display: block;">Scoring Mode <span style="color: #f87171; font-weight: 600; font-size: 0.85rem;">* (Please select)</span></label>
@@ -1297,7 +1312,7 @@
           <p class="eyebrow">Cricket tracker</p>
           <h1>IPL Tournament</h1>
         </div>
-        <button id="back-to-formats-from-tchoice" class="sport-tab active" type="button">Formats</button>
+        <button id="back-to-formats-from-tchoice" class="sport-tab active" type="button" title="Back to Formats">&larr; Back to Formats</button>
       </header>
 
       <section class="custom-setup" aria-label="IPL tournament options" style="margin-top: 24px; max-width: 960px; margin-left: auto; margin-right: auto; padding: 24px;">
@@ -1329,8 +1344,8 @@
           <h1>IPL Tournament Setup</h1>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
-          <button id="back-to-formats-from-tsetup" class="sport-tab" type="button" title="Back to Tournament Choice">Back</button>
-          <button id="btn-tsetup-to-formats" class="sport-tab active" type="button" title="Back to Formats Page">Formats</button>
+          <button id="back-to-formats-from-tsetup" class="sport-tab active" type="button" title="Back to Tournament Choice">&larr; Back</button>
+          <button id="btn-tsetup-to-formats" class="sport-tab" type="button" title="Back to Formats Page">Formats</button>
         </div>
       </header>
 
@@ -1392,7 +1407,7 @@
           <h1 id="tournament-dashboard-title" style="text-align: right;">#1 IPL 2026</h1>
         </div>
         <div style="display: flex; gap: 8px; margin-left: 0; margin-right: auto; align-items: center; flex-wrap: wrap;">
-          <button id="back-to-formats-from-tdashboard" class="sport-tab active" type="button" title="Back to Formats Page">Formats</button>
+          <button id="back-to-formats-from-tdashboard" class="sport-tab active" type="button" title="Back to Formats Page">&larr; Back to Formats</button>
           <button id="reset-tournament-btn" class="sport-tab" type="button">New Tournament</button>
           <button id="btn-save-cricket-tourn-vault" class="save-to-vault-btn" type="button">💾 Save Tournament</button>
         </div>
@@ -1562,7 +1577,7 @@
           </div>
           <div class="cricket-topbar-actions">
             <button id="btn-top-scoreboard" class="sport-tab" type="button" title="View Scoreboard">📊 Scoreboard</button>
-            <button id="back-to-formats" class="sport-tab active" type="button">Formats</button>
+            <button id="back-to-formats" class="sport-tab active" type="button" title="Back to Formats / Tournament">&larr; Back</button>
           </div>
         </header>
 
@@ -2482,7 +2497,7 @@
             <h1 id="fb-tdashboard-title" style="text-align: right; color: #34d399; margin: 0; font-size: 1.8rem;">Football Tournament</h1>
           </div>
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-            <button id="fb-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0;" title="Back to Football Formats">Formats</button>
+            <button id="fb-tdashboard-back-btn" class="sport-tab active" type="button" style="margin: 0;" title="Back to Football Formats">&larr; Back to Formats</button>
             <button id="fb-treset-btn" class="sport-tab active" type="button" style="margin: 0; background: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border: 1px solid rgba(239, 68, 68, 0.2) !important;">New Tournament</button>
           </div>
         </header>
@@ -7584,8 +7599,8 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=366"></script>
-    <script src="sports/football.js?v=214"></script>
+    <script src="app.js?v=367"></script>
+    <script src="sports/football.js?v=215"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>
     <script src="sports/badminton.js?v=211"></script>

@@ -5681,6 +5681,29 @@ if (modalRosterAlertOverlay) {
   });
 }
 
+const sportsBackToHomeBtn = document.querySelector("#sports-back-to-home-btn");
+if (sportsBackToHomeBtn) {
+  sportsBackToHomeBtn.addEventListener("click", () => {
+    showWelcomePage();
+  });
+}
+
+const formatBackToHomeBtn = document.querySelector("#format-back-to-home-btn");
+if (formatBackToHomeBtn) {
+  formatBackToHomeBtn.addEventListener("click", () => {
+    showWelcomePage();
+  });
+}
+
+const customSetupBackBtn = document.querySelector("#custom-setup-back-btn");
+if (customSetupBackBtn) {
+  customSetupBackBtn.addEventListener("click", () => {
+    if (els.customSetup) els.customSetup.classList.add("hidden");
+    const formatGrid = document.querySelector(".format-grid");
+    if (formatGrid) formatGrid.scrollIntoView({ behavior: "smooth" });
+  });
+}
+
 els.backToSportsFromFormat.addEventListener("click", () => {
   showSportsPage();
 });
