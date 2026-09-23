@@ -6684,6 +6684,38 @@ if (demoBbBtnReset) {
   });
 }
 
+// Simulator scoreboards - Click scoreboard to redirect to respective sports pages
+const demoCricketCard = document.querySelector(".demo-card-cricket");
+if (demoCricketCard) {
+  demoCricketCard.addEventListener("click", (e) => {
+    if (e.target.closest(".welcome-demo-controls")) return;
+    showFormatPage();
+    render();
+  });
+}
+
+const demoFootballCard = document.querySelector(".demo-card-football");
+if (demoFootballCard) {
+  demoFootballCard.addEventListener("click", (e) => {
+    if (e.target.closest(".welcome-demo-controls")) return;
+    showFootballPage();
+    render();
+  });
+}
+
+const demoBasketballCard = document.querySelector(".demo-card-basketball");
+if (demoBasketballCard) {
+  demoBasketballCard.addEventListener("click", (e) => {
+    if (e.target.closest(".welcome-demo-controls")) return;
+    if (typeof window.showBasketballPage === "function") {
+      window.showBasketballPage();
+    } else {
+      window.location.hash = "#basketball";
+    }
+    render();
+  });
+}
+
 // Review Form Handler (Supports Standalone Review Page and Welcome Section)
 (function initReviewSections() {
   const ratingDescriptions = {
