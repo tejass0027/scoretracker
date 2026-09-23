@@ -3250,7 +3250,16 @@ function render() {
   }
 
   if (els.backToFormats) {
-    els.backToFormats.textContent = state.tournamentActive ? "Tournament" : "Formats";
+    els.backToFormats.innerHTML = state.tournamentActive ? "<span>&larr;</span> Tournament" : "<span>&larr;</span> Formats";
+    els.backToFormats.title = state.tournamentActive ? "Back to Tournament Dashboard" : "Back to Cricket Formats";
+  }
+  const btnCricketToFormats = document.querySelector("#btn-cricket-to-formats");
+  if (btnCricketToFormats) {
+    if (state.tournamentActive) {
+      btnCricketToFormats.classList.remove("hidden");
+    } else {
+      btnCricketToFormats.classList.add("hidden");
+    }
   }
 
   if (result) {
@@ -5860,17 +5869,39 @@ if (els.btnNewTournamentChoice) {
 if (els.backToFormatsFromTchoice) {
   els.backToFormatsFromTchoice.addEventListener("click", () => {
     showFormatPage();
+    render();
   });
 }
 
 if (els.backToFormatsFromTsetup) {
   els.backToFormatsFromTsetup.addEventListener("click", () => {
+    showFormatPage();
+    render();
+  });
+}
+
+const btnTsetupToChoice = document.querySelector("#btn-tsetup-to-tchoice");
+if (btnTsetupToChoice) {
+  btnTsetupToChoice.addEventListener("click", () => {
     showTournamentChoice();
+    render();
   });
 }
 
 if (els.btnTsetupToFormats) {
   els.btnTsetupToFormats.addEventListener("click", () => {
+    showFormatPage();
+    render();
+  });
+}
+
+const btnCricketToFormats = document.querySelector("#btn-cricket-to-formats");
+if (btnCricketToFormats) {
+  btnCricketToFormats.addEventListener("click", () => {
+    saveState();
+    if (hasActiveCricketMatch()) {
+      showToast("💾 Match saved! You can resume it anytime.");
+    }
     showFormatPage();
     render();
   });
