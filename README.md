@@ -113,3 +113,5 @@ This application provides real-time scoring trackers and tournament standing com
   * **Saved Tournaments Vault**: Save and resume full tournament fixtures, points tables, and team statistics.
   * **Search & Filters**: Filter by sport (All 14 Sports) or search by team/tournament names.
   * **Backup & Restore**: Export complete vault backups to a JSON file and restore anytime.
+
+available 
