@@ -38,8 +38,8 @@
       })();
     </script>
     
-    <link rel="stylesheet" href="styles.css?v=366" />
-    <link rel="stylesheet" href="hub.css?v=346" />
+    <link rel="stylesheet" href="styles.css?v=368" />
+    <link rel="stylesheet" href="hub.css?v=347" />
     <link rel="stylesheet" href="sports/football.css?v=212" />
     <link rel="stylesheet" href="sports/basketball.css?v=211" />
     <link rel="stylesheet" href="sports/tennis.css?v=211" />
@@ -1965,9 +1965,9 @@
         </div>
 
         <!-- Body with Batter Choices -->
-        <div style="padding: 18px 20px; display: grid; gap: 12px;">
+        <div style="padding: 18px 20px; display: grid; gap: 14px;">
           <!-- Striker Option -->
-          <button id="btn-retire-striker-choice" type="button" class="retire-choice-card" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+          <div class="retire-choice-card" style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); text-align: left;">
             <div>
               <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
                 <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f87171;"></span>
@@ -1976,11 +1976,20 @@
               <strong id="retire-modal-striker-name" style="font-size: 1.05rem; color: var(--ink, #fff); display: block;">Striker</strong>
               <span id="retire-modal-striker-stats" style="font-size: 0.8rem; color: var(--muted, #94a3b8);">0 runs (0 balls)</span>
             </div>
-            <span style="background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;">Retire ➔</span>
-          </button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px;">
+              <button id="btn-retire-striker-canbat" type="button" class="retire-btn-canbat" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1.5px solid rgba(16, 185, 129, 0.35); padding: 9px 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.2s ease;">
+                <span style="display: flex; align-items: center; gap: 4px;"><span>🩹</span> Can Bat Later</span>
+                <span style="font-size: 0.68rem; font-weight: 500; opacity: 0.85; color: #a7f3d0;">No Wicket • At Last</span>
+              </button>
+              <button id="btn-retire-striker-unable" type="button" class="retire-btn-unable" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1.5px solid rgba(239, 68, 68, 0.35); padding: 9px 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.2s ease;">
+                <span style="display: flex; align-items: center; gap: 4px;"><span>❌</span> Unable to Bat</span>
+                <span style="font-size: 0.68rem; font-weight: 500; opacity: 0.85; color: #fca5a5;">Count as OUT (+1)</span>
+              </button>
+            </div>
+          </div>
 
           <!-- Non-Striker Option -->
-          <button id="btn-retire-nonstriker-choice" type="button" class="retire-choice-card" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); cursor: pointer; text-align: left; transition: all 0.2s ease;">
+          <div class="retire-choice-card" style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); text-align: left;">
             <div>
               <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
                 <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #60a5fa;"></span>
@@ -1989,11 +1998,21 @@
               <strong id="retire-modal-nonstriker-name" style="font-size: 1.05rem; color: var(--ink, #fff); display: block;">Non-Striker</strong>
               <span id="retire-modal-nonstriker-stats" style="font-size: 0.8rem; color: var(--muted, #94a3b8);">0 runs (0 balls)</span>
             </div>
-            <span style="background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;">Retire ➔</span>
-          </button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px;">
+              <button id="btn-retire-nonstriker-canbat" type="button" class="retire-btn-canbat" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1.5px solid rgba(16, 185, 129, 0.35); padding: 9px 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.2s ease;">
+                <span style="display: flex; align-items: center; gap: 4px;"><span>🩹</span> Can Bat Later</span>
+                <span style="font-size: 0.68rem; font-weight: 500; opacity: 0.85; color: #a7f3d0;">No Wicket • At Last</span>
+              </button>
+              <button id="btn-retire-nonstriker-unable" type="button" class="retire-btn-unable" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1.5px solid rgba(239, 68, 68, 0.35); padding: 9px 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.2s ease;">
+                <span style="display: flex; align-items: center; gap: 4px;"><span>❌</span> Unable to Bat</span>
+                <span style="font-size: 0.68rem; font-weight: 500; opacity: 0.85; color: #fca5a5;">Count as OUT (+1)</span>
+              </button>
+            </div>
+          </div>
 
-          <div style="font-size: 0.78rem; color: var(--muted, #94a3b8); margin-top: 4px;">
-            💡 You can undo this action at any time with the Undo button.
+          <div style="font-size: 0.78rem; color: var(--muted, #94a3b8); margin-top: 4px; line-height: 1.5;">
+            💡 <strong>Can Bat Later:</strong> Wicket count unchanged. Player can return at the last.<br />
+            💡 <strong>Unable to Bat:</strong> Batter is considered Out (+1 Wicket).
           </div>
 
           <button id="btn-cancel-retire-hurt" type="button" class="sport-tab" style="padding: 10px; font-size: 0.88rem; font-weight: 600; border-radius: 10px; cursor: pointer; margin-top: 4px;">
@@ -2030,14 +2049,14 @@
               <span>🏏</span> <span id="btn-retired-hurt-resume-label">Resume Batting</span>
             </button>
 
-            <!-- Option 2: Unable to Bat / Next Innings -->
+            <!-- Option 2: Unable to Bat / Out -->
             <button id="btn-retired-hurt-decision-end" type="button" class="sport-tab" style="background: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border: 1.5px solid rgba(239, 68, 68, 0.35) !important; font-weight: 700; padding: 13px 16px; border-radius: 12px; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
-              <span>⏩</span> <span id="btn-retired-hurt-end-label">Unable to Bat &bull; Go to Next Innings</span>
+              <span>❌</span> <span id="btn-retired-hurt-end-label">Unable to Bat &bull; Considered Out</span>
             </button>
           </div>
 
           <div style="font-size: 0.78rem; color: var(--muted, #94a3b8); margin-top: 2px;">
-            💡 If the batter cannot resume, the innings will be closed and you can proceed to the next innings.
+            💡 If the batter cannot resume, they are considered <strong>Out (+1 Wicket)</strong> and the innings will be closed.
           </div>
         </div>
 
@@ -7666,7 +7685,7 @@
 
     <script>window.__initialHash = window.location.hash;</script>
     <script src="auth.js?v=223"></script>
-    <script src="app.js?v=369"></script>
+    <script src="app.js?v=370"></script>
     <script src="sports/football.js?v=216"></script>
     <script src="sports/basketball.js?v=212"></script>
     <script src="sports/tennis.js?v=211"></script>

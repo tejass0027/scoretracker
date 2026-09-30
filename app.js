@@ -198,6 +198,10 @@ const els = {
   closeRetireHurtModal: document.querySelector("#close-retire-hurt-modal"),
   btnRetireStrikerChoice: document.querySelector("#btn-retire-striker-choice"),
   btnRetireNonstrikerChoice: document.querySelector("#btn-retire-nonstriker-choice"),
+  btnRetireStrikerCanBat: document.querySelector("#btn-retire-striker-canbat"),
+  btnRetireStrikerUnable: document.querySelector("#btn-retire-striker-unable"),
+  btnRetireNonstrikerCanBat: document.querySelector("#btn-retire-nonstriker-canbat"),
+  btnRetireNonstrikerUnable: document.querySelector("#btn-retire-nonstriker-unable"),
   btnCancelRetireHurt: document.querySelector("#btn-cancel-retire-hurt"),
   retiredHurtDecisionModal: document.querySelector("#retired-hurt-decision-modal"),
   closeRetiredHurtDecisionModal: document.querySelector("#close-retired-hurt-decision-modal"),
@@ -3786,7 +3790,9 @@ function generateBattingScorecardHtml(innings, s = state) {
 
     const dismissalHTML = b.outInfo === "Retired Hurt"
       ? `<span style="color: #fb923c; font-weight: 600;">🩹 Retired Hurt</span>`
-      : (b.outInfo === "Not Out" ? `<span style="color: #34d399; font-weight: 600;">not out</span>` : b.outInfo);
+      : (b.outInfo === "Retired Out"
+        ? `<span style="color: #f87171; font-weight: 600;">retired out</span>`
+        : (b.outInfo === "Not Out" ? `<span style="color: #34d399; font-weight: 600;">not out</span>` : b.outInfo));
 
     html += `
       <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
@@ -4590,7 +4596,7 @@ function showRetiredHurtDecisionModal(targetSlot, retiredHurtList) {
 
   const isLastInnings = state.innings === 1 || (isTestMatch() && state.innings === state.inningsData.length - 1 && state.innings >= 3);
   if (endLabel) {
-    endLabel.textContent = isLastInnings ? "Unable to Bat • Finish Match" : "Unable to Bat • Go to Next Innings";
+    endLabel.textContent = isLastInnings ? "Unable to Bat • Out (Finish Match)" : "Unable to Bat • Out (Next Innings)";
   }
 
   modal.classList.remove("hidden");
@@ -4640,13 +4646,37 @@ function confirmRetiredHurtResume() {
 }
 
 function confirmRetiredHurtEndInnings() {
+  const decision = pendingRetiredHurtDecision;
   closeRetiredHurtDecisionModal();
   const inn = currentInnings();
   if (!inn) return;
 
   remember();
+
+  // Batter is unable to bat: consider him as OUT (+1 Wicket)
+  const list = decision ? decision.list : [];
+  if (list && list.length > 0) {
+    list.forEach(item => {
+      if (item.batter && item.batter.outInfo === "Retired Hurt") {
+        item.batter.outInfo = "Retired Out";
+        if (inn.wickets < maxWicketsForTeam(inn.team)) {
+          inn.wickets += 1;
+        }
+      }
+    });
+  } else {
+    (inn.batters || []).forEach(b => {
+      if (b.outInfo === "Retired Hurt") {
+        b.outInfo = "Retired Out";
+        if (inn.wickets < maxWicketsForTeam(inn.team)) {
+          inn.wickets += 1;
+        }
+      }
+    });
+  }
+
   inn.closed = true;
-  showToast("Innings closed as retired hurt batter is unable to resume.");
+  showToast("Batter unable to bat • Considered Out (+1 Wicket). Innings closed.");
   render();
 
   const win = winnerText();
@@ -4867,7 +4897,7 @@ function closeRetireHurtModal() {
   if (modal) modal.classList.add("hidden");
 }
 
-function retireBatter(target) {
+function retireBatter(target, canBatLater = true) {
   const innings = currentInnings();
   if (!innings) return;
   if (isInningsClosed(innings) || winnerText()) return;
@@ -4893,12 +4923,19 @@ function retireBatter(target) {
   }
 
   const retiringBatter = innings.batters[retiringIndex];
-  retiringBatter.outInfo = "Retired Hurt";
-
-  closeRetireHurtModal();
-
   const isSimple = state.scoringMode === "simple";
   const batterDisplayName = isSimple ? (target === "striker" ? "Striker" : "Non-Striker") : retiringBatter.name;
+
+  if (canBatLater) {
+    retiringBatter.outInfo = "Retired Hurt";
+    // Wicket count is not increased: keep count as it is, player can bat afterwards at the last
+  } else {
+    retiringBatter.outInfo = "Retired Out";
+    // If not able to bat: consider him as OUT (+1 Wicket)
+    innings.wickets += 1;
+  }
+
+  closeRetireHurtModal();
 
   if (isSlot1) {
     innings.slot1BatterIndex = -1;
@@ -4911,10 +4948,28 @@ function retireBatter(target) {
     innings.currentNonStrikerIndex = -1;
   }
 
+  // If considered out and reaches maximum wickets, declare all out and close innings
+  if (!canBatLater && innings.wickets >= maxWicketsForTeam(innings.team)) {
+    innings.closed = true;
+    showToast(`${batterDisplayName} retired out (All Out).`);
+    render();
+    const win = winnerText();
+    if (win) {
+      showToast(`🏆 ${win}`);
+      matchOverModalShownFor = win;
+      showMatchOverModal(win);
+    } else {
+      showNextInningsModal();
+    }
+    return;
+  }
+
   const available = getAvailableBattersToComeIn(innings, target);
 
   if (available.fresh.length === 0 && available.retiredHurt.length > 0) {
-    showToast(`${batterDisplayName} retired hurt.`);
+    showToast(canBatLater 
+      ? `${batterDisplayName} retired hurt (wicket count unchanged).` 
+      : `${batterDisplayName} retired out (+1 wicket).`);
     render();
     setTimeout(() => {
       showRetiredHurtDecisionModal(target, available.retiredHurt);
@@ -4924,9 +4979,18 @@ function retireBatter(target) {
 
   if (available.fresh.length === 0 && available.retiredHurt.length === 0) {
     innings.closed = true;
-    showToast(`${batterDisplayName} retired hurt. No more batters available. Innings closed.`);
+    showToast(canBatLater 
+      ? `${batterDisplayName} retired hurt. No more batters available. Innings closed.` 
+      : `${batterDisplayName} retired out. All out.`);
     render();
-    showNextInningsModal();
+    const win = winnerText();
+    if (win) {
+      showToast(`🏆 ${win}`);
+      matchOverModalShownFor = win;
+      showMatchOverModal(win);
+    } else {
+      showNextInningsModal();
+    }
     return;
   }
 
@@ -4942,10 +5006,14 @@ function retireBatter(target) {
     } else {
       innings.currentNonStrikerIndex = nextIndex;
     }
-    showToast(`${batterDisplayName} retired hurt.`);
+    showToast(canBatLater 
+      ? `${batterDisplayName} retired hurt (wicket count unchanged).` 
+      : `${batterDisplayName} retired out (+1 wicket).`);
     render();
   } else {
-    showToast(`${batterDisplayName} retired hurt. Please select incoming batter.`);
+    showToast(canBatLater 
+      ? `${batterDisplayName} retired hurt (no wicket). Please select incoming batter.` 
+      : `${batterDisplayName} retired out (+1 wicket). Please select incoming batter.`);
     render();
     setTimeout(() => {
       promptNewBatter(target);
@@ -7710,15 +7778,39 @@ if (els.btnCancelRetireHurt) {
   });
 }
 
+if (els.btnRetireStrikerCanBat) {
+  els.btnRetireStrikerCanBat.addEventListener("click", () => {
+    retireBatter("striker", true);
+  });
+}
+
+if (els.btnRetireStrikerUnable) {
+  els.btnRetireStrikerUnable.addEventListener("click", () => {
+    retireBatter("striker", false);
+  });
+}
+
+if (els.btnRetireNonstrikerCanBat) {
+  els.btnRetireNonstrikerCanBat.addEventListener("click", () => {
+    retireBatter("nonstriker", true);
+  });
+}
+
+if (els.btnRetireNonstrikerUnable) {
+  els.btnRetireNonstrikerUnable.addEventListener("click", () => {
+    retireBatter("nonstriker", false);
+  });
+}
+
 if (els.btnRetireStrikerChoice) {
   els.btnRetireStrikerChoice.addEventListener("click", () => {
-    retireBatter("striker");
+    retireBatter("striker", true);
   });
 }
 
 if (els.btnRetireNonstrikerChoice) {
   els.btnRetireNonstrikerChoice.addEventListener("click", () => {
-    retireBatter("nonstriker");
+    retireBatter("nonstriker", true);
   });
 }
 
