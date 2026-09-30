@@ -6,7 +6,7 @@
 #sports-page.sports-page {
   width: min(1280px, calc(100% - 32px)) !important;
   margin: 0 auto !important;
-  padding: 36px 0 60px !important;
+  padding: 96px 0 60px !important;
 }
 
 /* ==========================================================================
@@ -764,7 +764,7 @@
 .welcome-page {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 30px 0 60px;
+  padding: 96px 0 60px;
 }
 
 /* Staggered Entrance Animations */
@@ -3479,7 +3479,7 @@
   /* Sports Hub Page */
   #sports-page.sports-page {
     width: min(100% - 20px, 1280px) !important;
-    padding: 76px 0 60px !important;
+    padding: 84px 0 60px !important;
   }
 
   .hero-banner {
